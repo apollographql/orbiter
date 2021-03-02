@@ -1,0 +1,9 @@
+# Local Netlify folder
+.netlify
+
+# Compiled
+dist/
+
+# Installed
+node_modules/
+tsconfig.tsbuildinfo
