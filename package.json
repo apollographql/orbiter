@@ -1,0 +1,24 @@
+{
+  "name": "orbiter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "start": "netlify dev"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.57",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/node": "^12.12.47",
+    "@types/node-fetch": "^2.5.7",
+    "netlify-cli": "^2.57.0",
+    "typescript": "^3.9.6"
+  },
+  "dependencies": {
+    "make-fetch-happen": "^8.0.14"
+  }
+}
