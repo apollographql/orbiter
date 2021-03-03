@@ -4,21 +4,36 @@ import {
   APIGatewayProxyEvent,
 } from 'aws-lambda';
 import { getFetcher } from '../../lib/getFetcher';
-import { getLatestVersion } from '../../lib/getLatestVersion';
+import { getVersionFromEvent } from '../../lib/version';
 
 const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
-  _event,
+  event,
   _context,
 ) => {
   try {
     const fetch = getFetcher();
+    const { downloadVersion, latestVersion } = await getVersionFromEvent(event);
 
-    const latestVersion = await getLatestVersion();
+    const TEMP_INSTALL_SCRIPT_UNTIL_RELEASED =
+      'https://raw.githubusercontent.com/apollographql/rover/fcddd64ddedf162329c0d12ca3b1c0f67013114d/installers/binstall/scripts/nix/install.sh';
 
+    // always fetch the script from `latest`. We will amend the script to make
+    // sure it downloads the proper version of Rover.
+    // This will allow us to fix potential bugs in the script later on, while
+    // still allowing downloads of old versions of Rover :)
     let nixInstallScriptRes = await fetch(
-      `https://raw.githubusercontent.com/apollographql/rover/${latestVersion}/installers/binstall/scripts/nix/install.sh`,
+      TEMP_INSTALL_SCRIPT_UNTIL_RELEASED,
+      // TODO: this should be a stable url later
+      // `https://raw.githubusercontent.com/apollographql/rover/${downloadVersion}/installers/binstall/scripts/nix/install.sh`,
     );
     let nixInstallScript = await nixInstallScriptRes.text();
+
+    // this is where the version overwriting happens. We inline a env var
+    // declaration at the top of the installer :)
+    if (downloadVersion !== latestVersion) {
+      nixInstallScript =
+        `VERSION=${downloadVersion} # added by Orbiter\n\n` + nixInstallScript;
+    }
 
     return {
       statusCode: 200,

@@ -1,4 +1,5 @@
 import { getFetcher } from './getFetcher';
+import { APIGatewayProxyEvent } from 'aws-lambda';
 
 export async function getLatestVersion() {
   const fetch = getFetcher();
@@ -18,4 +19,14 @@ export async function getLatestVersion() {
   }
 
   return latestVersion;
+}
+
+export async function getVersionFromEvent(event: APIGatewayProxyEvent) {
+  const latestVersion = await getLatestVersion();
+  const paramVersion =
+    event.queryStringParameters && event.queryStringParameters.version;
+  return {
+    latestVersion,
+    downloadVersion: paramVersion ? paramVersion : latestVersion,
+  };
 }
