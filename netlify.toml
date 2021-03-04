@@ -1,3 +1,28 @@
 [build]
   command = "npm run build"
   functions = "./dist/functions"
+
+[[redirects]]
+  from = "/win"
+  to = "/.netlify/functions/win-install"
+
+  # Proxy / rewrite transparently without the `location` hop.
+  status = 200
+
+  # Always redirect, even if somehow some content exists at the root "from"
+  force = true
+
+  headers = {X-From = "Netlify"}
+
+
+[[redirects]]
+  from = "/nix"
+  to = "/.netlify/functions/nix-install"
+
+  # Proxy / rewrite transparently without the `location` hop.
+  status = 200
+
+  # Always redirect, even if somehow some content exists at the root "from"
+  force = true
+
+  headers = {X-From = "Netlify"}
