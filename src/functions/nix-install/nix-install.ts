@@ -4,6 +4,7 @@ import {
   APIGatewayProxyEvent,
 } from 'aws-lambda';
 import { getFetcher } from '../../lib/getFetcher';
+import { track } from '../../lib/segment';
 import { getVersionFromEvent } from '../../lib/version';
 
 const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
@@ -28,12 +29,25 @@ const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
     );
     let nixInstallScript = await nixInstallScriptRes.text();
 
+    // TODO 404
+
     // this is where the version overwriting happens. We inline a env var
     // declaration at the top of the installer :)
     if (downloadVersion !== latestVersion) {
       nixInstallScript =
         `VERSION=${downloadVersion} # added by Orbiter\n\n` + nixInstallScript;
     }
+
+    await track({
+      event: 'Rover Download',
+      context: {
+        app: 'Rover',
+        os: 'linux',
+      },
+      properties: {
+        release_version: downloadVersion,
+      },
+    });
 
     return {
       statusCode: 200,

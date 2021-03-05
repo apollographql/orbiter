@@ -4,6 +4,7 @@ import {
   APIGatewayProxyEvent,
 } from 'aws-lambda';
 import { getFetcher } from '../../lib/getFetcher';
+import { track } from '../../lib/segment';
 import { getVersionFromEvent } from '../../lib/version';
 
 const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
@@ -28,6 +29,8 @@ const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
     );
     let winInstallScript: string = await winInstallScriptRes.text();
 
+    // TODO 404
+
     // this is where the version overwriting happens. We inline a env var
     // declaration at the top of the installer :)
     // TODO: maybe we should add a line to unset this, since this will persist?
@@ -36,6 +39,17 @@ const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
         `$Env:VERSION='${downloadVersion}' # added by Orbiter\n\n` +
         winInstallScript;
     }
+
+    await track({
+      event: 'Rover Download',
+      context: {
+        app: 'Rover',
+        os: 'windows',
+      },
+      properties: {
+        release_version: downloadVersion,
+      },
+    });
 
     return {
       statusCode: 200,
