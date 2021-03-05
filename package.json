@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "btoa": "^1.2.1",
-    "make-fetch-happen": "^8.0.14"
+    "make-fetch-happen": "^8.0.14",
+    "uuid": "^8.3.2"
   }
 }

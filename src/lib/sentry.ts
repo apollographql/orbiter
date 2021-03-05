@@ -74,7 +74,7 @@
 //   );
 //   const { searchParams } = new URL(request.url);
 
-//   const { v4 } = require('uuid-browser');
+//   const { v4 } = require('uuid');
 //   return {
 //     event_id: v4(),
 //     message: errType + ': ' + (err.message || '<no message>'),

@@ -28,7 +28,7 @@ type SegmentEvent = {
 
 export async function track(payload: SegmentEvent) {
   if (typeof SEGMENT_API_KEY === 'undefined') return;
-  const { v4 } = require('uuid-browser');
+  const { v4 } = require('uuid');
   const message = Object.assign({}, payload);
   message.context.library = 'Rover Function';
   if (!message.userId && !message.anonymousId) message.anonymousId = v4();

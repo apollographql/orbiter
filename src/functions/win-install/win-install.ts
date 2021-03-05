@@ -40,7 +40,8 @@ const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
         winInstallScript;
     }
 
-    await track({
+    // Track the download, but explicitly _don't_ block on it
+    track({
       event: 'Rover Download',
       context: {
         app: 'Rover',
