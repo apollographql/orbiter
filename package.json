@@ -20,6 +20,7 @@
     "typescript": "^3.9.6"
   },
   "dependencies": {
+    "@sentry/serverless": "^6.2.1",
     "btoa": "^1.2.1",
     "make-fetch-happen": "^8.0.14",
     "uuid": "^8.3.2"

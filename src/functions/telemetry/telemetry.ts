@@ -4,8 +4,11 @@ import {
   APIGatewayProxyEvent,
 } from 'aws-lambda';
 import { track } from '../../lib/segment';
+import { sentryWrapHandler, initSentry } from '../../lib/sentry';
 
 const CLI_NAME: string = 'rover';
+
+initSentry();
 
 interface Platform {
   // the platform from which the command was run (i.e. linux, macOS, or windows)
@@ -48,7 +51,6 @@ const INVALID_PERMISSIONS = {
 
 const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
   event,
-  _context,
 ) => {
   const headers = event.headers;
   const contentType = headers['content-type'];
@@ -74,7 +76,7 @@ const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
   };
 };
 
-module.exports.handler = handler;
+module.exports.handler = sentryWrapHandler(handler);
 
 export async function trackSession(session: Session, userAgent: string) {
   const event_payload = {
