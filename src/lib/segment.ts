@@ -30,7 +30,7 @@ export async function track(payload: SegmentEvent) {
   if (typeof SEGMENT_API_KEY === 'undefined') return;
   const { v4 } = require('uuid');
   const message = Object.assign({}, payload);
-  message.context.library = 'Rover Function';
+  message.context.library = 'orbiter';
   if (!message.userId && !message.anonymousId) message.anonymousId = v4();
   if (!message.messageId)
     message.messageId = `${message.context.library}-${v4()}`;
