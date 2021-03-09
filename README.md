@@ -4,9 +4,9 @@
 
 This folder contains the code that powers the [Netlify Functions](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjRmPfBh5rvAhUxxVkKHaeNBlYQFjAAegQIERAD&url=https%3A%2F%2Fwww.netlify.com%2Fproducts%2Ffunctions%2F&usg=AOvVaw0WgqqN2xZx2ARRVLWP61oD) which are responsible for installing and telemetry reporting for [Rover](https://github.com/apollographql/rover).
 
-The function run from this project provides an unchanging url for users to install any version of Rover from.
+The function run from this project provides an unchanging url for users to install any version of Rover from, download the legacy apollo cli, and report telemetry from Rover.
 
-There are three functions included to be aware of:
+There are four functions included to be aware of:
 
 * __[Legacy CLI installer](./src/functions/nix-install/)__: This folder contains the function responsible for serving and tracking downloads of the legacy [apollo cli](https://github.com/apollographql/apollo-tooling) tarball.
 * __[Unix installer](./src/functions/nix-install/)__: This folder contains the function responsible for serving and (if applicable) modifying the unix install script.
