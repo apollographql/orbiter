@@ -62,7 +62,7 @@ Releasing a new build of the functions is managed through GitHub and Netlify. Wh
 
 ## Runbook
 
-The worker is instrumented with [Sentry](https://sentry.io) alerting. Those responsible for this code are: 
+The functions are instrumented with [Sentry](https://sentry.io) alerting. Those responsible for this code are: 
 
 * [@jakedawkins](https://github.com/jakedawkins)
 * [@EverlastingBugstopper](https://github.com/EverlastingBugstopper)
