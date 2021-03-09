@@ -1,3 +1,30 @@
 [build]
   command = "npm run build"
   functions = "./dist/functions"
+
+# Netlify's functions are invoked at `/.netlify/functions/fn-name`, which is 
+# definitely not ideal, and we'd like to also hide the provider (netlify) in the
+# url. This adds a 200 proxy from `/fn-name` to `/.netlify/functions/fn-name` 
+[[redirects]]
+  from = "/win"
+  to = "/.netlify/functions/win-install"
+
+  # Proxy / rewrite transparently without the `location` hop.
+  status = 200
+
+  # Always redirect, even if somehow some content exists at the root "from"
+  force = true
+
+  headers = {Apollo-Proxy-Rule = "from-root-config"}
+
+[[redirects]]
+  from = "/nix"
+  to = "/.netlify/functions/nix-install"
+
+  # Proxy / rewrite transparently without the `location` hop.
+  status = 200
+
+  # Always redirect, even if somehow some content exists at the root "from"
+  force = true
+
+  headers = {Apollo-Proxy-Rule = "from-root-config"}
