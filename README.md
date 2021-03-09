@@ -8,9 +8,10 @@ The function run from this project provides an unchanging url for users to insta
 
 There are three functions included to be aware of:
 
-* __[Windows installer](./src/functions/win-install/)__: This folder contains the TypeScript source code responsible for serving and (if applicable) modifying the windows install script.
-* __[Unix installer](./src/functions/nix-install/)__: This folder contains the TypeScript source code responsible for serving and (if applicable) modifying the unix install script.
-* __[Telemetry](./src/functions/telemetry/)__: This folder contains the TypeScript source code responsible for consuming telemetry reports from Rover and reporting them.
+* __[Legacy CLI installer](./src/functions/nix-install/)__: This folder contains the function responsible for serving and tracking downloads of the legacy [apollo cli](https://github.com/apollographql/apollo-tooling) tarball.
+* __[Unix installer](./src/functions/nix-install/)__: This folder contains the function responsible for serving and (if applicable) modifying the unix install script.
+* __[Telemetry](./src/functions/telemetry/)__: This folder contains the function responsible for consuming telemetry reports from Rover and reporting them.
+* __[Windows installer](./src/functions/win-install/)__: This folder contains the function responsible for serving and (if applicable) modifying the windows install script.
 
 ### Windows & Unix Installers
 
@@ -28,7 +29,35 @@ To choose a different version, the user passes a `version` query parameter (ex. 
 
 ### Telemetry
 
-<!--  -->
+The telemetry function is a single endpoint for reporting metrics from [Rover](https://github.com/apollographql/rover). Currently, this function reports all metrics to [Segment.io](https://segment.io) using the [segment util](./src/lib/segment.ts). 
+
+When running, this endpoint accepts POST requests, and requires you to pass `User-Agent: rover*` and `Content-Type: application/json` headers. 
+
+The payload shape looks like the following:
+
+```json
+{
+    "machine_id": "UNIQUE",
+    "cli_version": "v0.0.2",
+    "session_id": "UNIQUE",
+    "cwd_hash": "ghgfj4h",
+    "platform": { "os": "windows", "continuous_integration": "ci-provider or null" },
+    "command": { "name": "subgraph check", "args": {} }
+}
+```
+
+For full reporting of telemetry to work, you must have a `SEGMENT_API_KEY` environment variable set.
+
+### Legacy CLI
+
+The legacy cli function is a thin wrapper around the release tarball generated when releasing the [apollo cli](https://github.com/apollographql/apollo-tooling). The main purposes of this function are to:
+
+1. Provide a static url that we control, to serve the apollo cli's tarball. This way we can add custom caching (TBD).
+2. Track downloads of the tarball, giving us insight into our apollo-ios userbase.
+
+When running, this function accepts a redirect from any `/legacy-cli/*` route, but will fail unless there is a `platform` and `version` defined in the url path. For example, `http://localhost:8888/legacy-cli/darwin/2.32.1`.
+
+The `platform` is largely for tracking purposes, as we currently only support the `darwin` download. No matter the `platform` provided, we will download the same `darwin` tarball.
 
 ## Local Development
 
@@ -46,9 +75,10 @@ npm start
 
 This will run `netlify dev` which will serve functions under the following routes:
 
-- [`http://localhost:8888/nix`](http://localhost:8888/nix)
-- [`http://localhost:8888/win`](http://localhost:8888/win)
-- [`http://localhost:8888/telemetry`](http://localhost:8888/telemetry)
+- [`http://localhost:8888/nix`](http://localhost:8888/nix) <span style="color:#28a745">[GET]</span>
+- [`http://localhost:8888/win`](http://localhost:8888/win) <span style="color:#28a745">[GET]</span>
+- [`http://localhost:8888/telemetry`](http://localhost:8888/telemetry) <span style="color:#28a745">[POST]</span>
+- [`http://localhost:8888/legacy-cli`](http://localhost:8888/legacy-cli) <span style="color:#28a745">[GET]</span>
 
 For full reporting of telemetry to work, you must have a `SEGMENT_API_KEY` set.
 
