@@ -16,17 +16,12 @@ const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
   const fetch = getFetcher();
   const { downloadVersion, latestVersion } = await getVersionFromEvent(event);
 
-  const TEMP_INSTALL_SCRIPT_UNTIL_RELEASED =
-    'https://raw.githubusercontent.com/apollographql/rover/39c817a8fcf1dc81b33025449d36d43ccf881ce5/installers/binstall/scripts/windows/install.ps1';
-
   // always fetch the script from `latest`. We will amend the script to make
   // sure it downloads the proper version of Rover.
   // This will allow us to fix potential bugs in the script later on, while
   // still allowing downloads of old versions of Rover :)
   let winInstallScriptRes = await fetch(
-    TEMP_INSTALL_SCRIPT_UNTIL_RELEASED,
-    // TODO: this should be a stable url later
-    // `https://raw.githubusercontent.com/apollographql/rover/${downloadVersion}/installers/binstall/scripts/windows/install.ps1`,
+    `https://raw.githubusercontent.com/apollographql/rover/${latestVersion}/installers/binstall/scripts/windows/install.ps1`,
   );
   let winInstallScript: string = await winInstallScriptRes.text();
 
