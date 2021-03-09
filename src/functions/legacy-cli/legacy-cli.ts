@@ -3,7 +3,6 @@ import {
   APIGatewayProxyResult,
   APIGatewayProxyEvent,
 } from 'aws-lambda';
-// import btoa from 'btoa';
 import { getFetcher } from '../../lib/getFetcher';
 import { track } from '../../lib/segment';
 import { initSentry, sentryWrapHandler } from '../../lib/sentry';
