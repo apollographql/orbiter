@@ -23,9 +23,15 @@ const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
   // @ts-ignore: TS6133
   const [_, __, platform, version] = event.path.split('/');
 
-  // we don't need to check and see if platform and version both exist.
-  // The redirect rules should ensure that there's always SOMETHING for those
-  // values, otherwise the route will 404 and not reach here
+  // rather than 404 with `undefined` as versions later, we can check and fail early here
+  if (!platform || !version) {
+    return {
+      statusCode: 400,
+      body: `Missing ${
+        !platform ? 'platform and ' : ''
+      }version in URL path. Check your URL and try again. Correct format: "/legacy-cli/darwin/2.x.x"`,
+    };
+  }
 
   // this only supports 64 bit architectures. I don't see us changing this but if we do, this will become gross
   const downloadUrl = `${GITHUB_RELEASE}/download/apollo@${version}/apollo-v${version}-darwin-x64.tar.gz`;

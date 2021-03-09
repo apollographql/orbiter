@@ -42,7 +42,7 @@
   headers = {Apollo-Proxy-Rule = "from-root-config"}
 
 [[redirects]]
-  from = "/legacy-cli/:platform/:version"
+  from = "/legacy-cli/*"
   to = "/.netlify/functions/legacy-cli"
 
   # Proxy / rewrite transparently without the `location` hop.
