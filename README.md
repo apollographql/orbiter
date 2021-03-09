@@ -8,7 +8,7 @@ The functions run from this project provide install and telemetry services for [
 
 There are four functions included to be aware of:
 
-* __[Legacy CLI installer](./src/functions/nix-install/)__: This folder contains the function responsible for serving and tracking downloads of the legacy [apollo cli](https://github.com/apollographql/apollo-tooling) tarball.
+* __[Legacy CLI installer](./src/functions/legacy-cli/)__: This folder contains the function responsible for serving and tracking downloads of the legacy [apollo cli](https://github.com/apollographql/apollo-tooling) tarball.
 * __[Unix installer](./src/functions/nix-install/)__: This folder contains the function responsible for serving and (if applicable) modifying the unix install script.
 * __[Telemetry](./src/functions/telemetry/)__: This folder contains the function responsible for consuming telemetry reports from Rover and reporting them.
 * __[Windows installer](./src/functions/win-install/)__: This folder contains the function responsible for serving and (if applicable) modifying the windows install script.
