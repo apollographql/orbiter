@@ -1,5 +1,5 @@
-// import { mockGlobal } from '../mock';
-// import fetchMock from 'fetch-mock';
+import { unwrappedHandler as handler } from './legacy-cli';
+import nock from 'nock';
 
 jest.mock('../../lib/sentry', () => ({
   initSentry: jest.fn(),
@@ -10,27 +10,8 @@ jest.mock('../../lib/segment', () => ({
   track: jest.fn(),
 }));
 
-import { unwrappedHandler as handler } from './legacy-cli';
-import nock from 'nock';
-
 const GITHUB_RELEASE =
   'https://github.com/apollographql/apollo-tooling/releases';
-// beforeEach(() => {
-//   mockGlobal();
-//   jest.resetModules();
-// });
-
-// afterEach(fetchMock.resetBehavior);
-
-// it('runs', async () => {
-//   nock(GITHUB_RELEASE)
-//     .head('/download/apollo@0.0.1/apollo-v0.0.1-darwin-x64.tar.gz')
-//     .reply(200, 'binary file');
-//   const res = await handler({
-//     path: '/legacy-cli/darwin/0.0.1',
-//   });
-//   console.log(res);
-// });
 
 beforeEach(() => {
   if (!nock.isActive()) nock.activate();
