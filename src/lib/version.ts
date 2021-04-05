@@ -1,11 +1,12 @@
 import { getFetcher } from './getFetcher';
 import { APIGatewayProxyEvent } from 'aws-lambda';
 
+export const LATEST_URL = 'https://github.com/apollographql/rover/releases/latest';
+
 export async function getLatestVersion() {
   const fetch = getFetcher();
-  const url = 'https://github.com/apollographql/rover/releases/latest';
 
-  const res = await fetch(url, {
+  const res = await fetch(LATEST_URL, {
     method: 'HEAD',
     redirect: 'manual',
   });
@@ -21,12 +22,25 @@ export async function getLatestVersion() {
   return latestVersion;
 }
 
-export async function getVersionFromEvent(event: APIGatewayProxyEvent) {
-  const latestVersion = await getLatestVersion();
-  const paramVersion =
-    event.queryStringParameters && event.queryStringParameters.version;
-  return {
-    latestVersion,
-    downloadVersion: paramVersion ? paramVersion : latestVersion,
-  };
+export async function getVersionFromEvent(event: APIGatewayProxyEvent): Promise<string> {
+  // /nix/v0.0.2
+  // @ts-ignore TS6133
+  const [_, platform, version] = event.path.split('/');
+  
+  // check for unsupported platform
+  const supportedPlatforms = ['nix', 'win'];
+  if(!supportedPlatforms.includes(platform.toLowerCase())) {
+    throw new Error(`Invalid platform: ${platform}. Supported platforms: ${supportedPlatforms}`);
+  }
+
+  // check for 'latest' or properly formatted version id
+  if (version.toLowerCase() == 'latest'){
+    const latestVersion = await getLatestVersion();
+    return latestVersion;
+  }
+  else if (version.toLowerCase().startsWith('v')) {
+    return version;
+  } else {
+    throw new Error(`Invalid version: (${version}). Versions must start with a 'v' or be 'latest'.`)
+  }
 }
