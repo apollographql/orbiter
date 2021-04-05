@@ -23,9 +23,11 @@ it('pulls from a version if passed', async () => {
     .head('/download/apollo@0.0.1/apollo-v0.0.1-darwin-x64.tar.gz')
     .reply(200, 'binary file');
 
-  const res = await handler({
-    path: '/legacy-cli/darwin/0.0.1',
-  });
+  const res = await handler(
+    {
+      path: '/legacy-cli/darwin/0.0.1',
+    },
+  );
 
   expect(res.statusCode).toEqual(301);
   expect(res.body).toContain('Redirecting');
