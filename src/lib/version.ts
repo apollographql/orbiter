@@ -27,8 +27,16 @@ export async function getVersionFromEvent(event: APIGatewayProxyEvent): Promise<
   // @ts-ignore TS6133
   const [_, platform, version] = event.path.split('/');
   
-  // check for unsupported platform
   const supportedPlatforms = ['nix', 'win'];
+  if(!platform) {
+    throw new Error(`No platform provided. Must include one of: ${supportedPlatforms}`)
+  }
+
+  if(!version) {
+    throw new Error('No version provided. Versions must be `latest` or in semver format `v0.0.0`')
+  }
+
+  // check for unsupported platform
   if(!supportedPlatforms.includes(platform.toLowerCase())) {
     throw new Error(`Invalid platform: ${platform}. Supported platforms: ${supportedPlatforms}`);
   }
