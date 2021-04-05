@@ -29,7 +29,7 @@ const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
   );
 
   if(response.ok){
-    let nixInstallScript = await response.text();
+    const nixInstallScript = await response.text();
     
     // Track the download, but explicitly _don't_ block on it
     track({
