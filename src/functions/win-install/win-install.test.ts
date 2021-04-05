@@ -14,7 +14,6 @@ const buildInstallUrl = (downloadVersion) =>
   `https://raw.githubusercontent.com/apollographql/rover/${downloadVersion}/installers/binstall/scripts/windows/install.ps1`;
 
 beforeEach(() => {
-  if (!nock.isActive()) nock.activate();
   nock.cleanAll();
 });
 

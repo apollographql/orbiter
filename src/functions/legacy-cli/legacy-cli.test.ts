@@ -14,7 +14,6 @@ const GITHUB_RELEASE =
   'https://github.com/apollographql/apollo-tooling/releases';
 
 beforeEach(() => {
-  if (!nock.isActive()) nock.activate();
   nock.cleanAll();
 });
 
@@ -58,20 +57,6 @@ it('returns a 500 if no platform is passed', async () => {
   expect(res.statusCode).toEqual(400);
   expect(res.body).toContain('Missing');
 });
-
-// right now, we only provide darwin builds no matter what, so we
-// don't even check WHAT the platform is, just that it exists :/
-// it('returns a 500 if not asking for darwin builds', async () => {
-//   nock(GITHUB_RELEASE)
-//     .head('/download/apollo@0.0.1/apollo-v0.0.1-darwin-x64.tar.gz')
-//     .reply(200, 'binary file');
-
-//   const res = await handler({
-//     path: '/legacy-cli/ya-boi/0.0.1',
-//   });
-
-//   expect(res.statusCode).toEqual(400);
-// });
 
 it('returns a 500 if GitHub is down', async () => {
   nock(GITHUB_RELEASE)

@@ -7,7 +7,7 @@ export function getFetcher() {
     fetcher ||
     (fetcher = fetch.defaults({
       headers: {
-        'user-agent': 'Apollo Orbiter',
+        'user-agent': 'apollo-orbiter/0.0.1',
       },
       retry: {
         retries: process.env.NODE_ENV == 'test' ? 0 : 5,
