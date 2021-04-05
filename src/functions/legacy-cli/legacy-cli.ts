@@ -73,4 +73,7 @@ const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
   };
 };
 
-module.exports.handler = sentryWrapHandler(handler);
+module.exports = {
+  handler: sentryWrapHandler(handler),
+  unwrappedHandler: handler,
+};

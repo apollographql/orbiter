@@ -14,44 +14,55 @@ const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
   event,
 ) => {
   const fetch = getFetcher();
-  const { downloadVersion, latestVersion } = await getVersionFromEvent(event);
-
-  // always fetch the script from `latest`. We will amend the script to make
-  // sure it downloads the proper version of Rover.
-  // This will allow us to fix potential bugs in the script later on, while
-  // still allowing downloads of old versions of Rover :)
-  let winInstallScriptRes = await fetch(
-    `https://raw.githubusercontent.com/apollographql/rover/${latestVersion}/installers/binstall/scripts/windows/install.ps1`,
-  );
-  let winInstallScript: string = await winInstallScriptRes.text();
-
-  // TODO 404
-
-  // this is where the version overwriting happens. We inline a env var
-  // declaration at the top of the installer :)
-  // TODO: maybe we should add a line to unset this, since this will persist?
-  if (downloadVersion !== latestVersion) {
-    winInstallScript =
-      `$Env:VERSION='${downloadVersion}' # added by Orbiter\n\n` +
-      winInstallScript;
+  let downloadVersion;
+  try {
+    downloadVersion = await getVersionFromEvent(event);
+  } catch (e) {
+    return {
+      statusCode: 500,
+      body: e.message,
+    };
   }
 
-  // Track the download, but explicitly _don't_ block on it
-  track({
-    event: 'Rover Download',
-    context: {
-      app: 'Rover',
-      os: 'windows',
-    },
-    properties: {
-      release_version: downloadVersion,
-    },
-  });
+  let response = await fetch(
+    `https://raw.githubusercontent.com/apollographql/rover/${downloadVersion}/installers/binstall/scripts/windows/install.ps1`,
+  );
+  
+  if(response.ok) {
+    const winInstallScript: string = await response.text();
+
+    // Track the download, but explicitly _don't_ block on it
+    track({
+      event: 'Rover Download',
+      context: {
+        app: 'Rover',
+        os: 'windows',
+      },
+      properties: {
+        release_version: downloadVersion,
+      },
+    });
+  
+    return {
+      statusCode: 200,
+      body: winInstallScript,
+    };
+  }
+
+  if (response.status === 404){
+    return {
+      statusCode: 400,
+      body: `Couldn't find release for version ${downloadVersion} on GitHub Releases. This could be a problem with GitHub being offline or missing this version`,
+    }
+  }
 
   return {
-    statusCode: 200,
-    body: winInstallScript,
-  };
+    statusCode: 500,
+    body: `Error when loading Rover installer for ${downloadVersion} from GitHub releases. This could be because GitHub is down. The error we received from GitHub was ${response.statusText}`
+  }
 };
 
-module.exports.handler = sentryWrapHandler(handler);
+module.exports = {
+  handler: sentryWrapHandler(handler),
+  unwrappedHandler: handler,
+};

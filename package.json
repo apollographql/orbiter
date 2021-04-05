@@ -6,17 +6,25 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",
-    "start": "netlify dev"
+    "start": "netlify dev",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.13.14",
+    "@babel/preset-env": "^7.13.12",
+    "@babel/preset-typescript": "^7.13.0",
     "@types/aws-lambda": "^8.10.57",
     "@types/btoa": "^1.2.3",
+    "@types/jest": "^26.0.22",
     "@types/jsonwebtoken": "^8.5.0",
     "@types/node": "^12.12.47",
     "@types/node-fetch": "^2.5.7",
+    "babel-jest": "^26.6.3",
+    "jest": "^26.6.3",
     "netlify-cli": "^2.57.0",
+    "nock": "^13.0.11",
     "typescript": "^3.9.6"
   },
   "dependencies": {
