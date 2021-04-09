@@ -46,6 +46,9 @@ const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
     return {
       statusCode: 200,
       body: winInstallScript,
+      headers: {
+        "X-Version": downloadVersion
+      }
     };
   }
 

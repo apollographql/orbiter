@@ -25,6 +25,7 @@ it('pulls from a version if passed', async () => {
   });
 
   expect(res.statusCode).toEqual(200);
+  expect(res.headers["X-Version"]).toEqual("v0.0.1");
   expect(res.body).toContain('# bash script');
 });
 
