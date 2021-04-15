@@ -52,3 +52,9 @@
   force = true
 
   headers = {Apollo-Proxy-Rule = "from-root-config"}
+  
+[[redirects]]
+  from = "/"
+  to = "https://www.apollographql.com/docs/rover"
+
+  status = 302
