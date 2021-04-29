@@ -28,6 +28,7 @@
     "typescript": "^3.9.6"
   },
   "dependencies": {
+    "@netlify/functions": "^0.7.0",
     "@sentry/serverless": "^6.2.1",
     "btoa": "^1.2.1",
     "make-fetch-happen": "^8.0.14",

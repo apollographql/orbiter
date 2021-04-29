@@ -1,8 +1,4 @@
-import {
-  Handler,
-  APIGatewayProxyResult,
-  APIGatewayProxyEvent,
-} from 'aws-lambda';
+import { Handler } from '@netlify/functions';
 import { getFetcher } from '../../lib/getFetcher';
 import { track } from '../../lib/segment';
 import { getVersionFromEvent } from '../../lib/version';
@@ -10,7 +6,7 @@ import { initSentry, sentryWrapHandler } from '../../lib/sentry';
 
 initSentry();
 
-const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
+const handler: Handler = async (
   event,
 ) => {
   const fetch = getFetcher();

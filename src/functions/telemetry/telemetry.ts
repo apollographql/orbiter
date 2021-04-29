@@ -1,8 +1,4 @@
-import {
-  Handler,
-  APIGatewayProxyResult,
-  APIGatewayProxyEvent,
-} from 'aws-lambda';
+import { Handler } from '@netlify/functions';
 import { track } from '../../lib/segment';
 import { sentryWrapHandler, initSentry } from '../../lib/sentry';
 
@@ -49,7 +45,7 @@ const INVALID_PERMISSIONS = {
   body: 'Invalid Permissions',
 };
 
-const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
+const handler: Handler = async (
   event,
 ) => {
   const headers = event.headers;

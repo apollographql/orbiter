@@ -1,6 +1,6 @@
 import nock from 'nock';
 import { getVersionFromEvent, LATEST_URL, getLatestVersion } from '../version';
-import { APIGatewayProxyEvent } from 'aws-lambda';
+import { HandlerEvent } from '@netlify/functions';
 
 beforeEach(() => {
   if (!nock.isActive()) nock.activate();
@@ -21,14 +21,14 @@ it('gets latest version with /latest', async () => {
     .reply(301, undefined, { Location: 'https://lol.wow/v0.99.99' });
   const res = await getVersionFromEvent({
     path: '/nix/latest',
-  } as APIGatewayProxyEvent);
+  } as HandlerEvent);
   expect(res).toEqual('v0.99.99');
 });
 
 it('returns proper version with /vx.x.x', async () => {
   const res = await getVersionFromEvent({
     path: '/nix/v0.99.99',
-  } as APIGatewayProxyEvent);
+  } as HandlerEvent);
   expect(res).toEqual('v0.99.99');
 });
 
@@ -39,7 +39,7 @@ it('errors when invalid platform passed', async () => {
     async () =>
       await getVersionFromEvent({
         path: '/MyOS/v0.7.0',
-      } as APIGatewayProxyEvent),
+      } as HandlerEvent),
   ).rejects.toThrow(/platform/gi);
 });
 
@@ -50,6 +50,6 @@ it('errors when invalid version format passed', async () => {
     async () =>
       await getVersionFromEvent({
         path: '/nix/0.7.0',
-      } as APIGatewayProxyEvent),
+      } as HandlerEvent),
   ).rejects.toThrow(/version/gi);
 });
