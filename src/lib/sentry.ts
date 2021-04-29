@@ -1,12 +1,8 @@
 // https://docs.sentry.io/platforms/node/guides/aws-lambda/
-const Sentry = require('@sentry/serverless');
-
-const { SENTRY_DSN } = process.env;
+import { AWSLambda } from '@sentry/serverless';
 
 export function initSentry() {
-  if (SENTRY_DSN) {
-    Sentry.AWSLambda.init({ dsn: SENTRY_DSN });
-  }
+  AWSLambda.init();
 }
 
-export const sentryWrapHandler = Sentry.AWSLambda.wrapHandler;
+export const sentryWrapHandler = AWSLambda.wrapHandler;
