@@ -73,12 +73,14 @@ After you have these installed, you can run the project using the following comm
 npm start
 ```
 
-This will run `netlify dev` which will serve functions under the following routes:
+This will run `tsc --watch` and `netlify dev` concurrently, which will serve functions under the following routes:
 
 - [`http://localhost:8888/nix`](http://localhost:8888/nix) <span style="color:#28a745">[GET]</span>
 - [`http://localhost:8888/win`](http://localhost:8888/win) <span style="color:#28a745">[GET]</span>
 - [`http://localhost:8888/telemetry`](http://localhost:8888/telemetry) <span style="color:#28a745">[POST]</span>
 - [`http://localhost:8888/legacy-cli`](http://localhost:8888/legacy-cli) <span style="color:#28a745">[GET]</span>
+
+All file changes will be watched and reloaded, so you shouldn't have to restart the server.
 
 For full reporting of telemetry to work, you must have a `SEGMENT_API_KEY` set.
 

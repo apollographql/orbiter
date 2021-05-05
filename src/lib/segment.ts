@@ -1,5 +1,6 @@
 import { getFetcher } from './getFetcher';
 import btoa from 'btoa';
+import { v4 } from 'uuid';
 
 const SEGMENT_API_KEY = process.env.SEGMENT_API_KEY;
 
@@ -28,7 +29,6 @@ type SegmentEvent = {
 
 export async function track(payload: SegmentEvent) {
   if (typeof SEGMENT_API_KEY === 'undefined') return;
-  const { v4 } = require('uuid');
   const message = Object.assign({}, payload);
   message.context.library = 'orbiter';
   if (!message.userId && !message.anonymousId) message.anonymousId = v4();
