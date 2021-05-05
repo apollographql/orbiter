@@ -34,6 +34,8 @@ interface Session {
   session_id: string;
   // the sha-256 hash of the current working directory
   cwd_hash: string;
+  // the sha-256 hash of the git remote URL
+  remote_url_hash: string;
   // Information about the current architecture/platform
   platform: Platform;
   // The current version of the CLI
@@ -96,6 +98,7 @@ export async function trackSession(session: Session, userAgent: string) {
     properties: {
       command: session.command.name,
       cwd_hash: session.cwd_hash,
+      remote_url_hash: session.remote_url_hash,
       arguments: session.command.arguments,
       continuous_integration: session.platform.continuous_integration,
     },
