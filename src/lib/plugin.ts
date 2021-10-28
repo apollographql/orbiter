@@ -13,6 +13,10 @@ export async function getPluginFromEvent(event: APIGatewayProxyEvent): Promise<[
     throw new Error(`No plugin provided. Must be one of: ${supportedPlugins}`)
   }
 
+  if (!supportedPlugins.includes(plugin_name)) {
+    throw new Error(`Plugin ${plugin_name} does not exist. Must be one of: ${supportedPlugins}`)
+  }
+
   const supportedPlatforms = ['nix', 'win'];
   if (!platform) {
     throw new Error(`No platform provided. Must include one of: ${supportedPlatforms}`)
