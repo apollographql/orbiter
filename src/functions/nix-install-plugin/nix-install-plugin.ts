@@ -28,7 +28,7 @@ const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
   let plugin_version = plugin[1];
 
   let response = await fetch(
-    `https://raw.githubusercontent.com/apollographql/rover/${plugin_version}/installers/binstall/scripts/nix/install_${plugin_name}.sh`,
+    `https://raw.githubusercontent.com/apollographql/rover/${plugin_version}/installers/binstall/scripts/nix/install_${plugin_name.replace("-", "_")}.sh`,
   );
 
   if(response.ok){
