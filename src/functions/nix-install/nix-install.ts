@@ -4,7 +4,6 @@ import {
   APIGatewayProxyEvent,
 } from 'aws-lambda';
 import { getFetcher } from '../../lib/getFetcher';
-import { track } from '../../lib/segment';
 import { getVersionFromEvent } from '../../lib/version';
 import { initSentry, sentryWrapHandler } from '../../lib/sentry';
 
@@ -30,19 +29,7 @@ const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
 
   if(response.ok){
     const nixInstallScript = await response.text();
-    
-    // Track the download, but explicitly _don't_ block on it
-    track({
-      event: 'Rover Download',
-      context: {
-        app: 'Rover',
-        os: 'linux',
-      },
-      properties: {
-        release_version: downloadVersion,
-      },
-    });
-  
+
     return {
       statusCode: 200,
       body: nixInstallScript,

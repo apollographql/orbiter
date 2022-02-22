@@ -7,8 +7,10 @@
     "build": "tsc",
     "clean": "git clean -dfqX -- ./node_modules ./tscsonfig.tsbuildinfo ./dist",
     "watch": "tsc --watch",
-    "start": "npm run build && concurrently 'npm run watch' 'netlify dev'",
-    "test": "jest"
+    "start": "npm run build && concurrently 'npm run watch' 'netlify dev' 'npm run codegen -- --watch'",
+    "test": "jest",
+    "codegen": "graphql-codegen",
+    "format": "prettier --write './src/**/*.ts'"
   },
   "author": "opensource@apollographql.com",
   "license": "MIT",
@@ -16,6 +18,11 @@
     "@babel/core": "^7.13.14",
     "@babel/preset-env": "^7.13.12",
     "@babel/preset-typescript": "^7.13.0",
+    "@graphql-codegen/cli": "^2.6.2",
+    "@graphql-codegen/typescript": "^2.4.5",
+    "@graphql-codegen/typescript-document-nodes": "^2.2.5",
+    "@graphql-codegen/typescript-graphql-request": "^4.3.7",
+    "@graphql-codegen/typescript-operations": "^2.3.2",
     "@types/aws-lambda": "^8.10.57",
     "@types/btoa": "^1.2.3",
     "@types/jest": "^26.0.22",
@@ -28,12 +35,23 @@
     "jest": "^26.6.3",
     "netlify-cli": "^3.24.3",
     "nock": "^13.0.11",
-    "typescript": "^3.9.6"
+    "prettier": "^2.5.1",
+    "typescript": "^4.5.5"
   },
   "dependencies": {
     "@sentry/serverless": "^6.2.1",
     "btoa": "^1.2.1",
+    "graphql": "^15.8.0",
+    "graphql-request": "^4.0.0",
     "make-fetch-happen": "^8.0.14",
     "uuid": "^8.3.2"
+  },
+  "engines": {
+    "node": ">=14 <16",
+    "npm": "6.x"
+  },
+  "volta": {
+    "node": "14.19.0",
+    "npm": "6.14.16"
   }
 }

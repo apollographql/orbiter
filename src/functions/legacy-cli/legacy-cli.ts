@@ -4,7 +4,6 @@ import {
   APIGatewayProxyEvent,
 } from 'aws-lambda';
 import { getFetcher } from '../../lib/getFetcher';
-import { track } from '../../lib/segment';
 import { initSentry, sentryWrapHandler } from '../../lib/sentry';
 
 initSentry();
@@ -41,17 +40,6 @@ const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
   });
 
   if (response.ok) {
-    track({
-      event: 'Legacy CLI download',
-      context: {
-        app: 'Apollo iOS',
-        os: 'darwin',
-      },
-      properties: {
-        release_version: version,
-      },
-    });
-
     return {
       statusCode: 301,
       headers: {

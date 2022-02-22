@@ -29,9 +29,9 @@ To choose a different version, the user passes a `version` query parameter (ex. 
 
 ### Telemetry
 
-The telemetry function is a single endpoint for reporting metrics from [Rover](https://github.com/apollographql/rover). Currently, this function reports all metrics to [Segment.io](https://segment.io) using the [segment util](./src/lib/segment.ts). 
+The telemetry function is a single endpoint for reporting metrics from [Rover](https://github.com/apollographql/rover). Currently, this function reports all metrics to [studio-staging](https://studio-staging.apollographql.com) using the [track util](./src/lib/track.ts).
 
-When running, this endpoint accepts POST requests, and requires you to pass `User-Agent: rover*` and `Content-Type: application/json` headers. 
+When running, this endpoint accepts POST requests, and requires you to pass `User-Agent: rover*` and `Content-Type: application/json` headers.
 
 The payload shape looks like the following:
 
@@ -42,7 +42,7 @@ The payload shape looks like the following:
     "session_id": "UNIQUE",
     "cwd_hash": "ghgfj4h",
     "platform": { "os": "windows", "continuous_integration": "ci-provider or null" },
-    "command": { "name": "subgraph check", "args": {} }
+    "command": { "name": "subgraph check", "args": {"validation_period": null, "query_count_threshold": null} }
 }
 ```
 
