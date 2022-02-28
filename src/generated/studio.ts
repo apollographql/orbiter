@@ -1,17 +1,11 @@
-import gql from "graphql-tag";
-import { GraphQLClient } from "graphql-request";
-import * as Dom from "graphql-request/dist/types.dom";
+import gql from 'graphql-tag';
+import { GraphQLClient } from 'graphql-request';
+import * as Dom from 'graphql-request/dist/types.dom';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>;
-};
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>;
-};
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -36,7 +30,7 @@ export type Scalars = {
 };
 
 export type Account = {
-  __typename?: "Account";
+  __typename?: 'Account';
   auditLogExports?: Maybe<Array<AuditLogExport>>;
   /** These are the roles that the account is able to use */
   availableRoles: Array<UserPermission>;
@@ -54,9 +48,9 @@ export type Account = {
    * application. Apollo's media server will downscale larger images to at least the requested size,
    * but this will not happen for third-party media servers.
    */
-  avatarUrl?: Maybe<Scalars["String"]>;
+  avatarUrl?: Maybe<Scalars['String']>;
   billingInfo?: Maybe<BillingInfo>;
-  companyUrl?: Maybe<Scalars["String"]>;
+  companyUrl?: Maybe<Scalars['String']>;
   currentBillingMonth?: Maybe<BillingMonth>;
   currentPlan: BillingPlan;
   currentPlanV2: BillingPlanV2;
@@ -65,34 +59,34 @@ export type Account = {
   experimentalFeatures: AccountExperimentalFeatures;
   expiredTrialSubscription?: Maybe<BillingSubscription>;
   expiredTrialSubscriptionV2?: Maybe<BillingSubscriptionV2>;
-  graphIDAvailable: Scalars["Boolean"];
-  hasBeenOnTrial: Scalars["Boolean"];
-  hasBeenOnTrialV2: Scalars["Boolean"];
-  id: Scalars["ID"];
+  graphIDAvailable: Scalars['Boolean'];
+  hasBeenOnTrial: Scalars['Boolean'];
+  hasBeenOnTrialV2: Scalars['Boolean'];
+  id: Scalars['ID'];
   /**
    * Internal immutable identifier for the account. Only visible to Apollo admins (because it really
    * shouldn't be used in normal client apps).
    */
-  internalID: Scalars["ID"];
+  internalID: Scalars['ID'];
   invitations?: Maybe<Array<AccountInvitation>>;
   invoices?: Maybe<Array<Invoice>>;
   invoicesV2: Array<InvoiceV2>;
-  isOnExpiredTrial: Scalars["Boolean"];
-  isOnTrial: Scalars["Boolean"];
-  legacyIsOnTrial: Scalars["Boolean"];
+  isOnExpiredTrial: Scalars['Boolean'];
+  isOnTrial: Scalars['Boolean'];
+  legacyIsOnTrial: Scalars['Boolean'];
   memberships?: Maybe<Array<AccountMembership>>;
-  name: Scalars["String"];
-  provisionedAt?: Maybe<Scalars["Timestamp"]>;
-  recurlyEmail?: Maybe<Scalars["String"]>;
+  name: Scalars['String'];
+  provisionedAt?: Maybe<Scalars['Timestamp']>;
+  recurlyEmail?: Maybe<Scalars['String']>;
   /** Returns a different registry related stats pertaining to this account. */
   registryStatsWindow?: Maybe<RegistryStatsWindow>;
-  requests?: Maybe<Scalars["Long"]>;
-  requestsInCurrentBillingPeriod?: Maybe<Scalars["Long"]>;
+  requests?: Maybe<Scalars['Long']>;
+  requestsInCurrentBillingPeriod?: Maybe<Scalars['Long']>;
   roles?: Maybe<AccountRoles>;
   /** How many seats would be included in your next bill, as best estimated today */
-  seatCountForNextBill?: Maybe<Scalars["Int"]>;
+  seatCountForNextBill?: Maybe<Scalars['Int']>;
   seats?: Maybe<Seats>;
-  secondaryIDs: Array<Scalars["ID"]>;
+  secondaryIDs: Array<Scalars['ID']>;
   services: Array<Service>;
   /**
    * If non-null, this organization tracks its members through an upstream, eg PingOne;
@@ -113,135 +107,144 @@ export type Account = {
   tickets?: Maybe<Array<ZendeskTicket>>;
 };
 
+
 export type AccountAvatarUrlArgs = {
-  size?: Scalars["Int"];
+  size?: Scalars['Int'];
 };
+
 
 export type AccountGraphIdAvailableArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
+
 
 export type AccountInvitationsArgs = {
-  includeAccepted?: Scalars["Boolean"];
+  includeAccepted?: Scalars['Boolean'];
 };
+
 
 export type AccountRegistryStatsWindowArgs = {
-  from: Scalars["Timestamp"];
+  from: Scalars['Timestamp'];
   resolution?: InputMaybe<Resolution>;
-  to?: InputMaybe<Scalars["Timestamp"]>;
+  to?: InputMaybe<Scalars['Timestamp']>;
 };
+
 
 export type AccountRequestsArgs = {
-  from: Scalars["Timestamp"];
-  to: Scalars["Timestamp"];
+  from: Scalars['Timestamp'];
+  to: Scalars['Timestamp'];
 };
+
 
 export type AccountServicesArgs = {
-  includeDeleted?: InputMaybe<Scalars["Boolean"]>;
+  includeDeleted?: InputMaybe<Scalars['Boolean']>;
 };
+
 
 export type AccountStatsArgs = {
-  from: Scalars["Timestamp"];
+  from: Scalars['Timestamp'];
   resolution?: InputMaybe<Resolution>;
-  to?: InputMaybe<Scalars["Timestamp"]>;
+  to?: InputMaybe<Scalars['Timestamp']>;
 };
+
 
 export type AccountStatsWindowArgs = {
-  from: Scalars["Timestamp"];
+  from: Scalars['Timestamp'];
   resolution?: InputMaybe<Resolution>;
-  to?: InputMaybe<Scalars["Timestamp"]>;
+  to?: InputMaybe<Scalars['Timestamp']>;
 };
 
+
 export type AccountTicketArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
 
 export type AccountChecksStatsMetrics = {
-  __typename?: "AccountChecksStatsMetrics";
-  totalFailedChecks: Scalars["Long"];
-  totalSuccessfulChecks: Scalars["Long"];
+  __typename?: 'AccountChecksStatsMetrics';
+  totalFailedChecks: Scalars['Long'];
+  totalSuccessfulChecks: Scalars['Long'];
 };
 
 export type AccountChecksStatsRecord = {
-  __typename?: "AccountChecksStatsRecord";
-  id: Scalars["ID"];
+  __typename?: 'AccountChecksStatsRecord';
+  id: Scalars['ID'];
   metrics: AccountChecksStatsMetrics;
-  timestamp: Scalars["Timestamp"];
+  timestamp: Scalars['Timestamp'];
 };
 
 /** Columns of AccountEdgeServerInfos. */
 export enum AccountEdgeServerInfosColumn {
-  BootId = "BOOT_ID",
-  ExecutableSchemaId = "EXECUTABLE_SCHEMA_ID",
-  LibraryVersion = "LIBRARY_VERSION",
-  Platform = "PLATFORM",
-  RuntimeVersion = "RUNTIME_VERSION",
-  SchemaTag = "SCHEMA_TAG",
-  ServerId = "SERVER_ID",
-  ServiceId = "SERVICE_ID",
-  Timestamp = "TIMESTAMP",
-  UserVersion = "USER_VERSION",
+  BootId = 'BOOT_ID',
+  ExecutableSchemaId = 'EXECUTABLE_SCHEMA_ID',
+  LibraryVersion = 'LIBRARY_VERSION',
+  Platform = 'PLATFORM',
+  RuntimeVersion = 'RUNTIME_VERSION',
+  SchemaTag = 'SCHEMA_TAG',
+  ServerId = 'SERVER_ID',
+  ServiceId = 'SERVICE_ID',
+  Timestamp = 'TIMESTAMP',
+  UserVersion = 'USER_VERSION'
 }
 
 export type AccountEdgeServerInfosDimensions = {
-  __typename?: "AccountEdgeServerInfosDimensions";
-  bootId?: Maybe<Scalars["ID"]>;
-  executableSchemaId?: Maybe<Scalars["ID"]>;
-  libraryVersion?: Maybe<Scalars["String"]>;
-  platform?: Maybe<Scalars["String"]>;
-  runtimeVersion?: Maybe<Scalars["String"]>;
-  schemaTag?: Maybe<Scalars["String"]>;
-  serverId?: Maybe<Scalars["ID"]>;
-  serviceId?: Maybe<Scalars["ID"]>;
-  userVersion?: Maybe<Scalars["String"]>;
+  __typename?: 'AccountEdgeServerInfosDimensions';
+  bootId?: Maybe<Scalars['ID']>;
+  executableSchemaId?: Maybe<Scalars['ID']>;
+  libraryVersion?: Maybe<Scalars['String']>;
+  platform?: Maybe<Scalars['String']>;
+  runtimeVersion?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
+  serverId?: Maybe<Scalars['ID']>;
+  serviceId?: Maybe<Scalars['ID']>;
+  userVersion?: Maybe<Scalars['String']>;
 };
 
 /** Filter for data in AccountEdgeServerInfos. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
 export type AccountEdgeServerInfosFilter = {
   and?: InputMaybe<Array<AccountEdgeServerInfosFilter>>;
   /** Selects rows whose bootId dimension equals the given value if not null. To query for the null value, use {in: {bootId: [null]}} instead. */
-  bootId?: InputMaybe<Scalars["ID"]>;
+  bootId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose executableSchemaId dimension equals the given value if not null. To query for the null value, use {in: {executableSchemaId: [null]}} instead. */
-  executableSchemaId?: InputMaybe<Scalars["ID"]>;
+  executableSchemaId?: InputMaybe<Scalars['ID']>;
   in?: InputMaybe<AccountEdgeServerInfosFilterIn>;
   /** Selects rows whose libraryVersion dimension equals the given value if not null. To query for the null value, use {in: {libraryVersion: [null]}} instead. */
-  libraryVersion?: InputMaybe<Scalars["String"]>;
+  libraryVersion?: InputMaybe<Scalars['String']>;
   not?: InputMaybe<AccountEdgeServerInfosFilter>;
   or?: InputMaybe<Array<AccountEdgeServerInfosFilter>>;
   /** Selects rows whose platform dimension equals the given value if not null. To query for the null value, use {in: {platform: [null]}} instead. */
-  platform?: InputMaybe<Scalars["String"]>;
+  platform?: InputMaybe<Scalars['String']>;
   /** Selects rows whose runtimeVersion dimension equals the given value if not null. To query for the null value, use {in: {runtimeVersion: [null]}} instead. */
-  runtimeVersion?: InputMaybe<Scalars["String"]>;
+  runtimeVersion?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
-  schemaTag?: InputMaybe<Scalars["String"]>;
+  schemaTag?: InputMaybe<Scalars['String']>;
   /** Selects rows whose serverId dimension equals the given value if not null. To query for the null value, use {in: {serverId: [null]}} instead. */
-  serverId?: InputMaybe<Scalars["ID"]>;
+  serverId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose serviceId dimension equals the given value if not null. To query for the null value, use {in: {serviceId: [null]}} instead. */
-  serviceId?: InputMaybe<Scalars["ID"]>;
+  serviceId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose userVersion dimension equals the given value if not null. To query for the null value, use {in: {userVersion: [null]}} instead. */
-  userVersion?: InputMaybe<Scalars["String"]>;
+  userVersion?: InputMaybe<Scalars['String']>;
 };
 
 /** Filter for data in AccountEdgeServerInfos. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
 export type AccountEdgeServerInfosFilterIn = {
   /** Selects rows whose bootId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  bootId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  bootId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose executableSchemaId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  executableSchemaId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  executableSchemaId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose libraryVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  libraryVersion?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  libraryVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose platform dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  platform?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  platform?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose runtimeVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  runtimeVersion?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  runtimeVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaTag?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose serverId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  serverId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  serverId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose serviceId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  serviceId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  serviceId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose userVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  userVersion?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  userVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 export type AccountEdgeServerInfosOrderBySpec = {
@@ -250,88 +253,88 @@ export type AccountEdgeServerInfosOrderBySpec = {
 };
 
 export type AccountEdgeServerInfosRecord = {
-  __typename?: "AccountEdgeServerInfosRecord";
+  __typename?: 'AccountEdgeServerInfosRecord';
   /** Dimensions of AccountEdgeServerInfos that can be grouped by. */
   groupBy: AccountEdgeServerInfosDimensions;
   /** Starting segment timestamp. */
-  timestamp: Scalars["Timestamp"];
+  timestamp: Scalars['Timestamp'];
 };
 
 /** Columns of AccountErrorStats. */
 export enum AccountErrorStatsColumn {
-  ClientName = "CLIENT_NAME",
-  ClientVersion = "CLIENT_VERSION",
-  ErrorsCount = "ERRORS_COUNT",
-  Path = "PATH",
-  QueryId = "QUERY_ID",
-  QueryName = "QUERY_NAME",
-  RequestsWithErrorsCount = "REQUESTS_WITH_ERRORS_COUNT",
-  SchemaHash = "SCHEMA_HASH",
-  SchemaTag = "SCHEMA_TAG",
-  ServiceId = "SERVICE_ID",
-  Timestamp = "TIMESTAMP",
+  ClientName = 'CLIENT_NAME',
+  ClientVersion = 'CLIENT_VERSION',
+  ErrorsCount = 'ERRORS_COUNT',
+  Path = 'PATH',
+  QueryId = 'QUERY_ID',
+  QueryName = 'QUERY_NAME',
+  RequestsWithErrorsCount = 'REQUESTS_WITH_ERRORS_COUNT',
+  SchemaHash = 'SCHEMA_HASH',
+  SchemaTag = 'SCHEMA_TAG',
+  ServiceId = 'SERVICE_ID',
+  Timestamp = 'TIMESTAMP'
 }
 
 export type AccountErrorStatsDimensions = {
-  __typename?: "AccountErrorStatsDimensions";
-  clientName?: Maybe<Scalars["String"]>;
-  clientVersion?: Maybe<Scalars["String"]>;
-  path?: Maybe<Scalars["String"]>;
-  queryId?: Maybe<Scalars["ID"]>;
-  queryName?: Maybe<Scalars["String"]>;
-  schemaHash?: Maybe<Scalars["String"]>;
-  schemaTag?: Maybe<Scalars["String"]>;
-  serviceId?: Maybe<Scalars["ID"]>;
+  __typename?: 'AccountErrorStatsDimensions';
+  clientName?: Maybe<Scalars['String']>;
+  clientVersion?: Maybe<Scalars['String']>;
+  path?: Maybe<Scalars['String']>;
+  queryId?: Maybe<Scalars['ID']>;
+  queryName?: Maybe<Scalars['String']>;
+  schemaHash?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
+  serviceId?: Maybe<Scalars['ID']>;
 };
 
 /** Filter for data in AccountErrorStats. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
 export type AccountErrorStatsFilter = {
   and?: InputMaybe<Array<AccountErrorStatsFilter>>;
   /** Selects rows whose clientName dimension equals the given value if not null. To query for the null value, use {in: {clientName: [null]}} instead. */
-  clientName?: InputMaybe<Scalars["String"]>;
+  clientName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose clientVersion dimension equals the given value if not null. To query for the null value, use {in: {clientVersion: [null]}} instead. */
-  clientVersion?: InputMaybe<Scalars["String"]>;
+  clientVersion?: InputMaybe<Scalars['String']>;
   in?: InputMaybe<AccountErrorStatsFilterIn>;
   not?: InputMaybe<AccountErrorStatsFilter>;
   or?: InputMaybe<Array<AccountErrorStatsFilter>>;
   /** Selects rows whose path dimension equals the given value if not null. To query for the null value, use {in: {path: [null]}} instead. */
-  path?: InputMaybe<Scalars["String"]>;
+  path?: InputMaybe<Scalars['String']>;
   /** Selects rows whose queryId dimension equals the given value if not null. To query for the null value, use {in: {queryId: [null]}} instead. */
-  queryId?: InputMaybe<Scalars["ID"]>;
+  queryId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose queryName dimension equals the given value if not null. To query for the null value, use {in: {queryName: [null]}} instead. */
-  queryName?: InputMaybe<Scalars["String"]>;
+  queryName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaHash dimension equals the given value if not null. To query for the null value, use {in: {schemaHash: [null]}} instead. */
-  schemaHash?: InputMaybe<Scalars["String"]>;
+  schemaHash?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
-  schemaTag?: InputMaybe<Scalars["String"]>;
+  schemaTag?: InputMaybe<Scalars['String']>;
   /** Selects rows whose serviceId dimension equals the given value if not null. To query for the null value, use {in: {serviceId: [null]}} instead. */
-  serviceId?: InputMaybe<Scalars["ID"]>;
+  serviceId?: InputMaybe<Scalars['ID']>;
 };
 
 /** Filter for data in AccountErrorStats. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
 export type AccountErrorStatsFilterIn = {
   /** Selects rows whose clientName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose clientVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientVersion?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose path dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  path?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  path?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose queryId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  queryId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose queryName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  queryName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaHash dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaHash?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaHash?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaTag?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose serviceId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  serviceId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  serviceId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
 export type AccountErrorStatsMetrics = {
-  __typename?: "AccountErrorStatsMetrics";
-  errorsCount: Scalars["Long"];
-  requestsWithErrorsCount: Scalars["Long"];
+  __typename?: 'AccountErrorStatsMetrics';
+  errorsCount: Scalars['Long'];
+  requestsWithErrorsCount: Scalars['Long'];
 };
 
 export type AccountErrorStatsOrderBySpec = {
@@ -340,82 +343,82 @@ export type AccountErrorStatsOrderBySpec = {
 };
 
 export type AccountErrorStatsRecord = {
-  __typename?: "AccountErrorStatsRecord";
+  __typename?: 'AccountErrorStatsRecord';
   /** Dimensions of AccountErrorStats that can be grouped by. */
   groupBy: AccountErrorStatsDimensions;
   /** Metrics of AccountErrorStats that can be aggregated over. */
   metrics: AccountErrorStatsMetrics;
   /** Starting segment timestamp. */
-  timestamp: Scalars["Timestamp"];
+  timestamp: Scalars['Timestamp'];
 };
 
 export type AccountExperimentalFeatures = {
-  __typename?: "AccountExperimentalFeatures";
-  auditLogs: Scalars["Boolean"];
-  championDashboard: Scalars["Boolean"];
-  derivedLaunches: Scalars["Boolean"];
-  federation2Preview: Scalars["Boolean"];
-  preRequestPreview: Scalars["Boolean"];
-  publicVariants: Scalars["Boolean"];
-  variantHomepage: Scalars["Boolean"];
-  webhooksPreview: Scalars["Boolean"];
+  __typename?: 'AccountExperimentalFeatures';
+  auditLogs: Scalars['Boolean'];
+  championDashboard: Scalars['Boolean'];
+  derivedLaunches: Scalars['Boolean'];
+  federation2Preview: Scalars['Boolean'];
+  preRequestPreview: Scalars['Boolean'];
+  publicVariants: Scalars['Boolean'];
+  variantHomepage: Scalars['Boolean'];
+  webhooksPreview: Scalars['Boolean'];
 };
 
 /** Columns of AccountFieldLatencies. */
 export enum AccountFieldLatenciesColumn {
-  FieldHistogram = "FIELD_HISTOGRAM",
-  FieldName = "FIELD_NAME",
-  ParentType = "PARENT_TYPE",
-  SchemaHash = "SCHEMA_HASH",
-  SchemaTag = "SCHEMA_TAG",
-  ServiceId = "SERVICE_ID",
-  Timestamp = "TIMESTAMP",
+  FieldHistogram = 'FIELD_HISTOGRAM',
+  FieldName = 'FIELD_NAME',
+  ParentType = 'PARENT_TYPE',
+  SchemaHash = 'SCHEMA_HASH',
+  SchemaTag = 'SCHEMA_TAG',
+  ServiceId = 'SERVICE_ID',
+  Timestamp = 'TIMESTAMP'
 }
 
 export type AccountFieldLatenciesDimensions = {
-  __typename?: "AccountFieldLatenciesDimensions";
-  field?: Maybe<Scalars["String"]>;
-  fieldName?: Maybe<Scalars["String"]>;
-  parentType?: Maybe<Scalars["String"]>;
-  schemaHash?: Maybe<Scalars["String"]>;
-  schemaTag?: Maybe<Scalars["String"]>;
-  serviceId?: Maybe<Scalars["ID"]>;
+  __typename?: 'AccountFieldLatenciesDimensions';
+  field?: Maybe<Scalars['String']>;
+  fieldName?: Maybe<Scalars['String']>;
+  parentType?: Maybe<Scalars['String']>;
+  schemaHash?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
+  serviceId?: Maybe<Scalars['ID']>;
 };
 
 /** Filter for data in AccountFieldLatencies. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
 export type AccountFieldLatenciesFilter = {
   and?: InputMaybe<Array<AccountFieldLatenciesFilter>>;
   /** Selects rows whose fieldName dimension equals the given value if not null. To query for the null value, use {in: {fieldName: [null]}} instead. */
-  fieldName?: InputMaybe<Scalars["String"]>;
+  fieldName?: InputMaybe<Scalars['String']>;
   in?: InputMaybe<AccountFieldLatenciesFilterIn>;
   not?: InputMaybe<AccountFieldLatenciesFilter>;
   or?: InputMaybe<Array<AccountFieldLatenciesFilter>>;
   /** Selects rows whose parentType dimension equals the given value if not null. To query for the null value, use {in: {parentType: [null]}} instead. */
-  parentType?: InputMaybe<Scalars["String"]>;
+  parentType?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaHash dimension equals the given value if not null. To query for the null value, use {in: {schemaHash: [null]}} instead. */
-  schemaHash?: InputMaybe<Scalars["String"]>;
+  schemaHash?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
-  schemaTag?: InputMaybe<Scalars["String"]>;
+  schemaTag?: InputMaybe<Scalars['String']>;
   /** Selects rows whose serviceId dimension equals the given value if not null. To query for the null value, use {in: {serviceId: [null]}} instead. */
-  serviceId?: InputMaybe<Scalars["ID"]>;
+  serviceId?: InputMaybe<Scalars['ID']>;
 };
 
 /** Filter for data in AccountFieldLatencies. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
 export type AccountFieldLatenciesFilterIn = {
   /** Selects rows whose fieldName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  fieldName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  fieldName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose parentType dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  parentType?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  parentType?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaHash dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaHash?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaHash?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaTag?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose serviceId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  serviceId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  serviceId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
 export type AccountFieldLatenciesMetrics = {
-  __typename?: "AccountFieldLatenciesMetrics";
+  __typename?: 'AccountFieldLatenciesMetrics';
   fieldHistogram: DurationHistogram;
 };
 
@@ -425,98 +428,98 @@ export type AccountFieldLatenciesOrderBySpec = {
 };
 
 export type AccountFieldLatenciesRecord = {
-  __typename?: "AccountFieldLatenciesRecord";
+  __typename?: 'AccountFieldLatenciesRecord';
   /** Dimensions of AccountFieldLatencies that can be grouped by. */
   groupBy: AccountFieldLatenciesDimensions;
   /** Metrics of AccountFieldLatencies that can be aggregated over. */
   metrics: AccountFieldLatenciesMetrics;
   /** Starting segment timestamp. */
-  timestamp: Scalars["Timestamp"];
+  timestamp: Scalars['Timestamp'];
 };
 
 /** Columns of AccountFieldUsage. */
 export enum AccountFieldUsageColumn {
-  ClientName = "CLIENT_NAME",
-  ClientVersion = "CLIENT_VERSION",
-  EstimatedExecutionCount = "ESTIMATED_EXECUTION_COUNT",
-  ExecutionCount = "EXECUTION_COUNT",
-  FieldName = "FIELD_NAME",
-  ParentType = "PARENT_TYPE",
-  QueryId = "QUERY_ID",
-  QueryName = "QUERY_NAME",
-  ReferencingOperationCount = "REFERENCING_OPERATION_COUNT",
-  SchemaHash = "SCHEMA_HASH",
-  SchemaTag = "SCHEMA_TAG",
-  ServiceId = "SERVICE_ID",
-  Timestamp = "TIMESTAMP",
+  ClientName = 'CLIENT_NAME',
+  ClientVersion = 'CLIENT_VERSION',
+  EstimatedExecutionCount = 'ESTIMATED_EXECUTION_COUNT',
+  ExecutionCount = 'EXECUTION_COUNT',
+  FieldName = 'FIELD_NAME',
+  ParentType = 'PARENT_TYPE',
+  QueryId = 'QUERY_ID',
+  QueryName = 'QUERY_NAME',
+  ReferencingOperationCount = 'REFERENCING_OPERATION_COUNT',
+  SchemaHash = 'SCHEMA_HASH',
+  SchemaTag = 'SCHEMA_TAG',
+  ServiceId = 'SERVICE_ID',
+  Timestamp = 'TIMESTAMP'
 }
 
 export type AccountFieldUsageDimensions = {
-  __typename?: "AccountFieldUsageDimensions";
-  clientName?: Maybe<Scalars["String"]>;
-  clientVersion?: Maybe<Scalars["String"]>;
-  fieldName?: Maybe<Scalars["String"]>;
-  parentType?: Maybe<Scalars["String"]>;
-  queryId?: Maybe<Scalars["ID"]>;
-  queryName?: Maybe<Scalars["String"]>;
-  schemaHash?: Maybe<Scalars["String"]>;
-  schemaTag?: Maybe<Scalars["String"]>;
-  serviceId?: Maybe<Scalars["ID"]>;
+  __typename?: 'AccountFieldUsageDimensions';
+  clientName?: Maybe<Scalars['String']>;
+  clientVersion?: Maybe<Scalars['String']>;
+  fieldName?: Maybe<Scalars['String']>;
+  parentType?: Maybe<Scalars['String']>;
+  queryId?: Maybe<Scalars['ID']>;
+  queryName?: Maybe<Scalars['String']>;
+  schemaHash?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
+  serviceId?: Maybe<Scalars['ID']>;
 };
 
 /** Filter for data in AccountFieldUsage. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
 export type AccountFieldUsageFilter = {
   and?: InputMaybe<Array<AccountFieldUsageFilter>>;
   /** Selects rows whose clientName dimension equals the given value if not null. To query for the null value, use {in: {clientName: [null]}} instead. */
-  clientName?: InputMaybe<Scalars["String"]>;
+  clientName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose clientVersion dimension equals the given value if not null. To query for the null value, use {in: {clientVersion: [null]}} instead. */
-  clientVersion?: InputMaybe<Scalars["String"]>;
+  clientVersion?: InputMaybe<Scalars['String']>;
   /** Selects rows whose fieldName dimension equals the given value if not null. To query for the null value, use {in: {fieldName: [null]}} instead. */
-  fieldName?: InputMaybe<Scalars["String"]>;
+  fieldName?: InputMaybe<Scalars['String']>;
   in?: InputMaybe<AccountFieldUsageFilterIn>;
   not?: InputMaybe<AccountFieldUsageFilter>;
   or?: InputMaybe<Array<AccountFieldUsageFilter>>;
   /** Selects rows whose parentType dimension equals the given value if not null. To query for the null value, use {in: {parentType: [null]}} instead. */
-  parentType?: InputMaybe<Scalars["String"]>;
+  parentType?: InputMaybe<Scalars['String']>;
   /** Selects rows whose queryId dimension equals the given value if not null. To query for the null value, use {in: {queryId: [null]}} instead. */
-  queryId?: InputMaybe<Scalars["ID"]>;
+  queryId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose queryName dimension equals the given value if not null. To query for the null value, use {in: {queryName: [null]}} instead. */
-  queryName?: InputMaybe<Scalars["String"]>;
+  queryName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaHash dimension equals the given value if not null. To query for the null value, use {in: {schemaHash: [null]}} instead. */
-  schemaHash?: InputMaybe<Scalars["String"]>;
+  schemaHash?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
-  schemaTag?: InputMaybe<Scalars["String"]>;
+  schemaTag?: InputMaybe<Scalars['String']>;
   /** Selects rows whose serviceId dimension equals the given value if not null. To query for the null value, use {in: {serviceId: [null]}} instead. */
-  serviceId?: InputMaybe<Scalars["ID"]>;
+  serviceId?: InputMaybe<Scalars['ID']>;
 };
 
 /** Filter for data in AccountFieldUsage. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
 export type AccountFieldUsageFilterIn = {
   /** Selects rows whose clientName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose clientVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientVersion?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose fieldName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  fieldName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  fieldName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose parentType dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  parentType?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  parentType?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose queryId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  queryId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose queryName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  queryName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaHash dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaHash?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaHash?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaTag?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose serviceId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  serviceId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  serviceId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
 export type AccountFieldUsageMetrics = {
-  __typename?: "AccountFieldUsageMetrics";
-  estimatedExecutionCount: Scalars["Long"];
-  executionCount: Scalars["Long"];
-  referencingOperationCount: Scalars["Long"];
+  __typename?: 'AccountFieldUsageMetrics';
+  estimatedExecutionCount: Scalars['Long'];
+  executionCount: Scalars['Long'];
+  referencingOperationCount: Scalars['Long'];
 };
 
 export type AccountFieldUsageOrderBySpec = {
@@ -525,45 +528,45 @@ export type AccountFieldUsageOrderBySpec = {
 };
 
 export type AccountFieldUsageRecord = {
-  __typename?: "AccountFieldUsageRecord";
+  __typename?: 'AccountFieldUsageRecord';
   /** Dimensions of AccountFieldUsage that can be grouped by. */
   groupBy: AccountFieldUsageDimensions;
   /** Metrics of AccountFieldUsage that can be aggregated over. */
   metrics: AccountFieldUsageMetrics;
   /** Starting segment timestamp. */
-  timestamp: Scalars["Timestamp"];
+  timestamp: Scalars['Timestamp'];
 };
 
 export type AccountInvitation = {
-  __typename?: "AccountInvitation";
+  __typename?: 'AccountInvitation';
   /** An accepted invitation cannot be used anymore */
-  acceptedAt?: Maybe<Scalars["Timestamp"]>;
+  acceptedAt?: Maybe<Scalars['Timestamp']>;
   /** Who accepted the invitation */
   acceptedBy?: Maybe<User>;
   /** Time the invitation was created */
-  createdAt: Scalars["Timestamp"];
+  createdAt: Scalars['Timestamp'];
   /** Who created the invitation */
   createdBy?: Maybe<User>;
-  email: Scalars["String"];
-  id: Scalars["ID"];
+  email: Scalars['String'];
+  id: Scalars['ID'];
   /** Last time we sent an email for the invitation */
-  lastSentAt?: Maybe<Scalars["Timestamp"]>;
+  lastSentAt?: Maybe<Scalars['Timestamp']>;
   /** Access role for the invitee */
   role: UserPermission;
 };
 
 export type AccountMembership = {
-  __typename?: "AccountMembership";
+  __typename?: 'AccountMembership';
   account: Account;
-  createdAt: Scalars["Timestamp"];
+  createdAt: Scalars['Timestamp'];
   /** If this membership is a free seat (based on role) */
-  free?: Maybe<Scalars["Boolean"]>;
+  free?: Maybe<Scalars['Boolean']>;
   permission: UserPermission;
   user: User;
 };
 
 export type AccountMutation = {
-  __typename?: "AccountMutation";
+  __typename?: 'AccountMutation';
   auditExport?: Maybe<AuditLogExportMutation>;
   /** Cancel a pending change from an annual team subscription to a monthly team subscription when the current period expires. */
   cancelConvertAnnualTeamSubscriptionToMonthlyAtNextPeriod?: Maybe<Account>;
@@ -581,15 +584,15 @@ export type AccountMutation = {
   /** Apollo admins only: extend an ongoing trial */
   extendTrial?: Maybe<Account>;
   /** Hard delete an account and all associated services */
-  hardDelete?: Maybe<Scalars["Void"]>;
+  hardDelete?: Maybe<Scalars['Void']>;
   /** Send an invitation to join the account by E-mail */
   invite?: Maybe<AccountInvitation>;
   /** Reactivate a canceled current subscription */
   reactivateCurrentSubscription?: Maybe<Account>;
   /** Refresh billing information from third-party billing service */
-  refreshBilling?: Maybe<Scalars["Void"]>;
+  refreshBilling?: Maybe<Scalars['Void']>;
   /** Delete an invitation */
-  removeInvitation?: Maybe<Scalars["Void"]>;
+  removeInvitation?: Maybe<Scalars['Void']>;
   /** Remove a member of the account */
   removeMember?: Maybe<Account>;
   requestAuditExport?: Maybe<Account>;
@@ -597,26 +600,26 @@ export type AccountMutation = {
   resendInvitation?: Maybe<AccountInvitation>;
   revokeStaticInvitation?: Maybe<OrganizationInviteLink>;
   /** Apollo admins only: set the billing plan to an arbitrary plan */
-  setPlan?: Maybe<Scalars["Void"]>;
+  setPlan?: Maybe<Scalars['Void']>;
   /** Start a new team subscription with the given billing period */
   startTeamSubscription?: Maybe<Account>;
   /** Start a team trial */
   startTrial?: Maybe<Account>;
   /** This is called by the form shown to users after they cancel their team subscription. */
-  submitTeamCancellationFeedback?: Maybe<Scalars["Void"]>;
+  submitTeamCancellationFeedback?: Maybe<Scalars['Void']>;
   /** Apollo admins only: terminate any ongoing subscriptions in the account, without refunds */
   terminateSubscriptions?: Maybe<Account>;
   /** Update the billing address for a Recurly token */
   updateBillingAddress?: Maybe<Account>;
   /** Update the billing information from a Recurly token */
-  updateBillingInfo?: Maybe<Scalars["Void"]>;
+  updateBillingInfo?: Maybe<Scalars['Void']>;
   updateCompanyUrl?: Maybe<Account>;
   /** Set the E-mail address of the account, used notably for billing */
-  updateEmail?: Maybe<Scalars["Void"]>;
+  updateEmail?: Maybe<Scalars['Void']>;
   /** Update the account ID */
   updateID?: Maybe<Account>;
   /** Update the company name */
-  updateName?: Maybe<Scalars["Void"]>;
+  updateName?: Maybe<Scalars['Void']>;
   /** Apollo admins only: enable or disable an account for PingOne SSO login */
   updatePingOneSSOIDPID?: Maybe<Account>;
   /** Updates the role assigned to new SSO users. */
@@ -625,158 +628,179 @@ export type AccountMutation = {
   updateUserPermission?: Maybe<User>;
 };
 
+
 export type AccountMutationAuditExportArgs = {
-  id: Scalars["String"];
+  id: Scalars['String'];
 };
+
 
 export type AccountMutationCreateStaticInvitationArgs = {
   role: UserPermission;
 };
 
+
 export type AccountMutationExtendTrialArgs = {
-  to: Scalars["Timestamp"];
+  to: Scalars['Timestamp'];
 };
 
+
 export type AccountMutationInviteArgs = {
-  email: Scalars["String"];
+  email: Scalars['String'];
   role?: InputMaybe<UserPermission>;
 };
 
+
 export type AccountMutationRemoveInvitationArgs = {
-  id?: InputMaybe<Scalars["ID"]>;
+  id?: InputMaybe<Scalars['ID']>;
 };
 
+
 export type AccountMutationRemoveMemberArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
+
 
 export type AccountMutationRequestAuditExportArgs = {
   actors?: InputMaybe<Array<ActorInput>>;
-  from: Scalars["Timestamp"];
-  graphIds?: InputMaybe<Array<Scalars["String"]>>;
-  to: Scalars["Timestamp"];
+  from: Scalars['Timestamp'];
+  graphIds?: InputMaybe<Array<Scalars['String']>>;
+  to: Scalars['Timestamp'];
 };
+
 
 export type AccountMutationResendInvitationArgs = {
-  id?: InputMaybe<Scalars["ID"]>;
+  id?: InputMaybe<Scalars['ID']>;
 };
+
 
 export type AccountMutationRevokeStaticInvitationArgs = {
-  token: Scalars["String"];
+  token: Scalars['String'];
 };
 
+
 export type AccountMutationSetPlanArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
+
 
 export type AccountMutationStartTeamSubscriptionArgs = {
   billingPeriod: BillingPeriod;
 };
 
+
 export type AccountMutationSubmitTeamCancellationFeedbackArgs = {
-  feedback: Scalars["String"];
+  feedback: Scalars['String'];
 };
+
 
 export type AccountMutationUpdateBillingAddressArgs = {
   billingAddress: BillingAddressInput;
 };
 
+
 export type AccountMutationUpdateBillingInfoArgs = {
-  token: Scalars["String"];
+  token: Scalars['String'];
 };
+
 
 export type AccountMutationUpdateCompanyUrlArgs = {
-  companyUrl?: InputMaybe<Scalars["String"]>;
+  companyUrl?: InputMaybe<Scalars['String']>;
 };
+
 
 export type AccountMutationUpdateEmailArgs = {
-  email: Scalars["String"];
+  email: Scalars['String'];
 };
+
 
 export type AccountMutationUpdateIdArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
+
 
 export type AccountMutationUpdateNameArgs = {
-  name: Scalars["String"];
+  name: Scalars['String'];
 };
 
+
 export type AccountMutationUpdatePingOneSsoidpidArgs = {
-  idpid?: InputMaybe<Scalars["String"]>;
+  idpid?: InputMaybe<Scalars['String']>;
 };
+
 
 export type AccountMutationUpdateSsoDefaultRoleArgs = {
   role: UserPermission;
 };
 
+
 export type AccountMutationUpdateUserPermissionArgs = {
   permission: UserPermission;
-  userID: Scalars["ID"];
+  userID: Scalars['ID'];
 };
 
 /** Columns of AccountOperationCheckStats. */
 export enum AccountOperationCheckStatsColumn {
-  CachedRequestsCount = "CACHED_REQUESTS_COUNT",
-  ClientName = "CLIENT_NAME",
-  ClientVersion = "CLIENT_VERSION",
-  QueryId = "QUERY_ID",
-  QueryName = "QUERY_NAME",
-  SchemaTag = "SCHEMA_TAG",
-  ServiceId = "SERVICE_ID",
-  Timestamp = "TIMESTAMP",
-  UncachedRequestsCount = "UNCACHED_REQUESTS_COUNT",
+  CachedRequestsCount = 'CACHED_REQUESTS_COUNT',
+  ClientName = 'CLIENT_NAME',
+  ClientVersion = 'CLIENT_VERSION',
+  QueryId = 'QUERY_ID',
+  QueryName = 'QUERY_NAME',
+  SchemaTag = 'SCHEMA_TAG',
+  ServiceId = 'SERVICE_ID',
+  Timestamp = 'TIMESTAMP',
+  UncachedRequestsCount = 'UNCACHED_REQUESTS_COUNT'
 }
 
 export type AccountOperationCheckStatsDimensions = {
-  __typename?: "AccountOperationCheckStatsDimensions";
-  clientName?: Maybe<Scalars["String"]>;
-  clientVersion?: Maybe<Scalars["String"]>;
-  queryId?: Maybe<Scalars["ID"]>;
-  queryName?: Maybe<Scalars["String"]>;
-  schemaTag?: Maybe<Scalars["String"]>;
-  serviceId?: Maybe<Scalars["ID"]>;
+  __typename?: 'AccountOperationCheckStatsDimensions';
+  clientName?: Maybe<Scalars['String']>;
+  clientVersion?: Maybe<Scalars['String']>;
+  queryId?: Maybe<Scalars['ID']>;
+  queryName?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
+  serviceId?: Maybe<Scalars['ID']>;
 };
 
 /** Filter for data in AccountOperationCheckStats. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
 export type AccountOperationCheckStatsFilter = {
   and?: InputMaybe<Array<AccountOperationCheckStatsFilter>>;
   /** Selects rows whose clientName dimension equals the given value if not null. To query for the null value, use {in: {clientName: [null]}} instead. */
-  clientName?: InputMaybe<Scalars["String"]>;
+  clientName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose clientVersion dimension equals the given value if not null. To query for the null value, use {in: {clientVersion: [null]}} instead. */
-  clientVersion?: InputMaybe<Scalars["String"]>;
+  clientVersion?: InputMaybe<Scalars['String']>;
   in?: InputMaybe<AccountOperationCheckStatsFilterIn>;
   not?: InputMaybe<AccountOperationCheckStatsFilter>;
   or?: InputMaybe<Array<AccountOperationCheckStatsFilter>>;
   /** Selects rows whose queryId dimension equals the given value if not null. To query for the null value, use {in: {queryId: [null]}} instead. */
-  queryId?: InputMaybe<Scalars["ID"]>;
+  queryId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose queryName dimension equals the given value if not null. To query for the null value, use {in: {queryName: [null]}} instead. */
-  queryName?: InputMaybe<Scalars["String"]>;
+  queryName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
-  schemaTag?: InputMaybe<Scalars["String"]>;
+  schemaTag?: InputMaybe<Scalars['String']>;
   /** Selects rows whose serviceId dimension equals the given value if not null. To query for the null value, use {in: {serviceId: [null]}} instead. */
-  serviceId?: InputMaybe<Scalars["ID"]>;
+  serviceId?: InputMaybe<Scalars['ID']>;
 };
 
 /** Filter for data in AccountOperationCheckStats. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
 export type AccountOperationCheckStatsFilterIn = {
   /** Selects rows whose clientName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose clientVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientVersion?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose queryId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  queryId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose queryName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  queryName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaTag?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose serviceId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  serviceId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  serviceId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
 export type AccountOperationCheckStatsMetrics = {
-  __typename?: "AccountOperationCheckStatsMetrics";
-  cachedRequestsCount: Scalars["Long"];
-  uncachedRequestsCount: Scalars["Long"];
+  __typename?: 'AccountOperationCheckStatsMetrics';
+  cachedRequestsCount: Scalars['Long'];
+  uncachedRequestsCount: Scalars['Long'];
 };
 
 export type AccountOperationCheckStatsOrderBySpec = {
@@ -785,117 +809,117 @@ export type AccountOperationCheckStatsOrderBySpec = {
 };
 
 export type AccountOperationCheckStatsRecord = {
-  __typename?: "AccountOperationCheckStatsRecord";
+  __typename?: 'AccountOperationCheckStatsRecord';
   /** Dimensions of AccountOperationCheckStats that can be grouped by. */
   groupBy: AccountOperationCheckStatsDimensions;
   /** Metrics of AccountOperationCheckStats that can be aggregated over. */
   metrics: AccountOperationCheckStatsMetrics;
   /** Starting segment timestamp. */
-  timestamp: Scalars["Timestamp"];
+  timestamp: Scalars['Timestamp'];
 };
 
 export type AccountPublishesStatsMetrics = {
-  __typename?: "AccountPublishesStatsMetrics";
-  totalPublishes: Scalars["Long"];
+  __typename?: 'AccountPublishesStatsMetrics';
+  totalPublishes: Scalars['Long'];
 };
 
 export type AccountPublishesStatsRecord = {
-  __typename?: "AccountPublishesStatsRecord";
-  id: Scalars["ID"];
+  __typename?: 'AccountPublishesStatsRecord';
+  id: Scalars['ID'];
   metrics: AccountPublishesStatsMetrics;
-  timestamp: Scalars["Timestamp"];
+  timestamp: Scalars['Timestamp'];
 };
 
 /** Columns of AccountQueryStats. */
 export enum AccountQueryStatsColumn {
-  CachedHistogram = "CACHED_HISTOGRAM",
-  CachedRequestsCount = "CACHED_REQUESTS_COUNT",
-  CacheTtlHistogram = "CACHE_TTL_HISTOGRAM",
-  ClientName = "CLIENT_NAME",
-  ClientVersion = "CLIENT_VERSION",
-  ForbiddenOperationCount = "FORBIDDEN_OPERATION_COUNT",
-  FromEngineproxy = "FROM_ENGINEPROXY",
-  QueryId = "QUERY_ID",
-  QueryName = "QUERY_NAME",
-  RegisteredOperationCount = "REGISTERED_OPERATION_COUNT",
-  RequestsWithErrorsCount = "REQUESTS_WITH_ERRORS_COUNT",
-  SchemaHash = "SCHEMA_HASH",
-  SchemaTag = "SCHEMA_TAG",
-  ServiceId = "SERVICE_ID",
-  Timestamp = "TIMESTAMP",
-  UncachedHistogram = "UNCACHED_HISTOGRAM",
-  UncachedRequestsCount = "UNCACHED_REQUESTS_COUNT",
+  CachedHistogram = 'CACHED_HISTOGRAM',
+  CachedRequestsCount = 'CACHED_REQUESTS_COUNT',
+  CacheTtlHistogram = 'CACHE_TTL_HISTOGRAM',
+  ClientName = 'CLIENT_NAME',
+  ClientVersion = 'CLIENT_VERSION',
+  ForbiddenOperationCount = 'FORBIDDEN_OPERATION_COUNT',
+  FromEngineproxy = 'FROM_ENGINEPROXY',
+  QueryId = 'QUERY_ID',
+  QueryName = 'QUERY_NAME',
+  RegisteredOperationCount = 'REGISTERED_OPERATION_COUNT',
+  RequestsWithErrorsCount = 'REQUESTS_WITH_ERRORS_COUNT',
+  SchemaHash = 'SCHEMA_HASH',
+  SchemaTag = 'SCHEMA_TAG',
+  ServiceId = 'SERVICE_ID',
+  Timestamp = 'TIMESTAMP',
+  UncachedHistogram = 'UNCACHED_HISTOGRAM',
+  UncachedRequestsCount = 'UNCACHED_REQUESTS_COUNT'
 }
 
 export type AccountQueryStatsDimensions = {
-  __typename?: "AccountQueryStatsDimensions";
-  clientName?: Maybe<Scalars["String"]>;
-  clientVersion?: Maybe<Scalars["String"]>;
-  fromEngineproxy?: Maybe<Scalars["String"]>;
-  queryId?: Maybe<Scalars["ID"]>;
-  queryName?: Maybe<Scalars["String"]>;
-  querySignature?: Maybe<Scalars["String"]>;
-  schemaHash?: Maybe<Scalars["String"]>;
-  schemaTag?: Maybe<Scalars["String"]>;
-  serviceId?: Maybe<Scalars["ID"]>;
+  __typename?: 'AccountQueryStatsDimensions';
+  clientName?: Maybe<Scalars['String']>;
+  clientVersion?: Maybe<Scalars['String']>;
+  fromEngineproxy?: Maybe<Scalars['String']>;
+  queryId?: Maybe<Scalars['ID']>;
+  queryName?: Maybe<Scalars['String']>;
+  querySignature?: Maybe<Scalars['String']>;
+  schemaHash?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
+  serviceId?: Maybe<Scalars['ID']>;
 };
 
 /** Filter for data in AccountQueryStats. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
 export type AccountQueryStatsFilter = {
   and?: InputMaybe<Array<AccountQueryStatsFilter>>;
   /** Selects rows whose clientName dimension equals the given value if not null. To query for the null value, use {in: {clientName: [null]}} instead. */
-  clientName?: InputMaybe<Scalars["String"]>;
+  clientName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose clientVersion dimension equals the given value if not null. To query for the null value, use {in: {clientVersion: [null]}} instead. */
-  clientVersion?: InputMaybe<Scalars["String"]>;
+  clientVersion?: InputMaybe<Scalars['String']>;
   /** Selects rows whose fromEngineproxy dimension equals the given value if not null. To query for the null value, use {in: {fromEngineproxy: [null]}} instead. */
-  fromEngineproxy?: InputMaybe<Scalars["String"]>;
+  fromEngineproxy?: InputMaybe<Scalars['String']>;
   in?: InputMaybe<AccountQueryStatsFilterIn>;
   not?: InputMaybe<AccountQueryStatsFilter>;
   or?: InputMaybe<Array<AccountQueryStatsFilter>>;
   /** Selects rows whose queryId dimension equals the given value if not null. To query for the null value, use {in: {queryId: [null]}} instead. */
-  queryId?: InputMaybe<Scalars["ID"]>;
+  queryId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose queryName dimension equals the given value if not null. To query for the null value, use {in: {queryName: [null]}} instead. */
-  queryName?: InputMaybe<Scalars["String"]>;
+  queryName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaHash dimension equals the given value if not null. To query for the null value, use {in: {schemaHash: [null]}} instead. */
-  schemaHash?: InputMaybe<Scalars["String"]>;
+  schemaHash?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
-  schemaTag?: InputMaybe<Scalars["String"]>;
+  schemaTag?: InputMaybe<Scalars['String']>;
   /** Selects rows whose serviceId dimension equals the given value if not null. To query for the null value, use {in: {serviceId: [null]}} instead. */
-  serviceId?: InputMaybe<Scalars["ID"]>;
+  serviceId?: InputMaybe<Scalars['ID']>;
 };
 
 /** Filter for data in AccountQueryStats. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
 export type AccountQueryStatsFilterIn = {
   /** Selects rows whose clientName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose clientVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientVersion?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose fromEngineproxy dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  fromEngineproxy?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  fromEngineproxy?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose queryId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  queryId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose queryName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  queryName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaHash dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaHash?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaHash?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaTag?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose serviceId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  serviceId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  serviceId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
 export type AccountQueryStatsMetrics = {
-  __typename?: "AccountQueryStatsMetrics";
+  __typename?: 'AccountQueryStatsMetrics';
   cacheTtlHistogram: DurationHistogram;
   cachedHistogram: DurationHistogram;
-  cachedRequestsCount: Scalars["Long"];
-  forbiddenOperationCount: Scalars["Long"];
-  registeredOperationCount: Scalars["Long"];
-  requestsWithErrorsCount: Scalars["Long"];
+  cachedRequestsCount: Scalars['Long'];
+  forbiddenOperationCount: Scalars['Long'];
+  registeredOperationCount: Scalars['Long'];
+  requestsWithErrorsCount: Scalars['Long'];
   totalLatencyHistogram: DurationHistogram;
-  totalRequestCount: Scalars["Long"];
+  totalRequestCount: Scalars['Long'];
   uncachedHistogram: DurationHistogram;
-  uncachedRequestsCount: Scalars["Long"];
+  uncachedRequestsCount: Scalars['Long'];
 };
 
 export type AccountQueryStatsOrderBySpec = {
@@ -904,48 +928,48 @@ export type AccountQueryStatsOrderBySpec = {
 };
 
 export type AccountQueryStatsRecord = {
-  __typename?: "AccountQueryStatsRecord";
+  __typename?: 'AccountQueryStatsRecord';
   /** Dimensions of AccountQueryStats that can be grouped by. */
   groupBy: AccountQueryStatsDimensions;
   /** Metrics of AccountQueryStats that can be aggregated over. */
   metrics: AccountQueryStatsMetrics;
   /** Starting segment timestamp. */
-  timestamp: Scalars["Timestamp"];
+  timestamp: Scalars['Timestamp'];
 };
 
 export type AccountRoles = {
-  __typename?: "AccountRoles";
-  canAudit: Scalars["Boolean"];
-  canCreateDevGraph: Scalars["Boolean"];
-  canCreateService: Scalars["Boolean"];
-  canDelete: Scalars["Boolean"];
+  __typename?: 'AccountRoles';
+  canAudit: Scalars['Boolean'];
+  canCreateDevGraph: Scalars['Boolean'];
+  canCreateService: Scalars['Boolean'];
+  canDelete: Scalars['Boolean'];
   /** @deprecated Use canQueryBillingInfo instead */
-  canDownloadInvoice: Scalars["Boolean"];
-  canManageMembers: Scalars["Boolean"];
-  canQuery: Scalars["Boolean"];
-  canQueryAudit: Scalars["Boolean"];
-  canQueryBillingInfo: Scalars["Boolean"];
+  canDownloadInvoice: Scalars['Boolean'];
+  canManageMembers: Scalars['Boolean'];
+  canQuery: Scalars['Boolean'];
+  canQueryAudit: Scalars['Boolean'];
+  canQueryBillingInfo: Scalars['Boolean'];
   /** @deprecated Use canQueryBillingInfo instead */
-  canQueryInvoices: Scalars["Boolean"];
-  canQueryMembers: Scalars["Boolean"];
-  canQueryStats: Scalars["Boolean"];
-  canReadTickets: Scalars["Boolean"];
-  canRemoveMembers: Scalars["Boolean"];
-  canSetConstrainedPlan: Scalars["Boolean"];
-  canUpdateBillingInfo: Scalars["Boolean"];
-  canUpdateMetadata: Scalars["Boolean"];
+  canQueryInvoices: Scalars['Boolean'];
+  canQueryMembers: Scalars['Boolean'];
+  canQueryStats: Scalars['Boolean'];
+  canReadTickets: Scalars['Boolean'];
+  canRemoveMembers: Scalars['Boolean'];
+  canSetConstrainedPlan: Scalars['Boolean'];
+  canUpdateBillingInfo: Scalars['Boolean'];
+  canUpdateMetadata: Scalars['Boolean'];
 };
 
 export enum AccountState {
-  Active = "ACTIVE",
-  Closed = "CLOSED",
-  Unknown = "UNKNOWN",
-  Unprovisioned = "UNPROVISIONED",
+  Active = 'ACTIVE',
+  Closed = 'CLOSED',
+  Unknown = 'UNKNOWN',
+  Unprovisioned = 'UNPROVISIONED'
 }
 
 /** A time window with a specified granularity over a given account. */
 export type AccountStatsWindow = {
-  __typename?: "AccountStatsWindow";
+  __typename?: 'AccountStatsWindow';
   edgeServerInfos: Array<AccountEdgeServerInfosRecord>;
   errorStats: Array<AccountErrorStatsRecord>;
   fieldLatencies: Array<AccountFieldLatenciesRecord>;
@@ -953,172 +977,180 @@ export type AccountStatsWindow = {
   operationCheckStats: Array<AccountOperationCheckStatsRecord>;
   queryStats: Array<AccountQueryStatsRecord>;
   /** From field rounded down to the nearest resolution. */
-  roundedDownFrom: Scalars["Timestamp"];
+  roundedDownFrom: Scalars['Timestamp'];
   /** To field rounded up to the nearest resolution. */
-  roundedUpTo: Scalars["Timestamp"];
+  roundedUpTo: Scalars['Timestamp'];
   tracePathErrorsRefs: Array<AccountTracePathErrorsRefsRecord>;
   traceRefs: Array<AccountTraceRefsRecord>;
 };
 
+
 /** A time window with a specified granularity over a given account. */
 export type AccountStatsWindowEdgeServerInfosArgs = {
   filter?: InputMaybe<AccountEdgeServerInfosFilter>;
-  limit?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<AccountEdgeServerInfosOrderBySpec>>;
 };
+
 
 /** A time window with a specified granularity over a given account. */
 export type AccountStatsWindowErrorStatsArgs = {
   filter?: InputMaybe<AccountErrorStatsFilter>;
-  limit?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<AccountErrorStatsOrderBySpec>>;
 };
+
 
 /** A time window with a specified granularity over a given account. */
 export type AccountStatsWindowFieldLatenciesArgs = {
   filter?: InputMaybe<AccountFieldLatenciesFilter>;
-  limit?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<AccountFieldLatenciesOrderBySpec>>;
 };
+
 
 /** A time window with a specified granularity over a given account. */
 export type AccountStatsWindowFieldUsageArgs = {
   filter?: InputMaybe<AccountFieldUsageFilter>;
-  limit?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<AccountFieldUsageOrderBySpec>>;
 };
+
 
 /** A time window with a specified granularity over a given account. */
 export type AccountStatsWindowOperationCheckStatsArgs = {
   filter?: InputMaybe<AccountOperationCheckStatsFilter>;
-  limit?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<AccountOperationCheckStatsOrderBySpec>>;
 };
+
 
 /** A time window with a specified granularity over a given account. */
 export type AccountStatsWindowQueryStatsArgs = {
   filter?: InputMaybe<AccountQueryStatsFilter>;
-  limit?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<AccountQueryStatsOrderBySpec>>;
 };
+
 
 /** A time window with a specified granularity over a given account. */
 export type AccountStatsWindowTracePathErrorsRefsArgs = {
   filter?: InputMaybe<AccountTracePathErrorsRefsFilter>;
-  limit?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<AccountTracePathErrorsRefsOrderBySpec>>;
 };
+
 
 /** A time window with a specified granularity over a given account. */
 export type AccountStatsWindowTraceRefsArgs = {
   filter?: InputMaybe<AccountTraceRefsFilter>;
-  limit?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<AccountTraceRefsOrderBySpec>>;
 };
 
 /** Columns of AccountTracePathErrorsRefs. */
 export enum AccountTracePathErrorsRefsColumn {
-  ClientName = "CLIENT_NAME",
-  ClientVersion = "CLIENT_VERSION",
-  DurationBucket = "DURATION_BUCKET",
-  ErrorsCountInPath = "ERRORS_COUNT_IN_PATH",
-  ErrorsCountInTrace = "ERRORS_COUNT_IN_TRACE",
-  ErrorMessage = "ERROR_MESSAGE",
-  Path = "PATH",
-  QueryId = "QUERY_ID",
-  QueryName = "QUERY_NAME",
-  SchemaHash = "SCHEMA_HASH",
-  SchemaTag = "SCHEMA_TAG",
-  ServiceId = "SERVICE_ID",
-  Timestamp = "TIMESTAMP",
-  TraceHttpStatusCode = "TRACE_HTTP_STATUS_CODE",
-  TraceId = "TRACE_ID",
-  TraceSizeBytes = "TRACE_SIZE_BYTES",
-  TraceStartsAt = "TRACE_STARTS_AT",
+  ClientName = 'CLIENT_NAME',
+  ClientVersion = 'CLIENT_VERSION',
+  DurationBucket = 'DURATION_BUCKET',
+  ErrorsCountInPath = 'ERRORS_COUNT_IN_PATH',
+  ErrorsCountInTrace = 'ERRORS_COUNT_IN_TRACE',
+  ErrorMessage = 'ERROR_MESSAGE',
+  Path = 'PATH',
+  QueryId = 'QUERY_ID',
+  QueryName = 'QUERY_NAME',
+  SchemaHash = 'SCHEMA_HASH',
+  SchemaTag = 'SCHEMA_TAG',
+  ServiceId = 'SERVICE_ID',
+  Timestamp = 'TIMESTAMP',
+  TraceHttpStatusCode = 'TRACE_HTTP_STATUS_CODE',
+  TraceId = 'TRACE_ID',
+  TraceSizeBytes = 'TRACE_SIZE_BYTES',
+  TraceStartsAt = 'TRACE_STARTS_AT'
 }
 
 export type AccountTracePathErrorsRefsDimensions = {
-  __typename?: "AccountTracePathErrorsRefsDimensions";
-  clientName?: Maybe<Scalars["String"]>;
-  clientVersion?: Maybe<Scalars["String"]>;
-  durationBucket?: Maybe<Scalars["Int"]>;
-  errorMessage?: Maybe<Scalars["String"]>;
-  path?: Maybe<Scalars["String"]>;
-  queryId?: Maybe<Scalars["ID"]>;
-  queryName?: Maybe<Scalars["String"]>;
-  schemaHash?: Maybe<Scalars["String"]>;
-  schemaTag?: Maybe<Scalars["String"]>;
-  serviceId?: Maybe<Scalars["ID"]>;
-  traceHttpStatusCode?: Maybe<Scalars["Int"]>;
-  traceId?: Maybe<Scalars["ID"]>;
-  traceStartsAt?: Maybe<Scalars["Timestamp"]>;
+  __typename?: 'AccountTracePathErrorsRefsDimensions';
+  clientName?: Maybe<Scalars['String']>;
+  clientVersion?: Maybe<Scalars['String']>;
+  durationBucket?: Maybe<Scalars['Int']>;
+  errorMessage?: Maybe<Scalars['String']>;
+  path?: Maybe<Scalars['String']>;
+  queryId?: Maybe<Scalars['ID']>;
+  queryName?: Maybe<Scalars['String']>;
+  schemaHash?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
+  serviceId?: Maybe<Scalars['ID']>;
+  traceHttpStatusCode?: Maybe<Scalars['Int']>;
+  traceId?: Maybe<Scalars['ID']>;
+  traceStartsAt?: Maybe<Scalars['Timestamp']>;
 };
 
 /** Filter for data in AccountTracePathErrorsRefs. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
 export type AccountTracePathErrorsRefsFilter = {
   and?: InputMaybe<Array<AccountTracePathErrorsRefsFilter>>;
   /** Selects rows whose clientName dimension equals the given value if not null. To query for the null value, use {in: {clientName: [null]}} instead. */
-  clientName?: InputMaybe<Scalars["String"]>;
+  clientName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose clientVersion dimension equals the given value if not null. To query for the null value, use {in: {clientVersion: [null]}} instead. */
-  clientVersion?: InputMaybe<Scalars["String"]>;
+  clientVersion?: InputMaybe<Scalars['String']>;
   /** Selects rows whose durationBucket dimension equals the given value if not null. To query for the null value, use {in: {durationBucket: [null]}} instead. */
-  durationBucket?: InputMaybe<Scalars["Int"]>;
+  durationBucket?: InputMaybe<Scalars['Int']>;
   /** Selects rows whose errorMessage dimension equals the given value if not null. To query for the null value, use {in: {errorMessage: [null]}} instead. */
-  errorMessage?: InputMaybe<Scalars["String"]>;
+  errorMessage?: InputMaybe<Scalars['String']>;
   in?: InputMaybe<AccountTracePathErrorsRefsFilterIn>;
   not?: InputMaybe<AccountTracePathErrorsRefsFilter>;
   or?: InputMaybe<Array<AccountTracePathErrorsRefsFilter>>;
   /** Selects rows whose path dimension equals the given value if not null. To query for the null value, use {in: {path: [null]}} instead. */
-  path?: InputMaybe<Scalars["String"]>;
+  path?: InputMaybe<Scalars['String']>;
   /** Selects rows whose queryId dimension equals the given value if not null. To query for the null value, use {in: {queryId: [null]}} instead. */
-  queryId?: InputMaybe<Scalars["ID"]>;
+  queryId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose queryName dimension equals the given value if not null. To query for the null value, use {in: {queryName: [null]}} instead. */
-  queryName?: InputMaybe<Scalars["String"]>;
+  queryName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaHash dimension equals the given value if not null. To query for the null value, use {in: {schemaHash: [null]}} instead. */
-  schemaHash?: InputMaybe<Scalars["String"]>;
+  schemaHash?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
-  schemaTag?: InputMaybe<Scalars["String"]>;
+  schemaTag?: InputMaybe<Scalars['String']>;
   /** Selects rows whose serviceId dimension equals the given value if not null. To query for the null value, use {in: {serviceId: [null]}} instead. */
-  serviceId?: InputMaybe<Scalars["ID"]>;
+  serviceId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose traceHttpStatusCode dimension equals the given value if not null. To query for the null value, use {in: {traceHttpStatusCode: [null]}} instead. */
-  traceHttpStatusCode?: InputMaybe<Scalars["Int"]>;
+  traceHttpStatusCode?: InputMaybe<Scalars['Int']>;
   /** Selects rows whose traceId dimension equals the given value if not null. To query for the null value, use {in: {traceId: [null]}} instead. */
-  traceId?: InputMaybe<Scalars["ID"]>;
+  traceId?: InputMaybe<Scalars['ID']>;
 };
 
 /** Filter for data in AccountTracePathErrorsRefs. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
 export type AccountTracePathErrorsRefsFilterIn = {
   /** Selects rows whose clientName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose clientVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientVersion?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose durationBucket dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  durationBucket?: InputMaybe<Array<InputMaybe<Scalars["Int"]>>>;
+  durationBucket?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   /** Selects rows whose errorMessage dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  errorMessage?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  errorMessage?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose path dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  path?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  path?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose queryId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  queryId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose queryName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  queryName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaHash dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaHash?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaHash?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaTag?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose serviceId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  serviceId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  serviceId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose traceHttpStatusCode dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  traceHttpStatusCode?: InputMaybe<Array<InputMaybe<Scalars["Int"]>>>;
+  traceHttpStatusCode?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   /** Selects rows whose traceId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  traceId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  traceId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
 export type AccountTracePathErrorsRefsMetrics = {
-  __typename?: "AccountTracePathErrorsRefsMetrics";
-  errorsCountInPath: Scalars["Long"];
-  errorsCountInTrace: Scalars["Long"];
-  traceSizeBytes: Scalars["Long"];
+  __typename?: 'AccountTracePathErrorsRefsMetrics';
+  errorsCountInPath: Scalars['Long'];
+  errorsCountInTrace: Scalars['Long'];
+  traceSizeBytes: Scalars['Long'];
 };
 
 export type AccountTracePathErrorsRefsOrderBySpec = {
@@ -1127,97 +1159,97 @@ export type AccountTracePathErrorsRefsOrderBySpec = {
 };
 
 export type AccountTracePathErrorsRefsRecord = {
-  __typename?: "AccountTracePathErrorsRefsRecord";
+  __typename?: 'AccountTracePathErrorsRefsRecord';
   /** Dimensions of AccountTracePathErrorsRefs that can be grouped by. */
   groupBy: AccountTracePathErrorsRefsDimensions;
   /** Metrics of AccountTracePathErrorsRefs that can be aggregated over. */
   metrics: AccountTracePathErrorsRefsMetrics;
   /** Starting segment timestamp. */
-  timestamp: Scalars["Timestamp"];
+  timestamp: Scalars['Timestamp'];
 };
 
 /** Columns of AccountTraceRefs. */
 export enum AccountTraceRefsColumn {
-  ClientName = "CLIENT_NAME",
-  ClientVersion = "CLIENT_VERSION",
-  DurationBucket = "DURATION_BUCKET",
-  DurationNs = "DURATION_NS",
-  QueryId = "QUERY_ID",
-  QueryName = "QUERY_NAME",
-  SchemaHash = "SCHEMA_HASH",
-  SchemaTag = "SCHEMA_TAG",
-  ServiceId = "SERVICE_ID",
-  Timestamp = "TIMESTAMP",
-  TraceId = "TRACE_ID",
-  TraceSizeBytes = "TRACE_SIZE_BYTES",
+  ClientName = 'CLIENT_NAME',
+  ClientVersion = 'CLIENT_VERSION',
+  DurationBucket = 'DURATION_BUCKET',
+  DurationNs = 'DURATION_NS',
+  QueryId = 'QUERY_ID',
+  QueryName = 'QUERY_NAME',
+  SchemaHash = 'SCHEMA_HASH',
+  SchemaTag = 'SCHEMA_TAG',
+  ServiceId = 'SERVICE_ID',
+  Timestamp = 'TIMESTAMP',
+  TraceId = 'TRACE_ID',
+  TraceSizeBytes = 'TRACE_SIZE_BYTES'
 }
 
 export type AccountTraceRefsDimensions = {
-  __typename?: "AccountTraceRefsDimensions";
-  clientName?: Maybe<Scalars["String"]>;
-  clientVersion?: Maybe<Scalars["String"]>;
-  durationBucket?: Maybe<Scalars["Int"]>;
-  queryId?: Maybe<Scalars["ID"]>;
-  queryName?: Maybe<Scalars["String"]>;
-  querySignature?: Maybe<Scalars["String"]>;
-  schemaHash?: Maybe<Scalars["String"]>;
-  schemaTag?: Maybe<Scalars["String"]>;
-  serviceId?: Maybe<Scalars["ID"]>;
-  traceId?: Maybe<Scalars["ID"]>;
+  __typename?: 'AccountTraceRefsDimensions';
+  clientName?: Maybe<Scalars['String']>;
+  clientVersion?: Maybe<Scalars['String']>;
+  durationBucket?: Maybe<Scalars['Int']>;
+  queryId?: Maybe<Scalars['ID']>;
+  queryName?: Maybe<Scalars['String']>;
+  querySignature?: Maybe<Scalars['String']>;
+  schemaHash?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
+  serviceId?: Maybe<Scalars['ID']>;
+  traceId?: Maybe<Scalars['ID']>;
 };
 
 /** Filter for data in AccountTraceRefs. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
 export type AccountTraceRefsFilter = {
   and?: InputMaybe<Array<AccountTraceRefsFilter>>;
   /** Selects rows whose clientName dimension equals the given value if not null. To query for the null value, use {in: {clientName: [null]}} instead. */
-  clientName?: InputMaybe<Scalars["String"]>;
+  clientName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose clientVersion dimension equals the given value if not null. To query for the null value, use {in: {clientVersion: [null]}} instead. */
-  clientVersion?: InputMaybe<Scalars["String"]>;
+  clientVersion?: InputMaybe<Scalars['String']>;
   /** Selects rows whose durationBucket dimension equals the given value if not null. To query for the null value, use {in: {durationBucket: [null]}} instead. */
-  durationBucket?: InputMaybe<Scalars["Int"]>;
+  durationBucket?: InputMaybe<Scalars['Int']>;
   in?: InputMaybe<AccountTraceRefsFilterIn>;
   not?: InputMaybe<AccountTraceRefsFilter>;
   or?: InputMaybe<Array<AccountTraceRefsFilter>>;
   /** Selects rows whose queryId dimension equals the given value if not null. To query for the null value, use {in: {queryId: [null]}} instead. */
-  queryId?: InputMaybe<Scalars["ID"]>;
+  queryId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose queryName dimension equals the given value if not null. To query for the null value, use {in: {queryName: [null]}} instead. */
-  queryName?: InputMaybe<Scalars["String"]>;
+  queryName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaHash dimension equals the given value if not null. To query for the null value, use {in: {schemaHash: [null]}} instead. */
-  schemaHash?: InputMaybe<Scalars["String"]>;
+  schemaHash?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
-  schemaTag?: InputMaybe<Scalars["String"]>;
+  schemaTag?: InputMaybe<Scalars['String']>;
   /** Selects rows whose serviceId dimension equals the given value if not null. To query for the null value, use {in: {serviceId: [null]}} instead. */
-  serviceId?: InputMaybe<Scalars["ID"]>;
+  serviceId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose traceId dimension equals the given value if not null. To query for the null value, use {in: {traceId: [null]}} instead. */
-  traceId?: InputMaybe<Scalars["ID"]>;
+  traceId?: InputMaybe<Scalars['ID']>;
 };
 
 /** Filter for data in AccountTraceRefs. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
 export type AccountTraceRefsFilterIn = {
   /** Selects rows whose clientName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose clientVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientVersion?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose durationBucket dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  durationBucket?: InputMaybe<Array<InputMaybe<Scalars["Int"]>>>;
+  durationBucket?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   /** Selects rows whose queryId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  queryId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose queryName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  queryName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaHash dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaHash?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaHash?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaTag?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose serviceId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  serviceId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  serviceId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose traceId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  traceId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  traceId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
 export type AccountTraceRefsMetrics = {
-  __typename?: "AccountTraceRefsMetrics";
-  durationNs: Scalars["Long"];
-  traceSizeBytes: Scalars["Long"];
+  __typename?: 'AccountTraceRefsMetrics';
+  durationNs: Scalars['Long'];
+  traceSizeBytes: Scalars['Long'];
 };
 
 export type AccountTraceRefsOrderBySpec = {
@@ -1226,405 +1258,398 @@ export type AccountTraceRefsOrderBySpec = {
 };
 
 export type AccountTraceRefsRecord = {
-  __typename?: "AccountTraceRefsRecord";
+  __typename?: 'AccountTraceRefsRecord';
   /** Dimensions of AccountTraceRefs that can be grouped by. */
   groupBy: AccountTraceRefsDimensions;
   /** Metrics of AccountTraceRefs that can be aggregated over. */
   metrics: AccountTraceRefsMetrics;
   /** Starting segment timestamp. */
-  timestamp: Scalars["Timestamp"];
+  timestamp: Scalars['Timestamp'];
 };
 
 export type Actor = {
-  __typename?: "Actor";
-  actorId: Scalars["ID"];
+  __typename?: 'Actor';
+  actorId: Scalars['ID'];
   type: ActorType;
 };
 
 export type ActorInput = {
-  actorId: Scalars["ID"];
+  actorId: Scalars['ID'];
   type: ActorType;
 };
 
 export enum ActorType {
-  AnonymousUser = "ANONYMOUS_USER",
-  Backfill = "BACKFILL",
-  Cron = "CRON",
-  Graph = "GRAPH",
-  InternalIdentity = "INTERNAL_IDENTITY",
-  Synchronization = "SYNCHRONIZATION",
-  System = "SYSTEM",
-  User = "USER",
+  AnonymousUser = 'ANONYMOUS_USER',
+  Backfill = 'BACKFILL',
+  Cron = 'CRON',
+  Graph = 'GRAPH',
+  InternalIdentity = 'INTERNAL_IDENTITY',
+  Synchronization = 'SYNCHRONIZATION',
+  System = 'SYSTEM',
+  User = 'USER'
 }
 
-export type AddOperationCollectionEntryResult =
-  | OperationCollectionEntry
-  | PermissionError
-  | ValidationError;
+export type AddOperationCollectionEntryResult = OperationCollectionEntry | PermissionError | ValidationError;
 
-export type AddOperationCollectionToVariantResult =
-  | GraphVariant
-  | InvalidTarget
-  | PermissionError
-  | ValidationError;
+export type AddOperationCollectionToVariantResult = GraphVariant | InvalidTarget | PermissionError | ValidationError;
 
 export type AffectedClient = {
-  __typename?: "AffectedClient";
+  __typename?: 'AffectedClient';
   /**
    * ID, often the name, of the client set by the user and reported alongside metrics
    * @deprecated Unsupported.
    */
-  clientReferenceId?: Maybe<Scalars["ID"]>;
+  clientReferenceId?: Maybe<Scalars['ID']>;
   /**
    * version of the client set by the user and reported alongside metrics
    * @deprecated Unsupported.
    */
-  clientVersion?: Maybe<Scalars["String"]>;
+  clientVersion?: Maybe<Scalars['String']>;
 };
 
 export type AffectedQuery = {
-  __typename?: "AffectedQuery";
+  __typename?: 'AffectedQuery';
   /** If the operation would be approved if the check ran again. Returns null if queried from SchemaDiff.changes.affectedQueries.alreadyApproved */
-  alreadyApproved?: Maybe<Scalars["Boolean"]>;
+  alreadyApproved?: Maybe<Scalars['Boolean']>;
   /** If the operation would be ignored if the check ran again */
-  alreadyIgnored?: Maybe<Scalars["Boolean"]>;
+  alreadyIgnored?: Maybe<Scalars['Boolean']>;
   /** List of changes affecting this query. Returns null if queried from SchemaDiff.changes.affectedQueries.changes */
   changes?: Maybe<Array<ChangeOnOperation>>;
   /** Name to display to the user for the operation */
-  displayName?: Maybe<Scalars["String"]>;
-  id: Scalars["ID"];
+  displayName?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
   /** Determines if this query validates against the proposed schema */
-  isValid?: Maybe<Scalars["Boolean"]>;
+  isValid?: Maybe<Scalars['Boolean']>;
   /** Whether this operation was ignored and its severity was downgraded for that reason */
-  markedAsIgnored?: Maybe<Scalars["Boolean"]>;
+  markedAsIgnored?: Maybe<Scalars['Boolean']>;
   /** Whether the changes were marked as safe and its severity was downgraded for that reason */
-  markedAsSafe?: Maybe<Scalars["Boolean"]>;
+  markedAsSafe?: Maybe<Scalars['Boolean']>;
   /** Name provided for the operation, which can be empty string if it is an anonymous operation */
-  name?: Maybe<Scalars["String"]>;
+  name?: Maybe<Scalars['String']>;
   /** First 128 characters of query signature for display */
-  signature?: Maybe<Scalars["String"]>;
+  signature?: Maybe<Scalars['String']>;
 };
 
 export type ApiKey = {
-  id: Scalars["ID"];
-  keyName?: Maybe<Scalars["String"]>;
-  token: Scalars["String"];
+  id: Scalars['ID'];
+  keyName?: Maybe<Scalars['String']>;
+  token: Scalars['String'];
 };
 
 export type ApiKeyProvision = {
-  __typename?: "ApiKeyProvision";
+  __typename?: 'ApiKeyProvision';
   apiKey: ApiKey;
-  created: Scalars["Boolean"];
+  created: Scalars['Boolean'];
 };
 
 export type AuditLogExport = {
-  __typename?: "AuditLogExport";
+  __typename?: 'AuditLogExport';
   actors?: Maybe<Array<Identity>>;
-  bigqueryTriggeredAt?: Maybe<Scalars["Timestamp"]>;
-  completedAt?: Maybe<Scalars["Timestamp"]>;
-  createdAt: Scalars["Timestamp"];
-  exportedFiles?: Maybe<Array<Scalars["String"]>>;
-  from: Scalars["Timestamp"];
+  bigqueryTriggeredAt?: Maybe<Scalars['Timestamp']>;
+  completedAt?: Maybe<Scalars['Timestamp']>;
+  createdAt: Scalars['Timestamp'];
+  exportedFiles?: Maybe<Array<Scalars['String']>>;
+  from: Scalars['Timestamp'];
   graphs?: Maybe<Array<Service>>;
-  id: Scalars["ID"];
+  id: Scalars['ID'];
   requester?: Maybe<User>;
   status: AuditStatus;
-  to: Scalars["Timestamp"];
+  to: Scalars['Timestamp'];
 };
 
 export type AuditLogExportMutation = {
-  __typename?: "AuditLogExportMutation";
+  __typename?: 'AuditLogExportMutation';
   cancel?: Maybe<Account>;
   delete?: Maybe<Account>;
 };
 
 export enum AuditStatus {
-  Cancelled = "CANCELLED",
-  Completed = "COMPLETED",
-  Expired = "EXPIRED",
-  Failed = "FAILED",
-  InProgress = "IN_PROGRESS",
-  Queued = "QUEUED",
+  Cancelled = 'CANCELLED',
+  Completed = 'COMPLETED',
+  Expired = 'EXPIRED',
+  Failed = 'FAILED',
+  InProgress = 'IN_PROGRESS',
+  Queued = 'QUEUED'
 }
 
 export type AvatarDeleteError = {
-  __typename?: "AvatarDeleteError";
-  clientMessage: Scalars["String"];
+  __typename?: 'AvatarDeleteError';
+  clientMessage: Scalars['String'];
   code: AvatarDeleteErrorCode;
-  serverMessage: Scalars["String"];
+  serverMessage: Scalars['String'];
 };
 
 export enum AvatarDeleteErrorCode {
-  SsoUsersCannotDeleteSelfAvatar = "SSO_USERS_CANNOT_DELETE_SELF_AVATAR",
+  SsoUsersCannotDeleteSelfAvatar = 'SSO_USERS_CANNOT_DELETE_SELF_AVATAR'
 }
 
 export type AvatarUploadError = {
-  __typename?: "AvatarUploadError";
-  clientMessage: Scalars["String"];
+  __typename?: 'AvatarUploadError';
+  clientMessage: Scalars['String'];
   code: AvatarUploadErrorCode;
-  serverMessage: Scalars["String"];
+  serverMessage: Scalars['String'];
 };
 
 export enum AvatarUploadErrorCode {
-  SsoUsersCannotUploadSelfAvatar = "SSO_USERS_CANNOT_UPLOAD_SELF_AVATAR",
+  SsoUsersCannotUploadSelfAvatar = 'SSO_USERS_CANNOT_UPLOAD_SELF_AVATAR'
 }
 
 export type AvatarUploadResult = AvatarUploadError | MediaUploadInfo;
 
 export type BillingAddress = {
-  __typename?: "BillingAddress";
-  address1?: Maybe<Scalars["String"]>;
-  address2?: Maybe<Scalars["String"]>;
-  city?: Maybe<Scalars["String"]>;
-  country?: Maybe<Scalars["String"]>;
-  state?: Maybe<Scalars["String"]>;
-  zip?: Maybe<Scalars["String"]>;
+  __typename?: 'BillingAddress';
+  address1?: Maybe<Scalars['String']>;
+  address2?: Maybe<Scalars['String']>;
+  city?: Maybe<Scalars['String']>;
+  country?: Maybe<Scalars['String']>;
+  state?: Maybe<Scalars['String']>;
+  zip?: Maybe<Scalars['String']>;
 };
 
 /** Billing address inpnut */
 export type BillingAddressInput = {
-  address1: Scalars["String"];
-  address2?: InputMaybe<Scalars["String"]>;
-  city: Scalars["String"];
-  country: Scalars["String"];
-  state: Scalars["String"];
-  zip: Scalars["String"];
+  address1: Scalars['String'];
+  address2?: InputMaybe<Scalars['String']>;
+  city: Scalars['String'];
+  country: Scalars['String'];
+  state: Scalars['String'];
+  zip: Scalars['String'];
 };
 
 export type BillingInfo = {
-  __typename?: "BillingInfo";
+  __typename?: 'BillingInfo';
   address: BillingAddress;
-  cardType?: Maybe<Scalars["String"]>;
-  firstName?: Maybe<Scalars["String"]>;
-  lastFour?: Maybe<Scalars["Int"]>;
-  lastName?: Maybe<Scalars["String"]>;
-  month?: Maybe<Scalars["Int"]>;
-  vatNumber?: Maybe<Scalars["String"]>;
-  year?: Maybe<Scalars["Int"]>;
+  cardType?: Maybe<Scalars['String']>;
+  firstName?: Maybe<Scalars['String']>;
+  lastFour?: Maybe<Scalars['Int']>;
+  lastName?: Maybe<Scalars['String']>;
+  month?: Maybe<Scalars['Int']>;
+  vatNumber?: Maybe<Scalars['String']>;
+  year?: Maybe<Scalars['Int']>;
 };
 
 export enum BillingModel {
-  RequestBased = "REQUEST_BASED",
-  SeatBased = "SEAT_BASED",
+  RequestBased = 'REQUEST_BASED',
+  SeatBased = 'SEAT_BASED'
 }
 
 export type BillingMonth = {
-  __typename?: "BillingMonth";
-  end: Scalars["Timestamp"];
-  requests: Scalars["Long"];
-  start: Scalars["Timestamp"];
+  __typename?: 'BillingMonth';
+  end: Scalars['Timestamp'];
+  requests: Scalars['Long'];
+  start: Scalars['Timestamp'];
 };
 
 export enum BillingPeriod {
-  Monthly = "MONTHLY",
-  Quarterly = "QUARTERLY",
-  SemiAnnually = "SEMI_ANNUALLY",
-  Yearly = "YEARLY",
+  Monthly = 'MONTHLY',
+  Quarterly = 'QUARTERLY',
+  SemiAnnually = 'SEMI_ANNUALLY',
+  Yearly = 'YEARLY'
 }
 
 export type BillingPlan = {
-  __typename?: "BillingPlan";
+  __typename?: 'BillingPlan';
   addons: Array<BillingPlanAddon>;
   billingModel: BillingModel;
   billingPeriod?: Maybe<BillingPeriod>;
   capabilities: BillingPlanCapabilities;
-  description?: Maybe<Scalars["String"]>;
-  id: Scalars["ID"];
-  isTrial: Scalars["Boolean"];
+  description?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  isTrial: Scalars['Boolean'];
   kind: BillingPlanKind;
-  name: Scalars["String"];
+  name: Scalars['String'];
   /** The price of every seat */
-  pricePerSeatInUsdCents?: Maybe<Scalars["Int"]>;
+  pricePerSeatInUsdCents?: Maybe<Scalars['Int']>;
   /** The price of subscribing to this plan with a quantity of 1 (currently always the case) */
-  pricePerUnitInUsdCents: Scalars["Int"];
+  pricePerUnitInUsdCents: Scalars['Int'];
   /** Whether the plan is accessible by all users in QueryRoot.allPlans, QueryRoot.plan, or AccountMutation.setPlan */
-  public: Scalars["Boolean"];
+  public: Scalars['Boolean'];
   tier: BillingPlanTier;
 };
 
 export type BillingPlanAddon = {
-  __typename?: "BillingPlanAddon";
-  id: Scalars["ID"];
-  pricePerUnitInUsdCents: Scalars["Int"];
+  __typename?: 'BillingPlanAddon';
+  id: Scalars['ID'];
+  pricePerUnitInUsdCents: Scalars['Int'];
 };
 
 export type BillingPlanAddonV2 = {
-  __typename?: "BillingPlanAddonV2";
-  id: Scalars["ID"];
-  pricePerUnitInUsdCents: Scalars["Int"];
+  __typename?: 'BillingPlanAddonV2';
+  id: Scalars['ID'];
+  pricePerUnitInUsdCents: Scalars['Int'];
 };
 
 export type BillingPlanCapabilities = {
-  __typename?: "BillingPlanCapabilities";
-  clients: Scalars["Boolean"];
-  contracts: Scalars["Boolean"];
-  datadog: Scalars["Boolean"];
-  errors: Scalars["Boolean"];
-  federation: Scalars["Boolean"];
-  launches: Scalars["Boolean"];
-  maxAuditInDays: Scalars["Int"];
-  maxRangeInDays?: Maybe<Scalars["Int"]>;
-  maxRequestsPerMonth?: Maybe<Scalars["Long"]>;
-  metrics: Scalars["Boolean"];
-  notifications: Scalars["Boolean"];
-  operationRegistry: Scalars["Boolean"];
-  ranges: Array<Scalars["String"]>;
-  schemaValidation: Scalars["Boolean"];
-  traces: Scalars["Boolean"];
-  userRoles: Scalars["Boolean"];
-  webhooks: Scalars["Boolean"];
+  __typename?: 'BillingPlanCapabilities';
+  clients: Scalars['Boolean'];
+  contracts: Scalars['Boolean'];
+  datadog: Scalars['Boolean'];
+  errors: Scalars['Boolean'];
+  federation: Scalars['Boolean'];
+  launches: Scalars['Boolean'];
+  maxAuditInDays: Scalars['Int'];
+  maxRangeInDays?: Maybe<Scalars['Int']>;
+  maxRequestsPerMonth?: Maybe<Scalars['Long']>;
+  metrics: Scalars['Boolean'];
+  notifications: Scalars['Boolean'];
+  operationRegistry: Scalars['Boolean'];
+  ranges: Array<Scalars['String']>;
+  schemaValidation: Scalars['Boolean'];
+  traces: Scalars['Boolean'];
+  userRoles: Scalars['Boolean'];
+  webhooks: Scalars['Boolean'];
 };
 
 export enum BillingPlanKind {
-  Community = "COMMUNITY",
-  EnterpriseInternal = "ENTERPRISE_INTERNAL",
-  EnterprisePaid = "ENTERPRISE_PAID",
-  EnterprisePilot = "ENTERPRISE_PILOT",
-  TeamPaid = "TEAM_PAID",
-  TeamTrial = "TEAM_TRIAL",
+  Community = 'COMMUNITY',
+  EnterpriseInternal = 'ENTERPRISE_INTERNAL',
+  EnterprisePaid = 'ENTERPRISE_PAID',
+  EnterprisePilot = 'ENTERPRISE_PILOT',
+  TeamPaid = 'TEAM_PAID',
+  TeamTrial = 'TEAM_TRIAL'
 }
 
 export enum BillingPlanKindV2 {
-  Community = "COMMUNITY",
-  EnterpriseInternal = "ENTERPRISE_INTERNAL",
-  EnterprisePaid = "ENTERPRISE_PAID",
-  EnterprisePilot = "ENTERPRISE_PILOT",
-  TeamPaid = "TEAM_PAID",
-  TeamTrial = "TEAM_TRIAL",
-  Unknown = "UNKNOWN",
+  Community = 'COMMUNITY',
+  EnterpriseInternal = 'ENTERPRISE_INTERNAL',
+  EnterprisePaid = 'ENTERPRISE_PAID',
+  EnterprisePilot = 'ENTERPRISE_PILOT',
+  TeamPaid = 'TEAM_PAID',
+  TeamTrial = 'TEAM_TRIAL',
+  Unknown = 'UNKNOWN'
 }
 
 export enum BillingPlanTier {
-  Community = "COMMUNITY",
-  Enterprise = "ENTERPRISE",
-  Team = "TEAM",
+  Community = 'COMMUNITY',
+  Enterprise = 'ENTERPRISE',
+  Team = 'TEAM'
 }
 
 export enum BillingPlanTierV2 {
-  Community = "COMMUNITY",
-  Enterprise = "ENTERPRISE",
-  Team = "TEAM",
-  Unknown = "UNKNOWN",
+  Community = 'COMMUNITY',
+  Enterprise = 'ENTERPRISE',
+  Team = 'TEAM',
+  Unknown = 'UNKNOWN'
 }
 
 export type BillingPlanV2 = {
-  __typename?: "BillingPlanV2";
+  __typename?: 'BillingPlanV2';
   addons: Array<BillingPlanAddonV2>;
   billingModel: BillingModel;
   billingPeriod?: Maybe<BillingPeriod>;
-  clients: Scalars["Boolean"];
-  contracts: Scalars["Boolean"];
-  datadog: Scalars["Boolean"];
-  description?: Maybe<Scalars["String"]>;
-  errors: Scalars["Boolean"];
-  federation: Scalars["Boolean"];
-  id: Scalars["ID"];
-  isTrial: Scalars["Boolean"];
+  clients: Scalars['Boolean'];
+  contracts: Scalars['Boolean'];
+  datadog: Scalars['Boolean'];
+  description?: Maybe<Scalars['String']>;
+  errors: Scalars['Boolean'];
+  federation: Scalars['Boolean'];
+  id: Scalars['ID'];
+  isTrial: Scalars['Boolean'];
   kind: BillingPlanKindV2;
-  launches: Scalars["Boolean"];
-  maxAuditInDays: Scalars["Int"];
-  maxRangeInDays?: Maybe<Scalars["Int"]>;
-  maxRequestsPerMonth?: Maybe<Scalars["Long"]>;
-  metrics: Scalars["Boolean"];
-  name: Scalars["String"];
-  notifications: Scalars["Boolean"];
-  operationRegistry: Scalars["Boolean"];
+  launches: Scalars['Boolean'];
+  maxAuditInDays: Scalars['Int'];
+  maxRangeInDays?: Maybe<Scalars['Int']>;
+  maxRequestsPerMonth?: Maybe<Scalars['Long']>;
+  metrics: Scalars['Boolean'];
+  name: Scalars['String'];
+  notifications: Scalars['Boolean'];
+  operationRegistry: Scalars['Boolean'];
   /** The price of every seat */
-  pricePerSeatInUsdCents?: Maybe<Scalars["Int"]>;
+  pricePerSeatInUsdCents?: Maybe<Scalars['Int']>;
   /** The price of subscribing to this plan with a quantity of 1 (currently always the case) */
-  pricePerUnitInUsdCents: Scalars["Int"];
+  pricePerUnitInUsdCents: Scalars['Int'];
   /** Whether the plan is accessible by all users in QueryRoot.allPlans, QueryRoot.plan, or AccountMutation.setPlan */
-  public: Scalars["Boolean"];
-  ranges: Array<Scalars["String"]>;
-  schemaValidation: Scalars["Boolean"];
+  public: Scalars['Boolean'];
+  ranges: Array<Scalars['String']>;
+  schemaValidation: Scalars['Boolean'];
   tier: BillingPlanTierV2;
-  traces: Scalars["Boolean"];
-  userRoles: Scalars["Boolean"];
-  webhooks: Scalars["Boolean"];
+  traces: Scalars['Boolean'];
+  userRoles: Scalars['Boolean'];
+  webhooks: Scalars['Boolean'];
 };
 
 export type BillingSubscription = {
-  __typename?: "BillingSubscription";
-  activatedAt: Scalars["Timestamp"];
+  __typename?: 'BillingSubscription';
+  activatedAt: Scalars['Timestamp'];
   addons: Array<BillingSubscriptionAddon>;
-  autoRenew: Scalars["Boolean"];
+  autoRenew: Scalars['Boolean'];
   /** The price of the subscription when ignoring add-ons (such as seats), ie quantity * pricePerUnitInUsdCents */
-  basePriceInUsdCents: Scalars["Long"];
-  canceledAt?: Maybe<Scalars["Timestamp"]>;
-  currentPeriodEndsAt: Scalars["Timestamp"];
-  currentPeriodStartedAt: Scalars["Timestamp"];
-  expiresAt?: Maybe<Scalars["Timestamp"]>;
+  basePriceInUsdCents: Scalars['Long'];
+  canceledAt?: Maybe<Scalars['Timestamp']>;
+  currentPeriodEndsAt: Scalars['Timestamp'];
+  currentPeriodStartedAt: Scalars['Timestamp'];
+  expiresAt?: Maybe<Scalars['Timestamp']>;
   plan: BillingPlan;
   /** The price of every seat */
-  pricePerSeatInUsdCents?: Maybe<Scalars["Int"]>;
+  pricePerSeatInUsdCents?: Maybe<Scalars['Int']>;
   /** The price of every unit in the subscription (hence multiplied by quantity to get to the basePriceInUsdCents) */
-  pricePerUnitInUsdCents: Scalars["Int"];
-  quantity: Scalars["Int"];
+  pricePerUnitInUsdCents: Scalars['Int'];
+  quantity: Scalars['Int'];
   /** Total price of the subscription when it next renews, including add-ons (such as seats) */
-  renewalTotalPriceInUsdCents: Scalars["Long"];
+  renewalTotalPriceInUsdCents: Scalars['Long'];
   state: SubscriptionState;
   /** Total price of the subscription, including add-ons (such as seats) */
-  totalPriceInUsdCents: Scalars["Long"];
+  totalPriceInUsdCents: Scalars['Long'];
   /**
    * When this subscription's trial period expires (if it is a trial). Not the same as the
    * subscription's Recurly expiration).
    */
-  trialExpiresAt?: Maybe<Scalars["Timestamp"]>;
-  uuid: Scalars["ID"];
+  trialExpiresAt?: Maybe<Scalars['Timestamp']>;
+  uuid: Scalars['ID'];
 };
 
 export type BillingSubscriptionAddon = {
-  __typename?: "BillingSubscriptionAddon";
-  id: Scalars["ID"];
-  pricePerUnitInUsdCents: Scalars["Int"];
-  quantity: Scalars["Int"];
+  __typename?: 'BillingSubscriptionAddon';
+  id: Scalars['ID'];
+  pricePerUnitInUsdCents: Scalars['Int'];
+  quantity: Scalars['Int'];
 };
 
 export type BillingSubscriptionAddonV2 = {
-  __typename?: "BillingSubscriptionAddonV2";
-  id: Scalars["ID"];
-  pricePerUnitInUsdCents: Scalars["Int"];
-  quantity: Scalars["Int"];
+  __typename?: 'BillingSubscriptionAddonV2';
+  id: Scalars['ID'];
+  pricePerUnitInUsdCents: Scalars['Int'];
+  quantity: Scalars['Int'];
 };
 
 export type BillingSubscriptionV2 = {
-  __typename?: "BillingSubscriptionV2";
+  __typename?: 'BillingSubscriptionV2';
   /** The price of every unit in the subscription (hence multiplied by quantity to get to the basePriceInUsdCents) */
-  activatedAt: Scalars["Timestamp"];
+  activatedAt: Scalars['Timestamp'];
   addons: Array<BillingSubscriptionAddonV2>;
-  autoRenew: Scalars["Boolean"];
-  canceledAt?: Maybe<Scalars["Timestamp"]>;
-  currentPeriodEndsAt: Scalars["Timestamp"];
-  currentPeriodStartedAt: Scalars["Timestamp"];
-  expiresAt?: Maybe<Scalars["Timestamp"]>;
+  autoRenew: Scalars['Boolean'];
+  canceledAt?: Maybe<Scalars['Timestamp']>;
+  currentPeriodEndsAt: Scalars['Timestamp'];
+  currentPeriodStartedAt: Scalars['Timestamp'];
+  expiresAt?: Maybe<Scalars['Timestamp']>;
   plan: BillingPlanV2;
   /** The price of every seat */
-  pricePerSeatInUsdCents?: Maybe<Scalars["Int"]>;
-  quantity: Scalars["Int"];
+  pricePerSeatInUsdCents?: Maybe<Scalars['Int']>;
+  quantity: Scalars['Int'];
   state: SubscriptionStateV2;
   /**
    * When this subscription's trial period expires (if it is a trial). Not the same as the
    * subscription's Recurly expiration).
    */
-  trialExpiresAt?: Maybe<Scalars["Timestamp"]>;
-  uuid: Scalars["ID"];
+  trialExpiresAt?: Maybe<Scalars['Timestamp']>;
+  uuid: Scalars['ID'];
 };
 
 export type Build = {
-  __typename?: "Build";
+  __typename?: 'Build';
   input: BuildInput;
   result?: Maybe<BuildResult>;
 };
 
 export type BuildError = {
-  __typename?: "BuildError";
-  code?: Maybe<Scalars["String"]>;
+  __typename?: 'BuildError';
+  code?: Maybe<Scalars['String']>;
   locations: Array<SourceLocation>;
-  message: Scalars["String"];
+  message: Scalars['String'];
 };
 
 export type BuildFailure = {
-  __typename?: "BuildFailure";
+  __typename?: 'BuildFailure';
   errorMessages: Array<BuildError>;
 };
 
@@ -1633,19 +1658,19 @@ export type BuildInput = CompositionBuildInput | FilterBuildInput;
 export type BuildResult = BuildFailure | BuildSuccess;
 
 export type BuildSuccess = {
-  __typename?: "BuildSuccess";
+  __typename?: 'BuildSuccess';
   coreSchema: CoreSchema;
 };
 
 export enum CacheScope {
-  Private = "PRIVATE",
-  Public = "PUBLIC",
-  Unknown = "UNKNOWN",
-  Unrecognized = "UNRECOGNIZED",
+  Private = 'PRIVATE',
+  Public = 'PUBLIC',
+  Unknown = 'UNKNOWN',
+  Unrecognized = 'UNRECOGNIZED'
 }
 
 export type Change = {
-  __typename?: "Change";
+  __typename?: 'Change';
   affectedQueries?: Maybe<Array<AffectedQuery>>;
   /** Target arg of change made. */
   argNode?: Maybe<NamedIntrospectionArg>;
@@ -1657,9 +1682,9 @@ export type Change = {
    */
   childNode?: Maybe<NamedIntrospectionValue>;
   /** Indication of the kind of target and action of the change, e.g. 'TYPE_REMOVED'. */
-  code: Scalars["String"];
+  code: Scalars['String'];
   /** Explanation of both the target of the change and how it was changed. */
-  description: Scalars["String"];
+  description: Scalars['String'];
   /** Top level node affected by the change */
   parentNode?: Maybe<NamedIntrospectionType>;
   /** Indication of the success of the overall change, either failure, warning, or notice. */
@@ -1676,10 +1701,10 @@ export type Change = {
  * can be grouped by.
  */
 export enum ChangeCategory {
-  Addition = "ADDITION",
-  Deprecation = "DEPRECATION",
-  Edit = "EDIT",
-  Removal = "REMOVAL",
+  Addition = 'ADDITION',
+  Deprecation = 'DEPRECATION',
+  Edit = 'EDIT',
+  Removal = 'REMOVAL'
 }
 
 /**
@@ -1688,82 +1713,86 @@ export enum ChangeCategory {
  */
 export enum ChangeCode {
   /** Type of the argument was changed. */
-  ArgChangedType = "ARG_CHANGED_TYPE",
+  ArgChangedType = 'ARG_CHANGED_TYPE',
   /** Argument was changed from nullable to non-nullable. */
-  ArgChangedTypeOptionalToRequired = "ARG_CHANGED_TYPE_OPTIONAL_TO_REQUIRED",
+  ArgChangedTypeOptionalToRequired = 'ARG_CHANGED_TYPE_OPTIONAL_TO_REQUIRED',
   /** Default value added or changed for the argument. */
-  ArgDefaultValueChange = "ARG_DEFAULT_VALUE_CHANGE",
+  ArgDefaultValueChange = 'ARG_DEFAULT_VALUE_CHANGE',
   /** Description was added, removed, or updated for argument. */
-  ArgDescriptionChange = "ARG_DESCRIPTION_CHANGE",
+  ArgDescriptionChange = 'ARG_DESCRIPTION_CHANGE',
   /** Argument to a field was removed. */
-  ArgRemoved = "ARG_REMOVED",
+  ArgRemoved = 'ARG_REMOVED',
   /** Argument to the directive was removed. */
-  DirectiveArgRemoved = "DIRECTIVE_ARG_REMOVED",
+  DirectiveArgRemoved = 'DIRECTIVE_ARG_REMOVED',
   /** Location of the directive was removed. */
-  DirectiveLocationRemoved = "DIRECTIVE_LOCATION_REMOVED",
+  DirectiveLocationRemoved = 'DIRECTIVE_LOCATION_REMOVED',
   /** Directive was removed. */
-  DirectiveRemoved = "DIRECTIVE_REMOVED",
+  DirectiveRemoved = 'DIRECTIVE_REMOVED',
   /** Repeatable flag was removed for directive. */
-  DirectiveRepeatableRemoved = "DIRECTIVE_REPEATABLE_REMOVED",
+  DirectiveRepeatableRemoved = 'DIRECTIVE_REPEATABLE_REMOVED',
   /** Enum was deprecated. */
-  EnumDeprecated = "ENUM_DEPRECATED",
+  EnumDeprecated = 'ENUM_DEPRECATED',
   /** Reason for enum deprecation changed. */
-  EnumDeprecatedReasonChange = "ENUM_DEPRECATED_REASON_CHANGE",
+  EnumDeprecatedReasonChange = 'ENUM_DEPRECATED_REASON_CHANGE',
   /** Enum deprecation was removed. */
-  EnumDeprecationRemoved = "ENUM_DEPRECATION_REMOVED",
+  EnumDeprecationRemoved = 'ENUM_DEPRECATION_REMOVED',
   /** Description was added, removed, or updated for enum value. */
-  EnumValueDescriptionChange = "ENUM_VALUE_DESCRIPTION_CHANGE",
+  EnumValueDescriptionChange = 'ENUM_VALUE_DESCRIPTION_CHANGE',
   /** Field was added to the type. */
-  FieldAdded = "FIELD_ADDED",
+  FieldAdded = 'FIELD_ADDED',
   /** Return type for the field was changed. */
-  FieldChangedType = "FIELD_CHANGED_TYPE",
+  FieldChangedType = 'FIELD_CHANGED_TYPE',
   /** Field was deprecated. */
-  FieldDeprecated = "FIELD_DEPRECATED",
+  FieldDeprecated = 'FIELD_DEPRECATED',
   /** Reason for field deprecation changed. */
-  FieldDeprecatedReasonChange = "FIELD_DEPRECATED_REASON_CHANGE",
+  FieldDeprecatedReasonChange = 'FIELD_DEPRECATED_REASON_CHANGE',
   /** Field deprecation removed. */
-  FieldDeprecationRemoved = "FIELD_DEPRECATION_REMOVED",
+  FieldDeprecationRemoved = 'FIELD_DEPRECATION_REMOVED',
   /** Description was added, removed, or updated for field. */
-  FieldDescriptionChange = "FIELD_DESCRIPTION_CHANGE",
+  FieldDescriptionChange = 'FIELD_DESCRIPTION_CHANGE',
   /** Type of the field in the input object was changed. */
-  FieldOnInputObjectChangedType = "FIELD_ON_INPUT_OBJECT_CHANGED_TYPE",
+  FieldOnInputObjectChangedType = 'FIELD_ON_INPUT_OBJECT_CHANGED_TYPE',
   /** Field was removed from the type. */
-  FieldRemoved = "FIELD_REMOVED",
+  FieldRemoved = 'FIELD_REMOVED',
   /** Field was removed from the input object. */
-  FieldRemovedFromInputObject = "FIELD_REMOVED_FROM_INPUT_OBJECT",
-  /** Non-nullable field was added to the input object. */
-  NonNullableFieldAddedToInputObject = "NON_NULLABLE_FIELD_ADDED_TO_INPUT_OBJECT",
-  /** Nullable field was added to the input type. */
-  NullableFieldAddedToInputObject = "NULLABLE_FIELD_ADDED_TO_INPUT_OBJECT",
+  FieldRemovedFromInputObject = 'FIELD_REMOVED_FROM_INPUT_OBJECT',
+  /** Non-nullable field was added to the input object. (Deprecated.) */
+  NonNullableFieldAddedToInputObject = 'NON_NULLABLE_FIELD_ADDED_TO_INPUT_OBJECT',
+  /** Nullable field was added to the input type. (Deprecated.) */
+  NullableFieldAddedToInputObject = 'NULLABLE_FIELD_ADDED_TO_INPUT_OBJECT',
   /** Nullable argument was added to the field. */
-  OptionalArgAdded = "OPTIONAL_ARG_ADDED",
+  OptionalArgAdded = 'OPTIONAL_ARG_ADDED',
+  /** Optional field was added to the input type. */
+  OptionalFieldAddedToInputObject = 'OPTIONAL_FIELD_ADDED_TO_INPUT_OBJECT',
   /** Non-nullable argument was added to the field. */
-  RequiredArgAdded = "REQUIRED_ARG_ADDED",
+  RequiredArgAdded = 'REQUIRED_ARG_ADDED',
   /** Non-nullable argument added to directive. */
-  RequiredDirectiveArgAdded = "REQUIRED_DIRECTIVE_ARG_ADDED",
+  RequiredDirectiveArgAdded = 'REQUIRED_DIRECTIVE_ARG_ADDED',
+  /** Required field was added to the input object. */
+  RequiredFieldAddedToInputObject = 'REQUIRED_FIELD_ADDED_TO_INPUT_OBJECT',
   /** Type was added to the schema. */
-  TypeAdded = "TYPE_ADDED",
+  TypeAdded = 'TYPE_ADDED',
   /** Type now implements the interface. */
-  TypeAddedToInterface = "TYPE_ADDED_TO_INTERFACE",
+  TypeAddedToInterface = 'TYPE_ADDED_TO_INTERFACE',
   /** A new value was added to the enum. */
-  TypeAddedToUnion = "TYPE_ADDED_TO_UNION",
+  TypeAddedToUnion = 'TYPE_ADDED_TO_UNION',
   /**
    * Type was changed from one kind to another.
    * Ex: scalar to object or enum to union.
    */
-  TypeChangedKind = "TYPE_CHANGED_KIND",
+  TypeChangedKind = 'TYPE_CHANGED_KIND',
   /** Description was added, removed, or updated for type. */
-  TypeDescriptionChange = "TYPE_DESCRIPTION_CHANGE",
+  TypeDescriptionChange = 'TYPE_DESCRIPTION_CHANGE',
   /** Type (object or scalar) was removed from the schema. */
-  TypeRemoved = "TYPE_REMOVED",
+  TypeRemoved = 'TYPE_REMOVED',
   /** Type no longer implements the interface. */
-  TypeRemovedFromInterface = "TYPE_REMOVED_FROM_INTERFACE",
+  TypeRemovedFromInterface = 'TYPE_REMOVED_FROM_INTERFACE',
   /** Type is no longer included in the union. */
-  TypeRemovedFromUnion = "TYPE_REMOVED_FROM_UNION",
+  TypeRemovedFromUnion = 'TYPE_REMOVED_FROM_UNION',
   /** A new value was added to the enum. */
-  ValueAddedToEnum = "VALUE_ADDED_TO_ENUM",
+  ValueAddedToEnum = 'VALUE_ADDED_TO_ENUM',
   /** Value was removed from the enum. */
-  ValueRemovedFromEnum = "VALUE_REMOVED_FROM_ENUM",
+  ValueRemovedFromEnum = 'VALUE_REMOVED_FROM_ENUM'
 }
 
 /**
@@ -1771,7 +1800,7 @@ export enum ChangeCode {
  * about a particular kind of schema change.
  */
 export type ChangeDefinition = {
-  __typename?: "ChangeDefinition";
+  __typename?: 'ChangeDefinition';
   category: ChangeCategory;
   code: ChangeCode;
   defaultSeverity: ChangeSeverity;
@@ -1779,16 +1808,16 @@ export type ChangeDefinition = {
 
 /** Info about a change in the context of an operation it affects */
 export type ChangeOnOperation = {
-  __typename?: "ChangeOnOperation";
+  __typename?: 'ChangeOnOperation';
   /** Human-readable explanation of the impact of this change on the operation */
-  impact?: Maybe<Scalars["String"]>;
+  impact?: Maybe<Scalars['String']>;
   /** The semantic info about this change, i.e. info about the change that doesn't depend on the operation */
   semanticChange: SemanticChange;
 };
 
 export enum ChangeSeverity {
-  Failure = "FAILURE",
-  Notice = "NOTICE",
+  Failure = 'FAILURE',
+  Notice = 'NOTICE'
 }
 
 /**
@@ -1803,7 +1832,7 @@ export enum ChangeSeverity {
  * ancestor) was added/removed.
  */
 export type ChangeSummary = {
-  __typename?: "ChangeSummary";
+  __typename?: 'ChangeSummary';
   /** Counts for changes to fields of objects, input objects, and interfaces. */
   field: FieldChangeSummaryCounts;
   /** Counts for all changes. */
@@ -1816,34 +1845,34 @@ export type ChangeSummary = {
 };
 
 export enum ChangeType {
-  Failure = "FAILURE",
-  Notice = "NOTICE",
+  Failure = 'FAILURE',
+  Notice = 'NOTICE'
 }
 
 export type ChangelogLaunchResult = {
-  __typename?: "ChangelogLaunchResult";
-  createdAt: Scalars["Timestamp"];
-  schemaTagID: Scalars["ID"];
+  __typename?: 'ChangelogLaunchResult';
+  createdAt: Scalars['Timestamp'];
+  schemaTagID: Scalars['ID'];
 };
 
 /** Destination for notifications */
 export type Channel = {
-  id: Scalars["ID"];
-  name: Scalars["String"];
+  id: Scalars['ID'];
+  name: Scalars['String'];
   subscriptions: Array<ChannelSubscription>;
 };
 
 export type ChannelSubscription = {
   channels: Array<Channel>;
-  enabled: Scalars["Boolean"];
-  id: Scalars["ID"];
-  variant?: Maybe<Scalars["String"]>;
+  enabled: Scalars['Boolean'];
+  id: Scalars['ID'];
+  variant?: Maybe<Scalars['String']>;
 };
 
 export type CheckConfiguration = {
-  __typename?: "CheckConfiguration";
+  __typename?: 'CheckConfiguration';
   /** Time when check configuration was created */
-  createdAt: Scalars["Timestamp"];
+  createdAt: Scalars['Timestamp'];
   /** Clients to ignore during validation */
   excludedClients: Array<ClientFilter>;
   /** Operation names to ignore during validation */
@@ -1851,94 +1880,94 @@ export type CheckConfiguration = {
   /** Operations to ignore during validation */
   excludedOperations: Array<ExcludedOperation>;
   /** Graph that this check configuration belongs to */
-  graphID: Scalars["ID"];
+  graphID: Scalars['ID'];
   /** ID of the check configuration */
-  id: Scalars["ID"];
+  id: Scalars['ID'];
   /** Default configuration to include operations on the base variant. */
-  includeBaseVariant: Scalars["Boolean"];
+  includeBaseVariant: Scalars['Boolean'];
   /** Variant overrides for validation */
-  includedVariants: Array<Scalars["String"]>;
+  includedVariants: Array<Scalars['String']>;
   /** Minimum number of requests within the window for an operation to be considered. */
-  operationCountThreshold: Scalars["Int"];
+  operationCountThreshold: Scalars['Int'];
   /**
    * Number of requests within the window for an operation to be considered, relative to
    * total request count. Expected values are between 0 and 0.05 (minimum 5% of
    * total request volume)
    */
-  operationCountThresholdPercentage: Scalars["Float"];
+  operationCountThresholdPercentage: Scalars['Float'];
   /**
    * Only check operations from the last <timeRangeSeconds> seconds.
    * The default is 7 days (604,800 seconds).
    */
-  timeRangeSeconds: Scalars["Long"];
+  timeRangeSeconds: Scalars['Long'];
   /** Time when check configuration was last updated */
-  updatedAt: Scalars["Timestamp"];
+  updatedAt: Scalars['Timestamp'];
   /** Identity of the last user to update the check configuration */
   updatedBy?: Maybe<Identity>;
 };
 
 /** Filter options available when listing checks. */
 export type CheckFilterInput = {
-  authors?: InputMaybe<Array<Scalars["String"]>>;
-  branches?: InputMaybe<Array<Scalars["String"]>>;
+  authors?: InputMaybe<Array<Scalars['String']>>;
+  branches?: InputMaybe<Array<Scalars['String']>>;
   status?: InputMaybe<CheckFilterInputStatusOption>;
-  subgraphs?: InputMaybe<Array<Scalars["String"]>>;
+  subgraphs?: InputMaybe<Array<Scalars['String']>>;
 };
 
 /** Options for filtering CheckWorkflows by status */
 export enum CheckFilterInputStatusOption {
-  Failed = "FAILED",
-  Passed = "PASSED",
-  Pending = "PENDING",
+  Failed = 'FAILED',
+  Passed = 'PASSED',
+  Pending = 'PENDING'
 }
 
 export type CheckPartialSchemaResult = {
-  __typename?: "CheckPartialSchemaResult";
+  __typename?: 'CheckPartialSchemaResult';
   /** Result of traffic validation. This will be null if composition validation was unsuccessful. */
   checkSchemaResult?: Maybe<CheckSchemaResult>;
   /** Result of composition validation run before the schema check. */
   compositionValidationResult: CompositionValidationResult;
   /** If any modifications were detected in the composed core schema */
-  coreSchemaModified: Scalars["Boolean"];
+  coreSchemaModified: Scalars['Boolean'];
   /** Workflow associated with the composition validation. */
   workflow?: Maybe<CheckWorkflow>;
 };
 
 export type CheckSchemaResult = {
-  __typename?: "CheckSchemaResult";
+  __typename?: 'CheckSchemaResult';
   /** Schema diff and affected operations generated by the schema check */
   diffToPrevious: SchemaDiff;
   /** ID of the operations check that was created */
-  operationsCheckID: Scalars["ID"];
+  operationsCheckID: Scalars['ID'];
   /** Generated url to view schema diff in Engine */
-  targetUrl?: Maybe<Scalars["String"]>;
+  targetUrl?: Maybe<Scalars['String']>;
   /** Workflow associated with this check result */
   workflow?: Maybe<CheckWorkflow>;
 };
 
 export type CheckWorkflow = {
-  __typename?: "CheckWorkflow";
+  __typename?: 'CheckWorkflow';
   /**
    * The variant provided as a base to check against.  Only the differences from the
    * base schema will be tested in operations checks.
    */
   baseVariant?: Maybe<GraphVariant>;
-  completedAt?: Maybe<Scalars["Timestamp"]>;
-  createdAt: Scalars["Timestamp"];
+  completedAt?: Maybe<Scalars['Timestamp']>;
+  createdAt: Scalars['Timestamp'];
   /** Contextual parameters supplied by the runtime environment where the check was run. */
   gitContext?: Maybe<GitContext>;
-  id: Scalars["ID"];
+  id: Scalars['ID'];
   /** The name of the implementing service that was responsible for triggering the validation. */
-  implementingServiceName?: Maybe<Scalars["String"]>;
+  implementingServiceName?: Maybe<Scalars['String']>;
   /** If this check is triggered for an sdl fetched using introspection, this is the endpoint where that schema was being served. */
-  introspectionEndpoint?: Maybe<Scalars["String"]>;
+  introspectionEndpoint?: Maybe<Scalars['String']>;
   /** Only true if the check was triggered from Sandbox Checks page. */
-  isSandboxCheck: Scalars["Boolean"];
+  isSandboxCheck: Scalars['Boolean'];
   /** If this check was created by rerunning, the original check that was rerun. */
   rerunOf?: Maybe<CheckWorkflow>;
   /** Checks created by re-running this check, most recent first. */
   reruns?: Maybe<Array<CheckWorkflow>>;
-  startedAt?: Maybe<Scalars["Timestamp"]>;
+  startedAt?: Maybe<Scalars['Timestamp']>;
   /** Overall status of the workflow, based on the underlying task statuses. */
   status: CheckWorkflowStatus;
   /** The set of check tasks associated with this workflow, e.g. OperationsCheck, GraphComposition, etc. */
@@ -1949,18 +1978,19 @@ export type CheckWorkflow = {
   validationConfig?: Maybe<SchemaDiffValidationConfig>;
 };
 
+
 export type CheckWorkflowRerunsArgs = {
-  limit?: Scalars["Int"];
+  limit?: Scalars['Int'];
 };
 
 export type CheckWorkflowMutation = {
-  __typename?: "CheckWorkflowMutation";
+  __typename?: 'CheckWorkflowMutation';
   /** Re-run a check workflow using the current configuration. A new workflow is created and returned. */
   rerun?: Maybe<CheckWorkflowRerunResult>;
 };
 
 export type CheckWorkflowRerunResult = {
-  __typename?: "CheckWorkflowRerunResult";
+  __typename?: 'CheckWorkflowRerunResult';
   /** Check workflow created by re-running. */
   result?: Maybe<CheckWorkflow>;
   /** Check workflow that was rerun. */
@@ -1968,34 +1998,34 @@ export type CheckWorkflowRerunResult = {
 };
 
 export enum CheckWorkflowStatus {
-  Failed = "FAILED",
-  Passed = "PASSED",
-  Pending = "PENDING",
+  Failed = 'FAILED',
+  Passed = 'PASSED',
+  Pending = 'PENDING'
 }
 
 export type CheckWorkflowTask = {
-  completedAt?: Maybe<Scalars["Timestamp"]>;
-  createdAt: Scalars["Timestamp"];
-  id: Scalars["ID"];
+  completedAt?: Maybe<Scalars['Timestamp']>;
+  createdAt: Scalars['Timestamp'];
+  id: Scalars['ID'];
   status: CheckWorkflowTaskStatus;
   /** The workflow that this task belongs to. */
   workflow: CheckWorkflow;
 };
 
 export enum CheckWorkflowTaskStatus {
-  Blocked = "BLOCKED",
-  Failed = "FAILED",
-  Passed = "PASSED",
-  Pending = "PENDING",
+  Blocked = 'BLOCKED',
+  Failed = 'FAILED',
+  Passed = 'PASSED',
+  Pending = 'PENDING'
 }
 
 /** Client filter configuration for a graph. */
 export type ClientFilter = {
-  __typename?: "ClientFilter";
+  __typename?: 'ClientFilter';
   /** name of the client set by the user and reported alongside metrics */
-  name?: Maybe<Scalars["String"]>;
+  name?: Maybe<Scalars['String']>;
   /** version of the client set by the user and reported alongside metrics */
-  version?: Maybe<Scalars["String"]>;
+  version?: Maybe<Scalars['String']>;
 };
 
 /**
@@ -2004,43 +2034,43 @@ export type ClientFilter = {
  */
 export type ClientFilterInput = {
   /** name of the client set by the user and reported alongside metrics */
-  name?: InputMaybe<Scalars["String"]>;
+  name?: InputMaybe<Scalars['String']>;
   /** version of the client set by the user and reported alongside metrics */
-  version?: InputMaybe<Scalars["String"]>;
+  version?: InputMaybe<Scalars['String']>;
 };
 
 /** Filter options to exclude by client reference ID, client name, and client version. */
 export type ClientInfoFilter = {
-  name?: InputMaybe<Scalars["String"]>;
+  name?: InputMaybe<Scalars['String']>;
   /** Ignored */
-  referenceID?: InputMaybe<Scalars["ID"]>;
-  version?: InputMaybe<Scalars["String"]>;
+  referenceID?: InputMaybe<Scalars['ID']>;
+  version?: InputMaybe<Scalars['String']>;
 };
 
 /** Filter options to exclude clients. Used as an output type for SchemaDiffValidationConfig. */
 export type ClientInfoFilterOutput = {
-  __typename?: "ClientInfoFilterOutput";
-  name?: Maybe<Scalars["String"]>;
-  version?: Maybe<Scalars["String"]>;
+  __typename?: 'ClientInfoFilterOutput';
+  name?: Maybe<Scalars['String']>;
+  version?: Maybe<Scalars['String']>;
 };
 
 export enum ComparisonOperator {
-  Equals = "EQUALS",
-  GreaterThan = "GREATER_THAN",
-  GreaterThanOrEqualTo = "GREATER_THAN_OR_EQUAL_TO",
-  LessThan = "LESS_THAN",
-  LessThanOrEqualTo = "LESS_THAN_OR_EQUAL_TO",
-  NotEquals = "NOT_EQUALS",
-  Unrecognized = "UNRECOGNIZED",
+  Equals = 'EQUALS',
+  GreaterThan = 'GREATER_THAN',
+  GreaterThanOrEqualTo = 'GREATER_THAN_OR_EQUAL_TO',
+  LessThan = 'LESS_THAN',
+  LessThanOrEqualTo = 'LESS_THAN_OR_EQUAL_TO',
+  NotEquals = 'NOT_EQUALS',
+  Unrecognized = 'UNRECOGNIZED'
 }
 
 /** Metadata about the result of composition run in the cloud, combined with removing an implementing service */
 export type CompositionAndRemoveResult = {
-  __typename?: "CompositionAndRemoveResult";
+  __typename?: 'CompositionAndRemoveResult';
   /** The produced composition config. Will be null if there are any errors */
   compositionConfig?: Maybe<CompositionConfig>;
   /** Whether the removed implementing service existed. */
-  didExist: Scalars["Boolean"];
+  didExist: Scalars['Boolean'];
   /**
    * List of errors during composition. Errors mean that Apollo was unable to compose the
    * graph's implementing services into a GraphQL schema. This partial schema should not be
@@ -2048,16 +2078,16 @@ export type CompositionAndRemoveResult = {
    */
   errors: Array<Maybe<SchemaCompositionError>>;
   /** ID that points to the results of composition. */
-  graphCompositionID: Scalars["String"];
+  graphCompositionID: Scalars['String'];
   /** List of subgraphs that are included in this composition. */
   subgraphConfigs: Array<SubgraphConfig>;
   /** Whether the gateway link was updated, or would have been for dry runs. */
-  updatedGateway: Scalars["Boolean"];
+  updatedGateway: Scalars['Boolean'];
 };
 
 /** Metadata about the result of composition run in the cloud, combined with implementing service upsert */
 export type CompositionAndUpsertResult = {
-  __typename?: "CompositionAndUpsertResult";
+  __typename?: 'CompositionAndUpsertResult';
   /** The produced composition config. Will be null if there are any errors */
   compositionConfig?: Maybe<CompositionConfig>;
   /**
@@ -2067,32 +2097,32 @@ export type CompositionAndUpsertResult = {
    */
   errors: Array<Maybe<SchemaCompositionError>>;
   /** ID that points to the results of composition. */
-  graphCompositionID: Scalars["String"];
+  graphCompositionID: Scalars['String'];
   /** Copy text for the launch result of a publish. */
-  launchCliCopy?: Maybe<Scalars["String"]>;
+  launchCliCopy?: Maybe<Scalars['String']>;
   /** Link to corresponding launches page on Studio if avaliable. */
-  launchUrl?: Maybe<Scalars["String"]>;
+  launchUrl?: Maybe<Scalars['String']>;
   /** List of subgraphs that are included in this composition. */
   subgraphConfigs: Array<SubgraphConfig>;
   /** Whether the gateway link was updated. */
-  updatedGateway: Scalars["Boolean"];
+  updatedGateway: Scalars['Boolean'];
   /** Whether an implementingService was created as part of this mutation */
-  wasCreated: Scalars["Boolean"];
+  wasCreated: Scalars['Boolean'];
   /** Whether an implementingService was updated as part of this mutation */
-  wasUpdated: Scalars["Boolean"];
+  wasUpdated: Scalars['Boolean'];
 };
 
 export type CompositionBuildInput = {
-  __typename?: "CompositionBuildInput";
+  __typename?: 'CompositionBuildInput';
   subgraphs: Array<Subgraph>;
-  version?: Maybe<Scalars["String"]>;
+  version?: Maybe<Scalars['String']>;
 };
 
 export type CompositionCheckTask = CheckWorkflowTask & {
-  __typename?: "CompositionCheckTask";
-  completedAt?: Maybe<Scalars["Timestamp"]>;
-  createdAt: Scalars["Timestamp"];
-  id: Scalars["ID"];
+  __typename?: 'CompositionCheckTask';
+  completedAt?: Maybe<Scalars['Timestamp']>;
+  createdAt: Scalars['Timestamp'];
+  id: Scalars['ID'];
   /** The result of the composition. */
   result?: Maybe<CompositionResult>;
   status: CheckWorkflowTaskStatus;
@@ -2101,26 +2131,26 @@ export type CompositionCheckTask = CheckWorkflowTask & {
 
 /** The composition config exposed to the gateway */
 export type CompositionConfig = {
-  __typename?: "CompositionConfig";
+  __typename?: 'CompositionConfig';
   /**
    * List of GCS links for implementing services that comprise a composed graph. Is empty if tag/inaccessible is enabled.
    * @deprecated Soon we will stop writing to GCS locations
    */
   implementingServiceLocations: Array<ImplementingServiceLocation>;
   /** Hash of the composed schema */
-  schemaHash: Scalars["String"];
+  schemaHash: Scalars['String'];
 };
 
 /** Metadata about the result of composition run in the cloud */
 export type CompositionPublishResult = CompositionResult & {
-  __typename?: "CompositionPublishResult";
+  __typename?: 'CompositionPublishResult';
   /** The produced composition config. Will be null if there are any errors */
   compositionConfig?: Maybe<CompositionConfig>;
   /**
    * Supergraph SDL generated by composition (this is not the CSDL, that is a deprecated format).
    * @deprecated Use supergraphSdl instead
    */
-  csdl?: Maybe<Scalars["GraphQLDocument"]>;
+  csdl?: Maybe<Scalars['GraphQLDocument']>;
   /**
    * List of errors during composition. Errors mean that Apollo was unable to compose the
    * graph's implementing services into a GraphQL schema. This partial schema should not be
@@ -2128,14 +2158,14 @@ export type CompositionPublishResult = CompositionResult & {
    */
   errors: Array<SchemaCompositionError>;
   /** ID that points to the results of this composition. */
-  graphCompositionID: Scalars["ID"];
+  graphCompositionID: Scalars['ID'];
   /** List of subgraphs that are included in this composition. */
   subgraphConfigs: Array<SubgraphConfig>;
   /** Supergraph SDL generated by composition. */
-  supergraphSdl?: Maybe<Scalars["GraphQLDocument"]>;
+  supergraphSdl?: Maybe<Scalars['GraphQLDocument']>;
   /** Whether the gateway link was updated. */
-  updatedGateway: Scalars["Boolean"];
-  webhookNotificationBody?: Maybe<Scalars["String"]>;
+  updatedGateway: Scalars['Boolean'];
+  webhookNotificationBody?: Maybe<Scalars['String']>;
 };
 
 /** Result of a composition, either as the result of a composition validation or a publish. */
@@ -2144,7 +2174,7 @@ export type CompositionResult = {
    * Supergraph SDL generated by composition (this is not the CSDL, that is a deprecated format).
    * @deprecated Use supergraphSdl instead
    */
-  csdl?: Maybe<Scalars["GraphQLDocument"]>;
+  csdl?: Maybe<Scalars['GraphQLDocument']>;
   /**
    * List of errors during composition. Errors mean that Apollo was unable to compose the
    * graph's implementing services into a GraphQL schema. This partial schema should not be
@@ -2152,37 +2182,37 @@ export type CompositionResult = {
    */
   errors: Array<SchemaCompositionError>;
   /** ID that points to the results of this composition. */
-  graphCompositionID: Scalars["ID"];
+  graphCompositionID: Scalars['ID'];
   /** List of subgraphs that are included in this composition. */
   subgraphConfigs: Array<SubgraphConfig>;
   /** Supergraph SDL generated by composition. */
-  supergraphSdl?: Maybe<Scalars["GraphQLDocument"]>;
+  supergraphSdl?: Maybe<Scalars['GraphQLDocument']>;
 };
 
 export type CompositionStatusSubscription = ChannelSubscription & {
-  __typename?: "CompositionStatusSubscription";
+  __typename?: 'CompositionStatusSubscription';
   channels: Array<Channel>;
-  createdAt: Scalars["Timestamp"];
-  enabled: Scalars["Boolean"];
-  id: Scalars["ID"];
-  lastUpdatedAt: Scalars["Timestamp"];
-  variant?: Maybe<Scalars["String"]>;
+  createdAt: Scalars['Timestamp'];
+  enabled: Scalars['Boolean'];
+  id: Scalars['ID'];
+  lastUpdatedAt: Scalars['Timestamp'];
+  variant?: Maybe<Scalars['String']>;
 };
 
 /** The composition config exposed to the gateway */
 export type CompositionValidationDetails = {
-  __typename?: "CompositionValidationDetails";
+  __typename?: 'CompositionValidationDetails';
   /** List of implementing service partial schemas that comprised the graph composed during validation */
   implementingServices: Array<FederatedImplementingServicePartialSchema>;
   /** Hash of the composed schema */
-  schemaHash?: Maybe<Scalars["String"]>;
+  schemaHash?: Maybe<Scalars['String']>;
 };
 
 /** Metadata about the result of compositions validation run in the cloud */
 export type CompositionValidationResult = CompositionResult & {
-  __typename?: "CompositionValidationResult";
+  __typename?: 'CompositionValidationResult';
   /** Describes whether composition succeeded. */
-  compositionSuccess: Scalars["Boolean"];
+  compositionSuccess: Scalars['Boolean'];
   /**
    * Akin to a composition config, represents the partial schemas and implementing services that were used
    * in running composition. Will be null if any errors are encountered. Also may contain a schema hash if
@@ -2193,7 +2223,7 @@ export type CompositionValidationResult = CompositionResult & {
    * Supergraph SDL generated by composition (this is not the CSDL, that is a deprecated format).
    * @deprecated Use supergraphSdl instead
    */
-  csdl?: Maybe<Scalars["GraphQLDocument"]>;
+  csdl?: Maybe<Scalars['GraphQLDocument']>;
   /**
    * List of errors during composition. Errors mean that Apollo was unable to compose the
    * graph's implementing services into a GraphQL schema. This partial schema should not be
@@ -2201,269 +2231,259 @@ export type CompositionValidationResult = CompositionResult & {
    */
   errors: Array<SchemaCompositionError>;
   /** ID that points to the results of this composition. */
-  graphCompositionID: Scalars["ID"];
+  graphCompositionID: Scalars['ID'];
   /** The implementing service that was responsible for triggering the validation */
   proposedImplementingService: FederatedImplementingServicePartialSchema;
   /** List of subgraphs that are included in this composition. */
   subgraphConfigs: Array<SubgraphConfig>;
   /** Supergraph SDL generated by composition. */
-  supergraphSdl?: Maybe<Scalars["GraphQLDocument"]>;
+  supergraphSdl?: Maybe<Scalars['GraphQLDocument']>;
   /** If created as part of a check workflow, the associated workflow task. */
   workflowTask?: Maybe<CompositionCheckTask>;
 };
 
 export enum ContractVariantFailedStep {
-  AddDirectiveDefinitionsIfNotPresent = "ADD_DIRECTIVE_DEFINITIONS_IF_NOT_PRESENT",
-  DirectiveDefinitionLocationAugmenting = "DIRECTIVE_DEFINITION_LOCATION_AUGMENTING",
-  EmptyObjectAndInterfaceMasking = "EMPTY_OBJECT_AND_INTERFACE_MASKING",
-  EmptyUnionMasking = "EMPTY_UNION_MASKING",
-  InputValidation = "INPUT_VALIDATION",
-  Parsing = "PARSING",
-  ParsingTagDirectives = "PARSING_TAG_DIRECTIVES",
-  PartialInterfaceMasking = "PARTIAL_INTERFACE_MASKING",
-  SchemaRetrieval = "SCHEMA_RETRIEVAL",
-  TagInheriting = "TAG_INHERITING",
-  TagMatching = "TAG_MATCHING",
-  ToApiSchema = "TO_API_SCHEMA",
-  ToFilterSchema = "TO_FILTER_SCHEMA",
-  Unknown = "UNKNOWN",
-  VersionCheck = "VERSION_CHECK",
+  AddDirectiveDefinitionsIfNotPresent = 'ADD_DIRECTIVE_DEFINITIONS_IF_NOT_PRESENT',
+  DirectiveDefinitionLocationAugmenting = 'DIRECTIVE_DEFINITION_LOCATION_AUGMENTING',
+  EmptyObjectAndInterfaceMasking = 'EMPTY_OBJECT_AND_INTERFACE_MASKING',
+  EmptyUnionMasking = 'EMPTY_UNION_MASKING',
+  InputValidation = 'INPUT_VALIDATION',
+  Parsing = 'PARSING',
+  ParsingTagDirectives = 'PARSING_TAG_DIRECTIVES',
+  PartialInterfaceMasking = 'PARTIAL_INTERFACE_MASKING',
+  SchemaRetrieval = 'SCHEMA_RETRIEVAL',
+  TagInheriting = 'TAG_INHERITING',
+  TagMatching = 'TAG_MATCHING',
+  ToApiSchema = 'TO_API_SCHEMA',
+  ToFilterSchema = 'TO_FILTER_SCHEMA',
+  Unknown = 'UNKNOWN',
+  VersionCheck = 'VERSION_CHECK'
 }
 
 export type ContractVariantPreviewErrors = {
-  __typename?: "ContractVariantPreviewErrors";
-  errorMessages: Array<Scalars["String"]>;
+  __typename?: 'ContractVariantPreviewErrors';
+  errorMessages: Array<Scalars['String']>;
   failedStep: ContractVariantFailedStep;
 };
 
-export type ContractVariantPreviewResult =
-  | ContractVariantPreviewErrors
-  | ContractVariantPreviewSuccess;
+export type ContractVariantPreviewResult = ContractVariantPreviewErrors | ContractVariantPreviewSuccess;
 
 export type ContractVariantPreviewSuccess = {
-  __typename?: "ContractVariantPreviewSuccess";
-  allTags: Array<Scalars["String"]>;
-  baseApiSchema: Scalars["String"];
-  baseCoreSchema: Scalars["String"];
-  contractApiSchema: Scalars["String"];
-  contractCoreSchema: Scalars["String"];
+  __typename?: 'ContractVariantPreviewSuccess';
+  baseApiSchema: Scalars['String'];
+  baseCoreSchema: Scalars['String'];
+  contractApiSchema: Scalars['String'];
+  contractCoreSchema: Scalars['String'];
 };
 
 export type ContractVariantUpsertErrors = {
-  __typename?: "ContractVariantUpsertErrors";
-  errorMessages: Array<Scalars["String"]>;
+  __typename?: 'ContractVariantUpsertErrors';
+  errorMessages: Array<Scalars['String']>;
 };
 
-export type ContractVariantUpsertResult =
-  | ContractVariantUpsertErrors
-  | ContractVariantUpsertSuccess;
+export type ContractVariantUpsertResult = ContractVariantUpsertErrors | ContractVariantUpsertSuccess;
 
 export type ContractVariantUpsertSuccess = {
-  __typename?: "ContractVariantUpsertSuccess";
+  __typename?: 'ContractVariantUpsertSuccess';
   contractVariant: GraphVariant;
 };
 
 export type CoreSchema = {
-  __typename?: "CoreSchema";
-  apiDocument: Scalars["GraphQLDocument"];
-  coreDocument: Scalars["GraphQLDocument"];
-  coreHash: Scalars["String"];
+  __typename?: 'CoreSchema';
+  apiDocument: Scalars['GraphQLDocument'];
+  coreDocument: Scalars['GraphQLDocument'];
+  coreHash: Scalars['String'];
 };
 
-export type CreateOperationCollectionResult =
-  | OperationCollection
-  | PermissionError
-  | ValidationError;
+export type CreateOperationCollectionResult = OperationCollection | PermissionError | ValidationError;
 
 export type CronExecution = {
-  __typename?: "CronExecution";
-  completedAt?: Maybe<Scalars["Timestamp"]>;
-  failure?: Maybe<Scalars["String"]>;
-  id: Scalars["ID"];
+  __typename?: 'CronExecution';
+  completedAt?: Maybe<Scalars['Timestamp']>;
+  failure?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
   job: CronJob;
-  resolvedAt?: Maybe<Scalars["Timestamp"]>;
+  resolvedAt?: Maybe<Scalars['Timestamp']>;
   resolvedBy?: Maybe<Actor>;
-  schedule: Scalars["String"];
-  startedAt: Scalars["Timestamp"];
+  schedule: Scalars['String'];
+  startedAt: Scalars['Timestamp'];
 };
 
 export type CronJob = {
-  __typename?: "CronJob";
-  group: Scalars["String"];
-  name: Scalars["String"];
+  __typename?: 'CronJob';
+  group: Scalars['String'];
+  name: Scalars['String'];
   recentExecutions: Array<CronExecution>;
 };
 
+
 export type CronJobRecentExecutionsArgs = {
-  n?: InputMaybe<Scalars["Int"]>;
+  n?: InputMaybe<Scalars['Int']>;
 };
 
 export enum DatadogApiRegion {
-  Eu = "EU",
-  Eu1 = "EU1",
-  Us = "US",
-  Us1 = "US1",
-  Us1Fed = "US1FED",
-  Us3 = "US3",
-  Us5 = "US5",
+  Eu = 'EU',
+  Eu1 = 'EU1',
+  Us = 'US',
+  Us1 = 'US1',
+  Us1Fed = 'US1FED',
+  Us3 = 'US3',
+  Us5 = 'US5'
 }
 
 export type DatadogMetricsConfig = {
-  __typename?: "DatadogMetricsConfig";
-  apiKey: Scalars["String"];
+  __typename?: 'DatadogMetricsConfig';
+  apiKey: Scalars['String'];
   apiRegion: DatadogApiRegion;
-  enabled: Scalars["Boolean"];
-  legacyMetricNames: Scalars["Boolean"];
+  enabled: Scalars['Boolean'];
+  legacyMetricNames: Scalars['Boolean'];
 };
 
-export type DeleteOperationCollectionResult =
-  | DeleteOperationCollectionSuccess
-  | PermissionError;
+export type DeleteOperationCollectionResult = DeleteOperationCollectionSuccess | PermissionError;
 
 export type DeleteOperationCollectionSuccess = {
-  __typename?: "DeleteOperationCollectionSuccess";
+  __typename?: 'DeleteOperationCollectionSuccess';
+  sandboxOwner?: Maybe<User>;
   variants: Array<GraphVariant>;
 };
 
 export type DeleteSchemaTagResult = {
-  __typename?: "DeleteSchemaTagResult";
-  deleted: Scalars["Boolean"];
+  __typename?: 'DeleteSchemaTagResult';
+  deleted: Scalars['Boolean'];
 };
 
 export enum DeletionTargetType {
-  Account = "ACCOUNT",
-  User = "USER",
+  Account = 'ACCOUNT',
+  User = 'USER'
 }
 
 /** Support for a single directive on a graph variant */
 export type DirectiveSupportStatus = {
-  __typename?: "DirectiveSupportStatus";
+  __typename?: 'DirectiveSupportStatus';
   /** whether the directive is supported on the current graph variant */
-  enabled: Scalars["Boolean"];
+  enabled: Scalars['Boolean'];
   /** name of the directive */
-  name: Scalars["String"];
+  name: Scalars['String'];
 };
 
-export type DuplicateOperationCollectionResult =
-  | OperationCollection
-  | PermissionError
-  | ValidationError;
+export type DuplicateOperationCollectionResult = OperationCollection | PermissionError | ValidationError;
 
 export type DurationHistogram = {
-  __typename?: "DurationHistogram";
-  averageDurationMs?: Maybe<Scalars["Float"]>;
+  __typename?: 'DurationHistogram';
+  averageDurationMs?: Maybe<Scalars['Float']>;
   buckets: Array<DurationHistogramBucket>;
-  durationMs?: Maybe<Scalars["Float"]>;
+  durationMs?: Maybe<Scalars['Float']>;
   /** Counts per durationBucket, where sequences of zeroes are replaced with the negative of their size */
-  sparseBuckets: Array<Scalars["Long"]>;
-  totalCount: Scalars["Long"];
-  totalDurationMs: Scalars["Float"];
+  sparseBuckets: Array<Scalars['Long']>;
+  totalCount: Scalars['Long'];
+  totalDurationMs: Scalars['Float'];
 };
 
+
 export type DurationHistogramDurationMsArgs = {
-  percentile: Scalars["Float"];
+  percentile: Scalars['Float'];
 };
 
 export type DurationHistogramBucket = {
-  __typename?: "DurationHistogramBucket";
-  count: Scalars["Long"];
-  index: Scalars["Int"];
-  rangeBeginMs: Scalars["Float"];
-  rangeEndMs: Scalars["Float"];
+  __typename?: 'DurationHistogramBucket';
+  count: Scalars['Long'];
+  index: Scalars['Int'];
+  rangeBeginMs: Scalars['Float'];
+  rangeEndMs: Scalars['Float'];
 };
 
 export type EdgeServerInfo = {
   /** A randomly generated UUID, immutable for the lifetime of the edge server runtime. */
-  bootId: Scalars["String"];
+  bootId: Scalars['String'];
   /** A unique identifier for the executable GraphQL served by the edge server. length must be <= 64 characters. */
-  executableSchemaId: Scalars["String"];
+  executableSchemaId: Scalars['String'];
   /** The graph variant, defaults to 'current' */
-  graphVariant?: Scalars["String"];
+  graphVariant?: Scalars['String'];
   /** The version of the edge server reporting agent, e.g. apollo-server-2.8, graphql-java-3.1, etc. length must be <= 256 characters. */
-  libraryVersion?: InputMaybe<Scalars["String"]>;
+  libraryVersion?: InputMaybe<Scalars['String']>;
   /** The infra environment in which this edge server is running, e.g. localhost, Kubernetes, AWS Lambda, Google CloudRun, AWS ECS, etc. length must be <= 256 characters. */
-  platform?: InputMaybe<Scalars["String"]>;
+  platform?: InputMaybe<Scalars['String']>;
   /** The runtime in which the edge server is running, e.g. node 12.03, zulu8.46.0.19-ca-jdk8.0.252-macosx_x64, etc. length must be <= 256 characters. */
-  runtimeVersion?: InputMaybe<Scalars["String"]>;
+  runtimeVersion?: InputMaybe<Scalars['String']>;
   /** If available, an identifier for the edge server instance, such that when restarting this instance it will have the same serverId, with a different bootId. For example, in Kubernetes this might be the pod name. Length must be <= 256 characters. */
-  serverId?: InputMaybe<Scalars["String"]>;
+  serverId?: InputMaybe<Scalars['String']>;
   /** An identifier used to distinguish the version (from the user's perspective) of the edge server's code itself. For instance, the git sha of the server's repository or the docker sha of the associated image this server runs with. Length must be <= 256 characters. */
-  userVersion?: InputMaybe<Scalars["String"]>;
+  userVersion?: InputMaybe<Scalars['String']>;
 };
 
 /** Columns of EdgeServerInfos. */
 export enum EdgeServerInfosColumn {
-  BootId = "BOOT_ID",
-  ExecutableSchemaId = "EXECUTABLE_SCHEMA_ID",
-  LibraryVersion = "LIBRARY_VERSION",
-  Platform = "PLATFORM",
-  RuntimeVersion = "RUNTIME_VERSION",
-  SchemaTag = "SCHEMA_TAG",
-  ServerId = "SERVER_ID",
-  ServiceId = "SERVICE_ID",
-  Timestamp = "TIMESTAMP",
-  UserVersion = "USER_VERSION",
+  BootId = 'BOOT_ID',
+  ExecutableSchemaId = 'EXECUTABLE_SCHEMA_ID',
+  LibraryVersion = 'LIBRARY_VERSION',
+  Platform = 'PLATFORM',
+  RuntimeVersion = 'RUNTIME_VERSION',
+  SchemaTag = 'SCHEMA_TAG',
+  ServerId = 'SERVER_ID',
+  ServiceId = 'SERVICE_ID',
+  Timestamp = 'TIMESTAMP',
+  UserVersion = 'USER_VERSION'
 }
 
 export type EdgeServerInfosDimensions = {
-  __typename?: "EdgeServerInfosDimensions";
-  bootId?: Maybe<Scalars["ID"]>;
-  executableSchemaId?: Maybe<Scalars["ID"]>;
-  libraryVersion?: Maybe<Scalars["String"]>;
-  platform?: Maybe<Scalars["String"]>;
-  runtimeVersion?: Maybe<Scalars["String"]>;
-  schemaTag?: Maybe<Scalars["String"]>;
-  serverId?: Maybe<Scalars["ID"]>;
-  serviceId?: Maybe<Scalars["ID"]>;
-  userVersion?: Maybe<Scalars["String"]>;
+  __typename?: 'EdgeServerInfosDimensions';
+  bootId?: Maybe<Scalars['ID']>;
+  executableSchemaId?: Maybe<Scalars['ID']>;
+  libraryVersion?: Maybe<Scalars['String']>;
+  platform?: Maybe<Scalars['String']>;
+  runtimeVersion?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
+  serverId?: Maybe<Scalars['ID']>;
+  serviceId?: Maybe<Scalars['ID']>;
+  userVersion?: Maybe<Scalars['String']>;
 };
 
 /** Filter for data in EdgeServerInfos. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
 export type EdgeServerInfosFilter = {
   and?: InputMaybe<Array<EdgeServerInfosFilter>>;
   /** Selects rows whose bootId dimension equals the given value if not null. To query for the null value, use {in: {bootId: [null]}} instead. */
-  bootId?: InputMaybe<Scalars["ID"]>;
+  bootId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose executableSchemaId dimension equals the given value if not null. To query for the null value, use {in: {executableSchemaId: [null]}} instead. */
-  executableSchemaId?: InputMaybe<Scalars["ID"]>;
+  executableSchemaId?: InputMaybe<Scalars['ID']>;
   in?: InputMaybe<EdgeServerInfosFilterIn>;
   /** Selects rows whose libraryVersion dimension equals the given value if not null. To query for the null value, use {in: {libraryVersion: [null]}} instead. */
-  libraryVersion?: InputMaybe<Scalars["String"]>;
+  libraryVersion?: InputMaybe<Scalars['String']>;
   not?: InputMaybe<EdgeServerInfosFilter>;
   or?: InputMaybe<Array<EdgeServerInfosFilter>>;
   /** Selects rows whose platform dimension equals the given value if not null. To query for the null value, use {in: {platform: [null]}} instead. */
-  platform?: InputMaybe<Scalars["String"]>;
+  platform?: InputMaybe<Scalars['String']>;
   /** Selects rows whose runtimeVersion dimension equals the given value if not null. To query for the null value, use {in: {runtimeVersion: [null]}} instead. */
-  runtimeVersion?: InputMaybe<Scalars["String"]>;
+  runtimeVersion?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
-  schemaTag?: InputMaybe<Scalars["String"]>;
+  schemaTag?: InputMaybe<Scalars['String']>;
   /** Selects rows whose serverId dimension equals the given value if not null. To query for the null value, use {in: {serverId: [null]}} instead. */
-  serverId?: InputMaybe<Scalars["ID"]>;
+  serverId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose serviceId dimension equals the given value if not null. To query for the null value, use {in: {serviceId: [null]}} instead. */
-  serviceId?: InputMaybe<Scalars["ID"]>;
+  serviceId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose userVersion dimension equals the given value if not null. To query for the null value, use {in: {userVersion: [null]}} instead. */
-  userVersion?: InputMaybe<Scalars["String"]>;
+  userVersion?: InputMaybe<Scalars['String']>;
 };
 
 /** Filter for data in EdgeServerInfos. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
 export type EdgeServerInfosFilterIn = {
   /** Selects rows whose bootId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  bootId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  bootId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose executableSchemaId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  executableSchemaId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  executableSchemaId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose libraryVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  libraryVersion?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  libraryVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose platform dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  platform?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  platform?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose runtimeVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  runtimeVersion?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  runtimeVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaTag?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose serverId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  serverId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  serverId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose serviceId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  serviceId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  serviceId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose userVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  userVersion?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  userVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 export type EdgeServerInfosOrderBySpec = {
@@ -2472,109 +2492,109 @@ export type EdgeServerInfosOrderBySpec = {
 };
 
 export type EdgeServerInfosRecord = {
-  __typename?: "EdgeServerInfosRecord";
+  __typename?: 'EdgeServerInfosRecord';
   /** Dimensions of EdgeServerInfos that can be grouped by. */
   groupBy: EdgeServerInfosDimensions;
   /** Starting segment timestamp. */
-  timestamp: Scalars["Timestamp"];
+  timestamp: Scalars['Timestamp'];
 };
 
 export enum EmailCategory {
-  Educational = "EDUCATIONAL",
+  Educational = 'EDUCATIONAL'
 }
 
 export type EmailPreferences = {
-  __typename?: "EmailPreferences";
-  email: Scalars["String"];
+  __typename?: 'EmailPreferences';
+  email: Scalars['String'];
   subscriptions: Array<EmailCategory>;
-  unsubscribedFromAll: Scalars["Boolean"];
+  unsubscribedFromAll: Scalars['Boolean'];
 };
 
 export type Error = {
-  message: Scalars["String"];
+  message: Scalars['String'];
 };
 
 /** Columns of ErrorStats. */
 export enum ErrorStatsColumn {
-  AccountId = "ACCOUNT_ID",
-  ClientName = "CLIENT_NAME",
-  ClientVersion = "CLIENT_VERSION",
-  ErrorsCount = "ERRORS_COUNT",
-  Path = "PATH",
-  QueryId = "QUERY_ID",
-  QueryName = "QUERY_NAME",
-  RequestsWithErrorsCount = "REQUESTS_WITH_ERRORS_COUNT",
-  SchemaHash = "SCHEMA_HASH",
-  SchemaTag = "SCHEMA_TAG",
-  ServiceId = "SERVICE_ID",
-  Timestamp = "TIMESTAMP",
+  AccountId = 'ACCOUNT_ID',
+  ClientName = 'CLIENT_NAME',
+  ClientVersion = 'CLIENT_VERSION',
+  ErrorsCount = 'ERRORS_COUNT',
+  Path = 'PATH',
+  QueryId = 'QUERY_ID',
+  QueryName = 'QUERY_NAME',
+  RequestsWithErrorsCount = 'REQUESTS_WITH_ERRORS_COUNT',
+  SchemaHash = 'SCHEMA_HASH',
+  SchemaTag = 'SCHEMA_TAG',
+  ServiceId = 'SERVICE_ID',
+  Timestamp = 'TIMESTAMP'
 }
 
 export type ErrorStatsDimensions = {
-  __typename?: "ErrorStatsDimensions";
-  accountId?: Maybe<Scalars["ID"]>;
-  clientName?: Maybe<Scalars["String"]>;
-  clientVersion?: Maybe<Scalars["String"]>;
-  path?: Maybe<Scalars["String"]>;
-  queryId?: Maybe<Scalars["ID"]>;
-  queryName?: Maybe<Scalars["String"]>;
-  schemaHash?: Maybe<Scalars["String"]>;
-  schemaTag?: Maybe<Scalars["String"]>;
-  serviceId?: Maybe<Scalars["ID"]>;
+  __typename?: 'ErrorStatsDimensions';
+  accountId?: Maybe<Scalars['ID']>;
+  clientName?: Maybe<Scalars['String']>;
+  clientVersion?: Maybe<Scalars['String']>;
+  path?: Maybe<Scalars['String']>;
+  queryId?: Maybe<Scalars['ID']>;
+  queryName?: Maybe<Scalars['String']>;
+  schemaHash?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
+  serviceId?: Maybe<Scalars['ID']>;
 };
 
 /** Filter for data in ErrorStats. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
 export type ErrorStatsFilter = {
   /** Selects rows whose accountId dimension equals the given value if not null. To query for the null value, use {in: {accountId: [null]}} instead. */
-  accountId?: InputMaybe<Scalars["ID"]>;
+  accountId?: InputMaybe<Scalars['ID']>;
   and?: InputMaybe<Array<ErrorStatsFilter>>;
   /** Selects rows whose clientName dimension equals the given value if not null. To query for the null value, use {in: {clientName: [null]}} instead. */
-  clientName?: InputMaybe<Scalars["String"]>;
+  clientName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose clientVersion dimension equals the given value if not null. To query for the null value, use {in: {clientVersion: [null]}} instead. */
-  clientVersion?: InputMaybe<Scalars["String"]>;
+  clientVersion?: InputMaybe<Scalars['String']>;
   in?: InputMaybe<ErrorStatsFilterIn>;
   not?: InputMaybe<ErrorStatsFilter>;
   or?: InputMaybe<Array<ErrorStatsFilter>>;
   /** Selects rows whose path dimension equals the given value if not null. To query for the null value, use {in: {path: [null]}} instead. */
-  path?: InputMaybe<Scalars["String"]>;
+  path?: InputMaybe<Scalars['String']>;
   /** Selects rows whose queryId dimension equals the given value if not null. To query for the null value, use {in: {queryId: [null]}} instead. */
-  queryId?: InputMaybe<Scalars["ID"]>;
+  queryId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose queryName dimension equals the given value if not null. To query for the null value, use {in: {queryName: [null]}} instead. */
-  queryName?: InputMaybe<Scalars["String"]>;
+  queryName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaHash dimension equals the given value if not null. To query for the null value, use {in: {schemaHash: [null]}} instead. */
-  schemaHash?: InputMaybe<Scalars["String"]>;
+  schemaHash?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
-  schemaTag?: InputMaybe<Scalars["String"]>;
+  schemaTag?: InputMaybe<Scalars['String']>;
   /** Selects rows whose serviceId dimension equals the given value if not null. To query for the null value, use {in: {serviceId: [null]}} instead. */
-  serviceId?: InputMaybe<Scalars["ID"]>;
+  serviceId?: InputMaybe<Scalars['ID']>;
 };
 
 /** Filter for data in ErrorStats. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
 export type ErrorStatsFilterIn = {
   /** Selects rows whose accountId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  accountId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  accountId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose clientName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose clientVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientVersion?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose path dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  path?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  path?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose queryId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  queryId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose queryName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  queryName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaHash dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaHash?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaHash?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaTag?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose serviceId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  serviceId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  serviceId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
 export type ErrorStatsMetrics = {
-  __typename?: "ErrorStatsMetrics";
-  errorsCount: Scalars["Long"];
-  requestsWithErrorsCount: Scalars["Long"];
+  __typename?: 'ErrorStatsMetrics';
+  errorsCount: Scalars['Long'];
+  requestsWithErrorsCount: Scalars['Long'];
 };
 
 export type ErrorStatsOrderBySpec = {
@@ -2583,165 +2603,165 @@ export type ErrorStatsOrderBySpec = {
 };
 
 export type ErrorStatsRecord = {
-  __typename?: "ErrorStatsRecord";
+  __typename?: 'ErrorStatsRecord';
   /** Dimensions of ErrorStats that can be grouped by. */
   groupBy: ErrorStatsDimensions;
   /** Metrics of ErrorStats that can be aggregated over. */
   metrics: ErrorStatsMetrics;
   /** Starting segment timestamp. */
-  timestamp: Scalars["Timestamp"];
+  timestamp: Scalars['Timestamp'];
 };
 
 /**  Input parameters for run explorer operation event. */
 export enum EventEnum {
-  ClickCheckList = "CLICK_CHECK_LIST",
-  ClickGoToGraphSettings = "CLICK_GO_TO_GRAPH_SETTINGS",
-  RunExplorerOperation = "RUN_EXPLORER_OPERATION",
+  ClickCheckList = 'CLICK_CHECK_LIST',
+  ClickGoToGraphSettings = 'CLICK_GO_TO_GRAPH_SETTINGS',
+  RunExplorerOperation = 'RUN_EXPLORER_OPERATION'
 }
 
 /** Excluded operation for a graph. */
 export type ExcludedOperation = {
-  __typename?: "ExcludedOperation";
+  __typename?: 'ExcludedOperation';
   /** Operation ID to exclude from schema check. */
-  ID: Scalars["ID"];
+  ID: Scalars['ID'];
 };
 
 /** Option to filter by operation ID. */
 export type ExcludedOperationInput = {
   /** Operation ID to exclude from schema check. */
-  ID: Scalars["ID"];
+  ID: Scalars['ID'];
 };
 
 export type FeatureIntros = {
-  __typename?: "FeatureIntros";
-  devGraph: Scalars["Boolean"];
-  federatedGraph: Scalars["Boolean"];
-  freeConsumerSeats: Scalars["Boolean"];
+  __typename?: 'FeatureIntros';
+  devGraph: Scalars['Boolean'];
+  federatedGraph: Scalars['Boolean'];
+  freeConsumerSeats: Scalars['Boolean'];
 };
 
 /** Feature Intros Input Type */
 export type FeatureIntrosInput = {
-  devGraph?: InputMaybe<Scalars["Boolean"]>;
-  federatedGraph?: InputMaybe<Scalars["Boolean"]>;
-  freeConsumerSeats?: InputMaybe<Scalars["Boolean"]>;
+  devGraph?: InputMaybe<Scalars['Boolean']>;
+  federatedGraph?: InputMaybe<Scalars['Boolean']>;
+  freeConsumerSeats?: InputMaybe<Scalars['Boolean']>;
 };
 
 export type FederatedImplementingService = {
-  __typename?: "FederatedImplementingService";
+  __typename?: 'FederatedImplementingService';
   /**
    * An implementing service could have multiple inactive partial schemas that were previously uploaded
    * activePartialSchema returns the one that is designated to be used for composition for a given graph-variant
    */
   activePartialSchema: PartialSchema;
   /** Timestamp of when this implementing service was created */
-  createdAt: Scalars["Timestamp"];
+  createdAt: Scalars['Timestamp'];
   /**
    * Identifies which graph this implementing service belongs to.
    * Formerly known as "service_id"
    */
-  graphID: Scalars["String"];
+  graphID: Scalars['String'];
   /**
    * Specifies which variant of a graph this implementing service belongs to".
    * Formerly known as "tag"
    */
-  graphVariant: Scalars["String"];
+  graphVariant: Scalars['String'];
   /** Name of the implementing service */
-  name: Scalars["String"];
+  name: Scalars['String'];
   /**
    * A way to capture some customer-specific way of tracking which version / edition
    * of the ImplementingService this is. Typically a Git SHA or docker image ID.
    */
-  revision: Scalars["String"];
+  revision: Scalars['String'];
   /** Timestamp for when this implementing service was updated */
-  updatedAt: Scalars["Timestamp"];
+  updatedAt: Scalars['Timestamp'];
   /** URL of the graphql endpoint of the implementing service */
-  url?: Maybe<Scalars["String"]>;
+  url?: Maybe<Scalars['String']>;
 };
 
 /** A minimal representation of a federated implementing service, using only a name and partial schema SDL */
 export type FederatedImplementingServicePartialSchema = {
-  __typename?: "FederatedImplementingServicePartialSchema";
+  __typename?: 'FederatedImplementingServicePartialSchema';
   /** The name of the implementing service */
-  name: Scalars["String"];
+  name: Scalars['String'];
   /** The partial schema of the implementing service */
-  sdl: Scalars["String"];
+  sdl: Scalars['String'];
 };
 
 /** List of federated implementing services that compose a graph */
 export type FederatedImplementingServices = {
-  __typename?: "FederatedImplementingServices";
+  __typename?: 'FederatedImplementingServices';
   services: Array<FederatedImplementingService>;
 };
 
 export type FieldChangeSummaryCounts = {
-  __typename?: "FieldChangeSummaryCounts";
+  __typename?: 'FieldChangeSummaryCounts';
   /** Number of changes that are additions of fields to object and interface types. */
-  additions: Scalars["Int"];
+  additions: Scalars['Int'];
   /**
    * Number of changes that are field edits. This includes fields changing type and any field
    * deprecation and description changes, but also includes any argument changes and any input object
    * field changes.
    */
-  edits: Scalars["Int"];
+  edits: Scalars['Int'];
   /** Number of changes that are removals of fields from object and interface types. */
-  removals: Scalars["Int"];
+  removals: Scalars['Int'];
 };
 
 /** Columns of FieldLatencies. */
 export enum FieldLatenciesColumn {
-  FieldHistogram = "FIELD_HISTOGRAM",
-  FieldName = "FIELD_NAME",
-  ParentType = "PARENT_TYPE",
-  SchemaHash = "SCHEMA_HASH",
-  SchemaTag = "SCHEMA_TAG",
-  ServiceId = "SERVICE_ID",
-  Timestamp = "TIMESTAMP",
+  FieldHistogram = 'FIELD_HISTOGRAM',
+  FieldName = 'FIELD_NAME',
+  ParentType = 'PARENT_TYPE',
+  SchemaHash = 'SCHEMA_HASH',
+  SchemaTag = 'SCHEMA_TAG',
+  ServiceId = 'SERVICE_ID',
+  Timestamp = 'TIMESTAMP'
 }
 
 export type FieldLatenciesDimensions = {
-  __typename?: "FieldLatenciesDimensions";
-  field?: Maybe<Scalars["String"]>;
-  fieldName?: Maybe<Scalars["String"]>;
-  parentType?: Maybe<Scalars["String"]>;
-  schemaHash?: Maybe<Scalars["String"]>;
-  schemaTag?: Maybe<Scalars["String"]>;
-  serviceId?: Maybe<Scalars["ID"]>;
+  __typename?: 'FieldLatenciesDimensions';
+  field?: Maybe<Scalars['String']>;
+  fieldName?: Maybe<Scalars['String']>;
+  parentType?: Maybe<Scalars['String']>;
+  schemaHash?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
+  serviceId?: Maybe<Scalars['ID']>;
 };
 
 /** Filter for data in FieldLatencies. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
 export type FieldLatenciesFilter = {
   and?: InputMaybe<Array<FieldLatenciesFilter>>;
   /** Selects rows whose fieldName dimension equals the given value if not null. To query for the null value, use {in: {fieldName: [null]}} instead. */
-  fieldName?: InputMaybe<Scalars["String"]>;
+  fieldName?: InputMaybe<Scalars['String']>;
   in?: InputMaybe<FieldLatenciesFilterIn>;
   not?: InputMaybe<FieldLatenciesFilter>;
   or?: InputMaybe<Array<FieldLatenciesFilter>>;
   /** Selects rows whose parentType dimension equals the given value if not null. To query for the null value, use {in: {parentType: [null]}} instead. */
-  parentType?: InputMaybe<Scalars["String"]>;
+  parentType?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaHash dimension equals the given value if not null. To query for the null value, use {in: {schemaHash: [null]}} instead. */
-  schemaHash?: InputMaybe<Scalars["String"]>;
+  schemaHash?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
-  schemaTag?: InputMaybe<Scalars["String"]>;
+  schemaTag?: InputMaybe<Scalars['String']>;
   /** Selects rows whose serviceId dimension equals the given value if not null. To query for the null value, use {in: {serviceId: [null]}} instead. */
-  serviceId?: InputMaybe<Scalars["ID"]>;
+  serviceId?: InputMaybe<Scalars['ID']>;
 };
 
 /** Filter for data in FieldLatencies. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
 export type FieldLatenciesFilterIn = {
   /** Selects rows whose fieldName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  fieldName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  fieldName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose parentType dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  parentType?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  parentType?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaHash dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaHash?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaHash?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaTag?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose serviceId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  serviceId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  serviceId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
 export type FieldLatenciesMetrics = {
-  __typename?: "FieldLatenciesMetrics";
+  __typename?: 'FieldLatenciesMetrics';
   fieldHistogram: DurationHistogram;
 };
 
@@ -2751,98 +2771,98 @@ export type FieldLatenciesOrderBySpec = {
 };
 
 export type FieldLatenciesRecord = {
-  __typename?: "FieldLatenciesRecord";
+  __typename?: 'FieldLatenciesRecord';
   /** Dimensions of FieldLatencies that can be grouped by. */
   groupBy: FieldLatenciesDimensions;
   /** Metrics of FieldLatencies that can be aggregated over. */
   metrics: FieldLatenciesMetrics;
   /** Starting segment timestamp. */
-  timestamp: Scalars["Timestamp"];
+  timestamp: Scalars['Timestamp'];
 };
 
 /** Columns of FieldUsage. */
 export enum FieldUsageColumn {
-  ClientName = "CLIENT_NAME",
-  ClientVersion = "CLIENT_VERSION",
-  EstimatedExecutionCount = "ESTIMATED_EXECUTION_COUNT",
-  ExecutionCount = "EXECUTION_COUNT",
-  FieldName = "FIELD_NAME",
-  ParentType = "PARENT_TYPE",
-  QueryId = "QUERY_ID",
-  QueryName = "QUERY_NAME",
-  ReferencingOperationCount = "REFERENCING_OPERATION_COUNT",
-  SchemaHash = "SCHEMA_HASH",
-  SchemaTag = "SCHEMA_TAG",
-  ServiceId = "SERVICE_ID",
-  Timestamp = "TIMESTAMP",
+  ClientName = 'CLIENT_NAME',
+  ClientVersion = 'CLIENT_VERSION',
+  EstimatedExecutionCount = 'ESTIMATED_EXECUTION_COUNT',
+  ExecutionCount = 'EXECUTION_COUNT',
+  FieldName = 'FIELD_NAME',
+  ParentType = 'PARENT_TYPE',
+  QueryId = 'QUERY_ID',
+  QueryName = 'QUERY_NAME',
+  ReferencingOperationCount = 'REFERENCING_OPERATION_COUNT',
+  SchemaHash = 'SCHEMA_HASH',
+  SchemaTag = 'SCHEMA_TAG',
+  ServiceId = 'SERVICE_ID',
+  Timestamp = 'TIMESTAMP'
 }
 
 export type FieldUsageDimensions = {
-  __typename?: "FieldUsageDimensions";
-  clientName?: Maybe<Scalars["String"]>;
-  clientVersion?: Maybe<Scalars["String"]>;
-  fieldName?: Maybe<Scalars["String"]>;
-  parentType?: Maybe<Scalars["String"]>;
-  queryId?: Maybe<Scalars["ID"]>;
-  queryName?: Maybe<Scalars["String"]>;
-  schemaHash?: Maybe<Scalars["String"]>;
-  schemaTag?: Maybe<Scalars["String"]>;
-  serviceId?: Maybe<Scalars["ID"]>;
+  __typename?: 'FieldUsageDimensions';
+  clientName?: Maybe<Scalars['String']>;
+  clientVersion?: Maybe<Scalars['String']>;
+  fieldName?: Maybe<Scalars['String']>;
+  parentType?: Maybe<Scalars['String']>;
+  queryId?: Maybe<Scalars['ID']>;
+  queryName?: Maybe<Scalars['String']>;
+  schemaHash?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
+  serviceId?: Maybe<Scalars['ID']>;
 };
 
 /** Filter for data in FieldUsage. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
 export type FieldUsageFilter = {
   and?: InputMaybe<Array<FieldUsageFilter>>;
   /** Selects rows whose clientName dimension equals the given value if not null. To query for the null value, use {in: {clientName: [null]}} instead. */
-  clientName?: InputMaybe<Scalars["String"]>;
+  clientName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose clientVersion dimension equals the given value if not null. To query for the null value, use {in: {clientVersion: [null]}} instead. */
-  clientVersion?: InputMaybe<Scalars["String"]>;
+  clientVersion?: InputMaybe<Scalars['String']>;
   /** Selects rows whose fieldName dimension equals the given value if not null. To query for the null value, use {in: {fieldName: [null]}} instead. */
-  fieldName?: InputMaybe<Scalars["String"]>;
+  fieldName?: InputMaybe<Scalars['String']>;
   in?: InputMaybe<FieldUsageFilterIn>;
   not?: InputMaybe<FieldUsageFilter>;
   or?: InputMaybe<Array<FieldUsageFilter>>;
   /** Selects rows whose parentType dimension equals the given value if not null. To query for the null value, use {in: {parentType: [null]}} instead. */
-  parentType?: InputMaybe<Scalars["String"]>;
+  parentType?: InputMaybe<Scalars['String']>;
   /** Selects rows whose queryId dimension equals the given value if not null. To query for the null value, use {in: {queryId: [null]}} instead. */
-  queryId?: InputMaybe<Scalars["ID"]>;
+  queryId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose queryName dimension equals the given value if not null. To query for the null value, use {in: {queryName: [null]}} instead. */
-  queryName?: InputMaybe<Scalars["String"]>;
+  queryName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaHash dimension equals the given value if not null. To query for the null value, use {in: {schemaHash: [null]}} instead. */
-  schemaHash?: InputMaybe<Scalars["String"]>;
+  schemaHash?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
-  schemaTag?: InputMaybe<Scalars["String"]>;
+  schemaTag?: InputMaybe<Scalars['String']>;
   /** Selects rows whose serviceId dimension equals the given value if not null. To query for the null value, use {in: {serviceId: [null]}} instead. */
-  serviceId?: InputMaybe<Scalars["ID"]>;
+  serviceId?: InputMaybe<Scalars['ID']>;
 };
 
 /** Filter for data in FieldUsage. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
 export type FieldUsageFilterIn = {
   /** Selects rows whose clientName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose clientVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientVersion?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose fieldName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  fieldName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  fieldName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose parentType dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  parentType?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  parentType?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose queryId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  queryId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose queryName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  queryName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaHash dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaHash?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaHash?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaTag?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose serviceId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  serviceId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  serviceId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
 export type FieldUsageMetrics = {
-  __typename?: "FieldUsageMetrics";
-  estimatedExecutionCount: Scalars["Long"];
-  executionCount: Scalars["Long"];
-  referencingOperationCount: Scalars["Long"];
+  __typename?: 'FieldUsageMetrics';
+  estimatedExecutionCount: Scalars['Long'];
+  executionCount: Scalars['Long'];
+  referencingOperationCount: Scalars['Long'];
 };
 
 export type FieldUsageOrderBySpec = {
@@ -2851,183 +2871,186 @@ export type FieldUsageOrderBySpec = {
 };
 
 export type FieldUsageRecord = {
-  __typename?: "FieldUsageRecord";
+  __typename?: 'FieldUsageRecord';
   /** Dimensions of FieldUsage that can be grouped by. */
   groupBy: FieldUsageDimensions;
   /** Metrics of FieldUsage that can be aggregated over. */
   metrics: FieldUsageMetrics;
   /** Starting segment timestamp. */
-  timestamp: Scalars["Timestamp"];
+  timestamp: Scalars['Timestamp'];
 };
 
 export type FilterBuildInput = {
-  __typename?: "FilterBuildInput";
+  __typename?: 'FilterBuildInput';
   filterConfig: FilterConfig;
-  schemaHash: Scalars["String"];
+  schemaHash: Scalars['String'];
 };
 
 export type FilterConfig = {
-  __typename?: "FilterConfig";
-  exclude: Array<Scalars["String"]>;
-  include: Array<Scalars["String"]>;
+  __typename?: 'FilterConfig';
+  exclude: Array<Scalars['String']>;
+  include: Array<Scalars['String']>;
 };
 
 export type FilterConfigInput = {
-  exclude: Array<Scalars["String"]>;
-  include: Array<Scalars["String"]>;
+  exclude: Array<Scalars['String']>;
+  include: Array<Scalars['String']>;
 };
 
 export type GitContext = {
-  __typename?: "GitContext";
-  branch?: Maybe<Scalars["String"]>;
-  commit?: Maybe<Scalars["ID"]>;
-  commitUrl?: Maybe<Scalars["String"]>;
-  committer?: Maybe<Scalars["String"]>;
-  message?: Maybe<Scalars["String"]>;
+  __typename?: 'GitContext';
+  branch?: Maybe<Scalars['String']>;
+  commit?: Maybe<Scalars['ID']>;
+  commitUrl?: Maybe<Scalars['String']>;
+  committer?: Maybe<Scalars['String']>;
+  message?: Maybe<Scalars['String']>;
   remoteHost?: Maybe<GitRemoteHost>;
-  remoteUrl?: Maybe<Scalars["String"]>;
+  remoteUrl?: Maybe<Scalars['String']>;
 };
 
 /** This is stored with a schema when it is uploaded */
 export type GitContextInput = {
-  branch?: InputMaybe<Scalars["String"]>;
-  commit?: InputMaybe<Scalars["ID"]>;
-  committer?: InputMaybe<Scalars["String"]>;
-  message?: InputMaybe<Scalars["String"]>;
-  remoteUrl?: InputMaybe<Scalars["String"]>;
+  branch?: InputMaybe<Scalars['String']>;
+  commit?: InputMaybe<Scalars['ID']>;
+  committer?: InputMaybe<Scalars['String']>;
+  message?: InputMaybe<Scalars['String']>;
+  remoteUrl?: InputMaybe<Scalars['String']>;
 };
 
 export enum GitRemoteHost {
-  Bitbucket = "BITBUCKET",
-  Github = "GITHUB",
-  Gitlab = "GITLAB",
+  Bitbucket = 'BITBUCKET',
+  Github = 'GITHUB',
+  Gitlab = 'GITLAB'
 }
 
 export type GlobalExperimentalFeatures = {
-  __typename?: "GlobalExperimentalFeatures";
-  operationsCollections: Scalars["Boolean"];
-  sandboxesFullRelease: Scalars["Boolean"];
-  sandboxesPreview: Scalars["Boolean"];
-  sandboxesSchemaChecksPage: Scalars["Boolean"];
-  sandboxesSchemaDiffPage: Scalars["Boolean"];
-  subgraphsInSandbox: Scalars["Boolean"];
+  __typename?: 'GlobalExperimentalFeatures';
+  operationsCollections: Scalars['Boolean'];
+  sandboxesFullRelease: Scalars['Boolean'];
+  sandboxesPreview: Scalars['Boolean'];
+  sandboxesSchemaChecksPage: Scalars['Boolean'];
+  sandboxesSchemaDiffPage: Scalars['Boolean'];
+  subgraphsInSandbox: Scalars['Boolean'];
 };
 
 export type GraphApiKey = ApiKey & {
-  __typename?: "GraphApiKey";
-  createdAt: Scalars["Timestamp"];
+  __typename?: 'GraphApiKey';
+  createdAt: Scalars['Timestamp'];
   createdBy?: Maybe<Identity>;
-  id: Scalars["ID"];
-  keyName?: Maybe<Scalars["String"]>;
+  id: Scalars['ID'];
+  keyName?: Maybe<Scalars['String']>;
   role: UserPermission;
-  token: Scalars["String"];
+  token: Scalars['String'];
 };
 
 /** A union of all combinations that can comprise the implementingServices for a Service */
-export type GraphImplementors =
-  | FederatedImplementingServices
-  | NonFederatedImplementingService;
+export type GraphImplementors = FederatedImplementingServices | NonFederatedImplementingService;
 
 /** A variant of a graph, also called a schema tag in parts of our product. */
 export type GraphVariant = {
-  __typename?: "GraphVariant";
+  __typename?: 'GraphVariant';
   /** As new schema tags keep getting published, activeSchemaPublish refers to the latest. */
   activeSchemaPublish?: Maybe<SchemaTag>;
   /** The version of composition currently in use, if applicable */
-  compositionVersion?: Maybe<Scalars["String"]>;
+  compositionVersion?: Maybe<Scalars['String']>;
   /** Filter configuration used to create the contract schema */
   contractFilterConfig?: Maybe<FilterConfig>;
   /** Explorer setting for default headers for a graph */
-  defaultHeaders?: Maybe<Scalars["String"]>;
-  derivedVariantCount: Scalars["Int"];
+  defaultHeaders?: Maybe<Scalars['String']>;
+  derivedVariantCount: Scalars['Int'];
   /** Graph the variant belongs to */
   graph: Service;
   /** Graph ID of the variant. Prefer using graph { id } when feasible. */
-  graphId: Scalars["String"];
+  graphId: Scalars['String'];
   /** Global identifier for the graph variant, in the form `graph@variant`. */
-  id: Scalars["ID"];
+  id: Scalars['ID'];
   /** Represents whether this variant is a Contract. */
-  isContract: Scalars["Boolean"];
+  isContract: Scalars['Boolean'];
   /** Is this variant one of the current user's favorite variants? */
-  isFavoriteOfCurrentUser: Scalars["Boolean"];
+  isFavoriteOfCurrentUser: Scalars['Boolean'];
   /** If the variant has a composition */
-  isFederated?: Maybe<Scalars["Boolean"]>;
+  isFederated?: Maybe<Scalars['Boolean']>;
   /** If the variant is protected */
-  isProtected: Scalars["Boolean"];
-  isPublic: Scalars["Boolean"];
+  isProtected: Scalars['Boolean'];
+  isPublic: Scalars['Boolean'];
   /** Represents whether this variant should be listed in the public variants directory. This can only be true if the variant is also public. */
-  isPubliclyListed: Scalars["Boolean"];
+  isPubliclyListed: Scalars['Boolean'];
   /** Represents whether Apollo has verified the authenticity of this public variant. This can only be true if the variant is also public. */
-  isVerified: Scalars["Boolean"];
+  isVerified: Scalars['Boolean'];
+  latestApprovedLaunch?: Maybe<Launch>;
   latestLaunch?: Maybe<Launch>;
   launch?: Maybe<Launch>;
   launchHistory: Array<Launch>;
   links?: Maybe<Array<LinkInfo>>;
   /** Name of the variant, like `variant`. */
-  name: Scalars["String"];
+  name: Scalars['String'];
   operationCollections: Array<OperationCollection>;
   /** Which permissions the current user has for interacting with this variant */
   permissions: GraphVariantPermissions;
   /** Generate a federated operation plan for a given operation */
   plan?: Maybe<QueryPlan>;
   /** Explorer setting for preflight script to run before the actual GraphQL operations is run. */
-  preflightScript?: Maybe<Scalars["String"]>;
+  preflightScript?: Maybe<Scalars['String']>;
   readme?: Maybe<Readme>;
   /** Registry stats for this particular graph variant */
   registryStatsWindow?: Maybe<RegistryStatsWindow>;
   /** The total number of requests for this variant in the last 24 hours */
-  requestsInLastDay?: Maybe<Scalars["Long"]>;
+  requestsInLastDay?: Maybe<Scalars['Long']>;
   /** If the graphql endpoint is set up to accept cookies */
-  sendCookies?: Maybe<Scalars["Boolean"]>;
+  sendCookies?: Maybe<Scalars['Boolean']>;
   sourceVariant?: Maybe<GraphVariant>;
   /** URL where the graph subscription can be queried. */
-  subscriptionUrl?: Maybe<Scalars["String"]>;
+  subscriptionUrl?: Maybe<Scalars['String']>;
   /** A list of supported directives */
   supportedDirectives?: Maybe<Array<DirectiveSupportStatus>>;
   /** URL where the graph can be queried. */
-  url?: Maybe<Scalars["String"]>;
+  url?: Maybe<Scalars['String']>;
   /** The last instant that usage information (e.g. operation stat, client stats) was reported for this variant */
-  usageLastReportedAt?: Maybe<Scalars["Timestamp"]>;
+  usageLastReportedAt?: Maybe<Scalars['Timestamp']>;
 };
+
 
 /** A variant of a graph, also called a schema tag in parts of our product. */
 export type GraphVariantLaunchArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
+
 
 /** A variant of a graph, also called a schema tag in parts of our product. */
 export type GraphVariantLaunchHistoryArgs = {
-  limit?: Scalars["Int"];
+  limit?: Scalars['Int'];
 };
+
 
 /** A variant of a graph, also called a schema tag in parts of our product. */
 export type GraphVariantPlanArgs = {
-  document: Scalars["GraphQLDocument"];
-  operationName?: InputMaybe<Scalars["String"]>;
+  document: Scalars['GraphQLDocument'];
+  operationName?: InputMaybe<Scalars['String']>;
 };
+
 
 /** A variant of a graph, also called a schema tag in parts of our product. */
 export type GraphVariantRegistryStatsWindowArgs = {
-  from: Scalars["Timestamp"];
+  from: Scalars['Timestamp'];
   resolution?: InputMaybe<Resolution>;
-  to?: InputMaybe<Scalars["Timestamp"]>;
+  to?: InputMaybe<Scalars['Timestamp']>;
 };
 
 export type GraphVariantLookup = GraphVariant | InvalidRefFormat;
 
 /** Modifies a variant of a graph, also called a schema tag in parts of our product. */
 export type GraphVariantMutation = {
-  __typename?: "GraphVariantMutation";
+  __typename?: 'GraphVariantMutation';
   addLinkToVariant: GraphVariant;
   configureComposition?: Maybe<GraphVariant>;
   /** @deprecated Use configureComposition instead */
   enableTagAndInaccessible?: Maybe<GraphVariant>;
   /** Graph ID of the variant */
-  graphId: Scalars["String"];
+  graphId: Scalars['String'];
   /** Global identifier for the graph variant, in the form `graph@variant`. */
-  id: Scalars["ID"];
+  id: Scalars['ID'];
   /** Name of the variant, like `variant`. */
-  name: Scalars["String"];
+  name: Scalars['String'];
   relaunch: RelaunchResult;
   removeLinkFromVariant: GraphVariant;
   setIsFavoriteOfCurrentUser: GraphVariant;
@@ -3043,113 +3066,131 @@ export type GraphVariantMutation = {
   updateVariantReadme?: Maybe<GraphVariant>;
 };
 
+
 /** Modifies a variant of a graph, also called a schema tag in parts of our product. */
 export type GraphVariantMutationAddLinkToVariantArgs = {
-  title?: InputMaybe<Scalars["String"]>;
+  title?: InputMaybe<Scalars['String']>;
   type: LinkInfoType;
-  url: Scalars["String"];
+  url: Scalars['String'];
 };
+
 
 /** Modifies a variant of a graph, also called a schema tag in parts of our product. */
 export type GraphVariantMutationConfigureCompositionArgs = {
-  enableTagAndInaccessible?: InputMaybe<Scalars["Boolean"]>;
-  version?: InputMaybe<Scalars["String"]>;
+  enableTagAndInaccessible?: InputMaybe<Scalars['Boolean']>;
+  version?: InputMaybe<Scalars['String']>;
 };
+
 
 /** Modifies a variant of a graph, also called a schema tag in parts of our product. */
 export type GraphVariantMutationEnableTagAndInaccessibleArgs = {
-  enabled: Scalars["Boolean"];
+  enabled: Scalars['Boolean'];
 };
+
 
 /** Modifies a variant of a graph, also called a schema tag in parts of our product. */
 export type GraphVariantMutationRemoveLinkFromVariantArgs = {
-  linkInfoId: Scalars["ID"];
+  linkInfoId: Scalars['ID'];
 };
+
 
 /** Modifies a variant of a graph, also called a schema tag in parts of our product. */
 export type GraphVariantMutationSetIsFavoriteOfCurrentUserArgs = {
-  favorite: Scalars["Boolean"];
+  favorite: Scalars['Boolean'];
 };
+
 
 /** Modifies a variant of a graph, also called a schema tag in parts of our product. */
 export type GraphVariantMutationUpdateDefaultHeadersArgs = {
-  defaultHeaders?: InputMaybe<Scalars["String"]>;
+  defaultHeaders?: InputMaybe<Scalars['String']>;
 };
+
 
 /** Modifies a variant of a graph, also called a schema tag in parts of our product. */
 export type GraphVariantMutationUpdateIsProtectedArgs = {
-  isProtected: Scalars["Boolean"];
+  isProtected: Scalars['Boolean'];
 };
+
 
 /** Modifies a variant of a graph, also called a schema tag in parts of our product. */
 export type GraphVariantMutationUpdatePreflightScriptArgs = {
-  preflightScript?: InputMaybe<Scalars["String"]>;
+  preflightScript?: InputMaybe<Scalars['String']>;
 };
+
 
 /** Modifies a variant of a graph, also called a schema tag in parts of our product. */
 export type GraphVariantMutationUpdateSendCookiesArgs = {
-  sendCookies: Scalars["Boolean"];
+  sendCookies: Scalars['Boolean'];
 };
+
 
 /** Modifies a variant of a graph, also called a schema tag in parts of our product. */
 export type GraphVariantMutationUpdateSubscriptionUrlArgs = {
-  subscriptionUrl?: InputMaybe<Scalars["String"]>;
+  subscriptionUrl?: InputMaybe<Scalars['String']>;
 };
+
 
 /** Modifies a variant of a graph, also called a schema tag in parts of our product. */
 export type GraphVariantMutationUpdateUrlArgs = {
-  url?: InputMaybe<Scalars["String"]>;
+  url?: InputMaybe<Scalars['String']>;
 };
+
 
 /** Modifies a variant of a graph, also called a schema tag in parts of our product. */
 export type GraphVariantMutationUpdateVariantIsPublicArgs = {
-  isPublic: Scalars["Boolean"];
+  isPublic: Scalars['Boolean'];
 };
+
 
 /** Modifies a variant of a graph, also called a schema tag in parts of our product. */
 export type GraphVariantMutationUpdateVariantIsPubliclyListedArgs = {
-  isPubliclyListed: Scalars["Boolean"];
+  isPubliclyListed: Scalars['Boolean'];
 };
+
 
 /** Modifies a variant of a graph, also called a schema tag in parts of our product. */
 export type GraphVariantMutationUpdateVariantIsVerifiedArgs = {
-  isVerified: Scalars["Boolean"];
+  isVerified: Scalars['Boolean'];
 };
+
 
 /** Modifies a variant of a graph, also called a schema tag in parts of our product. */
 export type GraphVariantMutationUpdateVariantReadmeArgs = {
-  readme: Scalars["String"];
+  readme: Scalars['String'];
 };
 
 /** A map from permission String to boolean that the current user is allowed for the root graph variant */
 export type GraphVariantPermissions = {
-  __typename?: "GraphVariantPermissions";
-  canManageBuildConfig: Scalars["Boolean"];
-  canManageExplorerSettings: Scalars["Boolean"];
-  canPushSchemas: Scalars["Boolean"];
-  canQueryBuildConfig: Scalars["Boolean"];
+  __typename?: 'GraphVariantPermissions';
+  canCreateCollectionInVariant: Scalars['Boolean'];
+  canManageBuildConfig: Scalars['Boolean'];
+  canManageExplorerSettings: Scalars['Boolean'];
+  canPushSchemas: Scalars['Boolean'];
+  canQueryBuildConfig: Scalars['Boolean'];
   /**
    * Whether the current user can access the schema for this variant. This will be anded with
    * the ServiceRoles.canQuerySchemas, this will be true when the service schema permission is
    * false for Services with public variants
    */
-  canQuerySchemas: Scalars["Boolean"];
-  canUpdateVariantLinkInfo: Scalars["Boolean"];
-  canUpdateVariantReadme: Scalars["Boolean"];
+  canQuerySchemas: Scalars['Boolean'];
+  canShareCollectionInVariant: Scalars['Boolean'];
+  canUpdateVariantLinkInfo: Scalars['Boolean'];
+  canUpdateVariantReadme: Scalars['Boolean'];
+  variantId: Scalars['ID'];
 };
 
 export enum HttpMethod {
-  Connect = "CONNECT",
-  Delete = "DELETE",
-  Get = "GET",
-  Head = "HEAD",
-  Options = "OPTIONS",
-  Patch = "PATCH",
-  Post = "POST",
-  Put = "PUT",
-  Trace = "TRACE",
-  Unknown = "UNKNOWN",
-  Unrecognized = "UNRECOGNIZED",
+  Connect = 'CONNECT',
+  Delete = 'DELETE',
+  Get = 'GET',
+  Head = 'HEAD',
+  Options = 'OPTIONS',
+  Patch = 'PATCH',
+  Post = 'POST',
+  Put = 'PUT',
+  Trace = 'TRACE',
+  Unknown = 'UNKNOWN',
+  Unrecognized = 'UNRECOGNIZED'
 }
 
 export type HistoricQueryParameters = {
@@ -3157,9 +3198,9 @@ export type HistoricQueryParameters = {
   excludedClients?: InputMaybe<Array<ClientInfoFilter>>;
   /** A list of operation names to filter out during validation. */
   excludedOperationNames?: InputMaybe<Array<OperationNameFilterInput>>;
-  from?: InputMaybe<Scalars["Timestamp"]>;
+  from?: InputMaybe<Scalars['Timestamp']>;
   /** A list of operation IDs to filter out during validation. */
-  ignoredOperations?: InputMaybe<Array<Scalars["ID"]>>;
+  ignoredOperations?: InputMaybe<Array<Scalars['ID']>>;
   /**
    * A list of variants to include in the validation. If no variants are provided
    * then this defaults to the "current" variant along with the base variant. The
@@ -3168,31 +3209,31 @@ export type HistoricQueryParameters = {
    * same as null inside of `in`, and 'current') in this metrics fetch. This strategy
    * supports users who have not tagged their metrics or schema.
    */
-  includedVariants?: InputMaybe<Array<Scalars["String"]>>;
+  includedVariants?: InputMaybe<Array<Scalars['String']>>;
   /** Minimum number of requests within the window for a query to be considered. */
-  queryCountThreshold?: InputMaybe<Scalars["Int"]>;
+  queryCountThreshold?: InputMaybe<Scalars['Int']>;
   /**
    * Number of requests within the window for a query to be considered, relative to
    * total request count. Expected values are between 0 and 0.05 (minimum 5% of total
    * request volume)
    */
-  queryCountThresholdPercentage?: InputMaybe<Scalars["Float"]>;
-  to?: InputMaybe<Scalars["Timestamp"]>;
+  queryCountThresholdPercentage?: InputMaybe<Scalars['Float']>;
+  to?: InputMaybe<Scalars['Timestamp']>;
 };
 
 export type Identity = {
   asActor: Actor;
-  id: Scalars["ID"];
-  name: Scalars["String"];
+  id: Scalars['ID'];
+  name: Scalars['String'];
 };
 
 /** An actor's identity and info about the client they used to perform the action */
 export type IdentityAndClientInfo = {
-  __typename?: "IdentityAndClientInfo";
+  __typename?: 'IdentityAndClientInfo';
   /** The clientName given to Apollo Cloud when the actor performed the action */
-  clientName?: Maybe<Scalars["String"]>;
+  clientName?: Maybe<Scalars['String']>;
   /** The clientVersion given to Apollo Cloud when the actor performed the action */
-  clientVersion?: Maybe<Scalars["String"]>;
+  clientVersion?: Maybe<Scalars['String']>;
   /** Identity info about the actor */
   identity?: Maybe<Identity>;
 };
@@ -3200,160 +3241,160 @@ export type IdentityAndClientInfo = {
 export type IdentityMutation = ServiceMutation | UserMutation;
 
 export type IgnoreOperationsInChecksResult = {
-  __typename?: "IgnoreOperationsInChecksResult";
+  __typename?: 'IgnoreOperationsInChecksResult';
   graph: Service;
 };
 
 /** The location of the implementing service config file in storage */
 export type ImplementingServiceLocation = {
-  __typename?: "ImplementingServiceLocation";
+  __typename?: 'ImplementingServiceLocation';
   /** The name of the implementing service */
-  name: Scalars["String"];
+  name: Scalars['String'];
   /** The path in storage to access the implementing service config file */
-  path: Scalars["String"];
+  path: Scalars['String'];
 };
 
 export type InternalAdminUser = {
-  __typename?: "InternalAdminUser";
+  __typename?: 'InternalAdminUser';
   role: InternalMdgAdminRole;
-  userID: Scalars["String"];
+  userID: Scalars['String'];
 };
 
 export type InternalIdentity = Identity & {
-  __typename?: "InternalIdentity";
+  __typename?: 'InternalIdentity';
   accounts: Array<Account>;
   asActor: Actor;
-  email?: Maybe<Scalars["String"]>;
-  id: Scalars["ID"];
-  name: Scalars["String"];
+  email?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  name: Scalars['String'];
 };
 
 export enum InternalMdgAdminRole {
-  InternalMdgReadOnly = "INTERNAL_MDG_READ_ONLY",
-  InternalMdgSales = "INTERNAL_MDG_SALES",
-  InternalMdgSuperAdmin = "INTERNAL_MDG_SUPER_ADMIN",
-  InternalMdgSupport = "INTERNAL_MDG_SUPPORT",
+  InternalMdgReadOnly = 'INTERNAL_MDG_READ_ONLY',
+  InternalMdgSales = 'INTERNAL_MDG_SALES',
+  InternalMdgSuperAdmin = 'INTERNAL_MDG_SUPER_ADMIN',
+  InternalMdgSupport = 'INTERNAL_MDG_SUPPORT'
 }
 
 export type IntrospectionDirective = {
-  __typename?: "IntrospectionDirective";
+  __typename?: 'IntrospectionDirective';
   args: Array<IntrospectionInputValue>;
-  description?: Maybe<Scalars["String"]>;
+  description?: Maybe<Scalars['String']>;
   locations: Array<IntrospectionDirectiveLocation>;
-  name: Scalars["String"];
+  name: Scalars['String'];
 };
 
 export type IntrospectionDirectiveInput = {
   args: Array<IntrospectionInputValueInput>;
-  description?: InputMaybe<Scalars["String"]>;
-  isRepeatable?: InputMaybe<Scalars["Boolean"]>;
+  description?: InputMaybe<Scalars['String']>;
+  isRepeatable?: InputMaybe<Scalars['Boolean']>;
   locations: Array<IntrospectionDirectiveLocation>;
-  name: Scalars["String"];
+  name: Scalars['String'];
 };
 
 /** __DirectiveLocation introspection type */
 export enum IntrospectionDirectiveLocation {
   /** Location adjacent to an argument definition. */
-  ArgumentDefinition = "ARGUMENT_DEFINITION",
+  ArgumentDefinition = 'ARGUMENT_DEFINITION',
   /** Location adjacent to an enum definition. */
-  Enum = "ENUM",
+  Enum = 'ENUM',
   /** Location adjacent to an enum value definition. */
-  EnumValue = "ENUM_VALUE",
+  EnumValue = 'ENUM_VALUE',
   /** Location adjacent to a field. */
-  Field = "FIELD",
+  Field = 'FIELD',
   /** Location adjacent to a field definition. */
-  FieldDefinition = "FIELD_DEFINITION",
+  FieldDefinition = 'FIELD_DEFINITION',
   /** Location adjacent to a fragment definition. */
-  FragmentDefinition = "FRAGMENT_DEFINITION",
+  FragmentDefinition = 'FRAGMENT_DEFINITION',
   /** Location adjacent to a fragment spread. */
-  FragmentSpread = "FRAGMENT_SPREAD",
+  FragmentSpread = 'FRAGMENT_SPREAD',
   /** Location adjacent to an inline fragment. */
-  InlineFragment = "INLINE_FRAGMENT",
+  InlineFragment = 'INLINE_FRAGMENT',
   /** Location adjacent to an input object field definition. */
-  InputFieldDefinition = "INPUT_FIELD_DEFINITION",
+  InputFieldDefinition = 'INPUT_FIELD_DEFINITION',
   /** Location adjacent to an input object type definition. */
-  InputObject = "INPUT_OBJECT",
+  InputObject = 'INPUT_OBJECT',
   /** Location adjacent to an interface definition. */
-  Interface = "INTERFACE",
+  Interface = 'INTERFACE',
   /** Location adjacent to a mutation operation. */
-  Mutation = "MUTATION",
+  Mutation = 'MUTATION',
   /** Location adjacent to an object type definition. */
-  Object = "OBJECT",
+  Object = 'OBJECT',
   /** Location adjacent to a query operation. */
-  Query = "QUERY",
+  Query = 'QUERY',
   /** Location adjacent to a scalar definition. */
-  Scalar = "SCALAR",
+  Scalar = 'SCALAR',
   /** Location adjacent to a schema definition. */
-  Schema = "SCHEMA",
+  Schema = 'SCHEMA',
   /** Location adjacent to a subscription operation. */
-  Subscription = "SUBSCRIPTION",
+  Subscription = 'SUBSCRIPTION',
   /** Location adjacent to a union definition. */
-  Union = "UNION",
+  Union = 'UNION',
   /** Location adjacent to a variable definition. */
-  VariableDefinition = "VARIABLE_DEFINITION",
+  VariableDefinition = 'VARIABLE_DEFINITION'
 }
 
 /** Values associated with introspection result for an enum value */
 export type IntrospectionEnumValue = {
-  __typename?: "IntrospectionEnumValue";
+  __typename?: 'IntrospectionEnumValue';
   /** @deprecated Use deprecationReason instead */
-  depreactionReason?: Maybe<Scalars["String"]>;
-  deprecationReason?: Maybe<Scalars["String"]>;
-  description?: Maybe<Scalars["String"]>;
-  isDeprecated: Scalars["Boolean"];
-  name: Scalars["String"];
+  depreactionReason?: Maybe<Scalars['String']>;
+  deprecationReason?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  isDeprecated: Scalars['Boolean'];
+  name: Scalars['String'];
 };
 
 /** __EnumValue introspection type */
 export type IntrospectionEnumValueInput = {
-  deprecationReason?: InputMaybe<Scalars["String"]>;
-  description?: InputMaybe<Scalars["String"]>;
-  isDeprecated: Scalars["Boolean"];
-  name: Scalars["String"];
+  deprecationReason?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  isDeprecated: Scalars['Boolean'];
+  name: Scalars['String'];
 };
 
 /** Values associated with introspection result for field */
 export type IntrospectionField = {
-  __typename?: "IntrospectionField";
+  __typename?: 'IntrospectionField';
   args: Array<IntrospectionInputValue>;
-  deprecationReason?: Maybe<Scalars["String"]>;
-  description?: Maybe<Scalars["String"]>;
-  isDeprecated: Scalars["Boolean"];
-  name: Scalars["String"];
+  deprecationReason?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  isDeprecated: Scalars['Boolean'];
+  name: Scalars['String'];
   type: IntrospectionType;
 };
 
 /** __Field introspection type */
 export type IntrospectionFieldInput = {
   args: Array<IntrospectionInputValueInput>;
-  deprecationReason?: InputMaybe<Scalars["String"]>;
-  description?: InputMaybe<Scalars["String"]>;
-  isDeprecated: Scalars["Boolean"];
-  name: Scalars["String"];
+  deprecationReason?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  isDeprecated: Scalars['Boolean'];
+  name: Scalars['String'];
   type: IntrospectionTypeInput;
 };
 
 /** Values associated with introspection result for an input field */
 export type IntrospectionInputValue = {
-  __typename?: "IntrospectionInputValue";
-  defaultValue?: Maybe<Scalars["String"]>;
-  description?: Maybe<Scalars["String"]>;
-  name: Scalars["String"];
+  __typename?: 'IntrospectionInputValue';
+  defaultValue?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   type: IntrospectionType;
 };
 
 /** __Value introspection type */
 export type IntrospectionInputValueInput = {
-  defaultValue?: InputMaybe<Scalars["String"]>;
-  deprecationReason?: InputMaybe<Scalars["String"]>;
-  description?: InputMaybe<Scalars["String"]>;
-  isDeprecated?: InputMaybe<Scalars["Boolean"]>;
-  name: Scalars["String"];
+  defaultValue?: InputMaybe<Scalars['String']>;
+  deprecationReason?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  isDeprecated?: InputMaybe<Scalars['Boolean']>;
+  name: Scalars['String'];
   type: IntrospectionTypeInput;
 };
 
 export type IntrospectionSchema = {
-  __typename?: "IntrospectionSchema";
+  __typename?: 'IntrospectionSchema';
   directives: Array<IntrospectionDirective>;
   mutationType?: Maybe<IntrospectionType>;
   queryType: IntrospectionType;
@@ -3361,13 +3402,14 @@ export type IntrospectionSchema = {
   types: Array<IntrospectionType>;
 };
 
+
 export type IntrospectionSchemaTypesArgs = {
   filter?: InputMaybe<TypeFilterConfig>;
 };
 
 /** __Schema introspection type */
 export type IntrospectionSchemaInput = {
-  description?: InputMaybe<Scalars["String"]>;
+  description?: InputMaybe<Scalars['String']>;
   directives: Array<IntrospectionDirectiveInput>;
   mutationType?: InputMaybe<IntrospectionTypeRefInput>;
   queryType: IntrospectionTypeRefInput;
@@ -3377,148 +3419,149 @@ export type IntrospectionSchemaInput = {
 
 /** Object containing all possible values for an introspectionType */
 export type IntrospectionType = {
-  __typename?: "IntrospectionType";
+  __typename?: 'IntrospectionType';
   /** the base kind of the type this references, ignoring lists and nullability */
   baseKind?: Maybe<IntrospectionTypeKind>;
-  description?: Maybe<Scalars["String"]>;
+  description?: Maybe<Scalars['String']>;
   enumValues?: Maybe<Array<IntrospectionEnumValue>>;
   fields?: Maybe<Array<IntrospectionField>>;
   inputFields?: Maybe<Array<IntrospectionInputValue>>;
   interfaces?: Maybe<Array<IntrospectionType>>;
   kind?: Maybe<IntrospectionTypeKind>;
-  name?: Maybe<Scalars["String"]>;
+  name?: Maybe<Scalars['String']>;
   ofType?: Maybe<IntrospectionType>;
   possibleTypes?: Maybe<Array<IntrospectionType>>;
   /** printed representation of type, including nested nullability and list ofTypes */
-  printed: Scalars["String"];
+  printed: Scalars['String'];
 };
+
 
 /** Object containing all possible values for an introspectionType */
 export type IntrospectionTypeEnumValuesArgs = {
-  includeDeprecated?: InputMaybe<Scalars["Boolean"]>;
+  includeDeprecated?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** __Type introspection type */
 export type IntrospectionTypeInput = {
-  description?: InputMaybe<Scalars["String"]>;
+  description?: InputMaybe<Scalars['String']>;
   enumValues?: InputMaybe<Array<IntrospectionEnumValueInput>>;
   fields?: InputMaybe<Array<IntrospectionFieldInput>>;
   inputFields?: InputMaybe<Array<IntrospectionInputValueInput>>;
   interfaces?: InputMaybe<Array<IntrospectionTypeInput>>;
   kind: IntrospectionTypeKind;
-  name?: InputMaybe<Scalars["String"]>;
+  name?: InputMaybe<Scalars['String']>;
   ofType?: InputMaybe<IntrospectionTypeInput>;
   possibleTypes?: InputMaybe<Array<IntrospectionTypeInput>>;
-  specifiedByUrl?: InputMaybe<Scalars["String"]>;
+  specifiedByUrl?: InputMaybe<Scalars['String']>;
 };
 
 export enum IntrospectionTypeKind {
   /** Indicates this type is an enum. 'enumValues' is a valid field. */
-  Enum = "ENUM",
+  Enum = 'ENUM',
   /** Indicates this type is an input object. 'inputFields' is a valid field. */
-  InputObject = "INPUT_OBJECT",
+  InputObject = 'INPUT_OBJECT',
   /**
    * Indicates this type is an interface. 'fields' and 'possibleTypes' are valid
    * fields
    */
-  Interface = "INTERFACE",
+  Interface = 'INTERFACE',
   /** Indicates this type is a list. 'ofType' is a valid field. */
-  List = "LIST",
+  List = 'LIST',
   /** Indicates this type is a non-null. 'ofType' is a valid field. */
-  NonNull = "NON_NULL",
+  NonNull = 'NON_NULL',
   /** Indicates this type is an object. 'fields' and 'interfaces' are valid fields. */
-  Object = "OBJECT",
+  Object = 'OBJECT',
   /** Indicates this type is a scalar. */
-  Scalar = "SCALAR",
+  Scalar = 'SCALAR',
   /** Indicates this type is a union. 'possibleTypes' is a valid field. */
-  Union = "UNION",
+  Union = 'UNION'
 }
 
 /** Shallow __Type introspection type */
 export type IntrospectionTypeRefInput = {
-  kind?: InputMaybe<Scalars["String"]>;
-  name: Scalars["String"];
+  kind?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
 };
 
 export type InvalidOperation = {
-  __typename?: "InvalidOperation";
+  __typename?: 'InvalidOperation';
   errors?: Maybe<Array<OperationValidationError>>;
-  signature: Scalars["ID"];
+  signature: Scalars['ID'];
 };
 
 export type InvalidRefFormat = Error & {
-  __typename?: "InvalidRefFormat";
-  message: Scalars["String"];
+  __typename?: 'InvalidRefFormat';
+  message: Scalars['String'];
 };
 
 export type InvalidTarget = Error & {
-  __typename?: "InvalidTarget";
-  message: Scalars["String"];
+  __typename?: 'InvalidTarget';
+  message: Scalars['String'];
 };
 
 export type Invoice = {
-  __typename?: "Invoice";
-  closedAt?: Maybe<Scalars["Timestamp"]>;
-  collectionMethod?: Maybe<Scalars["String"]>;
-  createdAt: Scalars["Timestamp"];
-  invoiceNumber: Scalars["Int"];
+  __typename?: 'Invoice';
+  closedAt?: Maybe<Scalars['Timestamp']>;
+  collectionMethod?: Maybe<Scalars['String']>;
+  createdAt: Scalars['Timestamp'];
+  invoiceNumber: Scalars['Int'];
   state: InvoiceState;
-  totalInCents: Scalars["Int"];
-  updatedAt: Scalars["Timestamp"];
-  uuid: Scalars["ID"];
+  totalInCents: Scalars['Int'];
+  updatedAt: Scalars['Timestamp'];
+  uuid: Scalars['ID'];
 };
 
 export enum InvoiceState {
-  Collected = "COLLECTED",
-  Failed = "FAILED",
-  Open = "OPEN",
-  PastDue = "PAST_DUE",
-  Unknown = "UNKNOWN",
+  Collected = 'COLLECTED',
+  Failed = 'FAILED',
+  Open = 'OPEN',
+  PastDue = 'PAST_DUE',
+  Unknown = 'UNKNOWN'
 }
 
 export enum InvoiceStateV2 {
-  Collected = "COLLECTED",
-  Failed = "FAILED",
-  Open = "OPEN",
-  PastDue = "PAST_DUE",
-  Unknown = "UNKNOWN",
+  Collected = 'COLLECTED',
+  Failed = 'FAILED',
+  Open = 'OPEN',
+  PastDue = 'PAST_DUE',
+  Unknown = 'UNKNOWN'
 }
 
 export type InvoiceV2 = {
-  __typename?: "InvoiceV2";
-  closedAt?: Maybe<Scalars["Timestamp"]>;
-  collectionMethod?: Maybe<Scalars["String"]>;
-  createdAt: Scalars["Timestamp"];
-  invoiceNumber: Scalars["Int"];
+  __typename?: 'InvoiceV2';
+  closedAt?: Maybe<Scalars['Timestamp']>;
+  collectionMethod?: Maybe<Scalars['String']>;
+  createdAt: Scalars['Timestamp'];
+  invoiceNumber: Scalars['Int'];
   state: InvoiceStateV2;
-  totalInCents: Scalars["Int"];
-  updatedAt: Scalars["Timestamp"];
-  uuid: Scalars["ID"];
+  totalInCents: Scalars['Int'];
+  updatedAt: Scalars['Timestamp'];
+  uuid: Scalars['ID'];
 };
 
 export type Launch = {
-  __typename?: "Launch";
-  approvedAt?: Maybe<Scalars["Timestamp"]>;
+  __typename?: 'Launch';
+  approvedAt?: Maybe<Scalars['Timestamp']>;
   build?: Maybe<Build>;
   buildInput: BuildInput;
-  completedAt?: Maybe<Scalars["Timestamp"]>;
-  createdAt: Scalars["Timestamp"];
+  completedAt?: Maybe<Scalars['Timestamp']>;
+  createdAt: Scalars['Timestamp'];
   downstreamLaunches: Array<Launch>;
-  graphId: Scalars["String"];
-  graphVariant: Scalars["String"];
-  id: Scalars["ID"];
-  isAvailable?: Maybe<Scalars["Boolean"]>;
-  isCompleted?: Maybe<Scalars["Boolean"]>;
-  isPublished?: Maybe<Scalars["Boolean"]>;
-  isTarget?: Maybe<Scalars["Boolean"]>;
+  graphId: Scalars['String'];
+  graphVariant: Scalars['String'];
+  id: Scalars['ID'];
+  isAvailable?: Maybe<Scalars['Boolean']>;
+  isCompleted?: Maybe<Scalars['Boolean']>;
+  isPublished?: Maybe<Scalars['Boolean']>;
+  isTarget?: Maybe<Scalars['Boolean']>;
   latestSequenceStep?: Maybe<LaunchSequenceStep>;
   results: Array<LaunchResult>;
   schemaTag?: Maybe<SchemaTag>;
   sequence: Array<LaunchSequenceStep>;
-  shortenedID: Scalars["String"];
+  shortenedID: Scalars['String'];
   status: LaunchStatus;
   subgraphChanges?: Maybe<Array<SubgraphChange>>;
-  supersededAt?: Maybe<Scalars["Timestamp"]>;
+  supersededAt?: Maybe<Scalars['Timestamp']>;
   supersededBy?: Maybe<Launch>;
   upstreamLaunch?: Maybe<Launch>;
 };
@@ -3527,100 +3570,91 @@ export type Launch = {
 export type LaunchResult = ChangelogLaunchResult;
 
 export type LaunchSequenceBuildStep = {
-  __typename?: "LaunchSequenceBuildStep";
-  completedAt?: Maybe<Scalars["Timestamp"]>;
-  startedAt?: Maybe<Scalars["Timestamp"]>;
+  __typename?: 'LaunchSequenceBuildStep';
+  completedAt?: Maybe<Scalars['Timestamp']>;
+  startedAt?: Maybe<Scalars['Timestamp']>;
 };
 
 export type LaunchSequenceCheckStep = {
-  __typename?: "LaunchSequenceCheckStep";
-  completedAt?: Maybe<Scalars["Timestamp"]>;
-  startedAt?: Maybe<Scalars["Timestamp"]>;
+  __typename?: 'LaunchSequenceCheckStep';
+  completedAt?: Maybe<Scalars['Timestamp']>;
+  startedAt?: Maybe<Scalars['Timestamp']>;
 };
 
 export type LaunchSequenceCompletedStep = {
-  __typename?: "LaunchSequenceCompletedStep";
-  completedAt?: Maybe<Scalars["Timestamp"]>;
+  __typename?: 'LaunchSequenceCompletedStep';
+  completedAt?: Maybe<Scalars['Timestamp']>;
 };
 
 export type LaunchSequenceInitiatedStep = {
-  __typename?: "LaunchSequenceInitiatedStep";
-  startedAt?: Maybe<Scalars["Timestamp"]>;
+  __typename?: 'LaunchSequenceInitiatedStep';
+  startedAt?: Maybe<Scalars['Timestamp']>;
 };
 
 export type LaunchSequencePublishStep = {
-  __typename?: "LaunchSequencePublishStep";
-  completedAt?: Maybe<Scalars["Timestamp"]>;
-  startedAt?: Maybe<Scalars["Timestamp"]>;
+  __typename?: 'LaunchSequencePublishStep';
+  completedAt?: Maybe<Scalars['Timestamp']>;
+  startedAt?: Maybe<Scalars['Timestamp']>;
 };
 
-export type LaunchSequenceStep =
-  | LaunchSequenceBuildStep
-  | LaunchSequenceCheckStep
-  | LaunchSequenceCompletedStep
-  | LaunchSequenceInitiatedStep
-  | LaunchSequencePublishStep
-  | LaunchSequenceSupersededStep;
+export type LaunchSequenceStep = LaunchSequenceBuildStep | LaunchSequenceCheckStep | LaunchSequenceCompletedStep | LaunchSequenceInitiatedStep | LaunchSequencePublishStep | LaunchSequenceSupersededStep;
 
 export type LaunchSequenceSupersededStep = {
-  __typename?: "LaunchSequenceSupersededStep";
-  completedAt?: Maybe<Scalars["Timestamp"]>;
+  __typename?: 'LaunchSequenceSupersededStep';
+  completedAt?: Maybe<Scalars['Timestamp']>;
 };
 
 export enum LaunchStatus {
-  LaunchCompleted = "LAUNCH_COMPLETED",
-  LaunchFailed = "LAUNCH_FAILED",
-  LaunchInitiated = "LAUNCH_INITIATED",
+  LaunchCompleted = 'LAUNCH_COMPLETED',
+  LaunchFailed = 'LAUNCH_FAILED',
+  LaunchInitiated = 'LAUNCH_INITIATED'
 }
 
 export type LinkInfo = {
-  __typename?: "LinkInfo";
-  createdAt: Scalars["Timestamp"];
-  id: Scalars["ID"];
-  title?: Maybe<Scalars["String"]>;
+  __typename?: 'LinkInfo';
+  createdAt: Scalars['Timestamp'];
+  id: Scalars['ID'];
+  title?: Maybe<Scalars['String']>;
   type: LinkInfoType;
-  url: Scalars["String"];
+  url: Scalars['String'];
 };
 
 export enum LinkInfoType {
-  DeveloperPortal = "DEVELOPER_PORTAL",
-  Other = "OTHER",
-  Repository = "REPOSITORY",
+  DeveloperPortal = 'DEVELOPER_PORTAL',
+  Other = 'OTHER',
+  Repository = 'REPOSITORY'
 }
 
 export type MarkChangesForOperationAsSafeResult = {
-  __typename?: "MarkChangesForOperationAsSafeResult";
+  __typename?: 'MarkChangesForOperationAsSafeResult';
   /**
    * Nice to have for the frontend since the Apollo cache is already watching for AffectedQuery to update.
    * This might return null if no behavior changes were found for the affected operation ID.
    * This is a weird situation that should never happen.
    */
   affectedOperation?: Maybe<AffectedQuery>;
-  message: Scalars["String"];
-  success: Scalars["Boolean"];
+  message: Scalars['String'];
+  success: Scalars['Boolean'];
 };
 
 export type MediaUploadInfo = {
-  __typename?: "MediaUploadInfo";
-  csrfToken: Scalars["String"];
-  maxContentLength: Scalars["Int"];
-  url: Scalars["String"];
+  __typename?: 'MediaUploadInfo';
+  csrfToken: Scalars['String'];
+  maxContentLength: Scalars['Int'];
+  url: Scalars['String'];
 };
 
-export type MoveOperationCollectionEntryResult =
-  | InvalidTarget
-  | MoveOperationCollectionEntrySuccess
-  | PermissionError;
+export type MoveOperationCollectionEntryResult = InvalidTarget | MoveOperationCollectionEntrySuccess | PermissionError;
 
 export type MoveOperationCollectionEntrySuccess = {
-  __typename?: "MoveOperationCollectionEntrySuccess";
+  __typename?: 'MoveOperationCollectionEntrySuccess';
   operation: OperationCollectionEntry;
   originCollection: OperationCollection;
   targetCollection: OperationCollection;
 };
 
 export type Mutation = {
-  __typename?: "Mutation";
+  __typename?: 'Mutation';
   account?: Maybe<AccountMutation>;
   /** Creates an operation collection for the given variantRefs, or make a sandbox collection without variantRefs. */
   createOperationCollection: CreateOperationCollectionResult;
@@ -3628,7 +3662,7 @@ export type Mutation = {
    * Finalize a password reset with a token included in the E-mail link,
    * returns the corresponding login email when successful
    */
-  finalizePasswordReset?: Maybe<Scalars["String"]>;
+  finalizePasswordReset?: Maybe<Scalars['String']>;
   /** Join an account with a token */
   joinAccount?: Maybe<Account>;
   me?: Maybe<IdentityMutation>;
@@ -3636,12 +3670,12 @@ export type Mutation = {
   newService?: Maybe<Service>;
   operationCollection?: Maybe<OperationCollectionMutation>;
   /** Refresh all plans from third-party billing service */
-  plansRefreshBilling?: Maybe<Scalars["Void"]>;
+  plansRefreshBilling?: Maybe<Scalars['Void']>;
   /** Report a running GraphQL server's schema. */
   reportSchema?: Maybe<ReportSchemaResult>;
   /** Ask for a user's password to be reset by E-mail */
-  resetPassword?: Maybe<Scalars["Void"]>;
-  resolveAllInternalCronExecutions?: Maybe<Scalars["Void"]>;
+  resetPassword?: Maybe<Scalars['Void']>;
+  resolveAllInternalCronExecutions?: Maybe<Scalars['Void']>;
   resolveInternalCronExecution?: Maybe<CronExecution>;
   service?: Maybe<ServiceMutation>;
   /** Set the subscriptions for a given email */
@@ -3650,144 +3684,164 @@ export type Mutation = {
   setUserSettings?: Maybe<UserSettings>;
   signUp?: Maybe<User>;
   /** This is called by the form shown to users after they delete their user or organization account. */
-  submitPostDeletionFeedback?: Maybe<Scalars["Void"]>;
+  submitPostDeletionFeedback?: Maybe<Scalars['Void']>;
   /** Mutation for basic engagement tracking in studio */
-  track?: Maybe<Scalars["Void"]>;
+  track?: Maybe<Scalars['Void']>;
   /** Rover session tracking. Reserved to https://rover.apollo.dev/telemetry (https://github.com/apollographql/orbiter). */
-  trackRoverSession?: Maybe<Scalars["Void"]>;
+  trackRoverSession?: Maybe<Scalars['Void']>;
   /** Unsubscribe a given email from all emails */
   unsubscribeFromAll?: Maybe<EmailPreferences>;
   user?: Maybe<UserMutation>;
 };
 
+
 export type MutationAccountArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
+
 
 export type MutationCreateOperationCollectionArgs = {
-  description?: InputMaybe<Scalars["String"]>;
-  isSandbox: Scalars["Boolean"];
-  isShared: Scalars["Boolean"];
-  name: Scalars["String"];
-  variantRefs?: InputMaybe<Array<Scalars["ID"]>>;
+  description?: InputMaybe<Scalars['String']>;
+  isSandbox: Scalars['Boolean'];
+  isShared: Scalars['Boolean'];
+  name: Scalars['String'];
+  variantRefs?: InputMaybe<Array<Scalars['ID']>>;
 };
+
 
 export type MutationFinalizePasswordResetArgs = {
-  newPassword: Scalars["String"];
-  resetToken: Scalars["String"];
+  newPassword: Scalars['String'];
+  resetToken: Scalars['String'];
 };
+
 
 export type MutationJoinAccountArgs = {
-  accountId: Scalars["ID"];
-  joinToken: Scalars["String"];
+  accountId: Scalars['ID'];
+  joinToken: Scalars['String'];
 };
+
 
 export type MutationNewAccountArgs = {
-  companyUrl?: InputMaybe<Scalars["String"]>;
-  id: Scalars["ID"];
+  companyUrl?: InputMaybe<Scalars['String']>;
+  id: Scalars['ID'];
 };
+
 
 export type MutationNewServiceArgs = {
-  accountId: Scalars["ID"];
-  description?: InputMaybe<Scalars["String"]>;
-  hiddenFromUninvitedNonAdminAccountMembers?: Scalars["Boolean"];
-  id: Scalars["ID"];
-  isDev?: Scalars["Boolean"];
-  name?: InputMaybe<Scalars["String"]>;
-  title?: InputMaybe<Scalars["String"]>;
+  accountId: Scalars['ID'];
+  description?: InputMaybe<Scalars['String']>;
+  hiddenFromUninvitedNonAdminAccountMembers?: Scalars['Boolean'];
+  id: Scalars['ID'];
+  isDev?: Scalars['Boolean'];
+  name?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars['String']>;
 };
+
 
 export type MutationOperationCollectionArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
 
+
 export type MutationReportSchemaArgs = {
-  coreSchema?: InputMaybe<Scalars["String"]>;
+  coreSchema?: InputMaybe<Scalars['String']>;
   report: SchemaReport;
 };
 
+
 export type MutationResetPasswordArgs = {
-  email: Scalars["String"];
+  email: Scalars['String'];
 };
+
 
 export type MutationResolveAllInternalCronExecutionsArgs = {
-  group?: InputMaybe<Scalars["String"]>;
-  name?: InputMaybe<Scalars["String"]>;
+  group?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
 };
+
 
 export type MutationResolveInternalCronExecutionArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
+
 
 export type MutationServiceArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
 
+
 export type MutationSetSubscriptionsArgs = {
-  email: Scalars["String"];
+  email: Scalars['String'];
   subscriptions: Array<EmailCategory>;
-  token: Scalars["String"];
+  token: Scalars['String'];
 };
+
 
 export type MutationSetUserSettingsArgs = {
   newSettings?: InputMaybe<UserSettingsInput>;
 };
 
+
 export type MutationSignUpArgs = {
-  email: Scalars["String"];
-  fullName: Scalars["String"];
-  password: Scalars["String"];
-  referrer?: InputMaybe<Scalars["String"]>;
-  trackingGoogleClientId?: InputMaybe<Scalars["String"]>;
-  trackingMarketoClientId?: InputMaybe<Scalars["String"]>;
+  email: Scalars['String'];
+  fullName: Scalars['String'];
+  password: Scalars['String'];
+  referrer?: InputMaybe<Scalars['String']>;
+  trackingGoogleClientId?: InputMaybe<Scalars['String']>;
+  trackingMarketoClientId?: InputMaybe<Scalars['String']>;
   userSegment?: InputMaybe<UserSegment>;
-  utmCampaign?: InputMaybe<Scalars["String"]>;
-  utmMedium?: InputMaybe<Scalars["String"]>;
-  utmSource?: InputMaybe<Scalars["String"]>;
+  utmCampaign?: InputMaybe<Scalars['String']>;
+  utmMedium?: InputMaybe<Scalars['String']>;
+  utmSource?: InputMaybe<Scalars['String']>;
 };
 
+
 export type MutationSubmitPostDeletionFeedbackArgs = {
-  feedback: Scalars["String"];
-  targetIdentifier: Scalars["ID"];
+  feedback: Scalars['String'];
+  targetIdentifier: Scalars['ID'];
   targetType: DeletionTargetType;
 };
 
+
 export type MutationTrackArgs = {
   event: EventEnum;
-  graphID: Scalars["String"];
-  graphVariant?: Scalars["String"];
+  graphID: Scalars['String'];
+  graphVariant?: Scalars['String'];
 };
+
 
 export type MutationTrackRoverSessionArgs = {
-  anonymousId: Scalars["ID"];
-  arguments: Array<Scalars["String"]>;
-  ci?: InputMaybe<Scalars["String"]>;
-  command: Scalars["String"];
-  cwdHash: Scalars["SHA256"];
-  os: Scalars["String"];
-  remoteUrlHash: Scalars["SHA256"];
-  sessionId: Scalars["ID"];
-  version: Scalars["String"];
+  anonymousId: Scalars['ID'];
+  arguments: Array<Scalars['String']>;
+  ci?: InputMaybe<Scalars['String']>;
+  command: Scalars['String'];
+  cwdHash: Scalars['SHA256'];
+  os: Scalars['String'];
+  remoteUrlHash: Scalars['SHA256'];
+  sessionId: Scalars['ID'];
+  version: Scalars['String'];
 };
+
 
 export type MutationUnsubscribeFromAllArgs = {
-  email: Scalars["String"];
-  token: Scalars["String"];
+  email: Scalars['String'];
+  token: Scalars['String'];
 };
 
+
 export type MutationUserArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
 
 export type NamedIntrospectionArg = {
-  __typename?: "NamedIntrospectionArg";
-  description?: Maybe<Scalars["String"]>;
-  name?: Maybe<Scalars["String"]>;
+  __typename?: 'NamedIntrospectionArg';
+  description?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
 };
 
 export type NamedIntrospectionArgNoDescription = {
-  __typename?: "NamedIntrospectionArgNoDescription";
-  name?: Maybe<Scalars["String"]>;
+  __typename?: 'NamedIntrospectionArgNoDescription';
+  name?: Maybe<Scalars['String']>;
 };
 
 /**
@@ -3800,15 +3854,15 @@ export type NamedIntrospectionArgNoDescription = {
  * https://github.com/DefinitelyTyped/DefinitelyTyped/blob/659eb50d3/types/graphql/utilities/introspectionQuery.d.ts#L31-L37
  */
 export type NamedIntrospectionType = {
-  __typename?: "NamedIntrospectionType";
-  description?: Maybe<Scalars["String"]>;
+  __typename?: 'NamedIntrospectionType';
+  description?: Maybe<Scalars['String']>;
   kind?: Maybe<IntrospectionTypeKind>;
-  name?: Maybe<Scalars["String"]>;
+  name?: Maybe<Scalars['String']>;
 };
 
 export type NamedIntrospectionTypeNoDescription = {
-  __typename?: "NamedIntrospectionTypeNoDescription";
-  name?: Maybe<Scalars["String"]>;
+  __typename?: 'NamedIntrospectionTypeNoDescription';
+  name?: Maybe<Scalars['String']>;
 };
 
 /**
@@ -3818,161 +3872,161 @@ export type NamedIntrospectionTypeNoDescription = {
  * returned.
  */
 export type NamedIntrospectionValue = {
-  __typename?: "NamedIntrospectionValue";
-  description?: Maybe<Scalars["String"]>;
-  name?: Maybe<Scalars["String"]>;
-  printedType?: Maybe<Scalars["String"]>;
+  __typename?: 'NamedIntrospectionValue';
+  description?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  printedType?: Maybe<Scalars['String']>;
 };
 
 export type NamedIntrospectionValueNoDescription = {
-  __typename?: "NamedIntrospectionValueNoDescription";
-  name?: Maybe<Scalars["String"]>;
-  printedType?: Maybe<Scalars["String"]>;
+  __typename?: 'NamedIntrospectionValueNoDescription';
+  name?: Maybe<Scalars['String']>;
+  printedType?: Maybe<Scalars['String']>;
 };
 
 /** A non-federated service for a monolithic graph */
 export type NonFederatedImplementingService = {
-  __typename?: "NonFederatedImplementingService";
+  __typename?: 'NonFederatedImplementingService';
   /** Timestamp of when this implementing service was created */
-  createdAt: Scalars["Timestamp"];
+  createdAt: Scalars['Timestamp'];
   /**
    * Identifies which graph this non-implementing service belongs to.
    * Formerly known as "service_id"
    */
-  graphID: Scalars["String"];
+  graphID: Scalars['String'];
   /**
    * Specifies which variant of a graph this implementing service belongs to".
    * Formerly known as "tag"
    */
-  graphVariant: Scalars["String"];
+  graphVariant: Scalars['String'];
 };
 
 export type NotFoundError = Error & {
-  __typename?: "NotFoundError";
-  message: Scalars["String"];
+  __typename?: 'NotFoundError';
+  message: Scalars['String'];
 };
 
 export type OdysseyCertification = {
-  __typename?: "OdysseyCertification";
-  certificationId: Scalars["String"];
-  earnedAt: Scalars["Timestamp"];
-  id: Scalars["ID"];
+  __typename?: 'OdysseyCertification';
+  certificationId: Scalars['String'];
+  earnedAt: Scalars['Timestamp'];
+  id: Scalars['ID'];
   owner?: Maybe<OdysseyCertificationOwner>;
 };
 
 export type OdysseyCertificationOwner = {
-  __typename?: "OdysseyCertificationOwner";
-  fullName: Scalars["String"];
-  id: Scalars["ID"];
+  __typename?: 'OdysseyCertificationOwner';
+  fullName: Scalars['String'];
+  id: Scalars['ID'];
 };
 
 export type OdysseyCourse = {
-  __typename?: "OdysseyCourse";
-  completedAt?: Maybe<Scalars["Timestamp"]>;
-  enrolledAt?: Maybe<Scalars["Timestamp"]>;
-  id: Scalars["ID"];
+  __typename?: 'OdysseyCourse';
+  completedAt?: Maybe<Scalars['Timestamp']>;
+  enrolledAt?: Maybe<Scalars['Timestamp']>;
+  id: Scalars['ID'];
 };
 
 export type OdysseyCourseInput = {
-  completedAt?: InputMaybe<Scalars["Timestamp"]>;
-  courseId: Scalars["String"];
+  completedAt?: InputMaybe<Scalars['Timestamp']>;
+  courseId: Scalars['String'];
 };
 
 export type OdysseyTask = {
-  __typename?: "OdysseyTask";
-  completedAt?: Maybe<Scalars["Timestamp"]>;
-  id: Scalars["ID"];
-  value?: Maybe<Scalars["String"]>;
+  __typename?: 'OdysseyTask';
+  completedAt?: Maybe<Scalars['Timestamp']>;
+  id: Scalars['ID'];
+  value?: Maybe<Scalars['String']>;
 };
 
 export type OdysseyTaskInput = {
-  completedAt?: InputMaybe<Scalars["Timestamp"]>;
-  taskId: Scalars["String"];
-  value?: InputMaybe<Scalars["String"]>;
+  completedAt?: InputMaybe<Scalars['Timestamp']>;
+  taskId: Scalars['String'];
+  value?: InputMaybe<Scalars['String']>;
 };
 
 export type Operation = {
-  __typename?: "Operation";
-  id: Scalars["ID"];
-  name?: Maybe<Scalars["String"]>;
-  signature?: Maybe<Scalars["String"]>;
-  truncated: Scalars["Boolean"];
+  __typename?: 'Operation';
+  id: Scalars['ID'];
+  name?: Maybe<Scalars['String']>;
+  signature?: Maybe<Scalars['String']>;
+  truncated: Scalars['Boolean'];
 };
 
 export type OperationAcceptedChange = {
-  __typename?: "OperationAcceptedChange";
-  acceptedAt: Scalars["Timestamp"];
+  __typename?: 'OperationAcceptedChange';
+  acceptedAt: Scalars['Timestamp'];
   acceptedBy: Identity;
   change: StoredApprovedChange;
-  checkID: Scalars["ID"];
-  graphID: Scalars["ID"];
-  id: Scalars["ID"];
-  operationID: Scalars["String"];
+  checkID: Scalars['ID'];
+  graphID: Scalars['ID'];
+  id: Scalars['ID'];
+  operationID: Scalars['String'];
 };
 
 /** Columns of OperationCheckStats. */
 export enum OperationCheckStatsColumn {
-  CachedRequestsCount = "CACHED_REQUESTS_COUNT",
-  ClientName = "CLIENT_NAME",
-  ClientVersion = "CLIENT_VERSION",
-  QueryId = "QUERY_ID",
-  QueryName = "QUERY_NAME",
-  SchemaTag = "SCHEMA_TAG",
-  ServiceId = "SERVICE_ID",
-  Timestamp = "TIMESTAMP",
-  UncachedRequestsCount = "UNCACHED_REQUESTS_COUNT",
+  CachedRequestsCount = 'CACHED_REQUESTS_COUNT',
+  ClientName = 'CLIENT_NAME',
+  ClientVersion = 'CLIENT_VERSION',
+  QueryId = 'QUERY_ID',
+  QueryName = 'QUERY_NAME',
+  SchemaTag = 'SCHEMA_TAG',
+  ServiceId = 'SERVICE_ID',
+  Timestamp = 'TIMESTAMP',
+  UncachedRequestsCount = 'UNCACHED_REQUESTS_COUNT'
 }
 
 export type OperationCheckStatsDimensions = {
-  __typename?: "OperationCheckStatsDimensions";
-  clientName?: Maybe<Scalars["String"]>;
-  clientVersion?: Maybe<Scalars["String"]>;
-  queryId?: Maybe<Scalars["ID"]>;
-  queryName?: Maybe<Scalars["String"]>;
-  schemaTag?: Maybe<Scalars["String"]>;
-  serviceId?: Maybe<Scalars["ID"]>;
+  __typename?: 'OperationCheckStatsDimensions';
+  clientName?: Maybe<Scalars['String']>;
+  clientVersion?: Maybe<Scalars['String']>;
+  queryId?: Maybe<Scalars['ID']>;
+  queryName?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
+  serviceId?: Maybe<Scalars['ID']>;
 };
 
 /** Filter for data in OperationCheckStats. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
 export type OperationCheckStatsFilter = {
   and?: InputMaybe<Array<OperationCheckStatsFilter>>;
   /** Selects rows whose clientName dimension equals the given value if not null. To query for the null value, use {in: {clientName: [null]}} instead. */
-  clientName?: InputMaybe<Scalars["String"]>;
+  clientName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose clientVersion dimension equals the given value if not null. To query for the null value, use {in: {clientVersion: [null]}} instead. */
-  clientVersion?: InputMaybe<Scalars["String"]>;
+  clientVersion?: InputMaybe<Scalars['String']>;
   in?: InputMaybe<OperationCheckStatsFilterIn>;
   not?: InputMaybe<OperationCheckStatsFilter>;
   or?: InputMaybe<Array<OperationCheckStatsFilter>>;
   /** Selects rows whose queryId dimension equals the given value if not null. To query for the null value, use {in: {queryId: [null]}} instead. */
-  queryId?: InputMaybe<Scalars["ID"]>;
+  queryId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose queryName dimension equals the given value if not null. To query for the null value, use {in: {queryName: [null]}} instead. */
-  queryName?: InputMaybe<Scalars["String"]>;
+  queryName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
-  schemaTag?: InputMaybe<Scalars["String"]>;
+  schemaTag?: InputMaybe<Scalars['String']>;
   /** Selects rows whose serviceId dimension equals the given value if not null. To query for the null value, use {in: {serviceId: [null]}} instead. */
-  serviceId?: InputMaybe<Scalars["ID"]>;
+  serviceId?: InputMaybe<Scalars['ID']>;
 };
 
 /** Filter for data in OperationCheckStats. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
 export type OperationCheckStatsFilterIn = {
   /** Selects rows whose clientName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose clientVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientVersion?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose queryId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  queryId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose queryName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  queryName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaTag?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose serviceId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  serviceId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  serviceId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
 export type OperationCheckStatsMetrics = {
-  __typename?: "OperationCheckStatsMetrics";
-  cachedRequestsCount: Scalars["Long"];
-  uncachedRequestsCount: Scalars["Long"];
+  __typename?: 'OperationCheckStatsMetrics';
+  cachedRequestsCount: Scalars['Long'];
+  uncachedRequestsCount: Scalars['Long'];
 };
 
 export type OperationCheckStatsOrderBySpec = {
@@ -3981,32 +4035,32 @@ export type OperationCheckStatsOrderBySpec = {
 };
 
 export type OperationCheckStatsRecord = {
-  __typename?: "OperationCheckStatsRecord";
+  __typename?: 'OperationCheckStatsRecord';
   /** Dimensions of OperationCheckStats that can be grouped by. */
   groupBy: OperationCheckStatsDimensions;
   /** Metrics of OperationCheckStats that can be aggregated over. */
   metrics: OperationCheckStatsMetrics;
   /** Starting segment timestamp. */
-  timestamp: Scalars["Timestamp"];
+  timestamp: Scalars['Timestamp'];
 };
 
 export type OperationCollection = {
-  __typename?: "OperationCollection";
-  createdAt: Scalars["Timestamp"];
+  __typename?: 'OperationCollection';
+  createdAt: Scalars['Timestamp'];
   createdBy?: Maybe<Identity>;
-  description?: Maybe<Scalars["String"]>;
+  description?: Maybe<Scalars['String']>;
   /**
    * If a user has any of these roles, they will be able to edit this
    * collection. This will be null if and only if \`isShared\` is false
    */
   editRoles?: Maybe<Array<UserPermission>>;
-  id: Scalars["ID"];
-  isFavorite: Scalars["Boolean"];
-  isSandbox: Scalars["Boolean"];
-  isShared: Scalars["Boolean"];
-  lastUpdatedAt: Scalars["Timestamp"];
+  id: Scalars['ID'];
+  isFavorite: Scalars['Boolean'];
+  isSandbox: Scalars['Boolean'];
+  isShared: Scalars['Boolean'];
+  lastUpdatedAt: Scalars['Timestamp'];
   lastUpdatedBy?: Maybe<Identity>;
-  name: Scalars["String"];
+  name: Scalars['String'];
   operation?: Maybe<OperationCollectionEntryResult>;
   operations: Array<OperationCollectionEntry>;
   /**  Permissions the current user has for this collection */
@@ -4014,77 +4068,77 @@ export type OperationCollection = {
   variants: Array<GraphVariant>;
 };
 
+
 export type OperationCollectionOperationArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
 
 export type OperationCollectionEntry = {
-  __typename?: "OperationCollectionEntry";
+  __typename?: 'OperationCollectionEntry';
   collection: OperationCollection;
-  createdAt: Scalars["Timestamp"];
+  createdAt: Scalars['Timestamp'];
   createdBy?: Maybe<Identity>;
   currentOperationRevision: OperationCollectionEntryState;
-  id: Scalars["ID"];
-  lastUpdatedAt: Scalars["Timestamp"];
+  id: Scalars['ID'];
+  lastUpdatedAt: Scalars['Timestamp'];
   lastUpdatedBy?: Maybe<Identity>;
-  name: Scalars["String"];
-  orderingIndex: Scalars["String"];
+  name: Scalars['String'];
+  orderingIndex: Scalars['String'];
 };
 
 export type OperationCollectionEntryMutation = {
-  __typename?: "OperationCollectionEntryMutation";
+  __typename?: 'OperationCollectionEntryMutation';
   moveToCollection: MoveOperationCollectionEntryResult;
   reorderEntry?: Maybe<UpdateOperationCollectionResult>;
   updateName?: Maybe<UpdateOperationCollectionEntryResult>;
   updateValues?: Maybe<UpdateOperationCollectionEntryResult>;
 };
 
+
 export type OperationCollectionEntryMutationMoveToCollectionArgs = {
-  collectionId: Scalars["ID"];
-  lowerOrderingBound?: InputMaybe<Scalars["String"]>;
-  upperOrderingBound?: InputMaybe<Scalars["String"]>;
+  collectionId: Scalars['ID'];
+  lowerOrderingBound?: InputMaybe<Scalars['String']>;
+  upperOrderingBound?: InputMaybe<Scalars['String']>;
 };
+
 
 export type OperationCollectionEntryMutationReorderEntryArgs = {
-  lowerOrderingBound?: InputMaybe<Scalars["String"]>;
-  upperOrderingBound?: InputMaybe<Scalars["String"]>;
+  lowerOrderingBound?: InputMaybe<Scalars['String']>;
+  upperOrderingBound?: InputMaybe<Scalars['String']>;
 };
 
+
 export type OperationCollectionEntryMutationUpdateNameArgs = {
-  name: Scalars["String"];
+  name: Scalars['String'];
 };
+
 
 export type OperationCollectionEntryMutationUpdateValuesArgs = {
   operationInput: OperationCollectionEntryStateInput;
 };
 
-export type OperationCollectionEntryMutationResult =
-  | NotFoundError
-  | OperationCollectionEntryMutation
-  | PermissionError;
+export type OperationCollectionEntryMutationResult = NotFoundError | OperationCollectionEntryMutation | PermissionError;
 
-export type OperationCollectionEntryResult =
-  | NotFoundError
-  | OperationCollectionEntry;
+export type OperationCollectionEntryResult = NotFoundError | OperationCollectionEntry;
 
 export type OperationCollectionEntryState = {
-  __typename?: "OperationCollectionEntryState";
-  body: Scalars["String"];
-  createdAt: Scalars["Timestamp"];
+  __typename?: 'OperationCollectionEntryState';
+  body: Scalars['String'];
+  createdAt: Scalars['Timestamp'];
   createdBy?: Maybe<Identity>;
   headers?: Maybe<Array<OperationHeader>>;
-  variables?: Maybe<Scalars["String"]>;
+  variables?: Maybe<Scalars['String']>;
 };
 
 export type OperationCollectionEntryStateInput = {
-  body: Scalars["String"];
+  body: Scalars['String'];
   headers?: InputMaybe<Array<OperationHeaderInput>>;
   /**  I'm assuming this is non null */
-  variables?: InputMaybe<Scalars["String"]>;
+  variables?: InputMaybe<Scalars['String']>;
 };
 
 export type OperationCollectionMutation = {
-  __typename?: "OperationCollectionMutation";
+  __typename?: 'OperationCollectionMutation';
   addOperation?: Maybe<AddOperationCollectionEntryResult>;
   /** @deprecated Will throw NotImplemented */
   addToVariant: AddOperationCollectionToVariantResult;
@@ -4101,113 +4155,121 @@ export type OperationCollectionMutation = {
   updateName?: Maybe<UpdateOperationCollectionResult>;
 };
 
+
 export type OperationCollectionMutationAddOperationArgs = {
-  name: Scalars["String"];
+  name: Scalars['String'];
   operationInput: OperationCollectionEntryStateInput;
 };
 
+
 export type OperationCollectionMutationAddToVariantArgs = {
-  variantRef: Scalars["ID"];
+  variantRef: Scalars['ID'];
 };
+
 
 export type OperationCollectionMutationDeleteOperationArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
+
 
 export type OperationCollectionMutationDuplicateCollectionArgs = {
-  description?: InputMaybe<Scalars["String"]>;
-  isSandbox: Scalars["Boolean"];
-  isShared: Scalars["Boolean"];
-  name: Scalars["String"];
-  variantRef?: InputMaybe<Scalars["ID"]>;
+  description?: InputMaybe<Scalars['String']>;
+  isSandbox: Scalars['Boolean'];
+  isShared: Scalars['Boolean'];
+  name: Scalars['String'];
+  variantRef?: InputMaybe<Scalars['ID']>;
 };
+
 
 export type OperationCollectionMutationOperationArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
+
 
 export type OperationCollectionMutationRemoveFromVariantArgs = {
-  variantRef: Scalars["ID"];
+  variantRef: Scalars['ID'];
 };
 
+
 export type OperationCollectionMutationUpdateDescriptionArgs = {
-  description?: InputMaybe<Scalars["String"]>;
+  description?: InputMaybe<Scalars['String']>;
 };
+
 
 export type OperationCollectionMutationUpdateEditRolesArgs = {
   editRoles: Array<UserPermission>;
 };
 
+
 export type OperationCollectionMutationUpdateIsFavoriteArgs = {
-  isFavorite: Scalars["Boolean"];
+  isFavorite: Scalars['Boolean'];
 };
+
 
 export type OperationCollectionMutationUpdateIsSharedArgs = {
-  isShared: Scalars["Boolean"];
+  isShared: Scalars['Boolean'];
 };
 
+
 export type OperationCollectionMutationUpdateNameArgs = {
-  name: Scalars["String"];
+  name: Scalars['String'];
 };
 
 export type OperationCollectionPermissions = {
-  __typename?: "OperationCollectionPermissions";
-  canEditOperations: Scalars["Boolean"];
-  canManage: Scalars["Boolean"];
-  canReadOperations: Scalars["Boolean"];
+  __typename?: 'OperationCollectionPermissions';
+  canEditOperations: Scalars['Boolean'];
+  canManage: Scalars['Boolean'];
+  canReadOperations: Scalars['Boolean'];
 };
 
-export type OperationCollectionResult =
-  | NotFoundError
-  | OperationCollection
-  | PermissionError;
+export type OperationCollectionResult = NotFoundError | OperationCollection | PermissionError;
 
 export type OperationDocument = {
-  __typename?: "OperationDocument";
+  __typename?: 'OperationDocument';
   /** Operation document body */
-  body: Scalars["String"];
+  body: Scalars['String'];
   /** Operation name */
-  name?: Maybe<Scalars["String"]>;
+  name?: Maybe<Scalars['String']>;
 };
 
 export type OperationDocumentInput = {
   /** Operation document body */
-  body: Scalars["String"];
+  body: Scalars['String'];
   /** Operation name */
-  name?: InputMaybe<Scalars["String"]>;
+  name?: InputMaybe<Scalars['String']>;
 };
 
 export type OperationHeader = {
-  __typename?: "OperationHeader";
-  name: Scalars["String"];
-  value: Scalars["String"];
+  __typename?: 'OperationHeader';
+  name: Scalars['String'];
+  value: Scalars['String'];
 };
 
 export type OperationHeaderInput = {
-  name: Scalars["String"];
-  value: Scalars["String"];
+  name: Scalars['String'];
+  value: Scalars['String'];
 };
 
 /** Operation name filter configuration for a graph. */
 export type OperationNameFilter = {
-  __typename?: "OperationNameFilter";
+  __typename?: 'OperationNameFilter';
   /** name of the operation by the user and reported alongside metrics */
-  name: Scalars["String"];
+  name: Scalars['String'];
 };
 
 /** Options to filter by operation name. */
 export type OperationNameFilterInput = {
   /** name of the operation set by the user and reported alongside metrics */
-  name: Scalars["String"];
+  name: Scalars['String'];
 };
 
 export type OperationValidationError = {
-  __typename?: "OperationValidationError";
-  message: Scalars["String"];
+  __typename?: 'OperationValidationError';
+  message: Scalars['String'];
 };
 
 export type OperationsCheckResult = {
-  __typename?: "OperationsCheckResult";
+  __typename?: 'OperationsCheckResult';
   /** Operations affected by all changes in diff */
   affectedQueries?: Maybe<Array<AffectedQuery>>;
   /** Summary/counts for all changes in diff */
@@ -4218,20 +4280,20 @@ export type OperationsCheckResult = {
   checkSeverity: ChangeSeverity;
   /** The variant that was used as a base to check against */
   checkedVariant: GraphVariant;
-  createdAt: Scalars["Timestamp"];
-  id: Scalars["ID"];
+  createdAt: Scalars['Timestamp'];
+  id: Scalars['ID'];
   /** Number of affected query operations that are neither marked as SAFE or IGNORED */
-  numberOfAffectedOperations: Scalars["Int"];
+  numberOfAffectedOperations: Scalars['Int'];
   /** Number of operations that were validated during schema diff */
-  numberOfCheckedOperations: Scalars["Int"];
+  numberOfCheckedOperations: Scalars['Int'];
   workflowTask: OperationsCheckTask;
 };
 
 export type OperationsCheckTask = CheckWorkflowTask & {
-  __typename?: "OperationsCheckTask";
-  completedAt?: Maybe<Scalars["Timestamp"]>;
-  createdAt: Scalars["Timestamp"];
-  id: Scalars["ID"];
+  __typename?: 'OperationsCheckTask';
+  completedAt?: Maybe<Scalars['Timestamp']>;
+  createdAt: Scalars['Timestamp'];
+  id: Scalars['ID'];
   /** The result of the check. */
   result?: Maybe<OperationsCheckResult>;
   status: CheckWorkflowTaskStatus;
@@ -4239,57 +4301,57 @@ export type OperationsCheckTask = CheckWorkflowTask & {
 };
 
 export enum Ordering {
-  Ascending = "ASCENDING",
-  Descending = "DESCENDING",
+  Ascending = 'ASCENDING',
+  Descending = 'DESCENDING'
 }
 
 /** A reusable invite link for an organization. */
 export type OrganizationInviteLink = {
-  __typename?: "OrganizationInviteLink";
-  createdAt: Scalars["Timestamp"];
+  __typename?: 'OrganizationInviteLink';
+  createdAt: Scalars['Timestamp'];
   /** A joinToken that can be passed to Mutation.joinAccount to join the organization. */
-  joinToken: Scalars["String"];
+  joinToken: Scalars['String'];
   /** The role that the user will receive if they join the organization with this link. */
   role: UserPermission;
 };
 
 export type OrganizationSso = {
-  __typename?: "OrganizationSSO";
+  __typename?: 'OrganizationSSO';
   defaultRole: UserPermission;
-  idpid: Scalars["ID"];
+  idpid: Scalars['ID'];
   provider: OrganizationSsoProvider;
 };
 
 export enum OrganizationSsoProvider {
-  Pingone = "PINGONE",
+  Pingone = 'PINGONE'
 }
 
 /** PagerDuty notification channel */
 export type PagerDutyChannel = Channel & {
-  __typename?: "PagerDutyChannel";
-  id: Scalars["ID"];
-  name: Scalars["String"];
-  routingKey: Scalars["String"];
+  __typename?: 'PagerDutyChannel';
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  routingKey: Scalars['String'];
   subscriptions: Array<ChannelSubscription>;
 };
 
 /** PagerDuty notification channel parameters */
 export type PagerDutyChannelInput = {
-  name?: InputMaybe<Scalars["String"]>;
-  routingKey: Scalars["String"];
+  name?: InputMaybe<Scalars['String']>;
+  routingKey: Scalars['String'];
 };
 
 /** Schema for an implementing service with associated metadata */
 export type PartialSchema = {
-  __typename?: "PartialSchema";
+  __typename?: 'PartialSchema';
   /** Timestamp for when the partial schema was created */
-  createdAt: Scalars["Timestamp"];
+  createdAt: Scalars['Timestamp'];
   /** If this sdl is currently actively composed in the gateway, this is true */
-  isLive: Scalars["Boolean"];
+  isLive: Scalars['Boolean'];
   /** The enriched sdl of a partial schema */
-  sdl: Scalars["String"];
+  sdl: Scalars['String'];
   /** The path of deep storage to find the raw enriched partial schema file */
-  sdlPath: Scalars["String"];
+  sdlPath: Scalars['String'];
 };
 
 /**
@@ -4308,58 +4370,56 @@ export type PartialSchemaInput = {
    * Hash of the partial schema to associate; error is thrown if only the hash is
    * specified and the hash has not been seen before
    */
-  hash?: InputMaybe<Scalars["String"]>;
+  hash?: InputMaybe<Scalars['String']>;
   /**
    * Contents of the partial schema in SDL syntax, but may reference types
    * that aren't defined in this document
    */
-  sdl?: InputMaybe<Scalars["String"]>;
+  sdl?: InputMaybe<Scalars['String']>;
 };
 
 export type PermissionError = Error & {
-  __typename?: "PermissionError";
-  message: Scalars["String"];
+  __typename?: 'PermissionError';
+  message: Scalars['String'];
 };
 
 export type PromoteSchemaError = {
-  __typename?: "PromoteSchemaError";
+  __typename?: 'PromoteSchemaError';
   code: PromoteSchemaErrorCode;
-  message: Scalars["String"];
+  message: Scalars['String'];
 };
 
 export enum PromoteSchemaErrorCode {
-  CannotPromoteSchemaForFederatedGraph = "CANNOT_PROMOTE_SCHEMA_FOR_FEDERATED_GRAPH",
+  CannotPromoteSchemaForFederatedGraph = 'CANNOT_PROMOTE_SCHEMA_FOR_FEDERATED_GRAPH'
 }
 
 export type PromoteSchemaResponse = {
-  __typename?: "PromoteSchemaResponse";
+  __typename?: 'PromoteSchemaResponse';
   code: PromoteSchemaResponseCode;
   tag: SchemaTag;
 };
 
 export enum PromoteSchemaResponseCode {
-  NoChangesDetected = "NO_CHANGES_DETECTED",
-  PromotionSuccess = "PROMOTION_SUCCESS",
+  NoChangesDetected = 'NO_CHANGES_DETECTED',
+  PromotionSuccess = 'PROMOTION_SUCCESS'
 }
 
-export type PromoteSchemaResponseOrError =
-  | PromoteSchemaError
-  | PromoteSchemaResponse;
+export type PromoteSchemaResponseOrError = PromoteSchemaError | PromoteSchemaResponse;
 
 export type Protobuf = {
-  __typename?: "Protobuf";
-  json: Scalars["String"];
-  object: Scalars["Object"];
-  raw: Scalars["Blob"];
-  text: Scalars["String"];
+  __typename?: 'Protobuf';
+  json: Scalars['String'];
+  object: Scalars['Object'];
+  raw: Scalars['Blob'];
+  text: Scalars['String'];
 };
 
 export type Query = {
-  __typename?: "Query";
+  __typename?: 'Query';
   /** Account by ID */
   account?: Maybe<Account>;
   /** Whether an account ID is available for mutation{newAccount(id:)} */
-  accountIDAvailable: Scalars["Boolean"];
+  accountIDAvailable: Scalars['Boolean'];
   /** All accounts */
   allAccounts?: Maybe<Array<Account>>;
   /** All available plans */
@@ -4375,12 +4435,12 @@ export type Query = {
   /** All available plans */
   billingPlans: Array<BillingPlanV2>;
   /** If this is true, the user is an Apollo administrator who can ignore restrictions based purely on billing plan. */
-  canBypassPlanRestrictions: Scalars["Boolean"];
+  canBypassPlanRestrictions: Scalars['Boolean'];
   diffSchemas: Array<Change>;
   /** Get the unsubscribe settings for a given email. */
   emailPreferences?: Maybe<EmailPreferences>;
   experimentalFeatures: GlobalExperimentalFeatures;
-  frontendUrlRoot: Scalars["String"];
+  frontendUrlRoot: Scalars['String'];
   internalActiveCronJobs: Array<CronJob>;
   internalAdminUsers?: Maybe<Array<InternalAdminUser>>;
   internalUnresolvedCronExecutionFailures: Array<CronExecution>;
@@ -4417,191 +4477,209 @@ export type Query = {
   variant?: Maybe<GraphVariantLookup>;
 };
 
+
 export type QueryAccountArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
+
 
 export type QueryAccountIdAvailableArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
 
+
 export type QueryAllAccountsArgs = {
-  search?: InputMaybe<Scalars["String"]>;
+  search?: InputMaybe<Scalars['String']>;
   tier?: InputMaybe<BillingPlanTier>;
 };
 
+
 export type QueryAllServicesArgs = {
-  search?: InputMaybe<Scalars["String"]>;
+  search?: InputMaybe<Scalars['String']>;
 };
+
 
 export type QueryAllUsersArgs = {
-  search?: InputMaybe<Scalars["String"]>;
+  search?: InputMaybe<Scalars['String']>;
 };
+
 
 export type QueryBillingPlanArgs = {
-  id?: InputMaybe<Scalars["ID"]>;
+  id?: InputMaybe<Scalars['ID']>;
 };
+
 
 export type QueryDiffSchemasArgs = {
-  baseSchema: Scalars["String"];
-  nextSchema: Scalars["String"];
+  baseSchema: Scalars['String'];
+  nextSchema: Scalars['String'];
 };
+
 
 export type QueryEmailPreferencesArgs = {
-  email: Scalars["String"];
-  token: Scalars["String"];
+  email: Scalars['String'];
+  token: Scalars['String'];
 };
+
 
 export type QueryOdysseyCertificationArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
+
 
 export type QueryOperationCollectionArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
+
 
 export type QueryOperationCollectionEntriesArgs = {
-  collectionEntryIds: Array<Scalars["ID"]>;
+  collectionEntryIds: Array<Scalars['ID']>;
 };
+
 
 export type QueryPlanArgs = {
-  id?: InputMaybe<Scalars["ID"]>;
+  id?: InputMaybe<Scalars['ID']>;
 };
+
 
 export type QueryServiceArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
 
+
 export type QueryStatsArgs = {
-  from: Scalars["Timestamp"];
+  from: Scalars['Timestamp'];
   resolution?: InputMaybe<Resolution>;
-  to?: InputMaybe<Scalars["Timestamp"]>;
+  to?: InputMaybe<Scalars['Timestamp']>;
 };
+
 
 export type QueryTeamBillingPlanArgs = {
   billingPeriod: BillingPeriod;
 };
 
+
 export type QueryTeamPlanArgs = {
   billingPeriod: BillingPeriod;
 };
 
+
 export type QueryUserArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
 
+
 export type QueryVariantArgs = {
-  ref: Scalars["ID"];
+  ref: Scalars['ID'];
 };
 
 /** query documents to validate against */
 export type QueryDocumentInput = {
-  document?: InputMaybe<Scalars["String"]>;
+  document?: InputMaybe<Scalars['String']>;
 };
 
 export type QueryPlan = {
-  __typename?: "QueryPlan";
-  json: Scalars["String"];
-  object: Scalars["Object"];
-  text: Scalars["String"];
+  __typename?: 'QueryPlan';
+  json: Scalars['String'];
+  object: Scalars['Object'];
+  text: Scalars['String'];
 };
 
 /** Columns of QueryStats. */
 export enum QueryStatsColumn {
-  AccountId = "ACCOUNT_ID",
-  CachedHistogram = "CACHED_HISTOGRAM",
-  CachedRequestsCount = "CACHED_REQUESTS_COUNT",
-  CacheTtlHistogram = "CACHE_TTL_HISTOGRAM",
-  ClientName = "CLIENT_NAME",
-  ClientVersion = "CLIENT_VERSION",
-  ForbiddenOperationCount = "FORBIDDEN_OPERATION_COUNT",
-  FromEngineproxy = "FROM_ENGINEPROXY",
-  QueryId = "QUERY_ID",
-  QueryName = "QUERY_NAME",
-  RegisteredOperationCount = "REGISTERED_OPERATION_COUNT",
-  RequestsWithErrorsCount = "REQUESTS_WITH_ERRORS_COUNT",
-  SchemaHash = "SCHEMA_HASH",
-  SchemaTag = "SCHEMA_TAG",
-  ServiceId = "SERVICE_ID",
-  Timestamp = "TIMESTAMP",
-  UncachedHistogram = "UNCACHED_HISTOGRAM",
-  UncachedRequestsCount = "UNCACHED_REQUESTS_COUNT",
+  AccountId = 'ACCOUNT_ID',
+  CachedHistogram = 'CACHED_HISTOGRAM',
+  CachedRequestsCount = 'CACHED_REQUESTS_COUNT',
+  CacheTtlHistogram = 'CACHE_TTL_HISTOGRAM',
+  ClientName = 'CLIENT_NAME',
+  ClientVersion = 'CLIENT_VERSION',
+  ForbiddenOperationCount = 'FORBIDDEN_OPERATION_COUNT',
+  FromEngineproxy = 'FROM_ENGINEPROXY',
+  QueryId = 'QUERY_ID',
+  QueryName = 'QUERY_NAME',
+  RegisteredOperationCount = 'REGISTERED_OPERATION_COUNT',
+  RequestsWithErrorsCount = 'REQUESTS_WITH_ERRORS_COUNT',
+  SchemaHash = 'SCHEMA_HASH',
+  SchemaTag = 'SCHEMA_TAG',
+  ServiceId = 'SERVICE_ID',
+  Timestamp = 'TIMESTAMP',
+  UncachedHistogram = 'UNCACHED_HISTOGRAM',
+  UncachedRequestsCount = 'UNCACHED_REQUESTS_COUNT'
 }
 
 export type QueryStatsDimensions = {
-  __typename?: "QueryStatsDimensions";
-  accountId?: Maybe<Scalars["ID"]>;
-  clientName?: Maybe<Scalars["String"]>;
-  clientVersion?: Maybe<Scalars["String"]>;
-  fromEngineproxy?: Maybe<Scalars["String"]>;
-  queryId?: Maybe<Scalars["ID"]>;
-  queryName?: Maybe<Scalars["String"]>;
-  querySignature?: Maybe<Scalars["String"]>;
-  schemaHash?: Maybe<Scalars["String"]>;
-  schemaTag?: Maybe<Scalars["String"]>;
-  serviceId?: Maybe<Scalars["ID"]>;
+  __typename?: 'QueryStatsDimensions';
+  accountId?: Maybe<Scalars['ID']>;
+  clientName?: Maybe<Scalars['String']>;
+  clientVersion?: Maybe<Scalars['String']>;
+  fromEngineproxy?: Maybe<Scalars['String']>;
+  queryId?: Maybe<Scalars['ID']>;
+  queryName?: Maybe<Scalars['String']>;
+  querySignature?: Maybe<Scalars['String']>;
+  schemaHash?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
+  serviceId?: Maybe<Scalars['ID']>;
 };
 
 /** Filter for data in QueryStats. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
 export type QueryStatsFilter = {
   /** Selects rows whose accountId dimension equals the given value if not null. To query for the null value, use {in: {accountId: [null]}} instead. */
-  accountId?: InputMaybe<Scalars["ID"]>;
+  accountId?: InputMaybe<Scalars['ID']>;
   and?: InputMaybe<Array<QueryStatsFilter>>;
   /** Selects rows whose clientName dimension equals the given value if not null. To query for the null value, use {in: {clientName: [null]}} instead. */
-  clientName?: InputMaybe<Scalars["String"]>;
+  clientName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose clientVersion dimension equals the given value if not null. To query for the null value, use {in: {clientVersion: [null]}} instead. */
-  clientVersion?: InputMaybe<Scalars["String"]>;
+  clientVersion?: InputMaybe<Scalars['String']>;
   /** Selects rows whose fromEngineproxy dimension equals the given value if not null. To query for the null value, use {in: {fromEngineproxy: [null]}} instead. */
-  fromEngineproxy?: InputMaybe<Scalars["String"]>;
+  fromEngineproxy?: InputMaybe<Scalars['String']>;
   in?: InputMaybe<QueryStatsFilterIn>;
   not?: InputMaybe<QueryStatsFilter>;
   or?: InputMaybe<Array<QueryStatsFilter>>;
   /** Selects rows whose queryId dimension equals the given value if not null. To query for the null value, use {in: {queryId: [null]}} instead. */
-  queryId?: InputMaybe<Scalars["ID"]>;
+  queryId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose queryName dimension equals the given value if not null. To query for the null value, use {in: {queryName: [null]}} instead. */
-  queryName?: InputMaybe<Scalars["String"]>;
+  queryName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaHash dimension equals the given value if not null. To query for the null value, use {in: {schemaHash: [null]}} instead. */
-  schemaHash?: InputMaybe<Scalars["String"]>;
+  schemaHash?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
-  schemaTag?: InputMaybe<Scalars["String"]>;
+  schemaTag?: InputMaybe<Scalars['String']>;
   /** Selects rows whose serviceId dimension equals the given value if not null. To query for the null value, use {in: {serviceId: [null]}} instead. */
-  serviceId?: InputMaybe<Scalars["ID"]>;
+  serviceId?: InputMaybe<Scalars['ID']>;
 };
 
 /** Filter for data in QueryStats. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
 export type QueryStatsFilterIn = {
   /** Selects rows whose accountId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  accountId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  accountId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose clientName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose clientVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientVersion?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose fromEngineproxy dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  fromEngineproxy?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  fromEngineproxy?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose queryId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  queryId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose queryName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  queryName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaHash dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaHash?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaHash?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaTag?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose serviceId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  serviceId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  serviceId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
 export type QueryStatsMetrics = {
-  __typename?: "QueryStatsMetrics";
+  __typename?: 'QueryStatsMetrics';
   cacheTtlHistogram: DurationHistogram;
   cachedHistogram: DurationHistogram;
-  cachedRequestsCount: Scalars["Long"];
-  forbiddenOperationCount: Scalars["Long"];
-  registeredOperationCount: Scalars["Long"];
-  requestsWithErrorsCount: Scalars["Long"];
+  cachedRequestsCount: Scalars['Long'];
+  forbiddenOperationCount: Scalars['Long'];
+  registeredOperationCount: Scalars['Long'];
+  requestsWithErrorsCount: Scalars['Long'];
   totalLatencyHistogram: DurationHistogram;
-  totalRequestCount: Scalars["Long"];
+  totalRequestCount: Scalars['Long'];
   uncachedHistogram: DurationHistogram;
-  uncachedRequestsCount: Scalars["Long"];
+  uncachedRequestsCount: Scalars['Long'];
 };
 
 export type QueryStatsOrderBySpec = {
@@ -4610,303 +4688,296 @@ export type QueryStatsOrderBySpec = {
 };
 
 export type QueryStatsRecord = {
-  __typename?: "QueryStatsRecord";
+  __typename?: 'QueryStatsRecord';
   /** Dimensions of QueryStats that can be grouped by. */
   groupBy: QueryStatsDimensions;
   /** Metrics of QueryStats that can be aggregated over. */
   metrics: QueryStatsMetrics;
   /** Starting segment timestamp. */
-  timestamp: Scalars["Timestamp"];
+  timestamp: Scalars['Timestamp'];
 };
 
 /** Query Trigger */
 export type QueryTrigger = ChannelSubscription & {
-  __typename?: "QueryTrigger";
+  __typename?: 'QueryTrigger';
   channels: Array<Channel>;
   comparisonOperator: ComparisonOperator;
-  enabled: Scalars["Boolean"];
-  excludedOperationNames: Array<Scalars["String"]>;
-  id: Scalars["ID"];
+  enabled: Scalars['Boolean'];
+  excludedOperationNames: Array<Scalars['String']>;
+  id: Scalars['ID'];
   metric: QueryTriggerMetric;
-  operationNames: Array<Scalars["String"]>;
-  percentile?: Maybe<Scalars["Float"]>;
+  operationNames: Array<Scalars['String']>;
+  percentile?: Maybe<Scalars['Float']>;
   scope: QueryTriggerScope;
-  serviceId: Scalars["String"];
+  serviceId: Scalars['String'];
   state: QueryTriggerState;
-  threshold: Scalars["Float"];
-  variant?: Maybe<Scalars["String"]>;
+  threshold: Scalars['Float'];
+  variant?: Maybe<Scalars['String']>;
   window: QueryTriggerWindow;
 };
 
 /** Query trigger */
 export type QueryTriggerInput = {
-  channelIds?: InputMaybe<Array<Scalars["String"]>>;
+  channelIds?: InputMaybe<Array<Scalars['String']>>;
   comparisonOperator: ComparisonOperator;
-  enabled?: InputMaybe<Scalars["Boolean"]>;
-  excludedOperationNames?: InputMaybe<Array<Scalars["String"]>>;
+  enabled?: InputMaybe<Scalars['Boolean']>;
+  excludedOperationNames?: InputMaybe<Array<Scalars['String']>>;
   metric: QueryTriggerMetric;
-  operationNames?: InputMaybe<Array<Scalars["String"]>>;
-  percentile?: InputMaybe<Scalars["Float"]>;
+  operationNames?: InputMaybe<Array<Scalars['String']>>;
+  percentile?: InputMaybe<Scalars['Float']>;
   scope?: InputMaybe<QueryTriggerScope>;
-  threshold: Scalars["Float"];
-  variant?: InputMaybe<Scalars["String"]>;
+  threshold: Scalars['Float'];
+  variant?: InputMaybe<Scalars['String']>;
   window: QueryTriggerWindow;
 };
 
 export enum QueryTriggerMetric {
   /** Number of requests within the window that resulted in an error. Ignores `percentile`. */
-  ErrorCount = "ERROR_COUNT",
+  ErrorCount = 'ERROR_COUNT',
   /** Number of error requests divided by total number of requests. Ignores `percentile`. */
-  ErrorPercentage = "ERROR_PERCENTAGE",
+  ErrorPercentage = 'ERROR_PERCENTAGE',
   /** Number of requests within the window. Ignores `percentile`. */
-  RequestCount = "REQUEST_COUNT",
+  RequestCount = 'REQUEST_COUNT',
   /** Request latency in ms. Requires `percentile`. */
-  RequestServiceTime = "REQUEST_SERVICE_TIME",
+  RequestServiceTime = 'REQUEST_SERVICE_TIME'
 }
 
 export enum QueryTriggerScope {
-  All = "ALL",
-  Any = "ANY",
-  Unrecognized = "UNRECOGNIZED",
+  All = 'ALL',
+  Any = 'ANY',
+  Unrecognized = 'UNRECOGNIZED'
 }
 
 /** Query trigger state */
 export type QueryTriggerState = {
-  __typename?: "QueryTriggerState";
-  evaluatedAt: Scalars["Timestamp"];
-  lastTriggeredAt?: Maybe<Scalars["Timestamp"]>;
+  __typename?: 'QueryTriggerState';
+  evaluatedAt: Scalars['Timestamp'];
+  lastTriggeredAt?: Maybe<Scalars['Timestamp']>;
   operations: Array<QueryTriggerStateOperation>;
-  triggered: Scalars["Boolean"];
+  triggered: Scalars['Boolean'];
 };
 
 export type QueryTriggerStateOperation = {
-  __typename?: "QueryTriggerStateOperation";
-  count: Scalars["Long"];
-  operation: Scalars["String"];
-  triggered: Scalars["Boolean"];
-  value: Scalars["Float"];
+  __typename?: 'QueryTriggerStateOperation';
+  count: Scalars['Long'];
+  operation: Scalars['String'];
+  triggered: Scalars['Boolean'];
+  value: Scalars['Float'];
 };
 
 export enum QueryTriggerWindow {
-  FifteenMinutes = "FIFTEEN_MINUTES",
-  FiveMinutes = "FIVE_MINUTES",
-  OneMinute = "ONE_MINUTE",
-  Unrecognized = "UNRECOGNIZED",
+  FifteenMinutes = 'FIFTEEN_MINUTES',
+  FiveMinutes = 'FIVE_MINUTES',
+  OneMinute = 'ONE_MINUTE',
+  Unrecognized = 'UNRECOGNIZED'
 }
 
 export type Readme = {
-  __typename?: "Readme";
-  content: Scalars["String"];
-  id: Scalars["ID"];
-  lastUpdatedAt: Scalars["Timestamp"];
+  __typename?: 'Readme';
+  content: Scalars['String'];
+  id: Scalars['ID'];
+  lastUpdatedAt: Scalars['Timestamp'];
   lastUpdatedBy?: Maybe<Identity>;
 };
 
 export type RegisterOperationsMutationResponse = {
-  __typename?: "RegisterOperationsMutationResponse";
+  __typename?: 'RegisterOperationsMutationResponse';
   invalidOperations?: Maybe<Array<InvalidOperation>>;
   newOperations?: Maybe<Array<RegisteredOperation>>;
-  registrationSuccess: Scalars["Boolean"];
+  registrationSuccess: Scalars['Boolean'];
 };
 
 export type RegisteredClientIdentityInput = {
-  identifier: Scalars["String"];
-  name: Scalars["String"];
-  version?: InputMaybe<Scalars["String"]>;
+  identifier: Scalars['String'];
+  name: Scalars['String'];
+  version?: InputMaybe<Scalars['String']>;
 };
 
 export type RegisteredOperation = {
-  __typename?: "RegisteredOperation";
-  signature: Scalars["ID"];
+  __typename?: 'RegisteredOperation';
+  signature: Scalars['ID'];
 };
 
 export type RegisteredOperationInput = {
-  document?: InputMaybe<Scalars["String"]>;
+  document?: InputMaybe<Scalars['String']>;
   metadata?: InputMaybe<RegisteredOperationMetadataInput>;
-  signature: Scalars["ID"];
+  signature: Scalars['ID'];
 };
 
 export type RegisteredOperationMetadataInput = {
   /** This will be used to link existing records in Engine to a new ID. */
-  engineSignature?: InputMaybe<Scalars["String"]>;
+  engineSignature?: InputMaybe<Scalars['String']>;
 };
 
 export type RegistryApiKey = {
-  __typename?: "RegistryApiKey";
-  keyName?: Maybe<Scalars["String"]>;
-  token: Scalars["String"];
+  __typename?: 'RegistryApiKey';
+  keyName?: Maybe<Scalars['String']>;
+  token: Scalars['String'];
 };
 
 export type RegistryStatsWindow = {
-  __typename?: "RegistryStatsWindow";
+  __typename?: 'RegistryStatsWindow';
   schemaCheckStats: Array<AccountChecksStatsRecord>;
   schemaPublishStats: Array<AccountPublishesStatsRecord>;
 };
 
 export type RegistrySubscription = ChannelSubscription & {
-  __typename?: "RegistrySubscription";
+  __typename?: 'RegistrySubscription';
   channel?: Maybe<Channel>;
   /** @deprecated Use channels list instead */
   channels: Array<Channel>;
-  createdAt: Scalars["Timestamp"];
-  enabled: Scalars["Boolean"];
-  id: Scalars["ID"];
-  lastUpdatedAt: Scalars["Timestamp"];
+  createdAt: Scalars['Timestamp'];
+  enabled: Scalars['Boolean'];
+  id: Scalars['ID'];
+  lastUpdatedAt: Scalars['Timestamp'];
   options: SubscriptionOptions;
-  variant?: Maybe<Scalars["String"]>;
+  variant?: Maybe<Scalars['String']>;
 };
 
 export type RelaunchComplete = {
-  __typename?: "RelaunchComplete";
+  __typename?: 'RelaunchComplete';
   latestLaunch: Launch;
-  updated: Scalars["Boolean"];
+  updated: Scalars['Boolean'];
 };
 
 export type RelaunchError = {
-  __typename?: "RelaunchError";
-  message: Scalars["String"];
+  __typename?: 'RelaunchError';
+  message: Scalars['String'];
 };
 
 export type RelaunchResult = RelaunchComplete | RelaunchError;
 
-export type RemoveOperationCollectionEntryResult =
-  | OperationCollection
-  | PermissionError;
+export type RemoveOperationCollectionEntryResult = OperationCollection | PermissionError;
 
-export type RemoveOperationCollectionFromVariantResult =
-  | GraphVariant
-  | NotFoundError
-  | PermissionError
-  | ValidationError;
+export type RemoveOperationCollectionFromVariantResult = GraphVariant | NotFoundError | PermissionError | ValidationError;
 
-export type ReorderOperationCollectionResult =
-  | OperationCollection
-  | PermissionError;
+export type ReorderOperationCollectionResult = OperationCollection | PermissionError;
 
 export type ReportSchemaError = ReportSchemaResult & {
-  __typename?: "ReportSchemaError";
+  __typename?: 'ReportSchemaError';
   code: ReportSchemaErrorCode;
-  inSeconds: Scalars["Int"];
-  message: Scalars["String"];
-  withCoreSchema: Scalars["Boolean"];
+  inSeconds: Scalars['Int'];
+  message: Scalars['String'];
+  withCoreSchema: Scalars['Boolean'];
 };
 
 export enum ReportSchemaErrorCode {
-  BootIdIsNotValidUuid = "BOOT_ID_IS_NOT_VALID_UUID",
-  BootIdIsRequired = "BOOT_ID_IS_REQUIRED",
-  CoreSchemaHashIsNotSchemaSha256 = "CORE_SCHEMA_HASH_IS_NOT_SCHEMA_SHA256",
-  CoreSchemaHashIsRequired = "CORE_SCHEMA_HASH_IS_REQUIRED",
-  CoreSchemaHashIsTooLong = "CORE_SCHEMA_HASH_IS_TOO_LONG",
-  ExecutableSchemaIdIsNotSchemaSha256 = "EXECUTABLE_SCHEMA_ID_IS_NOT_SCHEMA_SHA256",
-  ExecutableSchemaIdIsRequired = "EXECUTABLE_SCHEMA_ID_IS_REQUIRED",
-  ExecutableSchemaIdIsTooLong = "EXECUTABLE_SCHEMA_ID_IS_TOO_LONG",
-  GraphRefInvalidFormat = "GRAPH_REF_INVALID_FORMAT",
-  GraphRefIsRequired = "GRAPH_REF_IS_REQUIRED",
-  GraphVariantDoesNotMatchRegex = "GRAPH_VARIANT_DOES_NOT_MATCH_REGEX",
-  GraphVariantIsRequired = "GRAPH_VARIANT_IS_REQUIRED",
-  LibraryVersionIsTooLong = "LIBRARY_VERSION_IS_TOO_LONG",
-  PlatformIsTooLong = "PLATFORM_IS_TOO_LONG",
-  RuntimeVersionIsTooLong = "RUNTIME_VERSION_IS_TOO_LONG",
-  SchemaIsNotParsable = "SCHEMA_IS_NOT_PARSABLE",
-  SchemaIsNotValid = "SCHEMA_IS_NOT_VALID",
-  ServerIdIsTooLong = "SERVER_ID_IS_TOO_LONG",
-  UserVersionIsTooLong = "USER_VERSION_IS_TOO_LONG",
+  BootIdIsNotValidUuid = 'BOOT_ID_IS_NOT_VALID_UUID',
+  BootIdIsRequired = 'BOOT_ID_IS_REQUIRED',
+  CoreSchemaHashIsNotSchemaSha256 = 'CORE_SCHEMA_HASH_IS_NOT_SCHEMA_SHA256',
+  CoreSchemaHashIsRequired = 'CORE_SCHEMA_HASH_IS_REQUIRED',
+  CoreSchemaHashIsTooLong = 'CORE_SCHEMA_HASH_IS_TOO_LONG',
+  ExecutableSchemaIdIsNotSchemaSha256 = 'EXECUTABLE_SCHEMA_ID_IS_NOT_SCHEMA_SHA256',
+  ExecutableSchemaIdIsRequired = 'EXECUTABLE_SCHEMA_ID_IS_REQUIRED',
+  ExecutableSchemaIdIsTooLong = 'EXECUTABLE_SCHEMA_ID_IS_TOO_LONG',
+  GraphRefInvalidFormat = 'GRAPH_REF_INVALID_FORMAT',
+  GraphRefIsRequired = 'GRAPH_REF_IS_REQUIRED',
+  GraphVariantDoesNotMatchRegex = 'GRAPH_VARIANT_DOES_NOT_MATCH_REGEX',
+  GraphVariantIsRequired = 'GRAPH_VARIANT_IS_REQUIRED',
+  LibraryVersionIsTooLong = 'LIBRARY_VERSION_IS_TOO_LONG',
+  PlatformIsTooLong = 'PLATFORM_IS_TOO_LONG',
+  RuntimeVersionIsTooLong = 'RUNTIME_VERSION_IS_TOO_LONG',
+  SchemaIsNotParsable = 'SCHEMA_IS_NOT_PARSABLE',
+  SchemaIsNotValid = 'SCHEMA_IS_NOT_VALID',
+  ServerIdIsTooLong = 'SERVER_ID_IS_TOO_LONG',
+  UserVersionIsTooLong = 'USER_VERSION_IS_TOO_LONG'
 }
 
 export type ReportSchemaResponse = ReportSchemaResult & {
-  __typename?: "ReportSchemaResponse";
-  inSeconds: Scalars["Int"];
-  withCoreSchema: Scalars["Boolean"];
+  __typename?: 'ReportSchemaResponse';
+  inSeconds: Scalars['Int'];
+  withCoreSchema: Scalars['Boolean'];
 };
 
 export type ReportSchemaResult = {
-  inSeconds: Scalars["Int"];
-  withCoreSchema: Scalars["Boolean"];
+  inSeconds: Scalars['Int'];
+  withCoreSchema: Scalars['Boolean'];
 };
 
 export type ReportServerInfoError = ReportServerInfoResult & {
-  __typename?: "ReportServerInfoError";
+  __typename?: 'ReportServerInfoError';
   code: ReportSchemaErrorCode;
-  inSeconds: Scalars["Int"];
-  message: Scalars["String"];
-  withExecutableSchema: Scalars["Boolean"];
+  inSeconds: Scalars['Int'];
+  message: Scalars['String'];
+  withExecutableSchema: Scalars['Boolean'];
 };
 
 export type ReportServerInfoResponse = ReportServerInfoResult & {
-  __typename?: "ReportServerInfoResponse";
-  inSeconds: Scalars["Int"];
-  withExecutableSchema: Scalars["Boolean"];
+  __typename?: 'ReportServerInfoResponse';
+  inSeconds: Scalars['Int'];
+  withExecutableSchema: Scalars['Boolean'];
 };
 
 export type ReportServerInfoResult = {
-  inSeconds: Scalars["Int"];
-  withExecutableSchema: Scalars["Boolean"];
+  inSeconds: Scalars['Int'];
+  withExecutableSchema: Scalars['Boolean'];
 };
 
 export enum Resolution {
-  R1D = "R1D",
-  R1H = "R1H",
-  R1M = "R1M",
-  R5M = "R5M",
-  R6H = "R6H",
-  R15M = "R15M",
+  R1D = 'R1D',
+  R1H = 'R1H',
+  R1M = 'R1M',
+  R5M = 'R5M',
+  R6H = 'R6H',
+  R15M = 'R15M'
 }
 
 export enum ResponseHints {
-  None = "NONE",
-  SampleResponses = "SAMPLE_RESPONSES",
-  Subgraphs = "SUBGRAPHS",
-  Timings = "TIMINGS",
-  TraceTimings = "TRACE_TIMINGS",
+  None = 'NONE',
+  SampleResponses = 'SAMPLE_RESPONSES',
+  Subgraphs = 'SUBGRAPHS',
+  Timings = 'TIMINGS',
+  TraceTimings = 'TRACE_TIMINGS'
 }
 
 export type RoleOverride = {
-  __typename?: "RoleOverride";
+  __typename?: 'RoleOverride';
   graph: Service;
-  lastUpdatedAt: Scalars["Timestamp"];
+  lastUpdatedAt: Scalars['Timestamp'];
   role: UserPermission;
   user: User;
 };
 
 export type ScheduledSummary = ChannelSubscription & {
-  __typename?: "ScheduledSummary";
+  __typename?: 'ScheduledSummary';
   /** @deprecated Use channels list instead */
   channel?: Maybe<Channel>;
   channels: Array<Channel>;
-  enabled: Scalars["Boolean"];
-  id: Scalars["ID"];
-  timezone: Scalars["String"];
-  variant: Scalars["String"];
+  enabled: Scalars['Boolean'];
+  id: Scalars['ID'];
+  timezone: Scalars['String'];
+  variant: Scalars['String'];
 };
 
 export type Schema = {
-  __typename?: "Schema";
+  __typename?: 'Schema';
   createTemporaryURL?: Maybe<TemporaryUrl>;
-  createdAt: Scalars["Timestamp"];
-  document: Scalars["GraphQLDocument"];
+  createdAt: Scalars['Timestamp'];
+  document: Scalars['GraphQLDocument'];
   /** The number of fields; this includes user defined fields only, excluding built-in types and fields */
-  fieldCount: Scalars["Int"];
+  fieldCount: Scalars['Int'];
   gitContext?: Maybe<GitContext>;
-  hash: Scalars["ID"];
+  hash: Scalars['ID'];
   introspection: IntrospectionSchema;
   /** The number of types; this includes user defined types only, excluding built-in types */
-  typeCount: Scalars["Int"];
+  typeCount: Scalars['Int'];
 };
 
+
 export type SchemaCreateTemporaryUrlArgs = {
-  expiresInSeconds?: Scalars["Int"];
+  expiresInSeconds?: Scalars['Int'];
 };
 
 /** Represents an error from running schema composition on a list of service definitions. */
 export type SchemaCompositionError = {
-  __typename?: "SchemaCompositionError";
-  code?: Maybe<Scalars["String"]>;
+  __typename?: 'SchemaCompositionError';
+  code?: Maybe<Scalars['String']>;
   locations: Array<Maybe<SourceLocation>>;
-  message: Scalars["String"];
+  message: Scalars['String'];
 };
 
 export type SchemaDiff = {
-  __typename?: "SchemaDiff";
+  __typename?: 'SchemaDiff';
   /**
    * Clients affected by all changes in diff
    * @deprecated Unsupported.
@@ -4919,13 +4990,13 @@ export type SchemaDiff = {
   /** List of schema changes with associated affected clients and operations */
   changes: Array<Change>;
   /** Number of affected query operations that are neither marked as SAFE or IGNORED */
-  numberOfAffectedOperations: Scalars["Int"];
+  numberOfAffectedOperations: Scalars['Int'];
   /** Number of operations that were validated during schema diff */
-  numberOfCheckedOperations?: Maybe<Scalars["Int"]>;
+  numberOfCheckedOperations?: Maybe<Scalars['Int']>;
   /** Indication of the success of the change, either failure, warning, or notice. */
   severity: ChangeSeverity;
   /** The tag against which this diff was created */
-  tag?: Maybe<Scalars["String"]>;
+  tag?: Maybe<Scalars['String']>;
   /** @deprecated use severity instead */
   type: ChangeType;
   /** Configuration of validation */
@@ -4933,7 +5004,7 @@ export type SchemaDiff = {
 };
 
 export type SchemaDiffValidationConfig = {
-  __typename?: "SchemaDiffValidationConfig";
+  __typename?: 'SchemaDiffValidationConfig';
   /** Clients to ignore during validation. */
   excludedClients?: Maybe<Array<ClientInfoFilterOutput>>;
   /** Operation names to ignore during validation. */
@@ -4944,19 +5015,19 @@ export type SchemaDiffValidationConfig = {
    * day would have a `from` value of -86400. In rare cases, this could be an ISO
    * timestamp if the user passed one in on diff creation
    */
-  from?: Maybe<Scalars["Timestamp"]>;
+  from?: Maybe<Scalars['Timestamp']>;
   /** Operation IDs to ignore during validation. */
-  ignoredOperations?: Maybe<Array<Scalars["ID"]>>;
+  ignoredOperations?: Maybe<Array<Scalars['ID']>>;
   /** Variants to include during validation. */
-  includedVariants?: Maybe<Array<Scalars["String"]>>;
+  includedVariants?: Maybe<Array<Scalars['String']>>;
   /** Minimum number of requests within the window for a query to be considered. */
-  queryCountThreshold?: Maybe<Scalars["Int"]>;
+  queryCountThreshold?: Maybe<Scalars['Int']>;
   /**
    * Number of requests within the window for a query to be considered, relative to
    * total request count. Expected values are between 0 and 0.05 (minimum 5% of
    * total request volume)
    */
-  queryCountThresholdPercentage?: Maybe<Scalars["Float"]>;
+  queryCountThresholdPercentage?: Maybe<Scalars['Float']>;
   /**
    * delta in seconds from current time that determines the end of the
    * window for reported metrics included in a schema diff. A day window
@@ -4964,43 +5035,43 @@ export type SchemaDiffValidationConfig = {
    * cases, this could be an ISO timestamp if the user passed one in on diff
    * creation
    */
-  to?: Maybe<Scalars["Timestamp"]>;
+  to?: Maybe<Scalars['Timestamp']>;
 };
 
 export type SchemaPublishSubscription = ChannelSubscription & {
-  __typename?: "SchemaPublishSubscription";
+  __typename?: 'SchemaPublishSubscription';
   channels: Array<Channel>;
-  createdAt: Scalars["Timestamp"];
-  enabled: Scalars["Boolean"];
-  id: Scalars["ID"];
-  lastUpdatedAt: Scalars["Timestamp"];
-  variant?: Maybe<Scalars["String"]>;
+  createdAt: Scalars['Timestamp'];
+  enabled: Scalars['Boolean'];
+  id: Scalars['ID'];
+  lastUpdatedAt: Scalars['Timestamp'];
+  variant?: Maybe<Scalars['String']>;
 };
 
 export type SchemaReport = {
   /** A randomly generated UUID, immutable for the lifetime of the edge server runtime. */
-  bootId: Scalars["String"];
+  bootId: Scalars['String'];
   /** The hex SHA256 hash of the schema being reported. Note that for a GraphQL server with a core schema, this should be the core schema, not the API schema. */
-  coreSchemaHash: Scalars["String"];
+  coreSchemaHash: Scalars['String'];
   /** The graph ref (eg, 'id@variant') */
-  graphRef: Scalars["String"];
+  graphRef: Scalars['String'];
   /** The version of the edge server reporting agent, e.g. apollo-server-2.8, graphql-java-3.1, etc. length must be <= 256 characters. */
-  libraryVersion?: InputMaybe<Scalars["String"]>;
+  libraryVersion?: InputMaybe<Scalars['String']>;
   /** The infra environment in which this edge server is running, e.g. localhost, Kubernetes, AWS Lambda, Google CloudRun, AWS ECS, etc. length must be <= 256 characters. */
-  platform?: InputMaybe<Scalars["String"]>;
+  platform?: InputMaybe<Scalars['String']>;
   /** The runtime in which the edge server is running, e.g. node 12.03, zulu8.46.0.19-ca-jdk8.0.252-macosx_x64, etc. length must be <= 256 characters. */
-  runtimeVersion?: InputMaybe<Scalars["String"]>;
+  runtimeVersion?: InputMaybe<Scalars['String']>;
   /** If available, an identifier for the edge server instance, such that when restarting this instance it will have the same serverId, with a different bootId. For example, in Kubernetes this might be the pod name. Length must be <= 256 characters. */
-  serverId?: InputMaybe<Scalars["String"]>;
+  serverId?: InputMaybe<Scalars['String']>;
   /** An identifier used to distinguish the version (from the user's perspective) of the edge server's code itself. For instance, the git sha of the server's repository or the docker sha of the associated image this server runs with. Length must be <= 256 characters. */
-  userVersion?: InputMaybe<Scalars["String"]>;
+  userVersion?: InputMaybe<Scalars['String']>;
 };
 
 export type SchemaTag = {
-  __typename?: "SchemaTag";
+  __typename?: 'SchemaTag';
   /** The composition result that corresponds to this schema repo tag, if it exists. */
   compositionResult?: Maybe<CompositionResult>;
-  createdAt: Scalars["Timestamp"];
+  createdAt: Scalars['Timestamp'];
   diffToPrevious?: Maybe<SchemaDiff>;
   gitContext?: Maybe<GitContext>;
   /**
@@ -5015,18 +5086,18 @@ export type SchemaTag = {
    * Number of tagged schemas created under the same tag name.
    * Also represents the maximum size of the history's limit argument.
    */
-  historyLength: Scalars["Int"];
+  historyLength: Scalars['Int'];
   /**
    * Number of schemas tagged prior to this one under the same tag name, its position
    * in the tag history.
    */
-  historyOrder: Scalars["Int"];
+  historyOrder: Scalars['Int'];
   /**
    * The identifier for this particular schema tag, which may be either a particular
    * run of a check or a specific publish. This ID can be used alongside `schemaTagByID`
    * in order to look up a particular entry.
    */
-  id: Scalars["ID"];
+  id: Scalars['ID'];
   /**
    * Indicates this schema is "published" meaning that our users correspond this schema
    * with a long-running or permanent initiative. Published schemas appear in the UI
@@ -5036,7 +5107,7 @@ export type SchemaTag = {
    * and is uploaded but not promoted to published yet. The other benefit is this makes
    * for nice UX around publishing events
    */
-  publishedAt: Scalars["Timestamp"];
+  publishedAt: Scalars['Timestamp'];
   /**
    * The Identity that published this schema and their client info, or null if this isn't
    * a publish. Sub-fields may be null if they weren't recorded.
@@ -5048,35 +5119,37 @@ export type SchemaTag = {
    */
   reversionFrom?: Maybe<SchemaTag>;
   schema: Schema;
-  slackNotificationBody?: Maybe<Scalars["String"]>;
+  slackNotificationBody?: Maybe<Scalars['String']>;
   /** @deprecated Please use variant { name } instead */
-  tag: Scalars["String"];
+  tag: Scalars['String'];
   /** The graph variant this schema tag belongs to. */
   variant: GraphVariant;
-  webhookNotificationBody: Scalars["String"];
+  webhookNotificationBody: Scalars['String'];
 };
+
 
 export type SchemaTagHistoryArgs = {
-  includeUnchanged?: Scalars["Boolean"];
-  limit?: Scalars["Int"];
-  offset?: InputMaybe<Scalars["Int"]>;
+  includeUnchanged?: Scalars['Boolean'];
+  limit?: Scalars['Int'];
+  offset?: InputMaybe<Scalars['Int']>;
 };
 
+
 export type SchemaTagSlackNotificationBodyArgs = {
-  graphDisplayName: Scalars["String"];
+  graphDisplayName: Scalars['String'];
 };
 
 /** How many seats of the given types does an organization have (regardless of plan type)? */
 export type Seats = {
-  __typename?: "Seats";
+  __typename?: 'Seats';
   /** How many members that are free in this organization. */
-  free: Scalars["Int"];
+  free: Scalars['Int'];
   /** How many members that are not free in this organization. */
-  fullPrice: Scalars["Int"];
+  fullPrice: Scalars['Int'];
 };
 
 export type SemanticChange = {
-  __typename?: "SemanticChange";
+  __typename?: 'SemanticChange';
   /** Target arg of change made. */
   argNode?: Maybe<NamedIntrospectionArg>;
   /**
@@ -5091,9 +5164,9 @@ export type SemanticChange = {
 };
 
 export type Service = Identity & {
-  __typename?: "Service";
+  __typename?: 'Service';
   account?: Maybe<Account>;
-  accountId?: Maybe<Scalars["ID"]>;
+  accountId?: Maybe<Scalars['ID']>;
   apiKeys?: Maybe<Array<GraphApiKey>>;
   asActor: Actor;
   /**
@@ -5110,7 +5183,7 @@ export type Service = Identity & {
    * application. Apollo's media server will downscale larger images to at least the requested size,
    * but this will not happen for third-party media servers.
    */
-  avatarUrl?: Maybe<Scalars["String"]>;
+  avatarUrl?: Maybe<Scalars['String']>;
   /** Get available notification endpoints */
   channels?: Maybe<Array<Channel>>;
   /** Get check configuration for this graph. */
@@ -5123,39 +5196,39 @@ export type Service = Identity & {
    * List of options available for filtering checks for this graph by author.
    * If a filter is passed, constrains results to match the filter.
    */
-  checksAuthorOptions: Array<Scalars["String"]>;
+  checksAuthorOptions: Array<Scalars['String']>;
   /**
    * List of options available for filtering checks for this graph by branch.
    * If a filter is passed, constrains results to match the filter.
    */
-  checksBranchOptions: Array<Scalars["String"]>;
+  checksBranchOptions: Array<Scalars['String']>;
   /**
    * List of options available for filtering checks for this graph by subgraph name.
    * If a filter is passed, constrains results to match the filter.
    */
-  checksSubgraphOptions: Array<Scalars["String"]>;
+  checksSubgraphOptions: Array<Scalars['String']>;
   /** Given a graphCompositionID, return the results of composition. This can represent either a validation or a publish. */
   compositionResultById?: Maybe<CompositionResult>;
-  createdAt: Scalars["Timestamp"];
+  createdAt: Scalars['Timestamp'];
   createdBy?: Maybe<Identity>;
   datadogMetricsConfig?: Maybe<DatadogMetricsConfig>;
-  deletedAt?: Maybe<Scalars["Timestamp"]>;
-  description?: Maybe<Scalars["String"]>;
+  deletedAt?: Maybe<Scalars['Timestamp']>;
+  description?: Maybe<Scalars['String']>;
   devGraphOwner?: Maybe<User>;
   /** Get a GraphQL document by hash */
-  document?: Maybe<Scalars["GraphQLDocument"]>;
+  document?: Maybe<Scalars['GraphQLDocument']>;
   /**
    * When this is true, this graph will be hidden from non-admin members of the org who haven't been explicitly assigned a
    * role on this graph.
    */
-  hiddenFromUninvitedNonAdminAccountMembers: Scalars["Boolean"];
-  id: Scalars["ID"];
+  hiddenFromUninvitedNonAdminAccountMembers: Scalars['Boolean'];
+  id: Scalars['ID'];
   /**
    * List of implementing services that comprise a graph. A non-federated graph should have a single implementing service.
    * Set includeDeleted to see deleted implementing services.
    */
   implementingServices?: Maybe<GraphImplementors>;
-  lastReportedAt?: Maybe<Scalars["Timestamp"]>;
+  lastReportedAt?: Maybe<Scalars['Timestamp']>;
   /** Current identity, null if not authenticated. */
   me?: Maybe<Identity>;
   /**
@@ -5166,7 +5239,7 @@ export type Service = Identity & {
   mostRecentCompositionPublish?: Maybe<CompositionPublishResult>;
   myRole?: Maybe<UserPermission>;
   /** @deprecated Use Service.title */
-  name: Scalars["String"];
+  name: Scalars['String'];
   operation?: Maybe<Operation>;
   /** Gets the operations and their approved changes for this graph, checkID, and operationID. */
   operationsAcceptedChanges: Array<OperationAcceptedChange>;
@@ -5181,8 +5254,8 @@ export type Service = Identity & {
    * Whether registry subscriptions (with any options) are enabled. If variant is not passed, returns true if configuration is present for any variant
    * @deprecated This field will be removed
    */
-  registrySubscriptionsEnabled: Scalars["Boolean"];
-  reportingEnabled: Scalars["Boolean"];
+  registrySubscriptionsEnabled: Scalars['Boolean'];
+  reportingEnabled: Scalars['Boolean'];
   /** The list of members that can access this graph, accounting for graph role overrides */
   roleOverrides?: Maybe<Array<RoleOverride>>;
   /** Which permissions the current user has for interacting with this service */
@@ -5202,202 +5275,229 @@ export type Service = Identity & {
   stats: ServiceStatsWindow;
   statsWindow?: Maybe<ServiceStatsWindow>;
   /** Generate a test schema publish notification body */
-  testSchemaPublishBody: Scalars["String"];
-  title: Scalars["String"];
+  testSchemaPublishBody: Scalars['String'];
+  title: Scalars['String'];
   trace?: Maybe<Trace>;
-  traceStorageEnabled: Scalars["Boolean"];
+  traceStorageEnabled: Scalars['Boolean'];
   /** A particular variant (sometimes called "tag") of the graph, often representing a live traffic environment (such as "prod"). Each variant can represent a specific URL or destination to query at, analytics, and its own schema history. */
   variant?: Maybe<GraphVariant>;
   /** The list of variants that exist for this graph */
   variants: Array<GraphVariant>;
 };
 
+
 export type ServiceAvatarUrlArgs = {
-  size?: Scalars["Int"];
+  size?: Scalars['Int'];
 };
+
 
 export type ServiceChannelsArgs = {
-  channelIds?: InputMaybe<Array<Scalars["ID"]>>;
+  channelIds?: InputMaybe<Array<Scalars['ID']>>;
 };
 
+
 export type ServiceCheckWorkflowArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
+
 
 export type ServiceCheckWorkflowsArgs = {
   filter?: InputMaybe<CheckFilterInput>;
-  limit?: Scalars["Int"];
+  limit?: Scalars['Int'];
 };
+
 
 export type ServiceChecksAuthorOptionsArgs = {
   filter?: InputMaybe<CheckFilterInput>;
 };
 
+
 export type ServiceChecksBranchOptionsArgs = {
   filter?: InputMaybe<CheckFilterInput>;
 };
+
 
 export type ServiceChecksSubgraphOptionsArgs = {
   filter?: InputMaybe<CheckFilterInput>;
 };
 
+
 export type ServiceCompositionResultByIdArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
+
 
 export type ServiceDocumentArgs = {
-  hash?: InputMaybe<Scalars["SHA256"]>;
+  hash?: InputMaybe<Scalars['SHA256']>;
 };
+
 
 export type ServiceImplementingServicesArgs = {
-  graphVariant: Scalars["String"];
-  includeDeleted?: InputMaybe<Scalars["Boolean"]>;
+  graphVariant: Scalars['String'];
+  includeDeleted?: InputMaybe<Scalars['Boolean']>;
 };
+
 
 export type ServiceLastReportedAtArgs = {
-  graphVariant?: InputMaybe<Scalars["String"]>;
+  graphVariant?: InputMaybe<Scalars['String']>;
 };
+
 
 export type ServiceMostRecentCompositionPublishArgs = {
-  graphVariant: Scalars["String"];
+  graphVariant: Scalars['String'];
 };
+
 
 export type ServiceOperationArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
+
 
 export type ServiceOperationsAcceptedChangesArgs = {
-  checkID: Scalars["ID"];
-  operationID: Scalars["String"];
+  checkID: Scalars['ID'];
+  operationID: Scalars['String'];
 };
+
 
 export type ServiceOperationsCheckArgs = {
-  checkID: Scalars["ID"];
+  checkID: Scalars['ID'];
 };
+
 
 export type ServiceQueryTriggersArgs = {
-  graphVariant?: InputMaybe<Scalars["String"]>;
-  operationNames?: InputMaybe<Array<Scalars["String"]>>;
+  graphVariant?: InputMaybe<Scalars['String']>;
+  operationNames?: InputMaybe<Array<Scalars['String']>>;
 };
+
 
 export type ServiceRegistryStatsWindowArgs = {
-  from: Scalars["Timestamp"];
+  from: Scalars['Timestamp'];
   resolution?: InputMaybe<Resolution>;
-  to?: InputMaybe<Scalars["Timestamp"]>;
+  to?: InputMaybe<Scalars['Timestamp']>;
 };
+
 
 export type ServiceRegistrySubscriptionsEnabledArgs = {
-  graphVariant?: InputMaybe<Scalars["String"]>;
+  graphVariant?: InputMaybe<Scalars['String']>;
 };
+
 
 export type ServiceSchemaArgs = {
-  hash?: InputMaybe<Scalars["ID"]>;
-  tag?: InputMaybe<Scalars["String"]>;
+  hash?: InputMaybe<Scalars['ID']>;
+  tag?: InputMaybe<Scalars['String']>;
 };
+
 
 export type ServiceSchemaTagArgs = {
-  tag: Scalars["String"];
+  tag: Scalars['String'];
 };
+
 
 export type ServiceSchemaTagByIdArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
+
 
 export type ServiceSchemaTagsArgs = {
-  tags?: InputMaybe<Array<Scalars["String"]>>;
+  tags?: InputMaybe<Array<Scalars['String']>>;
 };
+
 
 export type ServiceStatsArgs = {
-  from: Scalars["Timestamp"];
+  from: Scalars['Timestamp'];
   resolution?: InputMaybe<Resolution>;
-  to?: InputMaybe<Scalars["Timestamp"]>;
+  to?: InputMaybe<Scalars['Timestamp']>;
 };
+
 
 export type ServiceStatsWindowArgs = {
-  from: Scalars["Timestamp"];
+  from: Scalars['Timestamp'];
   resolution?: InputMaybe<Resolution>;
-  to?: InputMaybe<Scalars["Timestamp"]>;
+  to?: InputMaybe<Scalars['Timestamp']>;
 };
+
 
 export type ServiceTestSchemaPublishBodyArgs = {
-  variant: Scalars["String"];
+  variant: Scalars['String'];
 };
+
 
 export type ServiceTraceArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
 
+
 export type ServiceVariantArgs = {
-  name: Scalars["String"];
+  name: Scalars['String'];
 };
 
 /** Columns of ServiceEdgeServerInfos. */
 export enum ServiceEdgeServerInfosColumn {
-  BootId = "BOOT_ID",
-  ExecutableSchemaId = "EXECUTABLE_SCHEMA_ID",
-  LibraryVersion = "LIBRARY_VERSION",
-  Platform = "PLATFORM",
-  RuntimeVersion = "RUNTIME_VERSION",
-  SchemaTag = "SCHEMA_TAG",
-  ServerId = "SERVER_ID",
-  Timestamp = "TIMESTAMP",
-  UserVersion = "USER_VERSION",
+  BootId = 'BOOT_ID',
+  ExecutableSchemaId = 'EXECUTABLE_SCHEMA_ID',
+  LibraryVersion = 'LIBRARY_VERSION',
+  Platform = 'PLATFORM',
+  RuntimeVersion = 'RUNTIME_VERSION',
+  SchemaTag = 'SCHEMA_TAG',
+  ServerId = 'SERVER_ID',
+  Timestamp = 'TIMESTAMP',
+  UserVersion = 'USER_VERSION'
 }
 
 export type ServiceEdgeServerInfosDimensions = {
-  __typename?: "ServiceEdgeServerInfosDimensions";
-  bootId?: Maybe<Scalars["ID"]>;
-  executableSchemaId?: Maybe<Scalars["ID"]>;
-  libraryVersion?: Maybe<Scalars["String"]>;
-  platform?: Maybe<Scalars["String"]>;
-  runtimeVersion?: Maybe<Scalars["String"]>;
-  schemaTag?: Maybe<Scalars["String"]>;
-  serverId?: Maybe<Scalars["ID"]>;
-  userVersion?: Maybe<Scalars["String"]>;
+  __typename?: 'ServiceEdgeServerInfosDimensions';
+  bootId?: Maybe<Scalars['ID']>;
+  executableSchemaId?: Maybe<Scalars['ID']>;
+  libraryVersion?: Maybe<Scalars['String']>;
+  platform?: Maybe<Scalars['String']>;
+  runtimeVersion?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
+  serverId?: Maybe<Scalars['ID']>;
+  userVersion?: Maybe<Scalars['String']>;
 };
 
 /** Filter for data in ServiceEdgeServerInfos. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
 export type ServiceEdgeServerInfosFilter = {
   and?: InputMaybe<Array<ServiceEdgeServerInfosFilter>>;
   /** Selects rows whose bootId dimension equals the given value if not null. To query for the null value, use {in: {bootId: [null]}} instead. */
-  bootId?: InputMaybe<Scalars["ID"]>;
+  bootId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose executableSchemaId dimension equals the given value if not null. To query for the null value, use {in: {executableSchemaId: [null]}} instead. */
-  executableSchemaId?: InputMaybe<Scalars["ID"]>;
+  executableSchemaId?: InputMaybe<Scalars['ID']>;
   in?: InputMaybe<ServiceEdgeServerInfosFilterIn>;
   /** Selects rows whose libraryVersion dimension equals the given value if not null. To query for the null value, use {in: {libraryVersion: [null]}} instead. */
-  libraryVersion?: InputMaybe<Scalars["String"]>;
+  libraryVersion?: InputMaybe<Scalars['String']>;
   not?: InputMaybe<ServiceEdgeServerInfosFilter>;
   or?: InputMaybe<Array<ServiceEdgeServerInfosFilter>>;
   /** Selects rows whose platform dimension equals the given value if not null. To query for the null value, use {in: {platform: [null]}} instead. */
-  platform?: InputMaybe<Scalars["String"]>;
+  platform?: InputMaybe<Scalars['String']>;
   /** Selects rows whose runtimeVersion dimension equals the given value if not null. To query for the null value, use {in: {runtimeVersion: [null]}} instead. */
-  runtimeVersion?: InputMaybe<Scalars["String"]>;
+  runtimeVersion?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
-  schemaTag?: InputMaybe<Scalars["String"]>;
+  schemaTag?: InputMaybe<Scalars['String']>;
   /** Selects rows whose serverId dimension equals the given value if not null. To query for the null value, use {in: {serverId: [null]}} instead. */
-  serverId?: InputMaybe<Scalars["ID"]>;
+  serverId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose userVersion dimension equals the given value if not null. To query for the null value, use {in: {userVersion: [null]}} instead. */
-  userVersion?: InputMaybe<Scalars["String"]>;
+  userVersion?: InputMaybe<Scalars['String']>;
 };
 
 /** Filter for data in ServiceEdgeServerInfos. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
 export type ServiceEdgeServerInfosFilterIn = {
   /** Selects rows whose bootId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  bootId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  bootId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose executableSchemaId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  executableSchemaId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  executableSchemaId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose libraryVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  libraryVersion?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  libraryVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose platform dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  platform?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  platform?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose runtimeVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  runtimeVersion?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  runtimeVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaTag?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose serverId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  serverId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  serverId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose userVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  userVersion?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  userVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 export type ServiceEdgeServerInfosOrderBySpec = {
@@ -5406,82 +5506,82 @@ export type ServiceEdgeServerInfosOrderBySpec = {
 };
 
 export type ServiceEdgeServerInfosRecord = {
-  __typename?: "ServiceEdgeServerInfosRecord";
+  __typename?: 'ServiceEdgeServerInfosRecord';
   /** Dimensions of ServiceEdgeServerInfos that can be grouped by. */
   groupBy: ServiceEdgeServerInfosDimensions;
   /** Starting segment timestamp. */
-  timestamp: Scalars["Timestamp"];
+  timestamp: Scalars['Timestamp'];
 };
 
 /** Columns of ServiceErrorStats. */
 export enum ServiceErrorStatsColumn {
-  ClientName = "CLIENT_NAME",
-  ClientVersion = "CLIENT_VERSION",
-  ErrorsCount = "ERRORS_COUNT",
-  Path = "PATH",
-  QueryId = "QUERY_ID",
-  QueryName = "QUERY_NAME",
-  RequestsWithErrorsCount = "REQUESTS_WITH_ERRORS_COUNT",
-  SchemaHash = "SCHEMA_HASH",
-  SchemaTag = "SCHEMA_TAG",
-  Timestamp = "TIMESTAMP",
+  ClientName = 'CLIENT_NAME',
+  ClientVersion = 'CLIENT_VERSION',
+  ErrorsCount = 'ERRORS_COUNT',
+  Path = 'PATH',
+  QueryId = 'QUERY_ID',
+  QueryName = 'QUERY_NAME',
+  RequestsWithErrorsCount = 'REQUESTS_WITH_ERRORS_COUNT',
+  SchemaHash = 'SCHEMA_HASH',
+  SchemaTag = 'SCHEMA_TAG',
+  Timestamp = 'TIMESTAMP'
 }
 
 export type ServiceErrorStatsDimensions = {
-  __typename?: "ServiceErrorStatsDimensions";
-  clientName?: Maybe<Scalars["String"]>;
-  clientVersion?: Maybe<Scalars["String"]>;
-  path?: Maybe<Scalars["String"]>;
-  queryId?: Maybe<Scalars["ID"]>;
-  queryName?: Maybe<Scalars["String"]>;
-  schemaHash?: Maybe<Scalars["String"]>;
-  schemaTag?: Maybe<Scalars["String"]>;
+  __typename?: 'ServiceErrorStatsDimensions';
+  clientName?: Maybe<Scalars['String']>;
+  clientVersion?: Maybe<Scalars['String']>;
+  path?: Maybe<Scalars['String']>;
+  queryId?: Maybe<Scalars['ID']>;
+  queryName?: Maybe<Scalars['String']>;
+  schemaHash?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
 };
 
 /** Filter for data in ServiceErrorStats. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
 export type ServiceErrorStatsFilter = {
   and?: InputMaybe<Array<ServiceErrorStatsFilter>>;
   /** Selects rows whose clientName dimension equals the given value if not null. To query for the null value, use {in: {clientName: [null]}} instead. */
-  clientName?: InputMaybe<Scalars["String"]>;
+  clientName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose clientVersion dimension equals the given value if not null. To query for the null value, use {in: {clientVersion: [null]}} instead. */
-  clientVersion?: InputMaybe<Scalars["String"]>;
+  clientVersion?: InputMaybe<Scalars['String']>;
   in?: InputMaybe<ServiceErrorStatsFilterIn>;
   not?: InputMaybe<ServiceErrorStatsFilter>;
   or?: InputMaybe<Array<ServiceErrorStatsFilter>>;
   /** Selects rows whose path dimension equals the given value if not null. To query for the null value, use {in: {path: [null]}} instead. */
-  path?: InputMaybe<Scalars["String"]>;
+  path?: InputMaybe<Scalars['String']>;
   /** Selects rows whose queryId dimension equals the given value if not null. To query for the null value, use {in: {queryId: [null]}} instead. */
-  queryId?: InputMaybe<Scalars["ID"]>;
+  queryId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose queryName dimension equals the given value if not null. To query for the null value, use {in: {queryName: [null]}} instead. */
-  queryName?: InputMaybe<Scalars["String"]>;
+  queryName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaHash dimension equals the given value if not null. To query for the null value, use {in: {schemaHash: [null]}} instead. */
-  schemaHash?: InputMaybe<Scalars["String"]>;
+  schemaHash?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
-  schemaTag?: InputMaybe<Scalars["String"]>;
+  schemaTag?: InputMaybe<Scalars['String']>;
 };
 
 /** Filter for data in ServiceErrorStats. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
 export type ServiceErrorStatsFilterIn = {
   /** Selects rows whose clientName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose clientVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientVersion?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose path dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  path?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  path?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose queryId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  queryId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose queryName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  queryName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaHash dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaHash?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaHash?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaTag?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 export type ServiceErrorStatsMetrics = {
-  __typename?: "ServiceErrorStatsMetrics";
-  errorsCount: Scalars["Long"];
-  requestsWithErrorsCount: Scalars["Long"];
+  __typename?: 'ServiceErrorStatsMetrics';
+  errorsCount: Scalars['Long'];
+  requestsWithErrorsCount: Scalars['Long'];
 };
 
 export type ServiceErrorStatsOrderBySpec = {
@@ -5490,64 +5590,64 @@ export type ServiceErrorStatsOrderBySpec = {
 };
 
 export type ServiceErrorStatsRecord = {
-  __typename?: "ServiceErrorStatsRecord";
+  __typename?: 'ServiceErrorStatsRecord';
   /** Dimensions of ServiceErrorStats that can be grouped by. */
   groupBy: ServiceErrorStatsDimensions;
   /** Metrics of ServiceErrorStats that can be aggregated over. */
   metrics: ServiceErrorStatsMetrics;
   /** Starting segment timestamp. */
-  timestamp: Scalars["Timestamp"];
+  timestamp: Scalars['Timestamp'];
 };
 
 /** Columns of ServiceFieldLatencies. */
 export enum ServiceFieldLatenciesColumn {
-  FieldHistogram = "FIELD_HISTOGRAM",
-  FieldName = "FIELD_NAME",
-  ParentType = "PARENT_TYPE",
-  SchemaHash = "SCHEMA_HASH",
-  SchemaTag = "SCHEMA_TAG",
-  Timestamp = "TIMESTAMP",
+  FieldHistogram = 'FIELD_HISTOGRAM',
+  FieldName = 'FIELD_NAME',
+  ParentType = 'PARENT_TYPE',
+  SchemaHash = 'SCHEMA_HASH',
+  SchemaTag = 'SCHEMA_TAG',
+  Timestamp = 'TIMESTAMP'
 }
 
 export type ServiceFieldLatenciesDimensions = {
-  __typename?: "ServiceFieldLatenciesDimensions";
-  field?: Maybe<Scalars["String"]>;
-  fieldName?: Maybe<Scalars["String"]>;
-  parentType?: Maybe<Scalars["String"]>;
-  schemaHash?: Maybe<Scalars["String"]>;
-  schemaTag?: Maybe<Scalars["String"]>;
+  __typename?: 'ServiceFieldLatenciesDimensions';
+  field?: Maybe<Scalars['String']>;
+  fieldName?: Maybe<Scalars['String']>;
+  parentType?: Maybe<Scalars['String']>;
+  schemaHash?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
 };
 
 /** Filter for data in ServiceFieldLatencies. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
 export type ServiceFieldLatenciesFilter = {
   and?: InputMaybe<Array<ServiceFieldLatenciesFilter>>;
   /** Selects rows whose fieldName dimension equals the given value if not null. To query for the null value, use {in: {fieldName: [null]}} instead. */
-  fieldName?: InputMaybe<Scalars["String"]>;
+  fieldName?: InputMaybe<Scalars['String']>;
   in?: InputMaybe<ServiceFieldLatenciesFilterIn>;
   not?: InputMaybe<ServiceFieldLatenciesFilter>;
   or?: InputMaybe<Array<ServiceFieldLatenciesFilter>>;
   /** Selects rows whose parentType dimension equals the given value if not null. To query for the null value, use {in: {parentType: [null]}} instead. */
-  parentType?: InputMaybe<Scalars["String"]>;
+  parentType?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaHash dimension equals the given value if not null. To query for the null value, use {in: {schemaHash: [null]}} instead. */
-  schemaHash?: InputMaybe<Scalars["String"]>;
+  schemaHash?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
-  schemaTag?: InputMaybe<Scalars["String"]>;
+  schemaTag?: InputMaybe<Scalars['String']>;
 };
 
 /** Filter for data in ServiceFieldLatencies. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
 export type ServiceFieldLatenciesFilterIn = {
   /** Selects rows whose fieldName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  fieldName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  fieldName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose parentType dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  parentType?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  parentType?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaHash dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaHash?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaHash?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaTag?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 export type ServiceFieldLatenciesMetrics = {
-  __typename?: "ServiceFieldLatenciesMetrics";
+  __typename?: 'ServiceFieldLatenciesMetrics';
   fieldHistogram: DurationHistogram;
 };
 
@@ -5557,92 +5657,92 @@ export type ServiceFieldLatenciesOrderBySpec = {
 };
 
 export type ServiceFieldLatenciesRecord = {
-  __typename?: "ServiceFieldLatenciesRecord";
+  __typename?: 'ServiceFieldLatenciesRecord';
   /** Dimensions of ServiceFieldLatencies that can be grouped by. */
   groupBy: ServiceFieldLatenciesDimensions;
   /** Metrics of ServiceFieldLatencies that can be aggregated over. */
   metrics: ServiceFieldLatenciesMetrics;
   /** Starting segment timestamp. */
-  timestamp: Scalars["Timestamp"];
+  timestamp: Scalars['Timestamp'];
 };
 
 /** Columns of ServiceFieldUsage. */
 export enum ServiceFieldUsageColumn {
-  ClientName = "CLIENT_NAME",
-  ClientVersion = "CLIENT_VERSION",
-  EstimatedExecutionCount = "ESTIMATED_EXECUTION_COUNT",
-  ExecutionCount = "EXECUTION_COUNT",
-  FieldName = "FIELD_NAME",
-  ParentType = "PARENT_TYPE",
-  QueryId = "QUERY_ID",
-  QueryName = "QUERY_NAME",
-  ReferencingOperationCount = "REFERENCING_OPERATION_COUNT",
-  SchemaHash = "SCHEMA_HASH",
-  SchemaTag = "SCHEMA_TAG",
-  Timestamp = "TIMESTAMP",
+  ClientName = 'CLIENT_NAME',
+  ClientVersion = 'CLIENT_VERSION',
+  EstimatedExecutionCount = 'ESTIMATED_EXECUTION_COUNT',
+  ExecutionCount = 'EXECUTION_COUNT',
+  FieldName = 'FIELD_NAME',
+  ParentType = 'PARENT_TYPE',
+  QueryId = 'QUERY_ID',
+  QueryName = 'QUERY_NAME',
+  ReferencingOperationCount = 'REFERENCING_OPERATION_COUNT',
+  SchemaHash = 'SCHEMA_HASH',
+  SchemaTag = 'SCHEMA_TAG',
+  Timestamp = 'TIMESTAMP'
 }
 
 export type ServiceFieldUsageDimensions = {
-  __typename?: "ServiceFieldUsageDimensions";
-  clientName?: Maybe<Scalars["String"]>;
-  clientVersion?: Maybe<Scalars["String"]>;
-  fieldName?: Maybe<Scalars["String"]>;
-  parentType?: Maybe<Scalars["String"]>;
-  queryId?: Maybe<Scalars["ID"]>;
-  queryName?: Maybe<Scalars["String"]>;
-  schemaHash?: Maybe<Scalars["String"]>;
-  schemaTag?: Maybe<Scalars["String"]>;
+  __typename?: 'ServiceFieldUsageDimensions';
+  clientName?: Maybe<Scalars['String']>;
+  clientVersion?: Maybe<Scalars['String']>;
+  fieldName?: Maybe<Scalars['String']>;
+  parentType?: Maybe<Scalars['String']>;
+  queryId?: Maybe<Scalars['ID']>;
+  queryName?: Maybe<Scalars['String']>;
+  schemaHash?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
 };
 
 /** Filter for data in ServiceFieldUsage. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
 export type ServiceFieldUsageFilter = {
   and?: InputMaybe<Array<ServiceFieldUsageFilter>>;
   /** Selects rows whose clientName dimension equals the given value if not null. To query for the null value, use {in: {clientName: [null]}} instead. */
-  clientName?: InputMaybe<Scalars["String"]>;
+  clientName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose clientVersion dimension equals the given value if not null. To query for the null value, use {in: {clientVersion: [null]}} instead. */
-  clientVersion?: InputMaybe<Scalars["String"]>;
+  clientVersion?: InputMaybe<Scalars['String']>;
   /** Selects rows whose fieldName dimension equals the given value if not null. To query for the null value, use {in: {fieldName: [null]}} instead. */
-  fieldName?: InputMaybe<Scalars["String"]>;
+  fieldName?: InputMaybe<Scalars['String']>;
   in?: InputMaybe<ServiceFieldUsageFilterIn>;
   not?: InputMaybe<ServiceFieldUsageFilter>;
   or?: InputMaybe<Array<ServiceFieldUsageFilter>>;
   /** Selects rows whose parentType dimension equals the given value if not null. To query for the null value, use {in: {parentType: [null]}} instead. */
-  parentType?: InputMaybe<Scalars["String"]>;
+  parentType?: InputMaybe<Scalars['String']>;
   /** Selects rows whose queryId dimension equals the given value if not null. To query for the null value, use {in: {queryId: [null]}} instead. */
-  queryId?: InputMaybe<Scalars["ID"]>;
+  queryId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose queryName dimension equals the given value if not null. To query for the null value, use {in: {queryName: [null]}} instead. */
-  queryName?: InputMaybe<Scalars["String"]>;
+  queryName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaHash dimension equals the given value if not null. To query for the null value, use {in: {schemaHash: [null]}} instead. */
-  schemaHash?: InputMaybe<Scalars["String"]>;
+  schemaHash?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
-  schemaTag?: InputMaybe<Scalars["String"]>;
+  schemaTag?: InputMaybe<Scalars['String']>;
 };
 
 /** Filter for data in ServiceFieldUsage. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
 export type ServiceFieldUsageFilterIn = {
   /** Selects rows whose clientName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose clientVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientVersion?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose fieldName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  fieldName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  fieldName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose parentType dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  parentType?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  parentType?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose queryId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  queryId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose queryName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  queryName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaHash dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaHash?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaHash?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaTag?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 export type ServiceFieldUsageMetrics = {
-  __typename?: "ServiceFieldUsageMetrics";
-  estimatedExecutionCount: Scalars["Long"];
-  executionCount: Scalars["Long"];
-  referencingOperationCount: Scalars["Long"];
+  __typename?: 'ServiceFieldUsageMetrics';
+  estimatedExecutionCount: Scalars['Long'];
+  executionCount: Scalars['Long'];
+  referencingOperationCount: Scalars['Long'];
 };
 
 export type ServiceFieldUsageOrderBySpec = {
@@ -5651,17 +5751,17 @@ export type ServiceFieldUsageOrderBySpec = {
 };
 
 export type ServiceFieldUsageRecord = {
-  __typename?: "ServiceFieldUsageRecord";
+  __typename?: 'ServiceFieldUsageRecord';
   /** Dimensions of ServiceFieldUsage that can be grouped by. */
   groupBy: ServiceFieldUsageDimensions;
   /** Metrics of ServiceFieldUsage that can be aggregated over. */
   metrics: ServiceFieldUsageMetrics;
   /** Starting segment timestamp. */
-  timestamp: Scalars["Timestamp"];
+  timestamp: Scalars['Timestamp'];
 };
 
 export type ServiceMutation = {
-  __typename?: "ServiceMutation";
+  __typename?: 'ServiceMutation';
   /**
    * Compose an implementing service's partial schema, diff the composed schema, validate traffic against that schema,
    * and store the result so the details can be viewed by users in the UI.
@@ -5683,29 +5783,29 @@ export type ServiceMutation = {
   createCompositionStatusSubscription: SchemaPublishSubscription;
   createSchemaPublishSubscription: SchemaPublishSubscription;
   /** Soft delete a graph. Data associated with the graph is not permanently deleted; Apollo support can undo. */
-  delete?: Maybe<Scalars["Void"]>;
+  delete?: Maybe<Scalars['Void']>;
   /** Delete the service's avatar. Requires Service.roles.canUpdateAvatar to be true. */
   deleteAvatar?: Maybe<AvatarDeleteError>;
   /** Delete an existing channel */
-  deleteChannel: Scalars["Boolean"];
+  deleteChannel: Scalars['Boolean'];
   /** Delete an existing query trigger */
-  deleteQueryTrigger: Scalars["Boolean"];
+  deleteQueryTrigger: Scalars['Boolean'];
   /** Deletes this service's current subscriptions specific to the ID, returns true if it existed */
-  deleteRegistrySubscription: Scalars["Boolean"];
+  deleteRegistrySubscription: Scalars['Boolean'];
   /**
    * Deletes this service's current registry subscription(s) specific to its graph variant,
    * returns a list of subscription IDs that were deleted.
    */
-  deleteRegistrySubscriptions: Array<Scalars["ID"]>;
-  deleteScheduledSummary: Scalars["Boolean"];
+  deleteRegistrySubscriptions: Array<Scalars['ID']>;
+  deleteScheduledSummary: Scalars['Boolean'];
   deleteSchemaTag: DeleteSchemaTagResult;
   /** Given a UTC timestamp, delete all traces associated with this Service, on that corresponding day. If a timestamp to is provided, deletes all days inclusive. */
-  deleteTraces?: Maybe<Scalars["Void"]>;
+  deleteTraces?: Maybe<Scalars['Void']>;
   disableDatadogForwardingLegacyMetricNames?: Maybe<Service>;
   /** Hard delete a graph and all data associated with it. Its ID cannot be reused. */
-  hardDelete?: Maybe<Scalars["Void"]>;
+  hardDelete?: Maybe<Scalars['Void']>;
   /** @deprecated Use service.id */
-  id: Scalars["ID"];
+  id: Scalars['ID'];
   /**
    * Ignore an operation in future checks;
    * changes affecting it will be tracked,
@@ -5728,7 +5828,7 @@ export type ServiceMutation = {
   promoteSchema: PromoteSchemaResponseOrError;
   registerOperationsWithResponse?: Maybe<RegisterOperationsMutationResponse>;
   removeImplementingServiceAndTriggerComposition: CompositionAndRemoveResult;
-  removeKey?: Maybe<Scalars["Void"]>;
+  removeKey?: Maybe<Scalars['Void']>;
   renameKey?: Maybe<GraphApiKey>;
   /** @deprecated use Mutation.reportSchema instead */
   reportServerInfo?: Maybe<ReportServerInfoResult>;
@@ -5739,10 +5839,10 @@ export type ServiceMutation = {
    */
   storeSchemaDocument: StoreSchemaResponseOrError;
   /** Test Slack notification channel */
-  testSlackChannel?: Maybe<Scalars["Void"]>;
-  testSubscriptionForChannel: Scalars["String"];
+  testSlackChannel?: Maybe<Scalars['Void']>;
+  testSubscriptionForChannel: Scalars['String'];
   transfer?: Maybe<Service>;
-  triggerRepublish?: Maybe<Scalars["Void"]>;
+  triggerRepublish?: Maybe<Scalars['Void']>;
   undelete?: Maybe<Service>;
   /**
    * Revert the effects of ignoreOperation.
@@ -5787,345 +5887,390 @@ export type ServiceMutation = {
   variant?: Maybe<GraphVariantMutation>;
 };
 
+
 export type ServiceMutationCheckPartialSchemaArgs = {
-  frontend?: InputMaybe<Scalars["String"]>;
+  frontend?: InputMaybe<Scalars['String']>;
   gitContext?: InputMaybe<GitContextInput>;
-  graphVariant: Scalars["String"];
+  graphVariant: Scalars['String'];
   historicParameters?: InputMaybe<HistoricQueryParameters>;
-  implementingServiceName: Scalars["String"];
-  introspectionEndpoint?: InputMaybe<Scalars["String"]>;
-  isSandboxCheck?: Scalars["Boolean"];
+  implementingServiceName: Scalars['String'];
+  introspectionEndpoint?: InputMaybe<Scalars['String']>;
+  isSandboxCheck?: Scalars['Boolean'];
   partialSchema: PartialSchemaInput;
-  useMaximumRetention?: InputMaybe<Scalars["Boolean"]>;
+  useMaximumRetention?: InputMaybe<Scalars['Boolean']>;
 };
+
 
 export type ServiceMutationCheckSchemaArgs = {
-  baseSchemaTag?: InputMaybe<Scalars["String"]>;
-  frontend?: InputMaybe<Scalars["String"]>;
+  baseSchemaTag?: InputMaybe<Scalars['String']>;
+  frontend?: InputMaybe<Scalars['String']>;
   gitContext?: InputMaybe<GitContextInput>;
   historicParameters?: InputMaybe<HistoricQueryParameters>;
-  introspectionEndpoint?: InputMaybe<Scalars["String"]>;
-  isSandboxCheck?: Scalars["Boolean"];
+  introspectionEndpoint?: InputMaybe<Scalars['String']>;
+  isSandboxCheck?: Scalars['Boolean'];
   proposedSchema?: InputMaybe<IntrospectionSchemaInput>;
-  proposedSchemaDocument?: InputMaybe<Scalars["String"]>;
-  proposedSchemaHash?: InputMaybe<Scalars["String"]>;
-  useMaximumRetention?: InputMaybe<Scalars["Boolean"]>;
+  proposedSchemaDocument?: InputMaybe<Scalars['String']>;
+  proposedSchemaHash?: InputMaybe<Scalars['String']>;
+  useMaximumRetention?: InputMaybe<Scalars['Boolean']>;
 };
+
 
 export type ServiceMutationCheckWorkflowArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
+
 
 export type ServiceMutationCreateCompositionStatusSubscriptionArgs = {
-  channelID: Scalars["ID"];
-  variant: Scalars["String"];
+  channelID: Scalars['ID'];
+  variant: Scalars['String'];
 };
+
 
 export type ServiceMutationCreateSchemaPublishSubscriptionArgs = {
-  channelID: Scalars["ID"];
-  variant: Scalars["String"];
+  channelID: Scalars['ID'];
+  variant: Scalars['String'];
 };
+
 
 export type ServiceMutationDeleteChannelArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
+
 
 export type ServiceMutationDeleteQueryTriggerArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
+
 
 export type ServiceMutationDeleteRegistrySubscriptionArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
+
 
 export type ServiceMutationDeleteRegistrySubscriptionsArgs = {
-  variant: Scalars["String"];
+  variant: Scalars['String'];
 };
+
 
 export type ServiceMutationDeleteScheduledSummaryArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
+
 
 export type ServiceMutationDeleteSchemaTagArgs = {
-  tag: Scalars["String"];
+  tag: Scalars['String'];
 };
+
 
 export type ServiceMutationDeleteTracesArgs = {
-  from: Scalars["Timestamp"];
-  to?: InputMaybe<Scalars["Timestamp"]>;
+  from: Scalars['Timestamp'];
+  to?: InputMaybe<Scalars['Timestamp']>;
 };
+
 
 export type ServiceMutationIgnoreOperationsInChecksArgs = {
-  ids: Array<Scalars["ID"]>;
+  ids: Array<Scalars['ID']>;
 };
+
 
 export type ServiceMutationMarkChangesForOperationAsSafeArgs = {
-  checkID: Scalars["ID"];
-  operationID: Scalars["ID"];
+  checkID: Scalars['ID'];
+  operationID: Scalars['ID'];
 };
 
+
 export type ServiceMutationNewKeyArgs = {
-  keyName?: InputMaybe<Scalars["String"]>;
+  keyName?: InputMaybe<Scalars['String']>;
   role?: UserPermission;
 };
 
+
 export type ServiceMutationOverrideUserPermissionArgs = {
   permission?: InputMaybe<UserPermission>;
-  userID: Scalars["ID"];
+  userID: Scalars['ID'];
 };
+
 
 export type ServiceMutationPreviewContractVariantArgs = {
   filterConfig: FilterConfigInput;
-  sourceVariant: Scalars["String"];
+  sourceVariant: Scalars['String'];
 };
 
+
 export type ServiceMutationPromoteSchemaArgs = {
-  graphVariant: Scalars["String"];
+  graphVariant: Scalars['String'];
   historicParameters?: InputMaybe<HistoricQueryParameters>;
-  overrideComposedSchema?: Scalars["Boolean"];
-  sha256: Scalars["SHA256"];
+  overrideComposedSchema?: Scalars['Boolean'];
+  sha256: Scalars['SHA256'];
 };
+
 
 export type ServiceMutationRegisterOperationsWithResponseArgs = {
   clientIdentity?: InputMaybe<RegisteredClientIdentityInput>;
   gitContext?: InputMaybe<GitContextInput>;
-  graphVariant?: Scalars["String"];
-  manifestVersion?: InputMaybe<Scalars["Int"]>;
+  graphVariant?: Scalars['String'];
+  manifestVersion?: InputMaybe<Scalars['Int']>;
   operations: Array<RegisteredOperationInput>;
 };
 
-export type ServiceMutationRemoveImplementingServiceAndTriggerCompositionArgs =
-  {
-    dryRun?: Scalars["Boolean"];
-    graphVariant: Scalars["String"];
-    name: Scalars["String"];
-  };
+
+export type ServiceMutationRemoveImplementingServiceAndTriggerCompositionArgs = {
+  dryRun?: Scalars['Boolean'];
+  graphVariant: Scalars['String'];
+  name: Scalars['String'];
+};
+
 
 export type ServiceMutationRemoveKeyArgs = {
-  id?: InputMaybe<Scalars["ID"]>;
+  id?: InputMaybe<Scalars['ID']>;
 };
+
 
 export type ServiceMutationRenameKeyArgs = {
-  id: Scalars["ID"];
-  newKeyName?: InputMaybe<Scalars["String"]>;
+  id: Scalars['ID'];
+  newKeyName?: InputMaybe<Scalars['String']>;
 };
 
+
 export type ServiceMutationReportServerInfoArgs = {
-  executableSchema?: InputMaybe<Scalars["String"]>;
+  executableSchema?: InputMaybe<Scalars['String']>;
   info: EdgeServerInfo;
 };
 
+
 export type ServiceMutationStoreSchemaDocumentArgs = {
-  schemaDocument: Scalars["String"];
+  schemaDocument: Scalars['String'];
 };
 
+
 export type ServiceMutationTestSlackChannelArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
   notification: SlackNotificationInput;
 };
 
+
 export type ServiceMutationTestSubscriptionForChannelArgs = {
-  channelID: Scalars["ID"];
-  subscriptionID: Scalars["ID"];
+  channelID: Scalars['ID'];
+  subscriptionID: Scalars['ID'];
 };
+
 
 export type ServiceMutationTransferArgs = {
-  to: Scalars["String"];
+  to: Scalars['String'];
 };
+
 
 export type ServiceMutationTriggerRepublishArgs = {
-  graphVariant: Scalars["String"];
+  graphVariant: Scalars['String'];
 };
+
 
 export type ServiceMutationUnignoreOperationsInChecksArgs = {
-  ids: Array<Scalars["ID"]>;
+  ids: Array<Scalars['ID']>;
 };
 
+
 export type ServiceMutationUnmarkChangesForOperationAsSafeArgs = {
-  checkID: Scalars["ID"];
-  operationID: Scalars["ID"];
+  checkID: Scalars['ID'];
+  operationID: Scalars['ID'];
 };
+
 
 export type ServiceMutationUpdateCheckConfigurationArgs = {
   excludedClients?: InputMaybe<Array<ClientFilterInput>>;
   excludedOperationNames?: InputMaybe<Array<OperationNameFilterInput>>;
   excludedOperations?: InputMaybe<Array<ExcludedOperationInput>>;
-  includeBaseVariant?: InputMaybe<Scalars["Boolean"]>;
-  includedVariants?: InputMaybe<Array<Scalars["String"]>>;
-  operationCountThreshold?: InputMaybe<Scalars["Int"]>;
-  operationCountThresholdPercentage?: InputMaybe<Scalars["Float"]>;
-  timeRangeSeconds?: InputMaybe<Scalars["Long"]>;
+  includeBaseVariant?: InputMaybe<Scalars['Boolean']>;
+  includedVariants?: InputMaybe<Array<Scalars['String']>>;
+  operationCountThreshold?: InputMaybe<Scalars['Int']>;
+  operationCountThresholdPercentage?: InputMaybe<Scalars['Float']>;
+  timeRangeSeconds?: InputMaybe<Scalars['Long']>;
 };
+
 
 export type ServiceMutationUpdateDatadogMetricsConfigArgs = {
-  apiKey?: InputMaybe<Scalars["String"]>;
+  apiKey?: InputMaybe<Scalars['String']>;
   apiRegion?: InputMaybe<DatadogApiRegion>;
-  enabled?: InputMaybe<Scalars["Boolean"]>;
+  enabled?: InputMaybe<Scalars['Boolean']>;
 };
+
 
 export type ServiceMutationUpdateDescriptionArgs = {
-  description: Scalars["String"];
+  description: Scalars['String'];
 };
 
-export type ServiceMutationUpdateHiddenFromUninvitedNonAdminAccountMembersArgs =
-  {
-    hiddenFromUninvitedNonAdminAccountMembers: Scalars["Boolean"];
-  };
+
+export type ServiceMutationUpdateHiddenFromUninvitedNonAdminAccountMembersArgs = {
+  hiddenFromUninvitedNonAdminAccountMembers: Scalars['Boolean'];
+};
+
 
 export type ServiceMutationUpdateReadmeArgs = {
-  readme: Scalars["String"];
+  readme: Scalars['String'];
 };
+
 
 export type ServiceMutationUpdateTitleArgs = {
-  title: Scalars["String"];
+  title: Scalars['String'];
 };
+
 
 export type ServiceMutationUploadSchemaArgs = {
-  errorOnBadRequest?: Scalars["Boolean"];
+  errorOnBadRequest?: Scalars['Boolean'];
   gitContext?: InputMaybe<GitContextInput>;
   historicParameters?: InputMaybe<HistoricQueryParameters>;
-  overrideComposedSchema?: Scalars["Boolean"];
+  overrideComposedSchema?: Scalars['Boolean'];
   schema?: InputMaybe<IntrospectionSchemaInput>;
-  schemaDocument?: InputMaybe<Scalars["String"]>;
-  tag: Scalars["String"];
+  schemaDocument?: InputMaybe<Scalars['String']>;
+  tag: Scalars['String'];
 };
 
+
 export type ServiceMutationUpsertChannelArgs = {
-  id?: InputMaybe<Scalars["ID"]>;
+  id?: InputMaybe<Scalars['ID']>;
   pagerDutyChannel?: InputMaybe<PagerDutyChannelInput>;
   slackChannel?: InputMaybe<SlackChannelInput>;
   webhookChannel?: InputMaybe<WebhookChannelInput>;
 };
 
+
 export type ServiceMutationUpsertContractVariantArgs = {
-  contractVariantName: Scalars["String"];
+  contractVariantName: Scalars['String'];
   filterConfig: FilterConfigInput;
-  initiateLaunch?: Scalars["Boolean"];
-  sourceVariant: Scalars["String"];
+  initiateLaunch?: Scalars['Boolean'];
+  sourceVariant: Scalars['String'];
 };
 
-export type ServiceMutationUpsertImplementingServiceAndTriggerCompositionArgs =
-  {
-    activePartialSchema: PartialSchemaInput;
-    gitContext?: InputMaybe<GitContextInput>;
-    graphVariant: Scalars["String"];
-    name: Scalars["String"];
-    revision: Scalars["String"];
-    url?: InputMaybe<Scalars["String"]>;
-  };
+
+export type ServiceMutationUpsertImplementingServiceAndTriggerCompositionArgs = {
+  activePartialSchema: PartialSchemaInput;
+  gitContext?: InputMaybe<GitContextInput>;
+  graphVariant: Scalars['String'];
+  name: Scalars['String'];
+  revision: Scalars['String'];
+  url?: InputMaybe<Scalars['String']>;
+};
+
 
 export type ServiceMutationUpsertPagerDutyChannelArgs = {
   channel: PagerDutyChannelInput;
-  id?: InputMaybe<Scalars["ID"]>;
+  id?: InputMaybe<Scalars['ID']>;
 };
 
+
 export type ServiceMutationUpsertQueryTriggerArgs = {
-  id?: InputMaybe<Scalars["ID"]>;
+  id?: InputMaybe<Scalars['ID']>;
   trigger: QueryTriggerInput;
 };
 
+
 export type ServiceMutationUpsertRegistrySubscriptionArgs = {
-  channelID?: InputMaybe<Scalars["ID"]>;
-  id?: InputMaybe<Scalars["ID"]>;
+  channelID?: InputMaybe<Scalars['ID']>;
+  id?: InputMaybe<Scalars['ID']>;
   options?: InputMaybe<SubscriptionOptionsInput>;
-  variant?: InputMaybe<Scalars["String"]>;
+  variant?: InputMaybe<Scalars['String']>;
 };
 
+
 export type ServiceMutationUpsertScheduledSummaryArgs = {
-  channelID?: InputMaybe<Scalars["ID"]>;
-  enabled?: InputMaybe<Scalars["Boolean"]>;
-  id?: InputMaybe<Scalars["ID"]>;
-  tag?: InputMaybe<Scalars["String"]>;
-  timezone?: InputMaybe<Scalars["String"]>;
-  variant?: InputMaybe<Scalars["String"]>;
+  channelID?: InputMaybe<Scalars['ID']>;
+  enabled?: InputMaybe<Scalars['Boolean']>;
+  id?: InputMaybe<Scalars['ID']>;
+  tag?: InputMaybe<Scalars['String']>;
+  timezone?: InputMaybe<Scalars['String']>;
+  variant?: InputMaybe<Scalars['String']>;
 };
+
 
 export type ServiceMutationUpsertSlackChannelArgs = {
   channel: SlackChannelInput;
-  id?: InputMaybe<Scalars["ID"]>;
+  id?: InputMaybe<Scalars['ID']>;
 };
 
+
 export type ServiceMutationUpsertWebhookChannelArgs = {
-  id?: InputMaybe<Scalars["ID"]>;
-  name?: InputMaybe<Scalars["String"]>;
-  secretToken?: InputMaybe<Scalars["String"]>;
-  url: Scalars["String"];
+  id?: InputMaybe<Scalars['ID']>;
+  name?: InputMaybe<Scalars['String']>;
+  secretToken?: InputMaybe<Scalars['String']>;
+  url: Scalars['String'];
 };
+
 
 export type ServiceMutationValidateOperationsArgs = {
   gitContext?: InputMaybe<GitContextInput>;
   operations: Array<OperationDocumentInput>;
-  tag?: InputMaybe<Scalars["String"]>;
+  tag?: InputMaybe<Scalars['String']>;
 };
 
-export type ServiceMutationValidatePartialSchemaOfImplementingServiceAgainstGraphArgs =
-  {
-    graphVariant: Scalars["String"];
-    implementingServiceName: Scalars["String"];
-    partialSchema: PartialSchemaInput;
-  };
+
+export type ServiceMutationValidatePartialSchemaOfImplementingServiceAgainstGraphArgs = {
+  graphVariant: Scalars['String'];
+  implementingServiceName: Scalars['String'];
+  partialSchema: PartialSchemaInput;
+};
+
 
 export type ServiceMutationVariantArgs = {
-  name: Scalars["String"];
+  name: Scalars['String'];
 };
 
 /** Columns of ServiceOperationCheckStats. */
 export enum ServiceOperationCheckStatsColumn {
-  CachedRequestsCount = "CACHED_REQUESTS_COUNT",
-  ClientName = "CLIENT_NAME",
-  ClientVersion = "CLIENT_VERSION",
-  QueryId = "QUERY_ID",
-  QueryName = "QUERY_NAME",
-  SchemaTag = "SCHEMA_TAG",
-  Timestamp = "TIMESTAMP",
-  UncachedRequestsCount = "UNCACHED_REQUESTS_COUNT",
+  CachedRequestsCount = 'CACHED_REQUESTS_COUNT',
+  ClientName = 'CLIENT_NAME',
+  ClientVersion = 'CLIENT_VERSION',
+  QueryId = 'QUERY_ID',
+  QueryName = 'QUERY_NAME',
+  SchemaTag = 'SCHEMA_TAG',
+  Timestamp = 'TIMESTAMP',
+  UncachedRequestsCount = 'UNCACHED_REQUESTS_COUNT'
 }
 
 export type ServiceOperationCheckStatsDimensions = {
-  __typename?: "ServiceOperationCheckStatsDimensions";
-  clientName?: Maybe<Scalars["String"]>;
-  clientVersion?: Maybe<Scalars["String"]>;
-  queryId?: Maybe<Scalars["ID"]>;
-  queryName?: Maybe<Scalars["String"]>;
-  schemaTag?: Maybe<Scalars["String"]>;
+  __typename?: 'ServiceOperationCheckStatsDimensions';
+  clientName?: Maybe<Scalars['String']>;
+  clientVersion?: Maybe<Scalars['String']>;
+  queryId?: Maybe<Scalars['ID']>;
+  queryName?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
 };
 
 /** Filter for data in ServiceOperationCheckStats. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
 export type ServiceOperationCheckStatsFilter = {
   and?: InputMaybe<Array<ServiceOperationCheckStatsFilter>>;
   /** Selects rows whose clientName dimension equals the given value if not null. To query for the null value, use {in: {clientName: [null]}} instead. */
-  clientName?: InputMaybe<Scalars["String"]>;
+  clientName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose clientVersion dimension equals the given value if not null. To query for the null value, use {in: {clientVersion: [null]}} instead. */
-  clientVersion?: InputMaybe<Scalars["String"]>;
+  clientVersion?: InputMaybe<Scalars['String']>;
   in?: InputMaybe<ServiceOperationCheckStatsFilterIn>;
   not?: InputMaybe<ServiceOperationCheckStatsFilter>;
   or?: InputMaybe<Array<ServiceOperationCheckStatsFilter>>;
   /** Selects rows whose queryId dimension equals the given value if not null. To query for the null value, use {in: {queryId: [null]}} instead. */
-  queryId?: InputMaybe<Scalars["ID"]>;
+  queryId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose queryName dimension equals the given value if not null. To query for the null value, use {in: {queryName: [null]}} instead. */
-  queryName?: InputMaybe<Scalars["String"]>;
+  queryName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
-  schemaTag?: InputMaybe<Scalars["String"]>;
+  schemaTag?: InputMaybe<Scalars['String']>;
 };
 
 /** Filter for data in ServiceOperationCheckStats. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
 export type ServiceOperationCheckStatsFilterIn = {
   /** Selects rows whose clientName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose clientVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientVersion?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose queryId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  queryId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose queryName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  queryName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaTag?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 export type ServiceOperationCheckStatsMetrics = {
-  __typename?: "ServiceOperationCheckStatsMetrics";
-  cachedRequestsCount: Scalars["Long"];
-  uncachedRequestsCount: Scalars["Long"];
+  __typename?: 'ServiceOperationCheckStatsMetrics';
+  cachedRequestsCount: Scalars['Long'];
+  uncachedRequestsCount: Scalars['Long'];
 };
 
 export type ServiceOperationCheckStatsOrderBySpec = {
@@ -6134,99 +6279,99 @@ export type ServiceOperationCheckStatsOrderBySpec = {
 };
 
 export type ServiceOperationCheckStatsRecord = {
-  __typename?: "ServiceOperationCheckStatsRecord";
+  __typename?: 'ServiceOperationCheckStatsRecord';
   /** Dimensions of ServiceOperationCheckStats that can be grouped by. */
   groupBy: ServiceOperationCheckStatsDimensions;
   /** Metrics of ServiceOperationCheckStats that can be aggregated over. */
   metrics: ServiceOperationCheckStatsMetrics;
   /** Starting segment timestamp. */
-  timestamp: Scalars["Timestamp"];
+  timestamp: Scalars['Timestamp'];
 };
 
 /** Columns of ServiceQueryStats. */
 export enum ServiceQueryStatsColumn {
-  CachedHistogram = "CACHED_HISTOGRAM",
-  CachedRequestsCount = "CACHED_REQUESTS_COUNT",
-  CacheTtlHistogram = "CACHE_TTL_HISTOGRAM",
-  ClientName = "CLIENT_NAME",
-  ClientVersion = "CLIENT_VERSION",
-  ForbiddenOperationCount = "FORBIDDEN_OPERATION_COUNT",
-  FromEngineproxy = "FROM_ENGINEPROXY",
-  QueryId = "QUERY_ID",
-  QueryName = "QUERY_NAME",
-  RegisteredOperationCount = "REGISTERED_OPERATION_COUNT",
-  RequestsWithErrorsCount = "REQUESTS_WITH_ERRORS_COUNT",
-  SchemaHash = "SCHEMA_HASH",
-  SchemaTag = "SCHEMA_TAG",
-  Timestamp = "TIMESTAMP",
-  UncachedHistogram = "UNCACHED_HISTOGRAM",
-  UncachedRequestsCount = "UNCACHED_REQUESTS_COUNT",
+  CachedHistogram = 'CACHED_HISTOGRAM',
+  CachedRequestsCount = 'CACHED_REQUESTS_COUNT',
+  CacheTtlHistogram = 'CACHE_TTL_HISTOGRAM',
+  ClientName = 'CLIENT_NAME',
+  ClientVersion = 'CLIENT_VERSION',
+  ForbiddenOperationCount = 'FORBIDDEN_OPERATION_COUNT',
+  FromEngineproxy = 'FROM_ENGINEPROXY',
+  QueryId = 'QUERY_ID',
+  QueryName = 'QUERY_NAME',
+  RegisteredOperationCount = 'REGISTERED_OPERATION_COUNT',
+  RequestsWithErrorsCount = 'REQUESTS_WITH_ERRORS_COUNT',
+  SchemaHash = 'SCHEMA_HASH',
+  SchemaTag = 'SCHEMA_TAG',
+  Timestamp = 'TIMESTAMP',
+  UncachedHistogram = 'UNCACHED_HISTOGRAM',
+  UncachedRequestsCount = 'UNCACHED_REQUESTS_COUNT'
 }
 
 export type ServiceQueryStatsDimensions = {
-  __typename?: "ServiceQueryStatsDimensions";
-  clientName?: Maybe<Scalars["String"]>;
-  clientVersion?: Maybe<Scalars["String"]>;
-  fromEngineproxy?: Maybe<Scalars["String"]>;
-  queryId?: Maybe<Scalars["ID"]>;
-  queryName?: Maybe<Scalars["String"]>;
-  querySignature?: Maybe<Scalars["String"]>;
-  schemaHash?: Maybe<Scalars["String"]>;
-  schemaTag?: Maybe<Scalars["String"]>;
+  __typename?: 'ServiceQueryStatsDimensions';
+  clientName?: Maybe<Scalars['String']>;
+  clientVersion?: Maybe<Scalars['String']>;
+  fromEngineproxy?: Maybe<Scalars['String']>;
+  queryId?: Maybe<Scalars['ID']>;
+  queryName?: Maybe<Scalars['String']>;
+  querySignature?: Maybe<Scalars['String']>;
+  schemaHash?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
 };
 
 /** Filter for data in ServiceQueryStats. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
 export type ServiceQueryStatsFilter = {
   and?: InputMaybe<Array<ServiceQueryStatsFilter>>;
   /** Selects rows whose clientName dimension equals the given value if not null. To query for the null value, use {in: {clientName: [null]}} instead. */
-  clientName?: InputMaybe<Scalars["String"]>;
+  clientName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose clientVersion dimension equals the given value if not null. To query for the null value, use {in: {clientVersion: [null]}} instead. */
-  clientVersion?: InputMaybe<Scalars["String"]>;
+  clientVersion?: InputMaybe<Scalars['String']>;
   /** Selects rows whose fromEngineproxy dimension equals the given value if not null. To query for the null value, use {in: {fromEngineproxy: [null]}} instead. */
-  fromEngineproxy?: InputMaybe<Scalars["String"]>;
+  fromEngineproxy?: InputMaybe<Scalars['String']>;
   in?: InputMaybe<ServiceQueryStatsFilterIn>;
   not?: InputMaybe<ServiceQueryStatsFilter>;
   or?: InputMaybe<Array<ServiceQueryStatsFilter>>;
   /** Selects rows whose queryId dimension equals the given value if not null. To query for the null value, use {in: {queryId: [null]}} instead. */
-  queryId?: InputMaybe<Scalars["ID"]>;
+  queryId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose queryName dimension equals the given value if not null. To query for the null value, use {in: {queryName: [null]}} instead. */
-  queryName?: InputMaybe<Scalars["String"]>;
+  queryName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaHash dimension equals the given value if not null. To query for the null value, use {in: {schemaHash: [null]}} instead. */
-  schemaHash?: InputMaybe<Scalars["String"]>;
+  schemaHash?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
-  schemaTag?: InputMaybe<Scalars["String"]>;
+  schemaTag?: InputMaybe<Scalars['String']>;
 };
 
 /** Filter for data in ServiceQueryStats. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
 export type ServiceQueryStatsFilterIn = {
   /** Selects rows whose clientName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose clientVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientVersion?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose fromEngineproxy dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  fromEngineproxy?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  fromEngineproxy?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose queryId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  queryId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose queryName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  queryName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaHash dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaHash?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaHash?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaTag?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 export type ServiceQueryStatsMetrics = {
-  __typename?: "ServiceQueryStatsMetrics";
+  __typename?: 'ServiceQueryStatsMetrics';
   cacheTtlHistogram: DurationHistogram;
   cachedHistogram: DurationHistogram;
-  cachedRequestsCount: Scalars["Long"];
-  forbiddenOperationCount: Scalars["Long"];
-  registeredOperationCount: Scalars["Long"];
-  requestsWithErrorsCount: Scalars["Long"];
+  cachedRequestsCount: Scalars['Long'];
+  forbiddenOperationCount: Scalars['Long'];
+  registeredOperationCount: Scalars['Long'];
+  requestsWithErrorsCount: Scalars['Long'];
   totalLatencyHistogram: DurationHistogram;
-  totalRequestCount: Scalars["Long"];
+  totalRequestCount: Scalars['Long'];
   uncachedHistogram: DurationHistogram;
-  uncachedRequestsCount: Scalars["Long"];
+  uncachedRequestsCount: Scalars['Long'];
 };
 
 export type ServiceQueryStatsOrderBySpec = {
@@ -6235,55 +6380,55 @@ export type ServiceQueryStatsOrderBySpec = {
 };
 
 export type ServiceQueryStatsRecord = {
-  __typename?: "ServiceQueryStatsRecord";
+  __typename?: 'ServiceQueryStatsRecord';
   /** Dimensions of ServiceQueryStats that can be grouped by. */
   groupBy: ServiceQueryStatsDimensions;
   /** Metrics of ServiceQueryStats that can be aggregated over. */
   metrics: ServiceQueryStatsMetrics;
   /** Starting segment timestamp. */
-  timestamp: Scalars["Timestamp"];
+  timestamp: Scalars['Timestamp'];
 };
 
 /** A map from role (permission) String to boolean that the current user is allowed for the root service */
 export type ServiceRoles = {
-  __typename?: "ServiceRoles";
-  canCheckSchemas: Scalars["Boolean"];
-  canCreateVariants: Scalars["Boolean"];
-  canDelete: Scalars["Boolean"];
-  canManageAccess: Scalars["Boolean"];
-  canManageBuildConfig: Scalars["Boolean"];
-  canManageIntegrations: Scalars["Boolean"];
-  canManageKeys: Scalars["Boolean"];
-  canManageVariants: Scalars["Boolean"];
-  canQueryBuildConfig: Scalars["Boolean"];
-  canQueryCheckConfiguration: Scalars["Boolean"];
-  canQueryDeletedImplementingServices: Scalars["Boolean"];
-  canQueryImplementingServices: Scalars["Boolean"];
-  canQueryIntegrations: Scalars["Boolean"];
-  canQueryPrivateInfo: Scalars["Boolean"];
-  canQueryPublicInfo: Scalars["Boolean"];
-  canQueryReadmeAuthor: Scalars["Boolean"];
-  canQueryRoleOverrides: Scalars["Boolean"];
-  canQuerySchemas: Scalars["Boolean"];
-  canQueryStats: Scalars["Boolean"];
-  canQueryTokens: Scalars["Boolean"];
-  canQueryTraces: Scalars["Boolean"];
-  canRegisterOperations: Scalars["Boolean"];
-  canStoreSchemasWithoutVariant: Scalars["Boolean"];
-  canUndelete: Scalars["Boolean"];
-  canUpdateAvatar: Scalars["Boolean"];
-  canUpdateDescription: Scalars["Boolean"];
-  canUpdateTitle: Scalars["Boolean"];
+  __typename?: 'ServiceRoles';
+  canCheckSchemas: Scalars['Boolean'];
+  canCreateVariants: Scalars['Boolean'];
+  canDelete: Scalars['Boolean'];
+  canManageAccess: Scalars['Boolean'];
+  canManageBuildConfig: Scalars['Boolean'];
+  canManageIntegrations: Scalars['Boolean'];
+  canManageKeys: Scalars['Boolean'];
+  canManageVariants: Scalars['Boolean'];
+  canQueryBuildConfig: Scalars['Boolean'];
+  canQueryCheckConfiguration: Scalars['Boolean'];
+  canQueryDeletedImplementingServices: Scalars['Boolean'];
+  canQueryImplementingServices: Scalars['Boolean'];
+  canQueryIntegrations: Scalars['Boolean'];
+  canQueryPrivateInfo: Scalars['Boolean'];
+  canQueryPublicInfo: Scalars['Boolean'];
+  canQueryReadmeAuthor: Scalars['Boolean'];
+  canQueryRoleOverrides: Scalars['Boolean'];
+  canQuerySchemas: Scalars['Boolean'];
+  canQueryStats: Scalars['Boolean'];
+  canQueryTokens: Scalars['Boolean'];
+  canQueryTraces: Scalars['Boolean'];
+  canRegisterOperations: Scalars['Boolean'];
+  canStoreSchemasWithoutVariant: Scalars['Boolean'];
+  canUndelete: Scalars['Boolean'];
+  canUpdateAvatar: Scalars['Boolean'];
+  canUpdateDescription: Scalars['Boolean'];
+  canUpdateTitle: Scalars['Boolean'];
   /** @deprecated Replaced with canQueryTraces and canQueryStats */
-  canVisualizeStats: Scalars["Boolean"];
-  canWriteCheckConfiguration: Scalars["Boolean"];
+  canVisualizeStats: Scalars['Boolean'];
+  canWriteCheckConfiguration: Scalars['Boolean'];
   /** @deprecated Never worked, not replaced */
-  canWriteTraces: Scalars["Boolean"];
+  canWriteTraces: Scalars['Boolean'];
 };
 
 /** A time window with a specified granularity over a given service. */
 export type ServiceStatsWindow = {
-  __typename?: "ServiceStatsWindow";
+  __typename?: 'ServiceStatsWindow';
   edgeServerInfos: Array<ServiceEdgeServerInfosRecord>;
   errorStats: Array<ServiceErrorStatsRecord>;
   fieldLatencies: Array<ServiceFieldLatenciesRecord>;
@@ -6292,173 +6437,182 @@ export type ServiceStatsWindow = {
   operationCheckStats: Array<ServiceOperationCheckStatsRecord>;
   queryStats: Array<ServiceQueryStatsRecord>;
   /** From field rounded down to the nearest resolution. */
-  roundedDownFrom: Scalars["Timestamp"];
+  roundedDownFrom: Scalars['Timestamp'];
   /** To field rounded up to the nearest resolution. */
-  roundedUpTo: Scalars["Timestamp"];
+  roundedUpTo: Scalars['Timestamp'];
   tracePathErrorsRefs: Array<ServiceTracePathErrorsRefsRecord>;
   traceRefs: Array<ServiceTraceRefsRecord>;
 };
 
+
 /** A time window with a specified granularity over a given service. */
 export type ServiceStatsWindowEdgeServerInfosArgs = {
   filter?: InputMaybe<ServiceEdgeServerInfosFilter>;
-  limit?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<ServiceEdgeServerInfosOrderBySpec>>;
 };
+
 
 /** A time window with a specified granularity over a given service. */
 export type ServiceStatsWindowErrorStatsArgs = {
   filter?: InputMaybe<ServiceErrorStatsFilter>;
-  limit?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<ServiceErrorStatsOrderBySpec>>;
 };
+
 
 /** A time window with a specified granularity over a given service. */
 export type ServiceStatsWindowFieldLatenciesArgs = {
   filter?: InputMaybe<ServiceFieldLatenciesFilter>;
-  limit?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<ServiceFieldLatenciesOrderBySpec>>;
 };
+
 
 /** A time window with a specified granularity over a given service. */
 export type ServiceStatsWindowFieldStatsArgs = {
   filter?: InputMaybe<ServiceFieldLatenciesFilter>;
-  limit?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<ServiceFieldLatenciesOrderBySpec>>;
 };
+
 
 /** A time window with a specified granularity over a given service. */
 export type ServiceStatsWindowFieldUsageArgs = {
   filter?: InputMaybe<ServiceFieldUsageFilter>;
-  limit?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<ServiceFieldUsageOrderBySpec>>;
 };
+
 
 /** A time window with a specified granularity over a given service. */
 export type ServiceStatsWindowOperationCheckStatsArgs = {
   filter?: InputMaybe<ServiceOperationCheckStatsFilter>;
-  limit?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<ServiceOperationCheckStatsOrderBySpec>>;
 };
+
 
 /** A time window with a specified granularity over a given service. */
 export type ServiceStatsWindowQueryStatsArgs = {
   filter?: InputMaybe<ServiceQueryStatsFilter>;
-  limit?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<ServiceQueryStatsOrderBySpec>>;
 };
+
 
 /** A time window with a specified granularity over a given service. */
 export type ServiceStatsWindowTracePathErrorsRefsArgs = {
   filter?: InputMaybe<ServiceTracePathErrorsRefsFilter>;
-  limit?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<ServiceTracePathErrorsRefsOrderBySpec>>;
 };
+
 
 /** A time window with a specified granularity over a given service. */
 export type ServiceStatsWindowTraceRefsArgs = {
   filter?: InputMaybe<ServiceTraceRefsFilter>;
-  limit?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<ServiceTraceRefsOrderBySpec>>;
 };
 
 /** Columns of ServiceTracePathErrorsRefs. */
 export enum ServiceTracePathErrorsRefsColumn {
-  ClientName = "CLIENT_NAME",
-  ClientVersion = "CLIENT_VERSION",
-  DurationBucket = "DURATION_BUCKET",
-  ErrorsCountInPath = "ERRORS_COUNT_IN_PATH",
-  ErrorsCountInTrace = "ERRORS_COUNT_IN_TRACE",
-  ErrorMessage = "ERROR_MESSAGE",
-  Path = "PATH",
-  QueryId = "QUERY_ID",
-  QueryName = "QUERY_NAME",
-  SchemaHash = "SCHEMA_HASH",
-  SchemaTag = "SCHEMA_TAG",
-  Timestamp = "TIMESTAMP",
-  TraceHttpStatusCode = "TRACE_HTTP_STATUS_CODE",
-  TraceId = "TRACE_ID",
-  TraceSizeBytes = "TRACE_SIZE_BYTES",
-  TraceStartsAt = "TRACE_STARTS_AT",
+  ClientName = 'CLIENT_NAME',
+  ClientVersion = 'CLIENT_VERSION',
+  DurationBucket = 'DURATION_BUCKET',
+  ErrorsCountInPath = 'ERRORS_COUNT_IN_PATH',
+  ErrorsCountInTrace = 'ERRORS_COUNT_IN_TRACE',
+  ErrorMessage = 'ERROR_MESSAGE',
+  Path = 'PATH',
+  QueryId = 'QUERY_ID',
+  QueryName = 'QUERY_NAME',
+  SchemaHash = 'SCHEMA_HASH',
+  SchemaTag = 'SCHEMA_TAG',
+  Timestamp = 'TIMESTAMP',
+  TraceHttpStatusCode = 'TRACE_HTTP_STATUS_CODE',
+  TraceId = 'TRACE_ID',
+  TraceSizeBytes = 'TRACE_SIZE_BYTES',
+  TraceStartsAt = 'TRACE_STARTS_AT'
 }
 
 export type ServiceTracePathErrorsRefsDimensions = {
-  __typename?: "ServiceTracePathErrorsRefsDimensions";
-  clientName?: Maybe<Scalars["String"]>;
-  clientVersion?: Maybe<Scalars["String"]>;
-  durationBucket?: Maybe<Scalars["Int"]>;
-  errorMessage?: Maybe<Scalars["String"]>;
-  path?: Maybe<Scalars["String"]>;
-  queryId?: Maybe<Scalars["ID"]>;
-  queryName?: Maybe<Scalars["String"]>;
-  schemaHash?: Maybe<Scalars["String"]>;
-  schemaTag?: Maybe<Scalars["String"]>;
-  traceHttpStatusCode?: Maybe<Scalars["Int"]>;
-  traceId?: Maybe<Scalars["ID"]>;
-  traceStartsAt?: Maybe<Scalars["Timestamp"]>;
+  __typename?: 'ServiceTracePathErrorsRefsDimensions';
+  clientName?: Maybe<Scalars['String']>;
+  clientVersion?: Maybe<Scalars['String']>;
+  durationBucket?: Maybe<Scalars['Int']>;
+  errorMessage?: Maybe<Scalars['String']>;
+  path?: Maybe<Scalars['String']>;
+  queryId?: Maybe<Scalars['ID']>;
+  queryName?: Maybe<Scalars['String']>;
+  schemaHash?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
+  traceHttpStatusCode?: Maybe<Scalars['Int']>;
+  traceId?: Maybe<Scalars['ID']>;
+  traceStartsAt?: Maybe<Scalars['Timestamp']>;
 };
 
 /** Filter for data in ServiceTracePathErrorsRefs. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
 export type ServiceTracePathErrorsRefsFilter = {
   and?: InputMaybe<Array<ServiceTracePathErrorsRefsFilter>>;
   /** Selects rows whose clientName dimension equals the given value if not null. To query for the null value, use {in: {clientName: [null]}} instead. */
-  clientName?: InputMaybe<Scalars["String"]>;
+  clientName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose clientVersion dimension equals the given value if not null. To query for the null value, use {in: {clientVersion: [null]}} instead. */
-  clientVersion?: InputMaybe<Scalars["String"]>;
+  clientVersion?: InputMaybe<Scalars['String']>;
   /** Selects rows whose durationBucket dimension equals the given value if not null. To query for the null value, use {in: {durationBucket: [null]}} instead. */
-  durationBucket?: InputMaybe<Scalars["Int"]>;
+  durationBucket?: InputMaybe<Scalars['Int']>;
   /** Selects rows whose errorMessage dimension equals the given value if not null. To query for the null value, use {in: {errorMessage: [null]}} instead. */
-  errorMessage?: InputMaybe<Scalars["String"]>;
+  errorMessage?: InputMaybe<Scalars['String']>;
   in?: InputMaybe<ServiceTracePathErrorsRefsFilterIn>;
   not?: InputMaybe<ServiceTracePathErrorsRefsFilter>;
   or?: InputMaybe<Array<ServiceTracePathErrorsRefsFilter>>;
   /** Selects rows whose path dimension equals the given value if not null. To query for the null value, use {in: {path: [null]}} instead. */
-  path?: InputMaybe<Scalars["String"]>;
+  path?: InputMaybe<Scalars['String']>;
   /** Selects rows whose queryId dimension equals the given value if not null. To query for the null value, use {in: {queryId: [null]}} instead. */
-  queryId?: InputMaybe<Scalars["ID"]>;
+  queryId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose queryName dimension equals the given value if not null. To query for the null value, use {in: {queryName: [null]}} instead. */
-  queryName?: InputMaybe<Scalars["String"]>;
+  queryName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaHash dimension equals the given value if not null. To query for the null value, use {in: {schemaHash: [null]}} instead. */
-  schemaHash?: InputMaybe<Scalars["String"]>;
+  schemaHash?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
-  schemaTag?: InputMaybe<Scalars["String"]>;
+  schemaTag?: InputMaybe<Scalars['String']>;
   /** Selects rows whose traceHttpStatusCode dimension equals the given value if not null. To query for the null value, use {in: {traceHttpStatusCode: [null]}} instead. */
-  traceHttpStatusCode?: InputMaybe<Scalars["Int"]>;
+  traceHttpStatusCode?: InputMaybe<Scalars['Int']>;
   /** Selects rows whose traceId dimension equals the given value if not null. To query for the null value, use {in: {traceId: [null]}} instead. */
-  traceId?: InputMaybe<Scalars["ID"]>;
+  traceId?: InputMaybe<Scalars['ID']>;
 };
 
 /** Filter for data in ServiceTracePathErrorsRefs. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
 export type ServiceTracePathErrorsRefsFilterIn = {
   /** Selects rows whose clientName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose clientVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientVersion?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose durationBucket dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  durationBucket?: InputMaybe<Array<InputMaybe<Scalars["Int"]>>>;
+  durationBucket?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   /** Selects rows whose errorMessage dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  errorMessage?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  errorMessage?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose path dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  path?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  path?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose queryId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  queryId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose queryName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  queryName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaHash dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaHash?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaHash?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaTag?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose traceHttpStatusCode dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  traceHttpStatusCode?: InputMaybe<Array<InputMaybe<Scalars["Int"]>>>;
+  traceHttpStatusCode?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   /** Selects rows whose traceId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  traceId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  traceId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
 export type ServiceTracePathErrorsRefsMetrics = {
-  __typename?: "ServiceTracePathErrorsRefsMetrics";
-  errorsCountInPath: Scalars["Long"];
-  errorsCountInTrace: Scalars["Long"];
-  traceSizeBytes: Scalars["Long"];
+  __typename?: 'ServiceTracePathErrorsRefsMetrics';
+  errorsCountInPath: Scalars['Long'];
+  errorsCountInTrace: Scalars['Long'];
+  traceSizeBytes: Scalars['Long'];
 };
 
 export type ServiceTracePathErrorsRefsOrderBySpec = {
@@ -6467,91 +6621,91 @@ export type ServiceTracePathErrorsRefsOrderBySpec = {
 };
 
 export type ServiceTracePathErrorsRefsRecord = {
-  __typename?: "ServiceTracePathErrorsRefsRecord";
+  __typename?: 'ServiceTracePathErrorsRefsRecord';
   /** Dimensions of ServiceTracePathErrorsRefs that can be grouped by. */
   groupBy: ServiceTracePathErrorsRefsDimensions;
   /** Metrics of ServiceTracePathErrorsRefs that can be aggregated over. */
   metrics: ServiceTracePathErrorsRefsMetrics;
   /** Starting segment timestamp. */
-  timestamp: Scalars["Timestamp"];
+  timestamp: Scalars['Timestamp'];
 };
 
 /** Columns of ServiceTraceRefs. */
 export enum ServiceTraceRefsColumn {
-  ClientName = "CLIENT_NAME",
-  ClientVersion = "CLIENT_VERSION",
-  DurationBucket = "DURATION_BUCKET",
-  DurationNs = "DURATION_NS",
-  QueryId = "QUERY_ID",
-  QueryName = "QUERY_NAME",
-  SchemaHash = "SCHEMA_HASH",
-  SchemaTag = "SCHEMA_TAG",
-  Timestamp = "TIMESTAMP",
-  TraceId = "TRACE_ID",
-  TraceSizeBytes = "TRACE_SIZE_BYTES",
+  ClientName = 'CLIENT_NAME',
+  ClientVersion = 'CLIENT_VERSION',
+  DurationBucket = 'DURATION_BUCKET',
+  DurationNs = 'DURATION_NS',
+  QueryId = 'QUERY_ID',
+  QueryName = 'QUERY_NAME',
+  SchemaHash = 'SCHEMA_HASH',
+  SchemaTag = 'SCHEMA_TAG',
+  Timestamp = 'TIMESTAMP',
+  TraceId = 'TRACE_ID',
+  TraceSizeBytes = 'TRACE_SIZE_BYTES'
 }
 
 export type ServiceTraceRefsDimensions = {
-  __typename?: "ServiceTraceRefsDimensions";
-  clientName?: Maybe<Scalars["String"]>;
-  clientVersion?: Maybe<Scalars["String"]>;
-  durationBucket?: Maybe<Scalars["Int"]>;
-  queryId?: Maybe<Scalars["ID"]>;
-  queryName?: Maybe<Scalars["String"]>;
-  querySignature?: Maybe<Scalars["String"]>;
-  schemaHash?: Maybe<Scalars["String"]>;
-  schemaTag?: Maybe<Scalars["String"]>;
-  traceId?: Maybe<Scalars["ID"]>;
+  __typename?: 'ServiceTraceRefsDimensions';
+  clientName?: Maybe<Scalars['String']>;
+  clientVersion?: Maybe<Scalars['String']>;
+  durationBucket?: Maybe<Scalars['Int']>;
+  queryId?: Maybe<Scalars['ID']>;
+  queryName?: Maybe<Scalars['String']>;
+  querySignature?: Maybe<Scalars['String']>;
+  schemaHash?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
+  traceId?: Maybe<Scalars['ID']>;
 };
 
 /** Filter for data in ServiceTraceRefs. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
 export type ServiceTraceRefsFilter = {
   and?: InputMaybe<Array<ServiceTraceRefsFilter>>;
   /** Selects rows whose clientName dimension equals the given value if not null. To query for the null value, use {in: {clientName: [null]}} instead. */
-  clientName?: InputMaybe<Scalars["String"]>;
+  clientName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose clientVersion dimension equals the given value if not null. To query for the null value, use {in: {clientVersion: [null]}} instead. */
-  clientVersion?: InputMaybe<Scalars["String"]>;
+  clientVersion?: InputMaybe<Scalars['String']>;
   /** Selects rows whose durationBucket dimension equals the given value if not null. To query for the null value, use {in: {durationBucket: [null]}} instead. */
-  durationBucket?: InputMaybe<Scalars["Int"]>;
+  durationBucket?: InputMaybe<Scalars['Int']>;
   in?: InputMaybe<ServiceTraceRefsFilterIn>;
   not?: InputMaybe<ServiceTraceRefsFilter>;
   or?: InputMaybe<Array<ServiceTraceRefsFilter>>;
   /** Selects rows whose queryId dimension equals the given value if not null. To query for the null value, use {in: {queryId: [null]}} instead. */
-  queryId?: InputMaybe<Scalars["ID"]>;
+  queryId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose queryName dimension equals the given value if not null. To query for the null value, use {in: {queryName: [null]}} instead. */
-  queryName?: InputMaybe<Scalars["String"]>;
+  queryName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaHash dimension equals the given value if not null. To query for the null value, use {in: {schemaHash: [null]}} instead. */
-  schemaHash?: InputMaybe<Scalars["String"]>;
+  schemaHash?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
-  schemaTag?: InputMaybe<Scalars["String"]>;
+  schemaTag?: InputMaybe<Scalars['String']>;
   /** Selects rows whose traceId dimension equals the given value if not null. To query for the null value, use {in: {traceId: [null]}} instead. */
-  traceId?: InputMaybe<Scalars["ID"]>;
+  traceId?: InputMaybe<Scalars['ID']>;
 };
 
 /** Filter for data in ServiceTraceRefs. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
 export type ServiceTraceRefsFilterIn = {
   /** Selects rows whose clientName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose clientVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientVersion?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose durationBucket dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  durationBucket?: InputMaybe<Array<InputMaybe<Scalars["Int"]>>>;
+  durationBucket?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   /** Selects rows whose queryId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  queryId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose queryName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  queryName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaHash dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaHash?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaHash?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaTag?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose traceId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  traceId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  traceId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
 export type ServiceTraceRefsMetrics = {
-  __typename?: "ServiceTraceRefsMetrics";
-  durationNs: Scalars["Long"];
-  traceSizeBytes: Scalars["Long"];
+  __typename?: 'ServiceTraceRefsMetrics';
+  durationNs: Scalars['Long'];
+  traceSizeBytes: Scalars['Long'];
 };
 
 export type ServiceTraceRefsOrderBySpec = {
@@ -6560,57 +6714,57 @@ export type ServiceTraceRefsOrderBySpec = {
 };
 
 export type ServiceTraceRefsRecord = {
-  __typename?: "ServiceTraceRefsRecord";
+  __typename?: 'ServiceTraceRefsRecord';
   /** Dimensions of ServiceTraceRefs that can be grouped by. */
   groupBy: ServiceTraceRefsDimensions;
   /** Metrics of ServiceTraceRefs that can be aggregated over. */
   metrics: ServiceTraceRefsMetrics;
   /** Starting segment timestamp. */
-  timestamp: Scalars["Timestamp"];
+  timestamp: Scalars['Timestamp'];
 };
 
 /** Slack notification channel */
 export type SlackChannel = Channel & {
-  __typename?: "SlackChannel";
-  id: Scalars["ID"];
-  name: Scalars["String"];
+  __typename?: 'SlackChannel';
+  id: Scalars['ID'];
+  name: Scalars['String'];
   subscriptions: Array<ChannelSubscription>;
-  url: Scalars["String"];
+  url: Scalars['String'];
 };
 
 /** Slack notification channel parameters */
 export type SlackChannelInput = {
-  name?: InputMaybe<Scalars["String"]>;
-  url: Scalars["String"];
+  name?: InputMaybe<Scalars['String']>;
+  url: Scalars['String'];
 };
 
 export type SlackNotificationField = {
-  key: Scalars["String"];
-  value: Scalars["String"];
+  key: Scalars['String'];
+  value: Scalars['String'];
 };
 
 /** Slack notification message */
 export type SlackNotificationInput = {
-  color?: InputMaybe<Scalars["String"]>;
-  fallback: Scalars["String"];
+  color?: InputMaybe<Scalars['String']>;
+  fallback: Scalars['String'];
   fields?: InputMaybe<Array<SlackNotificationField>>;
-  iconUrl?: InputMaybe<Scalars["String"]>;
-  text?: InputMaybe<Scalars["String"]>;
-  timestamp?: InputMaybe<Scalars["Timestamp"]>;
-  title?: InputMaybe<Scalars["String"]>;
-  titleLink?: InputMaybe<Scalars["String"]>;
-  username?: InputMaybe<Scalars["String"]>;
+  iconUrl?: InputMaybe<Scalars['String']>;
+  text?: InputMaybe<Scalars['String']>;
+  timestamp?: InputMaybe<Scalars['Timestamp']>;
+  title?: InputMaybe<Scalars['String']>;
+  titleLink?: InputMaybe<Scalars['String']>;
+  username?: InputMaybe<Scalars['String']>;
 };
 
 export type SourceLocation = {
-  __typename?: "SourceLocation";
-  column: Scalars["Int"];
-  line: Scalars["Int"];
+  __typename?: 'SourceLocation';
+  column: Scalars['Int'];
+  line: Scalars['Int'];
 };
 
 /** A time window with a specified granularity. */
 export type StatsWindow = {
-  __typename?: "StatsWindow";
+  __typename?: 'StatsWindow';
   edgeServerInfos: Array<EdgeServerInfosRecord>;
   errorStats: Array<ErrorStatsRecord>;
   fieldLatencies: Array<FieldLatenciesRecord>;
@@ -6618,89 +6772,97 @@ export type StatsWindow = {
   operationCheckStats: Array<OperationCheckStatsRecord>;
   queryStats: Array<QueryStatsRecord>;
   /** From field rounded down to the nearest resolution. */
-  roundedDownFrom: Scalars["Timestamp"];
+  roundedDownFrom: Scalars['Timestamp'];
   /** To field rounded up to the nearest resolution. */
-  roundedUpTo: Scalars["Timestamp"];
+  roundedUpTo: Scalars['Timestamp'];
   tracePathErrorsRefs: Array<TracePathErrorsRefsRecord>;
   traceRefs: Array<TraceRefsRecord>;
 };
 
+
 /** A time window with a specified granularity. */
 export type StatsWindowEdgeServerInfosArgs = {
   filter?: InputMaybe<EdgeServerInfosFilter>;
-  limit?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<EdgeServerInfosOrderBySpec>>;
 };
+
 
 /** A time window with a specified granularity. */
 export type StatsWindowErrorStatsArgs = {
   filter?: InputMaybe<ErrorStatsFilter>;
-  limit?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<ErrorStatsOrderBySpec>>;
 };
+
 
 /** A time window with a specified granularity. */
 export type StatsWindowFieldLatenciesArgs = {
   filter?: InputMaybe<FieldLatenciesFilter>;
-  limit?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<FieldLatenciesOrderBySpec>>;
 };
+
 
 /** A time window with a specified granularity. */
 export type StatsWindowFieldUsageArgs = {
   filter?: InputMaybe<FieldUsageFilter>;
-  limit?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<FieldUsageOrderBySpec>>;
 };
+
 
 /** A time window with a specified granularity. */
 export type StatsWindowOperationCheckStatsArgs = {
   filter?: InputMaybe<OperationCheckStatsFilter>;
-  limit?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<OperationCheckStatsOrderBySpec>>;
 };
+
 
 /** A time window with a specified granularity. */
 export type StatsWindowQueryStatsArgs = {
   filter?: InputMaybe<QueryStatsFilter>;
-  limit?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<QueryStatsOrderBySpec>>;
 };
+
 
 /** A time window with a specified granularity. */
 export type StatsWindowTracePathErrorsRefsArgs = {
   filter?: InputMaybe<TracePathErrorsRefsFilter>;
-  limit?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<TracePathErrorsRefsOrderBySpec>>;
 };
+
 
 /** A time window with a specified granularity. */
 export type StatsWindowTraceRefsArgs = {
   filter?: InputMaybe<TraceRefsFilter>;
-  limit?: InputMaybe<Scalars["Int"]>;
+  limit?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<TraceRefsOrderBySpec>>;
 };
 
 export type StoreSchemaError = {
-  __typename?: "StoreSchemaError";
+  __typename?: 'StoreSchemaError';
   code: StoreSchemaErrorCode;
-  message: Scalars["String"];
+  message: Scalars['String'];
 };
 
 export enum StoreSchemaErrorCode {
-  SchemaIsNotParsable = "SCHEMA_IS_NOT_PARSABLE",
-  SchemaIsNotValid = "SCHEMA_IS_NOT_VALID",
+  SchemaIsNotParsable = 'SCHEMA_IS_NOT_PARSABLE',
+  SchemaIsNotValid = 'SCHEMA_IS_NOT_VALID'
 }
 
 export type StoreSchemaResponse = {
-  __typename?: "StoreSchemaResponse";
-  sha256: Scalars["SHA256"];
+  __typename?: 'StoreSchemaResponse';
+  sha256: Scalars['SHA256'];
 };
 
 export type StoreSchemaResponseOrError = StoreSchemaError | StoreSchemaResponse;
 
 export type StoredApprovedChange = {
-  __typename?: "StoredApprovedChange";
+  __typename?: 'StoredApprovedChange';
   argNode?: Maybe<NamedIntrospectionArgNoDescription>;
   childNode?: Maybe<NamedIntrospectionValueNoDescription>;
   code: ChangeCode;
@@ -6708,295 +6870,295 @@ export type StoredApprovedChange = {
 };
 
 export type StringToString = {
-  __typename?: "StringToString";
-  key: Scalars["String"];
-  value: Scalars["String"];
+  __typename?: 'StringToString';
+  key: Scalars['String'];
+  value: Scalars['String'];
 };
 
 export type StringToStringInput = {
-  key: Scalars["String"];
-  value: Scalars["String"];
+  key: Scalars['String'];
+  value: Scalars['String'];
 };
 
 export type Subgraph = {
-  __typename?: "Subgraph";
-  hash: Scalars["String"];
-  name: Scalars["String"];
-  routingURL: Scalars["String"];
+  __typename?: 'Subgraph';
+  hash: Scalars['String'];
+  name: Scalars['String'];
+  routingURL: Scalars['String'];
 };
 
 export type SubgraphChange = {
-  __typename?: "SubgraphChange";
-  name: Scalars["ID"];
+  __typename?: 'SubgraphChange';
+  name: Scalars['ID'];
   type: SubgraphChangeType;
 };
 
 export enum SubgraphChangeType {
-  Addition = "ADDITION",
-  Deletion = "DELETION",
-  Modification = "MODIFICATION",
+  Addition = 'ADDITION',
+  Deletion = 'DELETION',
+  Modification = 'MODIFICATION'
 }
 
 export type SubgraphConfig = {
-  __typename?: "SubgraphConfig";
-  id: Scalars["ID"];
-  name: Scalars["String"];
-  schemaHash: Scalars["String"];
-  sdl: Scalars["String"];
-  url: Scalars["String"];
+  __typename?: 'SubgraphConfig';
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  schemaHash: Scalars['String'];
+  sdl: Scalars['String'];
+  url: Scalars['String'];
 };
 
 export type SubscriptionOptions = {
-  __typename?: "SubscriptionOptions";
+  __typename?: 'SubscriptionOptions';
   /** Enables notifications for schema updates */
-  schemaUpdates: Scalars["Boolean"];
+  schemaUpdates: Scalars['Boolean'];
 };
 
 export type SubscriptionOptionsInput = {
   /** Enables notifications for schema updates */
-  schemaUpdates: Scalars["Boolean"];
+  schemaUpdates: Scalars['Boolean'];
 };
 
 export enum SubscriptionState {
-  Active = "ACTIVE",
-  Canceled = "CANCELED",
-  Expired = "EXPIRED",
-  Future = "FUTURE",
-  PastDue = "PAST_DUE",
-  Paused = "PAUSED",
-  Pending = "PENDING",
-  Unknown = "UNKNOWN",
+  Active = 'ACTIVE',
+  Canceled = 'CANCELED',
+  Expired = 'EXPIRED',
+  Future = 'FUTURE',
+  PastDue = 'PAST_DUE',
+  Paused = 'PAUSED',
+  Pending = 'PENDING',
+  Unknown = 'UNKNOWN'
 }
 
 export enum SubscriptionStateV2 {
-  Active = "ACTIVE",
-  Canceled = "CANCELED",
-  Expired = "EXPIRED",
-  Future = "FUTURE",
-  PastDue = "PAST_DUE",
-  Paused = "PAUSED",
-  Pending = "PENDING",
-  Unknown = "UNKNOWN",
+  Active = 'ACTIVE',
+  Canceled = 'CANCELED',
+  Expired = 'EXPIRED',
+  Future = 'FUTURE',
+  PastDue = 'PAST_DUE',
+  Paused = 'PAUSED',
+  Pending = 'PENDING',
+  Unknown = 'UNKNOWN'
 }
 
 export type TemporaryUrl = {
-  __typename?: "TemporaryURL";
-  url: Scalars["String"];
+  __typename?: 'TemporaryURL';
+  url: Scalars['String'];
 };
 
 export enum ThemeName {
-  Dark = "DARK",
-  Light = "LIGHT",
+  Dark = 'DARK',
+  Light = 'LIGHT'
 }
 
 export enum TicketPriority {
-  P0 = "P0",
-  P1 = "P1",
-  P2 = "P2",
-  P3 = "P3",
+  P0 = 'P0',
+  P1 = 'P1',
+  P2 = 'P2',
+  P3 = 'P3'
 }
 
 export enum TicketStatus {
-  Closed = "CLOSED",
-  Hold = "HOLD",
-  New = "NEW",
-  Open = "OPEN",
-  Pending = "PENDING",
-  Solved = "SOLVED",
+  Closed = 'CLOSED',
+  Hold = 'HOLD',
+  New = 'NEW',
+  Open = 'OPEN',
+  Pending = 'PENDING',
+  Solved = 'SOLVED'
 }
 
 export type TimezoneOffset = {
-  __typename?: "TimezoneOffset";
-  minutesOffsetFromUTC: Scalars["Int"];
-  zoneID: Scalars["String"];
+  __typename?: 'TimezoneOffset';
+  minutesOffsetFromUTC: Scalars['Int'];
+  zoneID: Scalars['String'];
 };
 
 export type TotalChangeSummaryCounts = {
-  __typename?: "TotalChangeSummaryCounts";
+  __typename?: 'TotalChangeSummaryCounts';
   /**
    * Number of changes that are additions. This includes adding types, adding fields to object, input
    * object, and interface types, adding values to enums, adding members to interfaces and unions, and
    * adding arguments.
    */
-  additions: Scalars["Int"];
+  additions: Scalars['Int'];
   /** Number of changes that are new usages of the @deprecated directive. */
-  deprecations: Scalars["Int"];
+  deprecations: Scalars['Int'];
   /**
    * Number of changes that are edits. This includes types changing kind, fields and arguments
    * changing type, arguments changing default value, and any description changes. This also includes
    * edits to @deprecated reason strings.
    */
-  edits: Scalars["Int"];
+  edits: Scalars['Int'];
   /**
    * Number of changes that are removals. This includes removing types, removing fields from object,
    * input object, and interface types, removing values from enums, removing members from interfaces
    * and unions, and removing arguments. This also includes removing @deprecated usages.
    */
-  removals: Scalars["Int"];
+  removals: Scalars['Int'];
 };
 
 export type Trace = {
-  __typename?: "Trace";
-  cacheMaxAgeMs?: Maybe<Scalars["Float"]>;
+  __typename?: 'Trace';
+  cacheMaxAgeMs?: Maybe<Scalars['Float']>;
   cacheScope?: Maybe<CacheScope>;
-  clientName?: Maybe<Scalars["String"]>;
-  clientVersion?: Maybe<Scalars["String"]>;
-  durationMs: Scalars["Float"];
-  endTime: Scalars["Timestamp"];
+  clientName?: Maybe<Scalars['String']>;
+  clientVersion?: Maybe<Scalars['String']>;
+  durationMs: Scalars['Float'];
+  endTime: Scalars['Timestamp'];
   http?: Maybe<TraceHttp>;
-  id: Scalars["ID"];
-  operationName?: Maybe<Scalars["String"]>;
+  id: Scalars['ID'];
+  operationName?: Maybe<Scalars['String']>;
   protobuf: Protobuf;
   root: TraceNode;
-  signature: Scalars["String"];
-  startTime: Scalars["Timestamp"];
+  signature: Scalars['String'];
+  startTime: Scalars['Timestamp'];
   variablesJSON: Array<StringToString>;
 };
 
 export type TraceError = {
-  __typename?: "TraceError";
-  json: Scalars["String"];
+  __typename?: 'TraceError';
+  json: Scalars['String'];
   locations: Array<TraceSourceLocation>;
-  message: Scalars["String"];
-  timestamp?: Maybe<Scalars["Timestamp"]>;
+  message: Scalars['String'];
+  timestamp?: Maybe<Scalars['Timestamp']>;
 };
 
 export type TraceHttp = {
-  __typename?: "TraceHTTP";
-  host?: Maybe<Scalars["String"]>;
+  __typename?: 'TraceHTTP';
+  host?: Maybe<Scalars['String']>;
   method: HttpMethod;
-  path?: Maybe<Scalars["String"]>;
-  protocol?: Maybe<Scalars["String"]>;
+  path?: Maybe<Scalars['String']>;
+  protocol?: Maybe<Scalars['String']>;
   requestHeaders: Array<StringToString>;
   responseHeaders: Array<StringToString>;
-  secure: Scalars["Boolean"];
-  statusCode: Scalars["Int"];
+  secure: Scalars['Boolean'];
+  statusCode: Scalars['Int'];
 };
 
 export type TraceNode = {
-  __typename?: "TraceNode";
-  cacheMaxAgeMs?: Maybe<Scalars["Float"]>;
+  __typename?: 'TraceNode';
+  cacheMaxAgeMs?: Maybe<Scalars['Float']>;
   cacheScope?: Maybe<CacheScope>;
   children: Array<TraceNode>;
-  childrenIds: Array<Scalars["ID"]>;
+  childrenIds: Array<Scalars['ID']>;
   descendants: Array<TraceNode>;
-  descendantsIds: Array<Scalars["ID"]>;
-  endTime: Scalars["Timestamp"];
+  descendantsIds: Array<Scalars['ID']>;
+  endTime: Scalars['Timestamp'];
   errors: Array<TraceError>;
-  id: Scalars["ID"];
-  key?: Maybe<Scalars["StringOrInt"]>;
-  originalFieldName?: Maybe<Scalars["String"]>;
-  parent: Scalars["ID"];
-  parentId?: Maybe<Scalars["ID"]>;
-  path: Array<Scalars["String"]>;
-  startTime: Scalars["Timestamp"];
-  type?: Maybe<Scalars["String"]>;
+  id: Scalars['ID'];
+  key?: Maybe<Scalars['StringOrInt']>;
+  originalFieldName?: Maybe<Scalars['String']>;
+  parent: Scalars['ID'];
+  parentId?: Maybe<Scalars['ID']>;
+  path: Array<Scalars['String']>;
+  startTime: Scalars['Timestamp'];
+  type?: Maybe<Scalars['String']>;
 };
 
 /** Columns of TracePathErrorsRefs. */
 export enum TracePathErrorsRefsColumn {
-  ClientName = "CLIENT_NAME",
-  ClientVersion = "CLIENT_VERSION",
-  DurationBucket = "DURATION_BUCKET",
-  ErrorsCountInPath = "ERRORS_COUNT_IN_PATH",
-  ErrorsCountInTrace = "ERRORS_COUNT_IN_TRACE",
-  ErrorMessage = "ERROR_MESSAGE",
-  Path = "PATH",
-  QueryId = "QUERY_ID",
-  QueryName = "QUERY_NAME",
-  SchemaHash = "SCHEMA_HASH",
-  SchemaTag = "SCHEMA_TAG",
-  ServiceId = "SERVICE_ID",
-  Timestamp = "TIMESTAMP",
-  TraceHttpStatusCode = "TRACE_HTTP_STATUS_CODE",
-  TraceId = "TRACE_ID",
-  TraceSizeBytes = "TRACE_SIZE_BYTES",
-  TraceStartsAt = "TRACE_STARTS_AT",
+  ClientName = 'CLIENT_NAME',
+  ClientVersion = 'CLIENT_VERSION',
+  DurationBucket = 'DURATION_BUCKET',
+  ErrorsCountInPath = 'ERRORS_COUNT_IN_PATH',
+  ErrorsCountInTrace = 'ERRORS_COUNT_IN_TRACE',
+  ErrorMessage = 'ERROR_MESSAGE',
+  Path = 'PATH',
+  QueryId = 'QUERY_ID',
+  QueryName = 'QUERY_NAME',
+  SchemaHash = 'SCHEMA_HASH',
+  SchemaTag = 'SCHEMA_TAG',
+  ServiceId = 'SERVICE_ID',
+  Timestamp = 'TIMESTAMP',
+  TraceHttpStatusCode = 'TRACE_HTTP_STATUS_CODE',
+  TraceId = 'TRACE_ID',
+  TraceSizeBytes = 'TRACE_SIZE_BYTES',
+  TraceStartsAt = 'TRACE_STARTS_AT'
 }
 
 export type TracePathErrorsRefsDimensions = {
-  __typename?: "TracePathErrorsRefsDimensions";
-  clientName?: Maybe<Scalars["String"]>;
-  clientVersion?: Maybe<Scalars["String"]>;
-  durationBucket?: Maybe<Scalars["Int"]>;
-  errorMessage?: Maybe<Scalars["String"]>;
+  __typename?: 'TracePathErrorsRefsDimensions';
+  clientName?: Maybe<Scalars['String']>;
+  clientVersion?: Maybe<Scalars['String']>;
+  durationBucket?: Maybe<Scalars['Int']>;
+  errorMessage?: Maybe<Scalars['String']>;
   /** If metrics were collected from a federated service, this field will be prefixed with `service:<SERVICE_NAME>.` */
-  path?: Maybe<Scalars["String"]>;
-  queryId?: Maybe<Scalars["ID"]>;
-  queryName?: Maybe<Scalars["String"]>;
-  schemaHash?: Maybe<Scalars["String"]>;
-  schemaTag?: Maybe<Scalars["String"]>;
-  serviceId?: Maybe<Scalars["ID"]>;
-  traceHttpStatusCode?: Maybe<Scalars["Int"]>;
-  traceId?: Maybe<Scalars["ID"]>;
-  traceStartsAt?: Maybe<Scalars["Timestamp"]>;
+  path?: Maybe<Scalars['String']>;
+  queryId?: Maybe<Scalars['ID']>;
+  queryName?: Maybe<Scalars['String']>;
+  schemaHash?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
+  serviceId?: Maybe<Scalars['ID']>;
+  traceHttpStatusCode?: Maybe<Scalars['Int']>;
+  traceId?: Maybe<Scalars['ID']>;
+  traceStartsAt?: Maybe<Scalars['Timestamp']>;
 };
 
 /** Filter for data in TracePathErrorsRefs. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
 export type TracePathErrorsRefsFilter = {
   and?: InputMaybe<Array<TracePathErrorsRefsFilter>>;
   /** Selects rows whose clientName dimension equals the given value if not null. To query for the null value, use {in: {clientName: [null]}} instead. */
-  clientName?: InputMaybe<Scalars["String"]>;
+  clientName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose clientVersion dimension equals the given value if not null. To query for the null value, use {in: {clientVersion: [null]}} instead. */
-  clientVersion?: InputMaybe<Scalars["String"]>;
+  clientVersion?: InputMaybe<Scalars['String']>;
   /** Selects rows whose durationBucket dimension equals the given value if not null. To query for the null value, use {in: {durationBucket: [null]}} instead. */
-  durationBucket?: InputMaybe<Scalars["Int"]>;
+  durationBucket?: InputMaybe<Scalars['Int']>;
   /** Selects rows whose errorMessage dimension equals the given value if not null. To query for the null value, use {in: {errorMessage: [null]}} instead. */
-  errorMessage?: InputMaybe<Scalars["String"]>;
+  errorMessage?: InputMaybe<Scalars['String']>;
   in?: InputMaybe<TracePathErrorsRefsFilterIn>;
   not?: InputMaybe<TracePathErrorsRefsFilter>;
   or?: InputMaybe<Array<TracePathErrorsRefsFilter>>;
   /** Selects rows whose path dimension equals the given value if not null. To query for the null value, use {in: {path: [null]}} instead. */
-  path?: InputMaybe<Scalars["String"]>;
+  path?: InputMaybe<Scalars['String']>;
   /** Selects rows whose queryId dimension equals the given value if not null. To query for the null value, use {in: {queryId: [null]}} instead. */
-  queryId?: InputMaybe<Scalars["ID"]>;
+  queryId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose queryName dimension equals the given value if not null. To query for the null value, use {in: {queryName: [null]}} instead. */
-  queryName?: InputMaybe<Scalars["String"]>;
+  queryName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaHash dimension equals the given value if not null. To query for the null value, use {in: {schemaHash: [null]}} instead. */
-  schemaHash?: InputMaybe<Scalars["String"]>;
+  schemaHash?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
-  schemaTag?: InputMaybe<Scalars["String"]>;
+  schemaTag?: InputMaybe<Scalars['String']>;
   /** Selects rows whose serviceId dimension equals the given value if not null. To query for the null value, use {in: {serviceId: [null]}} instead. */
-  serviceId?: InputMaybe<Scalars["ID"]>;
+  serviceId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose traceHttpStatusCode dimension equals the given value if not null. To query for the null value, use {in: {traceHttpStatusCode: [null]}} instead. */
-  traceHttpStatusCode?: InputMaybe<Scalars["Int"]>;
+  traceHttpStatusCode?: InputMaybe<Scalars['Int']>;
   /** Selects rows whose traceId dimension equals the given value if not null. To query for the null value, use {in: {traceId: [null]}} instead. */
-  traceId?: InputMaybe<Scalars["ID"]>;
+  traceId?: InputMaybe<Scalars['ID']>;
 };
 
 /** Filter for data in TracePathErrorsRefs. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
 export type TracePathErrorsRefsFilterIn = {
   /** Selects rows whose clientName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose clientVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientVersion?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose durationBucket dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  durationBucket?: InputMaybe<Array<InputMaybe<Scalars["Int"]>>>;
+  durationBucket?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   /** Selects rows whose errorMessage dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  errorMessage?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  errorMessage?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose path dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  path?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  path?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose queryId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  queryId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose queryName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  queryName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaHash dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaHash?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaHash?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaTag?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose serviceId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  serviceId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  serviceId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose traceHttpStatusCode dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  traceHttpStatusCode?: InputMaybe<Array<InputMaybe<Scalars["Int"]>>>;
+  traceHttpStatusCode?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   /** Selects rows whose traceId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  traceId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  traceId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
 export type TracePathErrorsRefsMetrics = {
-  __typename?: "TracePathErrorsRefsMetrics";
-  errorsCountInPath: Scalars["Long"];
-  errorsCountInTrace: Scalars["Long"];
-  traceSizeBytes: Scalars["Long"];
+  __typename?: 'TracePathErrorsRefsMetrics';
+  errorsCountInPath: Scalars['Long'];
+  errorsCountInTrace: Scalars['Long'];
+  traceSizeBytes: Scalars['Long'];
 };
 
 export type TracePathErrorsRefsOrderBySpec = {
@@ -7005,97 +7167,97 @@ export type TracePathErrorsRefsOrderBySpec = {
 };
 
 export type TracePathErrorsRefsRecord = {
-  __typename?: "TracePathErrorsRefsRecord";
+  __typename?: 'TracePathErrorsRefsRecord';
   /** Dimensions of TracePathErrorsRefs that can be grouped by. */
   groupBy: TracePathErrorsRefsDimensions;
   /** Metrics of TracePathErrorsRefs that can be aggregated over. */
   metrics: TracePathErrorsRefsMetrics;
   /** Starting segment timestamp. */
-  timestamp: Scalars["Timestamp"];
+  timestamp: Scalars['Timestamp'];
 };
 
 /** Columns of TraceRefs. */
 export enum TraceRefsColumn {
-  ClientName = "CLIENT_NAME",
-  ClientVersion = "CLIENT_VERSION",
-  DurationBucket = "DURATION_BUCKET",
-  DurationNs = "DURATION_NS",
-  QueryId = "QUERY_ID",
-  QueryName = "QUERY_NAME",
-  SchemaHash = "SCHEMA_HASH",
-  SchemaTag = "SCHEMA_TAG",
-  ServiceId = "SERVICE_ID",
-  Timestamp = "TIMESTAMP",
-  TraceId = "TRACE_ID",
-  TraceSizeBytes = "TRACE_SIZE_BYTES",
+  ClientName = 'CLIENT_NAME',
+  ClientVersion = 'CLIENT_VERSION',
+  DurationBucket = 'DURATION_BUCKET',
+  DurationNs = 'DURATION_NS',
+  QueryId = 'QUERY_ID',
+  QueryName = 'QUERY_NAME',
+  SchemaHash = 'SCHEMA_HASH',
+  SchemaTag = 'SCHEMA_TAG',
+  ServiceId = 'SERVICE_ID',
+  Timestamp = 'TIMESTAMP',
+  TraceId = 'TRACE_ID',
+  TraceSizeBytes = 'TRACE_SIZE_BYTES'
 }
 
 export type TraceRefsDimensions = {
-  __typename?: "TraceRefsDimensions";
-  clientName?: Maybe<Scalars["String"]>;
-  clientVersion?: Maybe<Scalars["String"]>;
-  durationBucket?: Maybe<Scalars["Int"]>;
-  queryId?: Maybe<Scalars["ID"]>;
-  queryName?: Maybe<Scalars["String"]>;
-  querySignature?: Maybe<Scalars["String"]>;
-  schemaHash?: Maybe<Scalars["String"]>;
-  schemaTag?: Maybe<Scalars["String"]>;
-  serviceId?: Maybe<Scalars["ID"]>;
-  traceId?: Maybe<Scalars["ID"]>;
+  __typename?: 'TraceRefsDimensions';
+  clientName?: Maybe<Scalars['String']>;
+  clientVersion?: Maybe<Scalars['String']>;
+  durationBucket?: Maybe<Scalars['Int']>;
+  queryId?: Maybe<Scalars['ID']>;
+  queryName?: Maybe<Scalars['String']>;
+  querySignature?: Maybe<Scalars['String']>;
+  schemaHash?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
+  serviceId?: Maybe<Scalars['ID']>;
+  traceId?: Maybe<Scalars['ID']>;
 };
 
 /** Filter for data in TraceRefs. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
 export type TraceRefsFilter = {
   and?: InputMaybe<Array<TraceRefsFilter>>;
   /** Selects rows whose clientName dimension equals the given value if not null. To query for the null value, use {in: {clientName: [null]}} instead. */
-  clientName?: InputMaybe<Scalars["String"]>;
+  clientName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose clientVersion dimension equals the given value if not null. To query for the null value, use {in: {clientVersion: [null]}} instead. */
-  clientVersion?: InputMaybe<Scalars["String"]>;
+  clientVersion?: InputMaybe<Scalars['String']>;
   /** Selects rows whose durationBucket dimension equals the given value if not null. To query for the null value, use {in: {durationBucket: [null]}} instead. */
-  durationBucket?: InputMaybe<Scalars["Int"]>;
+  durationBucket?: InputMaybe<Scalars['Int']>;
   in?: InputMaybe<TraceRefsFilterIn>;
   not?: InputMaybe<TraceRefsFilter>;
   or?: InputMaybe<Array<TraceRefsFilter>>;
   /** Selects rows whose queryId dimension equals the given value if not null. To query for the null value, use {in: {queryId: [null]}} instead. */
-  queryId?: InputMaybe<Scalars["ID"]>;
+  queryId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose queryName dimension equals the given value if not null. To query for the null value, use {in: {queryName: [null]}} instead. */
-  queryName?: InputMaybe<Scalars["String"]>;
+  queryName?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaHash dimension equals the given value if not null. To query for the null value, use {in: {schemaHash: [null]}} instead. */
-  schemaHash?: InputMaybe<Scalars["String"]>;
+  schemaHash?: InputMaybe<Scalars['String']>;
   /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
-  schemaTag?: InputMaybe<Scalars["String"]>;
+  schemaTag?: InputMaybe<Scalars['String']>;
   /** Selects rows whose serviceId dimension equals the given value if not null. To query for the null value, use {in: {serviceId: [null]}} instead. */
-  serviceId?: InputMaybe<Scalars["ID"]>;
+  serviceId?: InputMaybe<Scalars['ID']>;
   /** Selects rows whose traceId dimension equals the given value if not null. To query for the null value, use {in: {traceId: [null]}} instead. */
-  traceId?: InputMaybe<Scalars["ID"]>;
+  traceId?: InputMaybe<Scalars['ID']>;
 };
 
 /** Filter for data in TraceRefs. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
 export type TraceRefsFilterIn = {
   /** Selects rows whose clientName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose clientVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  clientVersion?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  clientVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose durationBucket dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  durationBucket?: InputMaybe<Array<InputMaybe<Scalars["Int"]>>>;
+  durationBucket?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   /** Selects rows whose queryId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  queryId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose queryName dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  queryName?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  queryName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaHash dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaHash?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaHash?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  schemaTag?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose serviceId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  serviceId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  serviceId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   /** Selects rows whose traceId dimension is in the given list. A null value in the list means a row with null for that dimension. */
-  traceId?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  traceId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
 export type TraceRefsMetrics = {
-  __typename?: "TraceRefsMetrics";
-  durationNs: Scalars["Long"];
-  traceSizeBytes: Scalars["Long"];
+  __typename?: 'TraceRefsMetrics';
+  durationNs: Scalars['Long'];
+  traceSizeBytes: Scalars['Long'];
 };
 
 export type TraceRefsOrderBySpec = {
@@ -7104,33 +7266,33 @@ export type TraceRefsOrderBySpec = {
 };
 
 export type TraceRefsRecord = {
-  __typename?: "TraceRefsRecord";
+  __typename?: 'TraceRefsRecord';
   /** Dimensions of TraceRefs that can be grouped by. */
   groupBy: TraceRefsDimensions;
   /** Metrics of TraceRefs that can be aggregated over. */
   metrics: TraceRefsMetrics;
   /** Starting segment timestamp. */
-  timestamp: Scalars["Timestamp"];
+  timestamp: Scalars['Timestamp'];
 };
 
 export type TraceSourceLocation = {
-  __typename?: "TraceSourceLocation";
-  column: Scalars["Int"];
-  line: Scalars["Int"];
+  __typename?: 'TraceSourceLocation';
+  column: Scalars['Int'];
+  line: Scalars['Int'];
 };
 
 export type TypeChangeSummaryCounts = {
-  __typename?: "TypeChangeSummaryCounts";
+  __typename?: 'TypeChangeSummaryCounts';
   /** Number of changes that are additions of types. */
-  additions: Scalars["Int"];
+  additions: Scalars['Int'];
   /**
    * Number of changes that are edits. This includes types changing kind and any type description
    * changes, but also includes adding/removing values from enums, adding/removing members from
    * interfaces and unions, and any enum value deprecation and description changes.
    */
-  edits: Scalars["Int"];
+  edits: Scalars['Int'];
   /** Number of changes that are removals of types. */
-  removals: Scalars["Int"];
+  removals: Scalars['Int'];
 };
 
 /**
@@ -7143,45 +7305,39 @@ export type TypeChangeSummaryCounts = {
  */
 export type TypeFilterConfig = {
   /** include abstract types (interfaces and unions) */
-  includeAbstractTypes?: InputMaybe<Scalars["Boolean"]>;
+  includeAbstractTypes?: InputMaybe<Scalars['Boolean']>;
   /** include built in scalars (i.e. Boolean, Int, etc) */
-  includeBuiltInTypes?: InputMaybe<Scalars["Boolean"]>;
+  includeBuiltInTypes?: InputMaybe<Scalars['Boolean']>;
   /** include reserved introspection types (i.e. __Type) */
-  includeIntrospectionTypes?: InputMaybe<Scalars["Boolean"]>;
+  includeIntrospectionTypes?: InputMaybe<Scalars['Boolean']>;
 };
 
 export type Uri = {
-  __typename?: "URI";
+  __typename?: 'URI';
   /** A GCS URI */
-  gcs: Scalars["String"];
+  gcs: Scalars['String'];
 };
 
 export type UnignoreOperationsInChecksResult = {
-  __typename?: "UnignoreOperationsInChecksResult";
+  __typename?: 'UnignoreOperationsInChecksResult';
   graph: Service;
 };
 
-export type UpdateOperationCollectionEntryResult =
-  | OperationCollectionEntry
-  | PermissionError
-  | ValidationError;
+export type UpdateOperationCollectionEntryResult = OperationCollectionEntry | PermissionError | ValidationError;
 
-export type UpdateOperationCollectionResult =
-  | OperationCollection
-  | PermissionError
-  | ValidationError;
+export type UpdateOperationCollectionResult = OperationCollection | PermissionError | ValidationError;
 
 export type UploadSchemaMutationResponse = {
-  __typename?: "UploadSchemaMutationResponse";
-  code: Scalars["String"];
-  message: Scalars["String"];
-  success: Scalars["Boolean"];
+  __typename?: 'UploadSchemaMutationResponse';
+  code: Scalars['String'];
+  message: Scalars['String'];
+  success: Scalars['Boolean'];
   tag?: Maybe<SchemaTag>;
 };
 
 export type User = Identity & {
-  __typename?: "User";
-  acceptedPrivacyPolicyAt?: Maybe<Scalars["Timestamp"]>;
+  __typename?: 'User';
+  acceptedPrivacyPolicyAt?: Maybe<Scalars['Timestamp']>;
   /** @deprecated Replaced with User.memberships.account */
   accounts: Array<Account>;
   apiKeys: Array<UserApiKey>;
@@ -7200,83 +7356,85 @@ export type User = Identity & {
    * application. Apollo's media server will downscale larger images to at least the requested size,
    * but this will not happen for third-party media servers.
    */
-  avatarUrl?: Maybe<Scalars["String"]>;
-  betaFeaturesOn: Scalars["Boolean"];
-  canUpdateAvatar: Scalars["Boolean"];
-  canUpdateEmail: Scalars["Boolean"];
-  canUpdateFullName: Scalars["Boolean"];
-  createdAt: Scalars["Timestamp"];
-  email?: Maybe<Scalars["String"]>;
-  emailModifiedAt?: Maybe<Scalars["Timestamp"]>;
-  emailVerified: Scalars["Boolean"];
+  avatarUrl?: Maybe<Scalars['String']>;
+  betaFeaturesOn: Scalars['Boolean'];
+  canUpdateAvatar: Scalars['Boolean'];
+  canUpdateEmail: Scalars['Boolean'];
+  canUpdateFullName: Scalars['Boolean'];
+  createdAt: Scalars['Timestamp'];
+  email?: Maybe<Scalars['String']>;
+  emailModifiedAt?: Maybe<Scalars['Timestamp']>;
+  emailVerified: Scalars['Boolean'];
   experimentalFeatures: UserExperimentalFeatures;
   featureIntros?: Maybe<FeatureIntros>;
-  fullName: Scalars["String"];
+  fullName: Scalars['String'];
   /** The user's GitHub username, if they log in via GitHub. May be null even for GitHub users in some edge cases. */
-  githubUsername?: Maybe<Scalars["String"]>;
-  id: Scalars["ID"];
+  githubUsername?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
   /**
    * This role is reserved exclusively for internal MDG employees, and it controls what access they may have to other
    * organizations. Only admins are allowed to see this field.
    */
   internalAdminRole?: Maybe<InternalMdgAdminRole>;
   /** Last time any API token from this user was used against AGM services */
-  lastAuthenticatedAt?: Maybe<Scalars["Timestamp"]>;
-  logoutAfterIdleMs?: Maybe<Scalars["Int"]>;
+  lastAuthenticatedAt?: Maybe<Scalars['Timestamp']>;
+  logoutAfterIdleMs?: Maybe<Scalars['Int']>;
   memberships: Array<UserMembership>;
-  name: Scalars["String"];
+  name: Scalars['String'];
   odysseyCertifications?: Maybe<Array<OdysseyCertification>>;
   odysseyCourses?: Maybe<Array<OdysseyCourse>>;
-  odysseyHasEarlyAccess: Scalars["Boolean"];
-  odysseyHasRequestedEarlyAccess: Scalars["Boolean"];
+  odysseyHasEarlyAccess: Scalars['Boolean'];
+  odysseyHasRequestedEarlyAccess: Scalars['Boolean'];
   odysseyTasks?: Maybe<Array<OdysseyTask>>;
   sandboxOperationCollections: Array<OperationCollection>;
-  synchronized: Scalars["Boolean"];
+  synchronized: Scalars['Boolean'];
   /** List of Zendesk tickets this user has submitted */
   tickets?: Maybe<Array<ZendeskTicket>>;
   type: UserType;
 };
 
+
 export type UserApiKeysArgs = {
-  includeCookies?: InputMaybe<Scalars["Boolean"]>;
+  includeCookies?: InputMaybe<Scalars['Boolean']>;
 };
 
+
 export type UserAvatarUrlArgs = {
-  size?: Scalars["Int"];
+  size?: Scalars['Int'];
 };
 
 export type UserApiKey = ApiKey & {
-  __typename?: "UserApiKey";
-  id: Scalars["ID"];
-  keyName?: Maybe<Scalars["String"]>;
-  token: Scalars["String"];
+  __typename?: 'UserApiKey';
+  id: Scalars['ID'];
+  keyName?: Maybe<Scalars['String']>;
+  token: Scalars['String'];
 };
 
 export type UserExperimentalFeatures = {
-  __typename?: "UserExperimentalFeatures";
-  exampleFeature: Scalars["Boolean"];
+  __typename?: 'UserExperimentalFeatures';
+  exampleFeature: Scalars['Boolean'];
 };
 
 export type UserMembership = {
-  __typename?: "UserMembership";
+  __typename?: 'UserMembership';
   account: Account;
-  createdAt: Scalars["Timestamp"];
+  createdAt: Scalars['Timestamp'];
   permission: UserPermission;
   user: User;
 };
 
 export type UserMutation = {
-  __typename?: "UserMutation";
-  acceptPrivacyPolicy?: Maybe<Scalars["Void"]>;
+  __typename?: 'UserMutation';
+  acceptPrivacyPolicy?: Maybe<Scalars['Void']>;
   /** Change the user's password */
-  changePassword?: Maybe<Scalars["Void"]>;
+  changePassword?: Maybe<Scalars['Void']>;
   createOdysseyCertification?: Maybe<OdysseyCertification>;
   createOdysseyCourses?: Maybe<Array<OdysseyCourse>>;
   createOdysseyTasks?: Maybe<Array<OdysseyTask>>;
   /** Delete the user's avatar. Requires User.canUpdateAvatar to be true. */
   deleteAvatar?: Maybe<AvatarDeleteError>;
   /** Hard deletes the associated user. Throws an error otherwise with reason included. */
-  hardDelete?: Maybe<Scalars["Void"]>;
+  hardDelete?: Maybe<Scalars['Void']>;
   /** Create a new API key for this user. Must take in a name for this key. */
   newKey: UserApiKey;
   /**
@@ -7287,10 +7445,10 @@ export type UserMutation = {
   /** Refresh information about the user from its upstream service (eg list of organizations from GitHub) */
   refresh?: Maybe<User>;
   /** Removes the given key from this user. Can be used to remove either a web cookie or a user API key. */
-  removeKey?: Maybe<Scalars["Void"]>;
+  removeKey?: Maybe<Scalars['Void']>;
   /** Renames the given key to the new key name. */
   renameKey?: Maybe<UserApiKey>;
-  resendVerificationEmail?: Maybe<Scalars["Void"]>;
+  resendVerificationEmail?: Maybe<Scalars['Void']>;
   setOdysseyCourse?: Maybe<OdysseyCourse>;
   setOdysseyTask?: Maybe<OdysseyTask>;
   /** Submit a zendesk ticket for this user */
@@ -7312,150 +7470,166 @@ export type UserMutation = {
   verifyEmail?: Maybe<User>;
 };
 
+
 export type UserMutationChangePasswordArgs = {
-  newPassword: Scalars["String"];
-  previousPassword: Scalars["String"];
+  newPassword: Scalars['String'];
+  previousPassword: Scalars['String'];
 };
 
+
 export type UserMutationCreateOdysseyCertificationArgs = {
-  certificationId: Scalars["String"];
+  certificationId: Scalars['String'];
 };
+
 
 export type UserMutationCreateOdysseyCoursesArgs = {
   courses: Array<OdysseyCourseInput>;
 };
 
+
 export type UserMutationCreateOdysseyTasksArgs = {
   tasks: Array<OdysseyTaskInput>;
 };
 
+
 export type UserMutationNewKeyArgs = {
-  keyName: Scalars["String"];
+  keyName: Scalars['String'];
 };
+
 
 export type UserMutationProvisionKeyArgs = {
-  keyName?: Scalars["String"];
+  keyName?: Scalars['String'];
 };
+
 
 export type UserMutationRemoveKeyArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
 
+
 export type UserMutationRenameKeyArgs = {
-  id: Scalars["ID"];
-  newKeyName?: InputMaybe<Scalars["String"]>;
+  id: Scalars['ID'];
+  newKeyName?: InputMaybe<Scalars['String']>;
 };
+
 
 export type UserMutationSetOdysseyCourseArgs = {
   course: OdysseyCourseInput;
 };
 
+
 export type UserMutationSetOdysseyTaskArgs = {
   task: OdysseyTaskInput;
 };
 
+
 export type UserMutationSubmitZendeskTicketArgs = {
-  collaborators?: InputMaybe<Array<Scalars["String"]>>;
-  email: Scalars["String"];
+  collaborators?: InputMaybe<Array<Scalars['String']>>;
+  email: Scalars['String'];
   ticket: ZendeskTicketInput;
 };
 
+
 export type UserMutationUpdateArgs = {
-  email?: InputMaybe<Scalars["String"]>;
-  fullName?: InputMaybe<Scalars["String"]>;
-  referrer?: InputMaybe<Scalars["String"]>;
-  trackingGoogleClientId?: InputMaybe<Scalars["String"]>;
-  trackingMarketoClientId?: InputMaybe<Scalars["String"]>;
+  email?: InputMaybe<Scalars['String']>;
+  fullName?: InputMaybe<Scalars['String']>;
+  referrer?: InputMaybe<Scalars['String']>;
+  trackingGoogleClientId?: InputMaybe<Scalars['String']>;
+  trackingMarketoClientId?: InputMaybe<Scalars['String']>;
   userSegment?: InputMaybe<UserSegment>;
-  utmCampaign?: InputMaybe<Scalars["String"]>;
-  utmMedium?: InputMaybe<Scalars["String"]>;
-  utmSource?: InputMaybe<Scalars["String"]>;
+  utmCampaign?: InputMaybe<Scalars['String']>;
+  utmMedium?: InputMaybe<Scalars['String']>;
+  utmSource?: InputMaybe<Scalars['String']>;
 };
 
+
 export type UserMutationUpdateBetaFeaturesOnArgs = {
-  betaFeaturesOn: Scalars["Boolean"];
+  betaFeaturesOn: Scalars['Boolean'];
 };
+
 
 export type UserMutationUpdateFeatureIntrosArgs = {
   newFeatureIntros?: InputMaybe<FeatureIntrosInput>;
 };
 
+
 export type UserMutationUpdateRoleArgs = {
   newRole?: InputMaybe<InternalMdgAdminRole>;
 };
 
+
 export type UserMutationVerifyEmailArgs = {
-  token: Scalars["String"];
+  token: Scalars['String'];
 };
 
 export enum UserPermission {
-  BillingManager = "BILLING_MANAGER",
-  Consumer = "CONSUMER",
-  Contributor = "CONTRIBUTOR",
-  GraphAdmin = "GRAPH_ADMIN",
-  LegacyGraphKey = "LEGACY_GRAPH_KEY",
-  Observer = "OBSERVER",
-  OrgAdmin = "ORG_ADMIN",
+  BillingManager = 'BILLING_MANAGER',
+  Consumer = 'CONSUMER',
+  Contributor = 'CONTRIBUTOR',
+  GraphAdmin = 'GRAPH_ADMIN',
+  LegacyGraphKey = 'LEGACY_GRAPH_KEY',
+  Observer = 'OBSERVER',
+  OrgAdmin = 'ORG_ADMIN'
 }
 
 export enum UserSegment {
-  JoinMyTeam = "JOIN_MY_TEAM",
-  LocalDevelopment = "LOCAL_DEVELOPMENT",
-  NotSpecified = "NOT_SPECIFIED",
-  ProductionGraphs = "PRODUCTION_GRAPHS",
-  Sandbox = "SANDBOX",
-  TryTeam = "TRY_TEAM",
+  JoinMyTeam = 'JOIN_MY_TEAM',
+  LocalDevelopment = 'LOCAL_DEVELOPMENT',
+  NotSpecified = 'NOT_SPECIFIED',
+  ProductionGraphs = 'PRODUCTION_GRAPHS',
+  Sandbox = 'SANDBOX',
+  TryTeam = 'TRY_TEAM'
 }
 
 export type UserSettings = {
-  __typename?: "UserSettings";
-  appNavCollapsed: Scalars["Boolean"];
-  autoManageVariables: Scalars["Boolean"];
-  id: Scalars["String"];
-  mockingResponses: Scalars["Boolean"];
-  preflightScriptEnabled: Scalars["Boolean"];
+  __typename?: 'UserSettings';
+  appNavCollapsed: Scalars['Boolean'];
+  autoManageVariables: Scalars['Boolean'];
+  id: Scalars['String'];
+  mockingResponses: Scalars['Boolean'];
+  preflightScriptEnabled: Scalars['Boolean'];
   responseHints: ResponseHints;
-  tableMode: Scalars["Boolean"];
+  tableMode: Scalars['Boolean'];
   themeName: ThemeName;
 };
 
 /** Explorer user settings input */
 export type UserSettingsInput = {
-  appNavCollapsed?: InputMaybe<Scalars["Boolean"]>;
-  autoManageVariables?: InputMaybe<Scalars["Boolean"]>;
-  mockingResponses?: InputMaybe<Scalars["Boolean"]>;
-  preflightScriptEnabled?: InputMaybe<Scalars["Boolean"]>;
+  appNavCollapsed?: InputMaybe<Scalars['Boolean']>;
+  autoManageVariables?: InputMaybe<Scalars['Boolean']>;
+  mockingResponses?: InputMaybe<Scalars['Boolean']>;
+  preflightScriptEnabled?: InputMaybe<Scalars['Boolean']>;
   responseHints?: InputMaybe<ResponseHints>;
-  tableMode?: InputMaybe<Scalars["Boolean"]>;
+  tableMode?: InputMaybe<Scalars['Boolean']>;
   themeName?: InputMaybe<ThemeName>;
 };
 
 export enum UserType {
-  Apollo = "APOLLO",
-  Github = "GITHUB",
-  Sso = "SSO",
+  Apollo = 'APOLLO',
+  Github = 'GITHUB',
+  Sso = 'SSO'
 }
 
 export type ValidateOperationsResult = {
-  __typename?: "ValidateOperationsResult";
+  __typename?: 'ValidateOperationsResult';
   validationResults: Array<ValidationResult>;
 };
 
 export type ValidationError = Error & {
-  __typename?: "ValidationError";
-  message: Scalars["String"];
+  __typename?: 'ValidationError';
+  message: Scalars['String'];
 };
 
 export enum ValidationErrorCode {
-  DeprecatedField = "DEPRECATED_FIELD",
-  InvalidOperation = "INVALID_OPERATION",
-  NonParseableDocument = "NON_PARSEABLE_DOCUMENT",
+  DeprecatedField = 'DEPRECATED_FIELD',
+  InvalidOperation = 'INVALID_OPERATION',
+  NonParseableDocument = 'NON_PARSEABLE_DOCUMENT'
 }
 
 export enum ValidationErrorType {
-  Failure = "FAILURE",
-  Invalid = "INVALID",
-  Warning = "WARNING",
+  Failure = 'FAILURE',
+  Invalid = 'INVALID',
+  Warning = 'WARNING'
 }
 
 /**
@@ -7463,11 +7637,11 @@ export enum ValidationErrorType {
  * and its respective operation
  */
 export type ValidationResult = {
-  __typename?: "ValidationResult";
+  __typename?: 'ValidationResult';
   /** The validation result's error code */
   code: ValidationErrorCode;
   /** Description of the validation error */
-  description: Scalars["String"];
+  description: Scalars['String'];
   /** The operation related to this validation result */
   operation: OperationDocument;
   /** The type of validation error thrown - warning, failure, or invalid. */
@@ -7476,136 +7650,101 @@ export type ValidationResult = {
 
 /** Webhook notification channel */
 export type WebhookChannel = Channel & {
-  __typename?: "WebhookChannel";
-  id: Scalars["ID"];
-  name: Scalars["String"];
-  secretToken?: Maybe<Scalars["String"]>;
+  __typename?: 'WebhookChannel';
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  secretToken?: Maybe<Scalars['String']>;
   subscriptions: Array<ChannelSubscription>;
-  url: Scalars["String"];
+  url: Scalars['String'];
 };
 
 /** PagerDuty notification channel parameters */
 export type WebhookChannelInput = {
-  name?: InputMaybe<Scalars["String"]>;
-  secretToken?: InputMaybe<Scalars["String"]>;
-  url: Scalars["String"];
+  name?: InputMaybe<Scalars['String']>;
+  secretToken?: InputMaybe<Scalars['String']>;
+  url: Scalars['String'];
 };
 
 export type ZendeskTicket = {
-  __typename?: "ZendeskTicket";
-  createdAt: Scalars["Timestamp"];
-  description: Scalars["String"];
+  __typename?: 'ZendeskTicket';
+  createdAt: Scalars['Timestamp'];
+  description: Scalars['String'];
   graph?: Maybe<Service>;
-  id: Scalars["Int"];
+  id: Scalars['Int'];
   organization?: Maybe<Account>;
   priority: TicketPriority;
   status?: Maybe<TicketStatus>;
-  subject: Scalars["String"];
+  subject: Scalars['String'];
   user?: Maybe<User>;
 };
 
 /** Zendesk ticket input */
 export type ZendeskTicketInput = {
-  description: Scalars["String"];
-  graphId?: InputMaybe<Scalars["String"]>;
-  organizationId?: InputMaybe<Scalars["String"]>;
+  description: Scalars['String'];
+  graphId?: InputMaybe<Scalars['String']>;
+  organizationId?: InputMaybe<Scalars['String']>;
   priority: TicketPriority;
-  subject: Scalars["String"];
+  subject: Scalars['String'];
 };
+
 
 export const RoverTrack = gql`
-  mutation RoverTrack(
-    $anonymousId: ID!
-    $command: String!
-    $cwdHash: SHA256!
-    $os: String!
-    $remoteUrlHash: SHA256!
-    $sessionId: ID!
-    $version: String!
-    $arguments: [String!]!
-    $ci: String
-  ) {
-    trackRoverSession(
-      anonymousId: $anonymousId
-      command: $command
-      cwdHash: $cwdHash
-      os: $os
-      remoteUrlHash: $remoteUrlHash
-      sessionId: $sessionId
-      version: $version
-      arguments: $arguments
-      ci: $ci
-    )
-  }
-`;
+    mutation RoverTrack($anonymousId: ID!, $command: String!, $cwdHash: SHA256!, $os: String!, $remoteUrlHash: SHA256!, $sessionId: ID!, $version: String!, $arguments: [String!]!, $ci: String) {
+  trackRoverSession(
+    anonymousId: $anonymousId
+    command: $command
+    cwdHash: $cwdHash
+    os: $os
+    remoteUrlHash: $remoteUrlHash
+    sessionId: $sessionId
+    version: $version
+    arguments: $arguments
+    ci: $ci
+  )
+}
+    `;
 export type RoverTrackMutationVariables = Exact<{
-  anonymousId: Scalars["ID"];
-  command: Scalars["String"];
-  cwdHash: Scalars["SHA256"];
-  os: Scalars["String"];
-  remoteUrlHash: Scalars["SHA256"];
-  sessionId: Scalars["ID"];
-  version: Scalars["String"];
-  arguments: Array<Scalars["String"]> | Scalars["String"];
-  ci?: InputMaybe<Scalars["String"]>;
+  anonymousId: Scalars['ID'];
+  command: Scalars['String'];
+  cwdHash: Scalars['SHA256'];
+  os: Scalars['String'];
+  remoteUrlHash: Scalars['SHA256'];
+  sessionId: Scalars['ID'];
+  version: Scalars['String'];
+  arguments: Array<Scalars['String']> | Scalars['String'];
+  ci?: InputMaybe<Scalars['String']>;
 }>;
 
-export type RoverTrackMutation = {
-  __typename?: "Mutation";
-  trackRoverSession?: any | null;
-};
+
+export type RoverTrackMutation = { __typename?: 'Mutation', trackRoverSession?: any | null };
+
 
 export const RoverTrackDocument = gql`
-  mutation RoverTrack(
-    $anonymousId: ID!
-    $command: String!
-    $cwdHash: SHA256!
-    $os: String!
-    $remoteUrlHash: SHA256!
-    $sessionId: ID!
-    $version: String!
-    $arguments: [String!]!
-    $ci: String
-  ) {
-    trackRoverSession(
-      anonymousId: $anonymousId
-      command: $command
-      cwdHash: $cwdHash
-      os: $os
-      remoteUrlHash: $remoteUrlHash
-      sessionId: $sessionId
-      version: $version
-      arguments: $arguments
-      ci: $ci
-    )
-  }
-`;
+    mutation RoverTrack($anonymousId: ID!, $command: String!, $cwdHash: SHA256!, $os: String!, $remoteUrlHash: SHA256!, $sessionId: ID!, $version: String!, $arguments: [String!]!, $ci: String) {
+  trackRoverSession(
+    anonymousId: $anonymousId
+    command: $command
+    cwdHash: $cwdHash
+    os: $os
+    remoteUrlHash: $remoteUrlHash
+    sessionId: $sessionId
+    version: $version
+    arguments: $arguments
+    ci: $ci
+  )
+}
+    `;
 
-export type SdkFunctionWrapper = <T>(
-  action: (requestHeaders?: Record<string, string>) => Promise<T>,
-  operationName: string
-) => Promise<T>;
+export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string) => Promise<T>;
+
 
 const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
 
-export function getSdk(
-  client: GraphQLClient,
-  withWrapper: SdkFunctionWrapper = defaultWrapper
-) {
+export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    RoverTrack(
-      variables: RoverTrackMutationVariables,
-      requestHeaders?: Dom.RequestInit["headers"]
-    ): Promise<RoverTrackMutation> {
-      return withWrapper(
-        (wrappedRequestHeaders) =>
-          client.request<RoverTrackMutation>(RoverTrackDocument, variables, {
-            ...requestHeaders,
-            ...wrappedRequestHeaders,
-          }),
-        "RoverTrack"
-      );
-    },
+    RoverTrack(variables: RoverTrackMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RoverTrackMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<RoverTrackMutation>(RoverTrackDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'RoverTrack');
+    }
   };
 }
 export type Sdk = ReturnType<typeof getSdk>;
