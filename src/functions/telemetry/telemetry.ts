@@ -2,11 +2,12 @@ import {
   Handler,
   APIGatewayProxyResult,
   APIGatewayProxyEvent,
-} from 'aws-lambda';
-import { track } from '../../lib/segment';
-import { sentryWrapHandler, initSentry } from '../../lib/sentry';
+} from "aws-lambda";
+import { track } from "../../lib/track";
+import { sentryWrapHandler, initSentry } from "../../lib/sentry";
+import { RoverTrackMutationVariables, RoverArgumentInput } from "../../generated/studio";
 
-const CLI_NAME: string = 'rover';
+const CLI_NAME: string = "rover";
 
 initSentry();
 
@@ -44,22 +45,22 @@ interface Session {
 
 const MALFORMED_REQUEST = {
   statusCode: 400,
-  body: 'Malformed Request',
+  body: "Malformed Request",
 };
 const INVALID_PERMISSIONS = {
   statusCode: 403,
-  body: 'Invalid Permissions',
+  body: "Invalid Permissions",
 };
 
 const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
-  event,
+  event
 ) => {
   const headers = event.headers;
-  const contentType = headers['content-type'];
-  const userAgent = headers['user-agent'];
+  const contentType = headers["content-type"];
+  const userAgent = headers["user-agent"];
 
   if (!userAgent || !userAgent.startsWith(CLI_NAME)) return INVALID_PERMISSIONS;
-  if (!contentType || !contentType.includes('application/json'))
+  if (!contentType || !contentType.includes("application/json"))
     return MALFORMED_REQUEST;
 
   // Make sure the body exists and contains the right keys to properly build
@@ -74,34 +75,32 @@ const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
 
   return {
     statusCode: 200,
-    body: 'Report received',
+    body: "Report received",
   };
 };
 
 module.exports.handler = sentryWrapHandler(handler);
 
 export async function trackSession(session: Session, userAgent: string) {
-  const event_payload = {
+  let args = new Array<RoverArgumentInput>();
+  for (const key in session.command.arguments) {
+    let value = session.command.arguments[key as keyof object];
+    let input: RoverArgumentInput = {
+      key,
+      value
+    }
+    args.push(input);
+  }
+  const event_payload: RoverTrackMutationVariables = {
     anonymousId: session.machine_id,
-    event: 'rover invocation',
-    context: {
-      app: {
-        name: CLI_NAME,
-        version: session.cli_version,
-      },
-      os: {
-        name: session.platform.os,
-      },
-      userAgent,
-    },
-    messageId: session.session_id,
-    properties: {
-      command: session.command.name,
-      cwd_hash: session.cwd_hash,
-      remote_url_hash: session.remote_url_hash,
-      arguments: session.command.arguments,
-      continuous_integration: session.platform.continuous_integration,
-    },
+    command: session.command.name,
+    cwdHash: session.cwd_hash,
+    os: session.platform.os,
+    remoteUrlHash: session.remote_url_hash,
+    sessionId: session.session_id,
+    version: session.cli_version,
+    arguments: args,
+    ci: session.platform.continuous_integration,
   };
-  await track(event_payload);
+  await track(event_payload, userAgent);
 }

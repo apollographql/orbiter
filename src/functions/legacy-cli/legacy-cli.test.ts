@@ -6,7 +6,7 @@ jest.mock('../../lib/sentry', () => ({
   sentryWrapHandler: jest.fn(() => {}),
 }));
 
-jest.mock('../../lib/segment', () => ({
+jest.mock('../../lib/track', () => ({
   track: jest.fn(),
 }));
 
