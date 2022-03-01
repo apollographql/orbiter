@@ -4,7 +4,7 @@ import {
 } from "../generated/studio";
 import { request } from "graphql-request";
 const graphQLEndpoint =
-  "https://graphql-staging.api.apollographql.com/api/graphql";
+  "https://graphql.api.apollographql.com/api/graphql";
 
 if (process.env["NODE_ENV"] == "dev") {
   require("dotenv").config()

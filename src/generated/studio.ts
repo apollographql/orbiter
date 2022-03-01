@@ -4946,7 +4946,7 @@ export type RoleOverride = {
 };
 
 export type RoverArgumentInput = {
-  name: Scalars['String'];
+  key: Scalars['String'];
   value?: InputMaybe<Scalars['Object']>;
 };
 
