@@ -5,7 +5,7 @@ import {
 } from "aws-lambda";
 import { track } from "../../lib/track";
 import { sentryWrapHandler, initSentry } from "../../lib/sentry";
-import { RoverTrackMutationVariables } from "../../generated/studio";
+import { RoverTrackMutationVariables, RoverArgumentInput } from "../../generated/studio";
 
 const CLI_NAME: string = "rover";
 
@@ -82,10 +82,14 @@ const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
 module.exports.handler = sentryWrapHandler(handler);
 
 export async function trackSession(session: Session, userAgent: string) {
-  let string_args: string[] = [];
-  for (const key in session.command.arguments) {
-    let val = session.command.arguments[key as keyof object];
-    string_args.push(`${key}=${val}`);
+  let args = new Array();
+  for (const name in session.command.arguments) {
+    let value = session.command.arguments[name as keyof object];
+    let input: RoverArgumentInput = {
+      name,
+      value
+    }
+    args.push(input);
   }
   const event_payload: RoverTrackMutationVariables = {
     anonymousId: session.machine_id,
@@ -95,7 +99,7 @@ export async function trackSession(session: Session, userAgent: string) {
     remoteUrlHash: session.remote_url_hash,
     sessionId: session.session_id,
     version: session.cli_version,
-    arguments: string_args,
+    arguments: args,
     ci: session.platform.continuous_integration,
   };
   await track(event_payload, userAgent);

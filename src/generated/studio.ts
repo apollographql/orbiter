@@ -3812,7 +3812,7 @@ export type MutationTrackArgs = {
 
 export type MutationTrackRoverSessionArgs = {
   anonymousId: Scalars['ID'];
-  arguments: Array<Scalars['String']>;
+  arguments: Array<RoverArgumentInput>;
   ci?: InputMaybe<Scalars['String']>;
   command: Scalars['String'];
   cwdHash: Scalars['SHA256'];
@@ -4418,6 +4418,8 @@ export type Query = {
   __typename?: 'Query';
   /** Account by ID */
   account?: Maybe<Account>;
+  /** Retrieve account by billing provider identifier */
+  accountByBillingCode?: Maybe<Account>;
   /** Whether an account ID is available for mutation{newAccount(id:)} */
   accountIDAvailable: Scalars['Boolean'];
   /** All accounts */
@@ -4479,6 +4481,11 @@ export type Query = {
 
 
 export type QueryAccountArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryAccountByBillingCodeArgs = {
   id: Scalars['ID'];
 };
 
@@ -4936,6 +4943,11 @@ export type RoleOverride = {
   lastUpdatedAt: Scalars['Timestamp'];
   role: UserPermission;
   user: User;
+};
+
+export type RoverArgumentInput = {
+  name: Scalars['String'];
+  value?: InputMaybe<Scalars['Object']>;
 };
 
 export type ScheduledSummary = ChannelSubscription & {
@@ -7689,7 +7701,7 @@ export type ZendeskTicketInput = {
 
 
 export const RoverTrack = gql`
-    mutation RoverTrack($anonymousId: ID!, $command: String!, $cwdHash: SHA256!, $os: String!, $remoteUrlHash: SHA256!, $sessionId: ID!, $version: String!, $arguments: [String!]!, $ci: String) {
+    mutation RoverTrack($anonymousId: ID!, $command: String!, $cwdHash: SHA256!, $os: String!, $remoteUrlHash: SHA256!, $sessionId: ID!, $version: String!, $arguments: [RoverArgumentInput!]!, $ci: String) {
   trackRoverSession(
     anonymousId: $anonymousId
     command: $command
@@ -7711,7 +7723,7 @@ export type RoverTrackMutationVariables = Exact<{
   remoteUrlHash: Scalars['SHA256'];
   sessionId: Scalars['ID'];
   version: Scalars['String'];
-  arguments: Array<Scalars['String']> | Scalars['String'];
+  arguments: Array<RoverArgumentInput> | RoverArgumentInput;
   ci?: InputMaybe<Scalars['String']>;
 }>;
 
@@ -7720,7 +7732,7 @@ export type RoverTrackMutation = { __typename?: 'Mutation', trackRoverSession?: 
 
 
 export const RoverTrackDocument = gql`
-    mutation RoverTrack($anonymousId: ID!, $command: String!, $cwdHash: SHA256!, $os: String!, $remoteUrlHash: SHA256!, $sessionId: ID!, $version: String!, $arguments: [String!]!, $ci: String) {
+    mutation RoverTrack($anonymousId: ID!, $command: String!, $cwdHash: SHA256!, $os: String!, $remoteUrlHash: SHA256!, $sessionId: ID!, $version: String!, $arguments: [RoverArgumentInput!]!, $ci: String) {
   trackRoverSession(
     anonymousId: $anonymousId
     command: $command

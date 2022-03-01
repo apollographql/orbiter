@@ -6,7 +6,7 @@ mutation RoverTrack(
   $remoteUrlHash: SHA256!
   $sessionId: ID!
   $version: String!
-  $arguments: [String!]!
+  $arguments: [RoverArgumentInput!]!
   $ci: String
 ) {
   trackRoverSession(
