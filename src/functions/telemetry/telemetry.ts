@@ -82,7 +82,7 @@ const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
 module.exports.handler = sentryWrapHandler(handler);
 
 export async function trackSession(session: Session, userAgent: string) {
-  let args = new Array();
+  let args = new Array<RoverArgumentInput>();
   for (const name in session.command.arguments) {
     let value = session.command.arguments[name as keyof object];
     let input: RoverArgumentInput = {

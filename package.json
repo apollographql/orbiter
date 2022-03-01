@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
-    "clean": "git clean -dfqX -- ./node_modules ./tscsonfig.tsbuildinfo ./dist",
-    "watch": "tsc --watch",
-    "start": "npm run build && concurrently 'npm run watch' 'npm run codegen -- --watch' 'netlify dev'",
+    "build": "npm run codegen && tsc",
+    "clean": "git clean -dfqX -- ./node_modules ./tscsonfig.tsbuildinfo ./dist ./generated",
+    "watch": "concurrently 'tsc --watch' 'npm run codegen -- --watch'",
+    "start": "npm run build && concurrently 'npm run watch' 'netlify dev'",
     "test": "jest",
     "codegen": "graphql-codegen",
     "format": "prettier --write './src/**/*.ts'"
