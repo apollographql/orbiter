@@ -2,31 +2,31 @@ import {
   Handler,
   APIGatewayProxyResult,
   APIGatewayProxyEvent,
-} from 'aws-lambda';
-import { getFetcher } from '../../lib/getFetcher';
-import { initSentry, sentryWrapHandler } from '../../lib/sentry';
+} from "aws-lambda";
+import { getFetcher } from "../../lib/getFetcher";
+import { initSentry, sentryWrapHandler } from "../../lib/sentry";
 
 initSentry();
 
 const GITHUB_RELEASE =
-  'https://github.com/apollographql/apollo-tooling/releases';
+  "https://github.com/apollographql/apollo-tooling/releases";
 
 const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
   event,
-  _context,
+  _context
 ) => {
   const fetch = getFetcher();
 
   // silence unused variable warning
   // @ts-ignore: TS6133
-  const [_, __, platform, version] = event.path.split('/');
+  const [_, __, platform, version] = event.path.split("/");
 
   // rather than 404 with `undefined` as versions later, we can check and fail early here
   if (!platform || !version) {
     return {
       statusCode: 400,
       body: `Missing ${
-        !platform ? 'platform and ' : ''
+        !platform ? "platform and " : ""
       }version in URL path. Check your URL and try again. Correct format: "/legacy-cli/darwin/2.x.x"`,
     };
   }
@@ -36,7 +36,7 @@ const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
 
   // we just want to make sure it's a valid download so we just need to HEAD
   const response = await fetch(downloadUrl, {
-    method: 'HEAD',
+    method: "HEAD",
   });
 
   if (response.ok) {

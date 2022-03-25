@@ -29,6 +29,7 @@ export type Scalars = {
   Void: any;
 };
 
+/** An organization. Can have multiple members and graphs. */
 export type Account = {
   __typename?: 'Account';
   auditLogExports?: Maybe<Array<AuditLogExport>>;
@@ -62,6 +63,7 @@ export type Account = {
   graphIDAvailable: Scalars['Boolean'];
   hasBeenOnTrial: Scalars['Boolean'];
   hasBeenOnTrialV2: Scalars['Boolean'];
+  /** Globally unique identifier, which isn't guaranteed stable (can be changed by administrators). */
   id: Scalars['ID'];
   /**
    * Internal immutable identifier for the account. Only visible to Apollo admins (because it really
@@ -75,6 +77,7 @@ export type Account = {
   isOnTrial: Scalars['Boolean'];
   legacyIsOnTrial: Scalars['Boolean'];
   memberships?: Maybe<Array<AccountMembership>>;
+  /** Name of the organization, which can change over time and isn't unique. */
   name: Scalars['String'];
   provisionedAt?: Maybe<Scalars['Timestamp']>;
   recurlyEmail?: Maybe<Scalars['String']>;
@@ -87,6 +90,7 @@ export type Account = {
   seatCountForNextBill?: Maybe<Scalars['Int']>;
   seats?: Maybe<Seats>;
   secondaryIDs: Array<Scalars['ID']>;
+  /** Graphs belonging to this organization. */
   services: Array<Service>;
   /**
    * If non-null, this organization tracks its members through an upstream, eg PingOne;
@@ -108,21 +112,25 @@ export type Account = {
 };
 
 
+/** An organization. Can have multiple members and graphs. */
 export type AccountAvatarUrlArgs = {
   size?: Scalars['Int'];
 };
 
 
+/** An organization. Can have multiple members and graphs. */
 export type AccountGraphIdAvailableArgs = {
   id: Scalars['ID'];
 };
 
 
+/** An organization. Can have multiple members and graphs. */
 export type AccountInvitationsArgs = {
   includeAccepted?: Scalars['Boolean'];
 };
 
 
+/** An organization. Can have multiple members and graphs. */
 export type AccountRegistryStatsWindowArgs = {
   from: Scalars['Timestamp'];
   resolution?: InputMaybe<Resolution>;
@@ -130,17 +138,20 @@ export type AccountRegistryStatsWindowArgs = {
 };
 
 
+/** An organization. Can have multiple members and graphs. */
 export type AccountRequestsArgs = {
   from: Scalars['Timestamp'];
   to: Scalars['Timestamp'];
 };
 
 
+/** An organization. Can have multiple members and graphs. */
 export type AccountServicesArgs = {
   includeDeleted?: InputMaybe<Scalars['Boolean']>;
 };
 
 
+/** An organization. Can have multiple members and graphs. */
 export type AccountStatsArgs = {
   from: Scalars['Timestamp'];
   resolution?: InputMaybe<Resolution>;
@@ -148,6 +159,7 @@ export type AccountStatsArgs = {
 };
 
 
+/** An organization. Can have multiple members and graphs. */
 export type AccountStatsWindowArgs = {
   from: Scalars['Timestamp'];
   resolution?: InputMaybe<Resolution>;
@@ -155,8 +167,69 @@ export type AccountStatsWindowArgs = {
 };
 
 
+/** An organization. Can have multiple members and graphs. */
 export type AccountTicketArgs = {
   id: Scalars['ID'];
+};
+
+/** Columns of AccountBillingUsageStats. */
+export enum AccountBillingUsageStatsColumn {
+  OperationCount = 'OPERATION_COUNT',
+  OperationCountProvidedExplicitly = 'OPERATION_COUNT_PROVIDED_EXPLICITLY',
+  SchemaTag = 'SCHEMA_TAG',
+  ServiceId = 'SERVICE_ID',
+  Timestamp = 'TIMESTAMP'
+}
+
+export type AccountBillingUsageStatsDimensions = {
+  __typename?: 'AccountBillingUsageStatsDimensions';
+  operationCountProvidedExplicitly?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
+  serviceId?: Maybe<Scalars['ID']>;
+};
+
+/** Filter for data in AccountBillingUsageStats. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
+export type AccountBillingUsageStatsFilter = {
+  and?: InputMaybe<Array<AccountBillingUsageStatsFilter>>;
+  in?: InputMaybe<AccountBillingUsageStatsFilterIn>;
+  not?: InputMaybe<AccountBillingUsageStatsFilter>;
+  /** Selects rows whose operationCountProvidedExplicitly dimension equals the given value if not null. To query for the null value, use {in: {operationCountProvidedExplicitly: [null]}} instead. */
+  operationCountProvidedExplicitly?: InputMaybe<Scalars['String']>;
+  or?: InputMaybe<Array<AccountBillingUsageStatsFilter>>;
+  /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
+  schemaTag?: InputMaybe<Scalars['String']>;
+  /** Selects rows whose serviceId dimension equals the given value if not null. To query for the null value, use {in: {serviceId: [null]}} instead. */
+  serviceId?: InputMaybe<Scalars['ID']>;
+};
+
+/** Filter for data in AccountBillingUsageStats. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
+export type AccountBillingUsageStatsFilterIn = {
+  /** Selects rows whose operationCountProvidedExplicitly dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  operationCountProvidedExplicitly?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Selects rows whose serviceId dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  serviceId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+};
+
+export type AccountBillingUsageStatsMetrics = {
+  __typename?: 'AccountBillingUsageStatsMetrics';
+  operationCount: Scalars['Long'];
+};
+
+export type AccountBillingUsageStatsOrderBySpec = {
+  column: AccountBillingUsageStatsColumn;
+  direction: Ordering;
+};
+
+export type AccountBillingUsageStatsRecord = {
+  __typename?: 'AccountBillingUsageStatsRecord';
+  /** Dimensions of AccountBillingUsageStats that can be grouped by. */
+  groupBy: AccountBillingUsageStatsDimensions;
+  /** Metrics of AccountBillingUsageStats that can be aggregated over. */
+  metrics: AccountBillingUsageStatsMetrics;
+  /** Starting segment timestamp. */
+  timestamp: Scalars['Timestamp'];
 };
 
 export type AccountChecksStatsMetrics = {
@@ -356,7 +429,6 @@ export type AccountExperimentalFeatures = {
   __typename?: 'AccountExperimentalFeatures';
   auditLogs: Scalars['Boolean'];
   championDashboard: Scalars['Boolean'];
-  derivedLaunches: Scalars['Boolean'];
   federation2Preview: Scalars['Boolean'];
   preRequestPreview: Scalars['Boolean'];
   publicVariants: Scalars['Boolean'];
@@ -970,6 +1042,7 @@ export enum AccountState {
 /** A time window with a specified granularity over a given account. */
 export type AccountStatsWindow = {
   __typename?: 'AccountStatsWindow';
+  billingUsageStats: Array<AccountBillingUsageStatsRecord>;
   edgeServerInfos: Array<AccountEdgeServerInfosRecord>;
   errorStats: Array<AccountErrorStatsRecord>;
   fieldLatencies: Array<AccountFieldLatenciesRecord>;
@@ -982,6 +1055,14 @@ export type AccountStatsWindow = {
   roundedUpTo: Scalars['Timestamp'];
   tracePathErrorsRefs: Array<AccountTracePathErrorsRefsRecord>;
   traceRefs: Array<AccountTraceRefsRecord>;
+};
+
+
+/** A time window with a specified granularity over a given account. */
+export type AccountStatsWindowBillingUsageStatsArgs = {
+  filter?: InputMaybe<AccountBillingUsageStatsFilter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<AccountBillingUsageStatsOrderBySpec>>;
 };
 
 
@@ -1267,6 +1348,7 @@ export type AccountTraceRefsRecord = {
   timestamp: Scalars['Timestamp'];
 };
 
+/** An actor (view of Identity) that performed an action within Studio. */
 export type Actor = {
   __typename?: 'Actor';
   actorId: Scalars['ID'];
@@ -1635,6 +1717,72 @@ export type BillingSubscriptionV2 = {
   uuid: Scalars['ID'];
 };
 
+/** Columns of BillingUsageStats. */
+export enum BillingUsageStatsColumn {
+  AccountId = 'ACCOUNT_ID',
+  OperationCount = 'OPERATION_COUNT',
+  OperationCountProvidedExplicitly = 'OPERATION_COUNT_PROVIDED_EXPLICITLY',
+  SchemaTag = 'SCHEMA_TAG',
+  ServiceId = 'SERVICE_ID',
+  Timestamp = 'TIMESTAMP'
+}
+
+export type BillingUsageStatsDimensions = {
+  __typename?: 'BillingUsageStatsDimensions';
+  accountId?: Maybe<Scalars['ID']>;
+  operationCountProvidedExplicitly?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
+  serviceId?: Maybe<Scalars['ID']>;
+};
+
+/** Filter for data in BillingUsageStats. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
+export type BillingUsageStatsFilter = {
+  /** Selects rows whose accountId dimension equals the given value if not null. To query for the null value, use {in: {accountId: [null]}} instead. */
+  accountId?: InputMaybe<Scalars['ID']>;
+  and?: InputMaybe<Array<BillingUsageStatsFilter>>;
+  in?: InputMaybe<BillingUsageStatsFilterIn>;
+  not?: InputMaybe<BillingUsageStatsFilter>;
+  /** Selects rows whose operationCountProvidedExplicitly dimension equals the given value if not null. To query for the null value, use {in: {operationCountProvidedExplicitly: [null]}} instead. */
+  operationCountProvidedExplicitly?: InputMaybe<Scalars['String']>;
+  or?: InputMaybe<Array<BillingUsageStatsFilter>>;
+  /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
+  schemaTag?: InputMaybe<Scalars['String']>;
+  /** Selects rows whose serviceId dimension equals the given value if not null. To query for the null value, use {in: {serviceId: [null]}} instead. */
+  serviceId?: InputMaybe<Scalars['ID']>;
+};
+
+/** Filter for data in BillingUsageStats. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
+export type BillingUsageStatsFilterIn = {
+  /** Selects rows whose accountId dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  accountId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Selects rows whose operationCountProvidedExplicitly dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  operationCountProvidedExplicitly?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Selects rows whose serviceId dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  serviceId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+};
+
+export type BillingUsageStatsMetrics = {
+  __typename?: 'BillingUsageStatsMetrics';
+  operationCount: Scalars['Long'];
+};
+
+export type BillingUsageStatsOrderBySpec = {
+  column: BillingUsageStatsColumn;
+  direction: Ordering;
+};
+
+export type BillingUsageStatsRecord = {
+  __typename?: 'BillingUsageStatsRecord';
+  /** Dimensions of BillingUsageStats that can be grouped by. */
+  groupBy: BillingUsageStatsDimensions;
+  /** Metrics of BillingUsageStats that can be aggregated over. */
+  metrics: BillingUsageStatsMetrics;
+  /** Starting segment timestamp. */
+  timestamp: Scalars['Timestamp'];
+};
+
 export type Build = {
   __typename?: 'Build';
   input: BuildInput;
@@ -1669,6 +1817,7 @@ export enum CacheScope {
   Unrecognized = 'UNRECOGNIZED'
 }
 
+/** A specific change to a definition in your schema. */
 export type Change = {
   __typename?: 'Change';
   affectedQueries?: Maybe<Array<AffectedQuery>>;
@@ -1678,16 +1827,16 @@ export type Change = {
   category: ChangeCategory;
   /**
    * Node related to the top level node that was changed, such as a field in an object,
-   * a value in an enum or the object of an interface
+   * a value in an enum or the object of an interface.
    */
   childNode?: Maybe<NamedIntrospectionValue>;
   /** Indication of the kind of target and action of the change, e.g. 'TYPE_REMOVED'. */
   code: Scalars['String'];
-  /** Explanation of both the target of the change and how it was changed. */
+  /** Human-readable description of the change. */
   description: Scalars['String'];
-  /** Top level node affected by the change */
+  /** Top level node affected by the change. */
   parentNode?: Maybe<NamedIntrospectionType>;
-  /** Indication of the success of the overall change, either failure, warning, or notice. */
+  /** Severity of the change, either failure or warning. */
   severity: ChangeSeverity;
   /**
    * Indication of the success of the overall change, either failure, warning, or notice.
@@ -1921,15 +2070,16 @@ export enum CheckFilterInputStatusOption {
   Pending = 'PENDING'
 }
 
+/** The result of performing a subgraph check, including all steps. */
 export type CheckPartialSchemaResult = {
   __typename?: 'CheckPartialSchemaResult';
-  /** Result of traffic validation. This will be null if composition validation was unsuccessful. */
+  /** Overall result of the check. This will be null if composition validation was unsuccessful. */
   checkSchemaResult?: Maybe<CheckSchemaResult>;
-  /** Result of composition validation run before the schema check. */
+  /** Result of compostion run as part of the overall subgraph check. */
   compositionValidationResult: CompositionValidationResult;
   /** If any modifications were detected in the composed core schema */
   coreSchemaModified: Scalars['Boolean'];
-  /** Workflow associated with the composition validation. */
+  /** Check workflow associated with the overall subgraph check. */
   workflow?: Maybe<CheckWorkflow>;
 };
 
@@ -2064,7 +2214,7 @@ export enum ComparisonOperator {
   Unrecognized = 'UNRECOGNIZED'
 }
 
-/** Metadata about the result of composition run in the cloud, combined with removing an implementing service */
+/** The result of composition run in the cloud, upon an attempted subgraph deletion. */
 export type CompositionAndRemoveResult = {
   __typename?: 'CompositionAndRemoveResult';
   /** The produced composition config. Will be null if there are any errors */
@@ -2072,28 +2222,28 @@ export type CompositionAndRemoveResult = {
   /** Whether the removed implementing service existed. */
   didExist: Scalars['Boolean'];
   /**
-   * List of errors during composition. Errors mean that Apollo was unable to compose the
-   * graph's implementing services into a GraphQL schema. This partial schema should not be
-   * published to the implementing service if there were any errors encountered.
+   *   List of errors during composition. Errors mean that Apollo was unable to compose the
+   *   graph variant's subgraphs into a GraphQL schema. If present, gateways / routers
+   * are not updated.
    */
   errors: Array<Maybe<SchemaCompositionError>>;
   /** ID that points to the results of composition. */
   graphCompositionID: Scalars['String'];
   /** List of subgraphs that are included in this composition. */
   subgraphConfigs: Array<SubgraphConfig>;
-  /** Whether the gateway link was updated, or would have been for dry runs. */
+  /** Whether the gateway/router was updated via Uplink, or would have been for dry runs. */
   updatedGateway: Scalars['Boolean'];
 };
 
-/** Metadata about the result of composition run in the cloud, combined with implementing service upsert */
+/** The result of composition run in the cloud, upon attempted publish of a subgraph. */
 export type CompositionAndUpsertResult = {
   __typename?: 'CompositionAndUpsertResult';
-  /** The produced composition config. Will be null if there are any errors */
+  /** The produced composition config, or null if there are any errors. */
   compositionConfig?: Maybe<CompositionConfig>;
   /**
    * List of errors during composition. Errors mean that Apollo was unable to compose the
-   * graph's implementing services into a GraphQL schema. This partial schema should not be
-   * published to the implementing service if there were any errors encountered
+   * graph variant's subgraphs into a supergraph schema. If present, gateways / routers
+   * are not updated.
    */
   errors: Array<Maybe<SchemaCompositionError>>;
   /** ID that points to the results of composition. */
@@ -2104,9 +2254,9 @@ export type CompositionAndUpsertResult = {
   launchUrl?: Maybe<Scalars['String']>;
   /** List of subgraphs that are included in this composition. */
   subgraphConfigs: Array<SubgraphConfig>;
-  /** Whether the gateway link was updated. */
+  /** Whether the gateway/router was updated via Uplink, or would have been for dry runs. */
   updatedGateway: Scalars['Boolean'];
-  /** Whether an implementingService was created as part of this mutation */
+  /** Whether a subgraph was created as part of this mutation. */
   wasCreated: Scalars['Boolean'];
   /** Whether an implementingService was updated as part of this mutation */
   wasUpdated: Scalars['Boolean'];
@@ -2129,7 +2279,7 @@ export type CompositionCheckTask = CheckWorkflowTask & {
   workflow: CheckWorkflow;
 };
 
-/** The composition config exposed to the gateway */
+/** Composition configuration exposed to the gateway. */
 export type CompositionConfig = {
   __typename?: 'CompositionConfig';
   /**
@@ -2137,11 +2287,11 @@ export type CompositionConfig = {
    * @deprecated Soon we will stop writing to GCS locations
    */
   implementingServiceLocations: Array<ImplementingServiceLocation>;
-  /** Hash of the composed schema */
+  /** Hash of the API schema. */
   schemaHash: Scalars['String'];
 };
 
-/** Metadata about the result of composition run in the cloud */
+/** The result of composition run in the cloud. */
 export type CompositionPublishResult = CompositionResult & {
   __typename?: 'CompositionPublishResult';
   /** The produced composition config. Will be null if there are any errors */
@@ -2153,37 +2303,40 @@ export type CompositionPublishResult = CompositionResult & {
   csdl?: Maybe<Scalars['GraphQLDocument']>;
   /**
    * List of errors during composition. Errors mean that Apollo was unable to compose the
-   * graph's implementing services into a GraphQL schema. This partial schema should not be
-   * published to the implementing service if there were any errors encountered
+   * graph variant's subgraphs into a supergraph schema. If present, gateways / routers
+   * are not updated.
    */
   errors: Array<SchemaCompositionError>;
-  /** ID that points to the results of this composition. */
+  /** ID for a particular composition. */
   graphCompositionID: Scalars['ID'];
   /** List of subgraphs that are included in this composition. */
   subgraphConfigs: Array<SubgraphConfig>;
   /** Supergraph SDL generated by composition. */
   supergraphSdl?: Maybe<Scalars['GraphQLDocument']>;
-  /** Whether the gateway link was updated. */
+  /** Whether the gateway/router was updated via Uplink, or would have been for dry runs. */
   updatedGateway: Scalars['Boolean'];
   webhookNotificationBody?: Maybe<Scalars['String']>;
 };
 
-/** Result of a composition, either as the result of a composition validation or a publish. */
+/**
+ * Result of a composition, often as the result of a subgraph check or subgraph publish.
+ * See implementations for more details.
+ */
 export type CompositionResult = {
   /**
-   * Supergraph SDL generated by composition (this is not the CSDL, that is a deprecated format).
+   * Supergraph SDL generated by composition (this is not the cSDL, a deprecated format).
    * @deprecated Use supergraphSdl instead
    */
   csdl?: Maybe<Scalars['GraphQLDocument']>;
   /**
    * List of errors during composition. Errors mean that Apollo was unable to compose the
-   * graph's implementing services into a GraphQL schema. This partial schema should not be
-   * published to the implementing service if there were any errors encountered
+   * graph variant's subgraphs into a supergraph schema. If present, gateways / routers
+   * are not updated.
    */
   errors: Array<SchemaCompositionError>;
-  /** ID that points to the results of this composition. */
+  /** Globally unique identifier for the composition. */
   graphCompositionID: Scalars['ID'];
-  /** List of subgraphs that are included in this composition. */
+  /** List of subgraphs included in this composition. */
   subgraphConfigs: Array<SubgraphConfig>;
   /** Supergraph SDL generated by composition. */
   supergraphSdl?: Maybe<Scalars['GraphQLDocument']>;
@@ -2208,13 +2361,13 @@ export type CompositionValidationDetails = {
   schemaHash?: Maybe<Scalars['String']>;
 };
 
-/** Metadata about the result of compositions validation run in the cloud */
+/** Metadata about the result of compositions validation run in the cloud, during a subgraph check. */
 export type CompositionValidationResult = CompositionResult & {
   __typename?: 'CompositionValidationResult';
   /** Describes whether composition succeeded. */
   compositionSuccess: Scalars['Boolean'];
   /**
-   * Akin to a composition config, represents the partial schemas and implementing services that were used
+   * Akin to a composition config, represents the subgraph schemas and corresponding subgraphs that were used
    * in running composition. Will be null if any errors are encountered. Also may contain a schema hash if
    * one could be computed, which can be used for schema validation.
    */
@@ -2226,8 +2379,8 @@ export type CompositionValidationResult = CompositionResult & {
   csdl?: Maybe<Scalars['GraphQLDocument']>;
   /**
    * List of errors during composition. Errors mean that Apollo was unable to compose the
-   * graph's implementing services into a GraphQL schema. This partial schema should not be
-   * published to the implementing service if there were any errors encountered
+   * graph variant's subgraphs into a supergraph schema. If present, gateways / routers
+   * are not updated.
    */
   errors: Array<SchemaCompositionError>;
   /** ID that points to the results of this composition. */
@@ -2236,10 +2389,32 @@ export type CompositionValidationResult = CompositionResult & {
   proposedImplementingService: FederatedImplementingServicePartialSchema;
   /** List of subgraphs that are included in this composition. */
   subgraphConfigs: Array<SubgraphConfig>;
-  /** Supergraph SDL generated by composition. */
+  /** Supergraph schema document generated by composition. */
   supergraphSdl?: Maybe<Scalars['GraphQLDocument']>;
   /** If created as part of a check workflow, the associated workflow task. */
   workflowTask?: Maybe<CompositionCheckTask>;
+};
+
+export type ContractPreview = {
+  __typename?: 'ContractPreview';
+  result: ContractPreviewResult;
+  upstreamLaunch: Launch;
+};
+
+export type ContractPreviewErrors = {
+  __typename?: 'ContractPreviewErrors';
+  errors: Array<Scalars['String']>;
+  failedAt: ContractVariantFailedStep;
+};
+
+export type ContractPreviewResult = ContractPreviewErrors | ContractPreviewSuccess;
+
+export type ContractPreviewSuccess = {
+  __typename?: 'ContractPreviewSuccess';
+  apiDocument: Scalars['String'];
+  coreDocument: Scalars['String'];
+  fieldCount: Scalars['Int'];
+  typeCount: Scalars['Int'];
 };
 
 export enum ContractVariantFailedStep {
@@ -2293,6 +2468,8 @@ export type CoreSchema = {
   apiDocument: Scalars['GraphQLDocument'];
   coreDocument: Scalars['GraphQLDocument'];
   coreHash: Scalars['String'];
+  fieldCount: Scalars['Int'];
+  typeCount: Scalars['Int'];
 };
 
 export type CreateOperationCollectionResult = OperationCollection | PermissionError | ValidationError;
@@ -2347,8 +2524,10 @@ export type DeleteOperationCollectionSuccess = {
   variants: Array<GraphVariant>;
 };
 
+/** The result of attempting to delete a graph variant. */
 export type DeleteSchemaTagResult = {
   __typename?: 'DeleteSchemaTagResult';
+  /** WHether a variant was deleted or not. */
   deleted: Scalars['Boolean'];
 };
 
@@ -2646,35 +2825,27 @@ export type FeatureIntrosInput = {
   freeConsumerSeats?: InputMaybe<Scalars['Boolean']>;
 };
 
+/**
+ * Subgraph. Federated graph variants that are managed by Apollo Studio are composed of subgraphs.
+ * See https://www.apollographql.com/docs/federation/managed-federation/overview/ for more information.
+ */
 export type FederatedImplementingService = {
   __typename?: 'FederatedImplementingService';
-  /**
-   * An implementing service could have multiple inactive partial schemas that were previously uploaded
-   * activePartialSchema returns the one that is designated to be used for composition for a given graph-variant
-   */
+  /** The subgraph schema actively published, used for composition for the graph variant this subgraph belongs to. */
   activePartialSchema: PartialSchema;
-  /** Timestamp of when this implementing service was created */
+  /** Timestamp of when this subgraph was created. */
   createdAt: Scalars['Timestamp'];
-  /**
-   * Identifies which graph this implementing service belongs to.
-   * Formerly known as "service_id"
-   */
+  /** The ID of the graph this subgraph belongs to. */
   graphID: Scalars['String'];
-  /**
-   * Specifies which variant of a graph this implementing service belongs to".
-   * Formerly known as "tag"
-   */
+  /** Which variant of a graph this subgraph belongs to. */
   graphVariant: Scalars['String'];
-  /** Name of the implementing service */
+  /** Name of the subgraph. */
   name: Scalars['String'];
-  /**
-   * A way to capture some customer-specific way of tracking which version / edition
-   * of the ImplementingService this is. Typically a Git SHA or docker image ID.
-   */
+  /** The particular version/edition of a subgraph, entered by users. Typically a Git SHA or docker image ID. */
   revision: Scalars['String'];
-  /** Timestamp for when this implementing service was updated */
+  /** Timestamp for when this subgraph was updated. */
   updatedAt: Scalars['Timestamp'];
-  /** URL of the graphql endpoint of the implementing service */
+  /** URL of the subgraph's GraphQL endpoint. */
   url?: Maybe<Scalars['String']>;
 };
 
@@ -2687,15 +2858,17 @@ export type FederatedImplementingServicePartialSchema = {
   sdl: Scalars['String'];
 };
 
-/** List of federated implementing services that compose a graph */
+/** Container for a list of subgraphs composing a graph. */
 export type FederatedImplementingServices = {
   __typename?: 'FederatedImplementingServices';
+  /** The list of underlying subgraphs. */
   services: Array<FederatedImplementingService>;
 };
 
+/** Counts of changes at the field level, including objects, interfaces, and input fields. */
 export type FieldChangeSummaryCounts = {
   __typename?: 'FieldChangeSummaryCounts';
-  /** Number of changes that are additions of fields to object and interface types. */
+  /** Number of changes that are additions of fields to object, interface, and input types. */
   additions: Scalars['Int'];
   /**
    * Number of changes that are field edits. This includes fields changing type and any field
@@ -2703,7 +2876,7 @@ export type FieldChangeSummaryCounts = {
    * field changes.
    */
   edits: Scalars['Int'];
-  /** Number of changes that are removals of fields from object and interface types. */
+  /** Number of changes that are removals of fields from object, interface, and input types. */
   removals: Scalars['Int'];
 };
 
@@ -2946,7 +3119,10 @@ export type GraphApiKey = ApiKey & {
 /** A union of all combinations that can comprise the implementingServices for a Service */
 export type GraphImplementors = FederatedImplementingServices | NonFederatedImplementingService;
 
-/** A variant of a graph, also called a schema tag in parts of our product. */
+/**
+ * A variant of a graph, often corresponding to an environment where a graph runs (e.g. staging).
+ * See https://www.apollographql.com/docs/studio/org/graphs/ for more details.
+ */
 export type GraphVariant = {
   __typename?: 'GraphVariant';
   /** As new schema tags keep getting published, activeSchemaPublish refers to the latest. */
@@ -2955,20 +3131,27 @@ export type GraphVariant = {
   compositionVersion?: Maybe<Scalars['String']>;
   /** Filter configuration used to create the contract schema */
   contractFilterConfig?: Maybe<FilterConfig>;
+  /** Preview a Contract schema built from this source variant. */
+  contractPreview: ContractPreview;
   /** Explorer setting for default headers for a graph */
   defaultHeaders?: Maybe<Scalars['String']>;
   derivedVariantCount: Scalars['Int'];
-  /** Graph the variant belongs to */
+  /** Graph the variant belongs to. */
   graph: Service;
   /** Graph ID of the variant. Prefer using graph { id } when feasible. */
   graphId: Scalars['String'];
+  /** If the variant has managed subgraphs. */
+  hasManagedSubgraphs?: Maybe<Scalars['Boolean']>;
   /** Global identifier for the graph variant, in the form `graph@variant`. */
   id: Scalars['ID'];
   /** Represents whether this variant is a Contract. */
   isContract: Scalars['Boolean'];
   /** Is this variant one of the current user's favorite variants? */
   isFavoriteOfCurrentUser: Scalars['Boolean'];
-  /** If the variant has a composition */
+  /**
+   * If the variant has managed subgraphs.
+   * @deprecated Replaced by hasManagedSubgraphs
+   */
   isFederated?: Maybe<Scalars['Boolean']>;
   /** If the variant is protected */
   isProtected: Scalars['Boolean'];
@@ -2977,8 +3160,12 @@ export type GraphVariant = {
   isPubliclyListed: Scalars['Boolean'];
   /** Represents whether Apollo has verified the authenticity of this public variant. This can only be true if the variant is also public. */
   isVerified: Scalars['Boolean'];
+  /** Latest approved launch for the variant, and what is served through Uplink. */
   latestApprovedLaunch?: Maybe<Launch>;
+  /** Latest launch for the variant, whether successful or not. */
   latestLaunch?: Maybe<Launch>;
+  /** Latest publication for the variant. */
+  latestPublication?: Maybe<SchemaTag>;
   launch?: Maybe<Launch>;
   launchHistory: Array<Launch>;
   links?: Maybe<Array<LinkInfo>>;
@@ -2996,46 +3183,93 @@ export type GraphVariant = {
   registryStatsWindow?: Maybe<RegistryStatsWindow>;
   /** The total number of requests for this variant in the last 24 hours */
   requestsInLastDay?: Maybe<Scalars['Long']>;
-  /** If the graphql endpoint is set up to accept cookies */
+  /** If the graphql endpoint is set up to accept cookies. */
   sendCookies?: Maybe<Scalars['Boolean']>;
   sourceVariant?: Maybe<GraphVariant>;
-  /** URL where the graph subscription can be queried. */
+  /** Subgraph of a given name, null if non-existent. */
+  subgraph?: Maybe<FederatedImplementingService>;
+  /**
+   * List of subgraphs that comprise a variant, null if not federated.
+   * Set includeDeleted to see deleted subgraphs.
+   */
+  subgraphs?: Maybe<Array<FederatedImplementingService>>;
+  /** URL where subscription operations can be executed. */
   subscriptionUrl?: Maybe<Scalars['String']>;
   /** A list of supported directives */
   supportedDirectives?: Maybe<Array<DirectiveSupportStatus>>;
-  /** URL where the graph can be queried. */
+  /** URL where non-subscription operations can be executed. */
   url?: Maybe<Scalars['String']>;
   /** The last instant that usage information (e.g. operation stat, client stats) was reported for this variant */
   usageLastReportedAt?: Maybe<Scalars['Timestamp']>;
 };
 
 
-/** A variant of a graph, also called a schema tag in parts of our product. */
+/**
+ * A variant of a graph, often corresponding to an environment where a graph runs (e.g. staging).
+ * See https://www.apollographql.com/docs/studio/org/graphs/ for more details.
+ */
+export type GraphVariantContractPreviewArgs = {
+  filters: FilterConfigInput;
+};
+
+
+/**
+ * A variant of a graph, often corresponding to an environment where a graph runs (e.g. staging).
+ * See https://www.apollographql.com/docs/studio/org/graphs/ for more details.
+ */
 export type GraphVariantLaunchArgs = {
   id: Scalars['ID'];
 };
 
 
-/** A variant of a graph, also called a schema tag in parts of our product. */
+/**
+ * A variant of a graph, often corresponding to an environment where a graph runs (e.g. staging).
+ * See https://www.apollographql.com/docs/studio/org/graphs/ for more details.
+ */
 export type GraphVariantLaunchHistoryArgs = {
   limit?: Scalars['Int'];
 };
 
 
-/** A variant of a graph, also called a schema tag in parts of our product. */
+/**
+ * A variant of a graph, often corresponding to an environment where a graph runs (e.g. staging).
+ * See https://www.apollographql.com/docs/studio/org/graphs/ for more details.
+ */
 export type GraphVariantPlanArgs = {
   document: Scalars['GraphQLDocument'];
   operationName?: InputMaybe<Scalars['String']>;
 };
 
 
-/** A variant of a graph, also called a schema tag in parts of our product. */
+/**
+ * A variant of a graph, often corresponding to an environment where a graph runs (e.g. staging).
+ * See https://www.apollographql.com/docs/studio/org/graphs/ for more details.
+ */
 export type GraphVariantRegistryStatsWindowArgs = {
   from: Scalars['Timestamp'];
   resolution?: InputMaybe<Resolution>;
   to?: InputMaybe<Scalars['Timestamp']>;
 };
 
+
+/**
+ * A variant of a graph, often corresponding to an environment where a graph runs (e.g. staging).
+ * See https://www.apollographql.com/docs/studio/org/graphs/ for more details.
+ */
+export type GraphVariantSubgraphArgs = {
+  name: Scalars['ID'];
+};
+
+
+/**
+ * A variant of a graph, often corresponding to an environment where a graph runs (e.g. staging).
+ * See https://www.apollographql.com/docs/studio/org/graphs/ for more details.
+ */
+export type GraphVariantSubgraphsArgs = {
+  includeDeleted?: Scalars['Boolean'];
+};
+
+/** Result of looking up a variant by ref */
 export type GraphVariantLookup = GraphVariant | InvalidRefFormat;
 
 /** Modifies a variant of a graph, also called a schema tag in parts of our product. */
@@ -3159,22 +3393,23 @@ export type GraphVariantMutationUpdateVariantReadmeArgs = {
   readme: Scalars['String'];
 };
 
-/** A map from permission String to boolean that the current user is allowed for the root graph variant */
+/** A map from permission String to boolean that the currently authenticated user is allowed for a particular graph variant. */
 export type GraphVariantPermissions = {
   __typename?: 'GraphVariantPermissions';
   canCreateCollectionInVariant: Scalars['Boolean'];
+  /** Whether the currently authenticated user is permitted to manage/update the build configuration (e.g. build pipeline version) for this variant. */
   canManageBuildConfig: Scalars['Boolean'];
+  /** Whether the currently authenticated user is permitted to update variant-level settings for the Schema Explorer. */
   canManageExplorerSettings: Scalars['Boolean'];
+  /** Whether the currently authenticated user is permitted to publish schemas to this variant. */
   canPushSchemas: Scalars['Boolean'];
+  /** Whether the currently authenticated user is permitted to view details regarding the build configuration (e.g. build pipeline version) for this variant. */
   canQueryBuildConfig: Scalars['Boolean'];
-  /**
-   * Whether the current user can access the schema for this variant. This will be anded with
-   * the ServiceRoles.canQuerySchemas, this will be true when the service schema permission is
-   * false for Services with public variants
-   */
+  /** Whether the currently authenticated user is permitted to download schemas associated to this variant. */
   canQuerySchemas: Scalars['Boolean'];
   canShareCollectionInVariant: Scalars['Boolean'];
   canUpdateVariantLinkInfo: Scalars['Boolean'];
+  /** Whether the currently authenticated user is permitted to update the README for this variant. */
   canUpdateVariantReadme: Scalars['Boolean'];
   variantId: Scalars['ID'];
 };
@@ -3221,18 +3456,22 @@ export type HistoricQueryParameters = {
   to?: InputMaybe<Scalars['Timestamp']>;
 };
 
+/** An identity (e.g. Anonymous, a specific User) within Apollo Studio. See implementations. */
 export type Identity = {
+  /** A view of the identity as an Actor type. */
   asActor: Actor;
+  /** An identifier for a given identity, unique within the context of the identity type. */
   id: Scalars['ID'];
+  /** A human-readable name for the identity in question. */
   name: Scalars['String'];
 };
 
 /** An actor's identity and info about the client they used to perform the action */
 export type IdentityAndClientInfo = {
   __typename?: 'IdentityAndClientInfo';
-  /** The clientName given to Apollo Cloud when the actor performed the action */
+  /** Client name provided when the actor performed the action */
   clientName?: Maybe<Scalars['String']>;
-  /** The clientVersion given to Apollo Cloud when the actor performed the action */
+  /** Client version provided when the actor performed the action */
   clientVersion?: Maybe<Scalars['String']>;
   /** Identity info about the actor */
   identity?: Maybe<Identity>;
@@ -3489,6 +3728,7 @@ export type InvalidOperation = {
   signature: Scalars['ID'];
 };
 
+/** Type returned by reference lookup when the reference was invalid */
 export type InvalidRefFormat = Error & {
   __typename?: 'InvalidRefFormat';
   message: Scalars['String'];
@@ -3539,30 +3779,53 @@ export type InvoiceV2 = {
   uuid: Scalars['ID'];
 };
 
+/** A Launch represents the complete process of making a set of updates to your deployed graph. */
 export type Launch = {
   __typename?: 'Launch';
+  /** The time at which this launch was approved. */
   approvedAt?: Maybe<Scalars['Timestamp']>;
+  /** The build for the variant being launched. Is non-null once the build is initiated. */
   build?: Maybe<Build>;
+  /** Set of items that will be passed to the build. */
   buildInput: BuildInput;
+  /** The time at which this launch completed. */
   completedAt?: Maybe<Scalars['Timestamp']>;
+  /** The time at which this launch initiated. */
   createdAt: Scalars['Timestamp'];
+  /** Contract launches that were triggered by this launch. */
   downstreamLaunches: Array<Launch>;
+  /** The ID of the graph that this launch was initiated for. */
   graphId: Scalars['String'];
+  /** The name of the variant that this launch was initiated for. */
   graphVariant: Scalars['String'];
+  /** Unique identifier for this launch. */
   id: Scalars['ID'];
   isAvailable?: Maybe<Scalars['Boolean']>;
+  /** Whether the launch completed. */
   isCompleted?: Maybe<Scalars['Boolean']>;
+  /** Whether the launch was published. */
   isPublished?: Maybe<Scalars['Boolean']>;
   isTarget?: Maybe<Scalars['Boolean']>;
+  /** Returns the most recent launch sequence step. */
   latestSequenceStep?: Maybe<LaunchSequenceStep>;
+  /** A specific publication of a graph variant pertaining to this launch. */
+  publication?: Maybe<SchemaTag>;
+  /** The outcome of the launch. */
   results: Array<LaunchResult>;
   schemaTag?: Maybe<SchemaTag>;
+  /** This represents a sequence in the Launch. Returns a list of sequence steps that represents points of time in the launch. */
   sequence: Array<LaunchSequenceStep>;
+  /** A shortened version of Launch.id. Contains the first 8 characters of the ID. */
   shortenedID: Scalars['String'];
+  /** The status of the launch. */
   status: LaunchStatus;
+  /** Changes that were made to the subgraphs for this launch. */
   subgraphChanges?: Maybe<Array<SubgraphChange>>;
+  /** The time at which this launch was superseded by another launch. */
   supersededAt?: Maybe<Scalars['Timestamp']>;
+  /** Represents the launch that caused this launch to not continue/publish. */
   supersededBy?: Maybe<Launch>;
+  /** Upstream launch represents the launch of the source variant. */
   upstreamLaunch?: Maybe<Launch>;
 };
 
@@ -3663,6 +3926,8 @@ export type Mutation = {
    * returns the corresponding login email when successful
    */
   finalizePasswordReset?: Maybe<Scalars['String']>;
+  /** Mutation a graph. */
+  graph?: Maybe<ServiceMutation>;
   /** Join an account with a token */
   joinAccount?: Maybe<Account>;
   me?: Maybe<IdentityMutation>;
@@ -3702,6 +3967,7 @@ export type MutationAccountArgs = {
 
 export type MutationCreateOperationCollectionArgs = {
   description?: InputMaybe<Scalars['String']>;
+  editRoles?: InputMaybe<Array<UserPermission>>;
   isSandbox: Scalars['Boolean'];
   isShared: Scalars['Boolean'];
   name: Scalars['String'];
@@ -3712,6 +3978,11 @@ export type MutationCreateOperationCollectionArgs = {
 export type MutationFinalizePasswordResetArgs = {
   newPassword: Scalars['String'];
   resetToken: Scalars['String'];
+};
+
+
+export type MutationGraphArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -3884,19 +4155,19 @@ export type NamedIntrospectionValueNoDescription = {
   printedType?: Maybe<Scalars['String']>;
 };
 
-/** A non-federated service for a monolithic graph */
+/** A non-federated service for a monolithic graph. */
 export type NonFederatedImplementingService = {
   __typename?: 'NonFederatedImplementingService';
-  /** Timestamp of when this implementing service was created */
+  /** Timestamp of when this implementing service was created. */
   createdAt: Scalars['Timestamp'];
   /**
    * Identifies which graph this non-implementing service belongs to.
-   * Formerly known as "service_id"
+   * Formerly known as "service_id".
    */
   graphID: Scalars['String'];
   /**
    * Specifies which variant of a graph this implementing service belongs to".
-   * Formerly known as "tag"
+   * Formerly known as "tag".
    */
   graphVariant: Scalars['String'];
 };
@@ -4052,6 +4323,7 @@ export type OperationCollection = {
   /**
    * If a user has any of these roles, they will be able to edit this
    * collection. This will be null if and only if \`isShared\` is false
+   * @deprecated deprecated in favour of minEditRole
    */
   editRoles?: Maybe<Array<UserPermission>>;
   id: Scalars['ID'];
@@ -4060,6 +4332,7 @@ export type OperationCollection = {
   isShared: Scalars['Boolean'];
   lastUpdatedAt: Scalars['Timestamp'];
   lastUpdatedBy?: Maybe<Identity>;
+  minEditRole?: Maybe<UserPermission>;
   name: Scalars['String'];
   operation?: Maybe<OperationCollectionEntryResult>;
   operations: Array<OperationCollectionEntry>;
@@ -4148,7 +4421,9 @@ export type OperationCollectionMutation = {
   operation?: Maybe<OperationCollectionEntryMutationResult>;
   /** @deprecated Will throw NotImplemented */
   removeFromVariant: RemoveOperationCollectionFromVariantResult;
+  setMinEditRole?: Maybe<UpdateOperationCollectionResult>;
   updateDescription?: Maybe<UpdateOperationCollectionResult>;
+  /** @deprecated Deprecated in favour of setMinEditRole */
   updateEditRoles?: Maybe<UpdateOperationCollectionResult>;
   updateIsFavorite?: Maybe<UpdateOperationCollectionResult>;
   updateIsShared?: Maybe<UpdateOperationCollectionResult>;
@@ -4188,6 +4463,11 @@ export type OperationCollectionMutationOperationArgs = {
 
 export type OperationCollectionMutationRemoveFromVariantArgs = {
   variantRef: Scalars['ID'];
+};
+
+
+export type OperationCollectionMutationSetMinEditRoleArgs = {
+  editRole?: InputMaybe<UserPermission>;
 };
 
 
@@ -4341,14 +4621,14 @@ export type PagerDutyChannelInput = {
   routingKey: Scalars['String'];
 };
 
-/** Schema for an implementing service with associated metadata */
+/** Schema for a subgraph with associated metadata */
 export type PartialSchema = {
   __typename?: 'PartialSchema';
   /** Timestamp for when the partial schema was created */
   createdAt: Scalars['Timestamp'];
   /** If this sdl is currently actively composed in the gateway, this is true */
   isLive: Scalars['Boolean'];
-  /** The enriched sdl of a partial schema */
+  /** The GraphQL document for a subgraph schema. */
   sdl: Scalars['String'];
   /** The path of deep storage to find the raw enriched partial schema file */
   sdlPath: Scalars['String'];
@@ -4426,6 +4706,7 @@ export type Query = {
   allAccounts?: Maybe<Array<Account>>;
   /** All available plans */
   allPlans: Array<BillingPlan>;
+  allPublicVariants?: Maybe<Array<GraphVariant>>;
   /** All services */
   allServices?: Maybe<Array<Service>>;
   /** All timezones with their offsets from UTC */
@@ -4442,15 +4723,20 @@ export type Query = {
   /** Get the unsubscribe settings for a given email. */
   emailPreferences?: Maybe<EmailPreferences>;
   experimentalFeatures: GlobalExperimentalFeatures;
+  /** Address of the Studio frontend. */
   frontendUrlRoot: Scalars['String'];
+  /** Access a graph by ID. */
+  graph?: Maybe<Service>;
   internalActiveCronJobs: Array<CronJob>;
   internalAdminUsers?: Maybe<Array<InternalAdminUser>>;
   internalUnresolvedCronExecutionFailures: Array<CronExecution>;
-  /** Current identity, null if not authenticated */
+  /** User or graph querying the API, null if not authenticated. */
   me?: Maybe<Identity>;
   odysseyCertification?: Maybe<OdysseyCertification>;
   operationCollection: OperationCollectionResult;
   operationCollectionEntries: Array<OperationCollectionEntry>;
+  /** Access an organization by ID. */
+  organization?: Maybe<Account>;
   /** Look up a plan by ID */
   plan?: Maybe<BillingPlan>;
   /** A list of public variants that have been selected to be shown on our Graph Directory. */
@@ -4465,6 +4751,8 @@ export type Query = {
   teamBillingPlan: BillingPlanV2;
   /** The plan started by AccountMutation.startTeamSubscription */
   teamPlan: BillingPlan;
+  /** Schema transformation for the Apollo platform API. Renames types. Internal to Apollo. */
+  transformSchemaForPlatformApi?: Maybe<Scalars['GraphQLDocument']>;
   /** The plan started by AccountMutation.startTrial */
   trialBillingPlan: BillingPlanV2;
   /** The plan started by AccountMutation.startTrial */
@@ -4528,6 +4816,11 @@ export type QueryEmailPreferencesArgs = {
 };
 
 
+export type QueryGraphArgs = {
+  id: Scalars['ID'];
+};
+
+
 export type QueryOdysseyCertificationArgs = {
   id: Scalars['ID'];
 };
@@ -4540,6 +4833,11 @@ export type QueryOperationCollectionArgs = {
 
 export type QueryOperationCollectionEntriesArgs = {
   collectionEntryIds: Array<Scalars['ID']>;
+};
+
+
+export type QueryOrganizationArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -4567,6 +4865,11 @@ export type QueryTeamBillingPlanArgs = {
 
 export type QueryTeamPlanArgs = {
   billingPeriod: BillingPeriod;
+};
+
+
+export type QueryTransformSchemaForPlatformApiArgs = {
+  baseSchema: Scalars['GraphQLDocument'];
 };
 
 
@@ -4779,11 +5082,15 @@ export enum QueryTriggerWindow {
   Unrecognized = 'UNRECOGNIZED'
 }
 
+/** The documentation for a graph variant, as display in Studio. */
 export type Readme = {
   __typename?: 'Readme';
+  /** Content of the document. */
   content: Scalars['String'];
   id: Scalars['ID'];
+  /** Last time the document was updated. */
   lastUpdatedAt: Scalars['Timestamp'];
+  /** Identity of who updated the document last. */
   lastUpdatedBy?: Maybe<Identity>;
 };
 
@@ -4961,14 +5268,18 @@ export type ScheduledSummary = ChannelSubscription & {
   variant: Scalars['String'];
 };
 
+/** A GraphQL schema document, which may optionally map back to context with which the schema was ingested. */
 export type Schema = {
   __typename?: 'Schema';
   createTemporaryURL?: Maybe<TemporaryUrl>;
+  /** The timestamp of initial ingestion of a schema to a graph. */
   createdAt: Scalars['Timestamp'];
+  /** The raw GraphQL document for the schema in question */
   document: Scalars['GraphQLDocument'];
   /** The number of fields; this includes user defined fields only, excluding built-in types and fields */
   fieldCount: Scalars['Int'];
   gitContext?: Maybe<GitContext>;
+  /** The hex representation of the SHA256 of the GraphQL document. */
   hash: Scalars['ID'];
   introspection: IntrospectionSchema;
   /** The number of types; this includes user defined types only, excluding built-in types */
@@ -4976,36 +5287,41 @@ export type Schema = {
 };
 
 
+/** A GraphQL schema document, which may optionally map back to context with which the schema was ingested. */
 export type SchemaCreateTemporaryUrlArgs = {
   expiresInSeconds?: Scalars['Int'];
 };
 
-/** Represents an error from running schema composition on a list of service definitions. */
+/** Represents an error from running schema composition on a list of subgraph definitions. */
 export type SchemaCompositionError = {
   __typename?: 'SchemaCompositionError';
+  /** A machine-readable error code. */
   code?: Maybe<Scalars['String']>;
+  /** Affected locations. */
   locations: Array<Maybe<SourceLocation>>;
+  /** A human-readable locations. */
   message: Scalars['String'];
 };
 
+/** The difference between two schemas, as usually computed during a schema check. */
 export type SchemaDiff = {
   __typename?: 'SchemaDiff';
   /**
-   * Clients affected by all changes in diff
+   * Clients affected by all changes in the diff.
    * @deprecated Unsupported.
    */
   affectedClients?: Maybe<Array<AffectedClient>>;
-  /** Operations affected by all changes in diff */
+  /** Operations affected by all changes in the diff. */
   affectedQueries?: Maybe<Array<AffectedQuery>>;
-  /** Summary/counts for all changes in diff */
+  /** Numeric summary of all changes in the diff. */
   changeSummary: ChangeSummary;
-  /** List of schema changes with associated affected clients and operations */
+  /** List of schema changes with associated affected clients and operations. */
   changes: Array<Change>;
-  /** Number of affected query operations that are neither marked as SAFE or IGNORED */
+  /** Number of affected query operations that are neither marked as safe or ignored. */
   numberOfAffectedOperations: Scalars['Int'];
-  /** Number of operations that were validated during schema diff */
+  /** Number of operations that were validated during the check. */
   numberOfCheckedOperations?: Maybe<Scalars['Int']>;
-  /** Indication of the success of the change, either failure, warning, or notice. */
+  /** Indication of the success of the change; either failure, warning, or notice. */
   severity: ChangeSeverity;
   /** The tag against which this diff was created */
   tag?: Maybe<Scalars['String']>;
@@ -5079,11 +5395,16 @@ export type SchemaReport = {
   userVersion?: InputMaybe<Scalars['String']>;
 };
 
+/** A specific publication of a graph variant. */
 export type SchemaTag = {
   __typename?: 'SchemaTag';
-  /** The composition result that corresponds to this schema repo tag, if it exists. */
+  /**
+   * The result of composition, including either a supergraph schema or errors,
+   * executed during this publication. Only available with managed federation.
+   */
   compositionResult?: Maybe<CompositionResult>;
   createdAt: Scalars['Timestamp'];
+  /** Differences with the schema from the previous successful publication. */
   diffToPrevious?: Maybe<SchemaDiff>;
   gitContext?: Maybe<GitContext>;
   /**
@@ -5104,21 +5425,9 @@ export type SchemaTag = {
    * in the tag history.
    */
   historyOrder: Scalars['Int'];
-  /**
-   * The identifier for this particular schema tag, which may be either a particular
-   * run of a check or a specific publish. This ID can be used alongside `schemaTagByID`
-   * in order to look up a particular entry.
-   */
+  /** The identifier for this specific publication. */
   id: Scalars['ID'];
-  /**
-   * Indicates this schema is "published" meaning that our users correspond this schema
-   * with a long-running or permanent initiative. Published schemas appear in the UI
-   * when exploring a service's schemas, and typically refer to either active environments
-   * with metrics (e.g. "staging") or git branches that are constantly used as a base
-   * (e.g. "main"). If this field is not found, the schema is "private" to Engine
-   * and is uploaded but not promoted to published yet. The other benefit is this makes
-   * for nice UX around publishing events
-   */
+  /** Time of publication. */
   publishedAt: Scalars['Timestamp'];
   /**
    * The Identity that published this schema and their client info, or null if this isn't
@@ -5130,16 +5439,18 @@ export type SchemaTag = {
    * first upload of the schema.
    */
   reversionFrom?: Maybe<SchemaTag>;
+  /** The published schema. */
   schema: Schema;
   slackNotificationBody?: Maybe<Scalars['String']>;
   /** @deprecated Please use variant { name } instead */
   tag: Scalars['String'];
-  /** The graph variant this schema tag belongs to. */
+  /** The graph variant this belongs to. */
   variant: GraphVariant;
   webhookNotificationBody: Scalars['String'];
 };
 
 
+/** A specific publication of a graph variant. */
 export type SchemaTagHistoryArgs = {
   includeUnchanged?: Scalars['Boolean'];
   limit?: Scalars['Int'];
@@ -5147,6 +5458,7 @@ export type SchemaTagHistoryArgs = {
 };
 
 
+/** A specific publication of a graph variant. */
 export type SchemaTagSlackNotificationBodyArgs = {
   graphDisplayName: Scalars['String'];
 };
@@ -5175,11 +5487,18 @@ export type SemanticChange = {
   parentNode?: Maybe<NamedIntrospectionType>;
 };
 
+/**
+ * A graph in Apollo Studio represents a graph in your organization.
+ * Each graph has one or more variants, which correspond to the different environments where that graph runs (such as staging and production).
+ * Each variant has its own GraphQL schema, which means schemas can differ between environments.
+ */
 export type Service = Identity & {
   __typename?: 'Service';
+  /** Organization that this graph belongs to. */
   account?: Maybe<Account>;
   accountId?: Maybe<Scalars['ID']>;
   apiKeys?: Maybe<Array<GraphApiKey>>;
+  /** A view of the identity as an Actor type. */
   asActor: Actor;
   /**
    * Get an URL to which an avatar image can be uploaded. Client uploads by sending a PUT request
@@ -5234,23 +5553,24 @@ export type Service = Identity & {
    * role on this graph.
    */
   hiddenFromUninvitedNonAdminAccountMembers: Scalars['Boolean'];
+  /** Globally unique identifier for this graph. */
   id: Scalars['ID'];
   /**
-   * List of implementing services that comprise a graph. A non-federated graph should have a single implementing service.
-   * Set includeDeleted to see deleted implementing services.
+   * List of subgraphs that comprise a graph. A non-federated graph should have a single implementing service.
+   * Set includeDeleted to see deleted subgraphs.
    */
   implementingServices?: Maybe<GraphImplementors>;
   lastReportedAt?: Maybe<Scalars['Timestamp']>;
   /** Current identity, null if not authenticated. */
   me?: Maybe<Identity>;
-  /**
-   * This returns the composition result that was most recently published to the graph.
-   * Only identities that canQuerySchemas and canQueryImplementingServices have access
-   * to this field
-   */
+  /** The composition result that was most recently published to a graph variant. */
   mostRecentCompositionPublish?: Maybe<CompositionPublishResult>;
+  /** Permissions of the current user in this graph. */
   myRole?: Maybe<UserPermission>;
-  /** @deprecated Use Service.title */
+  /**
+   * Name of this graph. Note that this field is deprecated.
+   * @deprecated Use Service.title
+   */
   name: Scalars['String'];
   operation?: Maybe<Operation>;
   /** Gets the operations and their approved changes for this graph, checkID, and operationID. */
@@ -5270,12 +5590,12 @@ export type Service = Identity & {
   reportingEnabled: Scalars['Boolean'];
   /** The list of members that can access this graph, accounting for graph role overrides */
   roleOverrides?: Maybe<Array<RoleOverride>>;
-  /** Which permissions the current user has for interacting with this service */
+  /** Which permissions the current user has for interacting with this graph */
   roles?: Maybe<ServiceRoles>;
   scheduledSummaries: Array<ScheduledSummary>;
-  /** Get a schema by hash OR current tag */
+  /** Get a schema by hash or current tag */
   schema?: Maybe<Schema>;
-  /** Get the schema tag */
+  /** The current publish associated to a given variant (with 'tag' as the variant name). */
   schemaTag?: Maybe<SchemaTag>;
   schemaTagById?: Maybe<SchemaTag>;
   /**
@@ -5288,100 +5608,190 @@ export type Service = Identity & {
   statsWindow?: Maybe<ServiceStatsWindow>;
   /** Generate a test schema publish notification body */
   testSchemaPublishBody: Scalars['String'];
+  /** Name of this graph. */
   title: Scalars['String'];
   trace?: Maybe<Trace>;
   traceStorageEnabled: Scalars['Boolean'];
-  /** A particular variant (sometimes called "tag") of the graph, often representing a live traffic environment (such as "prod"). Each variant can represent a specific URL or destination to query at, analytics, and its own schema history. */
+  /**
+   * A particular variant often representing a live traffic environment (such as "dev", "staging", or "prod").
+   * Each variant can represent a specific URL or destination to query at, analytics, and its own schema history.
+   * Pass in a name to get a specific variant. Use `Graph.variants` to get a list of variants.
+   */
   variant?: Maybe<GraphVariant>;
   /** The list of variants that exist for this graph */
   variants: Array<GraphVariant>;
 };
 
 
+/**
+ * A graph in Apollo Studio represents a graph in your organization.
+ * Each graph has one or more variants, which correspond to the different environments where that graph runs (such as staging and production).
+ * Each variant has its own GraphQL schema, which means schemas can differ between environments.
+ */
 export type ServiceAvatarUrlArgs = {
   size?: Scalars['Int'];
 };
 
 
+/**
+ * A graph in Apollo Studio represents a graph in your organization.
+ * Each graph has one or more variants, which correspond to the different environments where that graph runs (such as staging and production).
+ * Each variant has its own GraphQL schema, which means schemas can differ between environments.
+ */
 export type ServiceChannelsArgs = {
   channelIds?: InputMaybe<Array<Scalars['ID']>>;
 };
 
 
+/**
+ * A graph in Apollo Studio represents a graph in your organization.
+ * Each graph has one or more variants, which correspond to the different environments where that graph runs (such as staging and production).
+ * Each variant has its own GraphQL schema, which means schemas can differ between environments.
+ */
 export type ServiceCheckWorkflowArgs = {
   id: Scalars['ID'];
 };
 
 
+/**
+ * A graph in Apollo Studio represents a graph in your organization.
+ * Each graph has one or more variants, which correspond to the different environments where that graph runs (such as staging and production).
+ * Each variant has its own GraphQL schema, which means schemas can differ between environments.
+ */
 export type ServiceCheckWorkflowsArgs = {
   filter?: InputMaybe<CheckFilterInput>;
   limit?: Scalars['Int'];
 };
 
 
+/**
+ * A graph in Apollo Studio represents a graph in your organization.
+ * Each graph has one or more variants, which correspond to the different environments where that graph runs (such as staging and production).
+ * Each variant has its own GraphQL schema, which means schemas can differ between environments.
+ */
 export type ServiceChecksAuthorOptionsArgs = {
   filter?: InputMaybe<CheckFilterInput>;
 };
 
 
+/**
+ * A graph in Apollo Studio represents a graph in your organization.
+ * Each graph has one or more variants, which correspond to the different environments where that graph runs (such as staging and production).
+ * Each variant has its own GraphQL schema, which means schemas can differ between environments.
+ */
 export type ServiceChecksBranchOptionsArgs = {
   filter?: InputMaybe<CheckFilterInput>;
 };
 
 
+/**
+ * A graph in Apollo Studio represents a graph in your organization.
+ * Each graph has one or more variants, which correspond to the different environments where that graph runs (such as staging and production).
+ * Each variant has its own GraphQL schema, which means schemas can differ between environments.
+ */
 export type ServiceChecksSubgraphOptionsArgs = {
   filter?: InputMaybe<CheckFilterInput>;
 };
 
 
+/**
+ * A graph in Apollo Studio represents a graph in your organization.
+ * Each graph has one or more variants, which correspond to the different environments where that graph runs (such as staging and production).
+ * Each variant has its own GraphQL schema, which means schemas can differ between environments.
+ */
 export type ServiceCompositionResultByIdArgs = {
   id: Scalars['ID'];
 };
 
 
+/**
+ * A graph in Apollo Studio represents a graph in your organization.
+ * Each graph has one or more variants, which correspond to the different environments where that graph runs (such as staging and production).
+ * Each variant has its own GraphQL schema, which means schemas can differ between environments.
+ */
 export type ServiceDocumentArgs = {
   hash?: InputMaybe<Scalars['SHA256']>;
 };
 
 
+/**
+ * A graph in Apollo Studio represents a graph in your organization.
+ * Each graph has one or more variants, which correspond to the different environments where that graph runs (such as staging and production).
+ * Each variant has its own GraphQL schema, which means schemas can differ between environments.
+ */
 export type ServiceImplementingServicesArgs = {
   graphVariant: Scalars['String'];
   includeDeleted?: InputMaybe<Scalars['Boolean']>;
 };
 
 
+/**
+ * A graph in Apollo Studio represents a graph in your organization.
+ * Each graph has one or more variants, which correspond to the different environments where that graph runs (such as staging and production).
+ * Each variant has its own GraphQL schema, which means schemas can differ between environments.
+ */
 export type ServiceLastReportedAtArgs = {
   graphVariant?: InputMaybe<Scalars['String']>;
 };
 
 
+/**
+ * A graph in Apollo Studio represents a graph in your organization.
+ * Each graph has one or more variants, which correspond to the different environments where that graph runs (such as staging and production).
+ * Each variant has its own GraphQL schema, which means schemas can differ between environments.
+ */
 export type ServiceMostRecentCompositionPublishArgs = {
   graphVariant: Scalars['String'];
 };
 
 
+/**
+ * A graph in Apollo Studio represents a graph in your organization.
+ * Each graph has one or more variants, which correspond to the different environments where that graph runs (such as staging and production).
+ * Each variant has its own GraphQL schema, which means schemas can differ between environments.
+ */
 export type ServiceOperationArgs = {
   id: Scalars['ID'];
 };
 
 
+/**
+ * A graph in Apollo Studio represents a graph in your organization.
+ * Each graph has one or more variants, which correspond to the different environments where that graph runs (such as staging and production).
+ * Each variant has its own GraphQL schema, which means schemas can differ between environments.
+ */
 export type ServiceOperationsAcceptedChangesArgs = {
   checkID: Scalars['ID'];
   operationID: Scalars['String'];
 };
 
 
+/**
+ * A graph in Apollo Studio represents a graph in your organization.
+ * Each graph has one or more variants, which correspond to the different environments where that graph runs (such as staging and production).
+ * Each variant has its own GraphQL schema, which means schemas can differ between environments.
+ */
 export type ServiceOperationsCheckArgs = {
   checkID: Scalars['ID'];
 };
 
 
+/**
+ * A graph in Apollo Studio represents a graph in your organization.
+ * Each graph has one or more variants, which correspond to the different environments where that graph runs (such as staging and production).
+ * Each variant has its own GraphQL schema, which means schemas can differ between environments.
+ */
 export type ServiceQueryTriggersArgs = {
   graphVariant?: InputMaybe<Scalars['String']>;
   operationNames?: InputMaybe<Array<Scalars['String']>>;
 };
 
 
+/**
+ * A graph in Apollo Studio represents a graph in your organization.
+ * Each graph has one or more variants, which correspond to the different environments where that graph runs (such as staging and production).
+ * Each variant has its own GraphQL schema, which means schemas can differ between environments.
+ */
 export type ServiceRegistryStatsWindowArgs = {
   from: Scalars['Timestamp'];
   resolution?: InputMaybe<Resolution>;
@@ -5389,32 +5799,62 @@ export type ServiceRegistryStatsWindowArgs = {
 };
 
 
+/**
+ * A graph in Apollo Studio represents a graph in your organization.
+ * Each graph has one or more variants, which correspond to the different environments where that graph runs (such as staging and production).
+ * Each variant has its own GraphQL schema, which means schemas can differ between environments.
+ */
 export type ServiceRegistrySubscriptionsEnabledArgs = {
   graphVariant?: InputMaybe<Scalars['String']>;
 };
 
 
+/**
+ * A graph in Apollo Studio represents a graph in your organization.
+ * Each graph has one or more variants, which correspond to the different environments where that graph runs (such as staging and production).
+ * Each variant has its own GraphQL schema, which means schemas can differ between environments.
+ */
 export type ServiceSchemaArgs = {
   hash?: InputMaybe<Scalars['ID']>;
   tag?: InputMaybe<Scalars['String']>;
 };
 
 
+/**
+ * A graph in Apollo Studio represents a graph in your organization.
+ * Each graph has one or more variants, which correspond to the different environments where that graph runs (such as staging and production).
+ * Each variant has its own GraphQL schema, which means schemas can differ between environments.
+ */
 export type ServiceSchemaTagArgs = {
   tag: Scalars['String'];
 };
 
 
+/**
+ * A graph in Apollo Studio represents a graph in your organization.
+ * Each graph has one or more variants, which correspond to the different environments where that graph runs (such as staging and production).
+ * Each variant has its own GraphQL schema, which means schemas can differ between environments.
+ */
 export type ServiceSchemaTagByIdArgs = {
   id: Scalars['ID'];
 };
 
 
+/**
+ * A graph in Apollo Studio represents a graph in your organization.
+ * Each graph has one or more variants, which correspond to the different environments where that graph runs (such as staging and production).
+ * Each variant has its own GraphQL schema, which means schemas can differ between environments.
+ */
 export type ServiceSchemaTagsArgs = {
   tags?: InputMaybe<Array<Scalars['String']>>;
 };
 
 
+/**
+ * A graph in Apollo Studio represents a graph in your organization.
+ * Each graph has one or more variants, which correspond to the different environments where that graph runs (such as staging and production).
+ * Each variant has its own GraphQL schema, which means schemas can differ between environments.
+ */
 export type ServiceStatsArgs = {
   from: Scalars['Timestamp'];
   resolution?: InputMaybe<Resolution>;
@@ -5422,6 +5862,11 @@ export type ServiceStatsArgs = {
 };
 
 
+/**
+ * A graph in Apollo Studio represents a graph in your organization.
+ * Each graph has one or more variants, which correspond to the different environments where that graph runs (such as staging and production).
+ * Each variant has its own GraphQL schema, which means schemas can differ between environments.
+ */
 export type ServiceStatsWindowArgs = {
   from: Scalars['Timestamp'];
   resolution?: InputMaybe<Resolution>;
@@ -5429,18 +5874,87 @@ export type ServiceStatsWindowArgs = {
 };
 
 
+/**
+ * A graph in Apollo Studio represents a graph in your organization.
+ * Each graph has one or more variants, which correspond to the different environments where that graph runs (such as staging and production).
+ * Each variant has its own GraphQL schema, which means schemas can differ between environments.
+ */
 export type ServiceTestSchemaPublishBodyArgs = {
   variant: Scalars['String'];
 };
 
 
+/**
+ * A graph in Apollo Studio represents a graph in your organization.
+ * Each graph has one or more variants, which correspond to the different environments where that graph runs (such as staging and production).
+ * Each variant has its own GraphQL schema, which means schemas can differ between environments.
+ */
 export type ServiceTraceArgs = {
   id: Scalars['ID'];
 };
 
 
+/**
+ * A graph in Apollo Studio represents a graph in your organization.
+ * Each graph has one or more variants, which correspond to the different environments where that graph runs (such as staging and production).
+ * Each variant has its own GraphQL schema, which means schemas can differ between environments.
+ */
 export type ServiceVariantArgs = {
   name: Scalars['String'];
+};
+
+/** Columns of ServiceBillingUsageStats. */
+export enum ServiceBillingUsageStatsColumn {
+  OperationCount = 'OPERATION_COUNT',
+  OperationCountProvidedExplicitly = 'OPERATION_COUNT_PROVIDED_EXPLICITLY',
+  SchemaTag = 'SCHEMA_TAG',
+  Timestamp = 'TIMESTAMP'
+}
+
+export type ServiceBillingUsageStatsDimensions = {
+  __typename?: 'ServiceBillingUsageStatsDimensions';
+  operationCountProvidedExplicitly?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
+};
+
+/** Filter for data in ServiceBillingUsageStats. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
+export type ServiceBillingUsageStatsFilter = {
+  and?: InputMaybe<Array<ServiceBillingUsageStatsFilter>>;
+  in?: InputMaybe<ServiceBillingUsageStatsFilterIn>;
+  not?: InputMaybe<ServiceBillingUsageStatsFilter>;
+  /** Selects rows whose operationCountProvidedExplicitly dimension equals the given value if not null. To query for the null value, use {in: {operationCountProvidedExplicitly: [null]}} instead. */
+  operationCountProvidedExplicitly?: InputMaybe<Scalars['String']>;
+  or?: InputMaybe<Array<ServiceBillingUsageStatsFilter>>;
+  /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
+  schemaTag?: InputMaybe<Scalars['String']>;
+};
+
+/** Filter for data in ServiceBillingUsageStats. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
+export type ServiceBillingUsageStatsFilterIn = {
+  /** Selects rows whose operationCountProvidedExplicitly dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  operationCountProvidedExplicitly?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type ServiceBillingUsageStatsMetrics = {
+  __typename?: 'ServiceBillingUsageStatsMetrics';
+  operationCount: Scalars['Long'];
+};
+
+export type ServiceBillingUsageStatsOrderBySpec = {
+  column: ServiceBillingUsageStatsColumn;
+  direction: Ordering;
+};
+
+export type ServiceBillingUsageStatsRecord = {
+  __typename?: 'ServiceBillingUsageStatsRecord';
+  /** Dimensions of ServiceBillingUsageStats that can be grouped by. */
+  groupBy: ServiceBillingUsageStatsDimensions;
+  /** Metrics of ServiceBillingUsageStats that can be aggregated over. */
+  metrics: ServiceBillingUsageStatsMetrics;
+  /** Starting segment timestamp. */
+  timestamp: Scalars['Timestamp'];
 };
 
 /** Columns of ServiceEdgeServerInfos. */
@@ -5772,22 +6286,21 @@ export type ServiceFieldUsageRecord = {
   timestamp: Scalars['Timestamp'];
 };
 
+/** Mutations to a graph. */
 export type ServiceMutation = {
   __typename?: 'ServiceMutation';
   /**
-   * Compose an implementing service's partial schema, diff the composed schema, validate traffic against that schema,
-   * and store the result so the details can be viewed by users in the UI.
-   * This mutation will not mark the schema as "published".
+   * Check a proposed subgraph schema change.
+   * If the proposal composes successfully, perform a usage check for the resulting schema.
    */
   checkPartialSchema: CheckPartialSchemaResult;
   /**
    * Checks a proposed schema against the schema that has been published to
-   * a particular tag, using metrics that have been published to the base tag.
-   * Callers can set the historicParameters directly, which will be used if
-   * provided. If useMaximumRetention is provided, but historicParameters is not,
-   * then validation will use the maximum retention the graph has access to.
-   * If neither historicParameters nor useMaximumRetention is provided, the
-   * default time range of one week (7 days) will be used.
+   * a particular variant, using metrics corresponding to `historicParameters`.
+   * Callers can set `historicParameters` directly or rely on defaults set in the
+   * graph's check configuration (7 days by default).
+   * If they do not set `historicParameters` but set `useMaximumRetention`,
+   * validation will use the maximum retention the graph has access to.
    */
   checkSchema: CheckSchemaResult;
   /** Make changes to a check workflow. */
@@ -5810,6 +6323,7 @@ export type ServiceMutation = {
    */
   deleteRegistrySubscriptions: Array<Scalars['ID']>;
   deleteScheduledSummary: Scalars['Boolean'];
+  /** Delete a variant by name. */
   deleteSchemaTag: DeleteSchemaTagResult;
   /** Given a UTC timestamp, delete all traces associated with this Service, on that corresponding day. If a timestamp to is provided, deletes all days inclusive. */
   deleteTraces?: Maybe<Scalars['Void']>;
@@ -5834,11 +6348,17 @@ export type ServiceMutation = {
   newKey: GraphApiKey;
   /** Adds an override to the given users permission for this graph */
   overrideUserPermission?: Maybe<Service>;
-  /** Returns a preview of the Core and API schema contracts derived from a source variant and a set of filter configurations */
+  /**
+   * Returns a preview of the Core and API schema contracts derived from a source variant and a set of filter configurations
+   * @deprecated use GraphVariant.contractPreview instead
+   */
   previewContractVariant: ContractVariantPreviewResult;
   /** Promote the schema with the given SHA-256 hash to active for the given variant/tag. */
   promoteSchema: PromoteSchemaResponseOrError;
+  /** Publish to a subgraph. If composition is successful, this will update running routers. */
+  publishSubgraph?: Maybe<CompositionAndUpsertResult>;
   registerOperationsWithResponse?: Maybe<RegisterOperationsMutationResponse>;
+  /** Removes a subgraph. If composition is successful, this will update running routers. */
   removeImplementingServiceAndTriggerComposition: CompositionAndRemoveResult;
   removeKey?: Maybe<Scalars['Void']>;
   renameKey?: Maybe<GraphApiKey>;
@@ -5872,10 +6392,12 @@ export type ServiceMutation = {
   updateHiddenFromUninvitedNonAdminAccountMembers?: Maybe<Service>;
   updateReadme?: Maybe<Service>;
   updateTitle?: Maybe<Service>;
+  /** Publish a schema to this variant, either via a document or an introspection query result. */
   uploadSchema?: Maybe<UploadSchemaMutationResponse>;
   upsertChannel?: Maybe<Channel>;
   /** Creates a contract schema from a source variant and a set of filter configurations */
   upsertContractVariant: ContractVariantUpsertResult;
+  /** Publish to a subgraph. If composition is successful, this will update running routers. */
   upsertImplementingServiceAndTriggerComposition?: Maybe<CompositionAndUpsertResult>;
   /** Create/update PagerDuty notification channel */
   upsertPagerDutyChannel?: Maybe<PagerDutyChannel>;
@@ -5900,6 +6422,7 @@ export type ServiceMutation = {
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationCheckPartialSchemaArgs = {
   frontend?: InputMaybe<Scalars['String']>;
   gitContext?: InputMaybe<GitContextInput>;
@@ -5913,6 +6436,7 @@ export type ServiceMutationCheckPartialSchemaArgs = {
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationCheckSchemaArgs = {
   baseSchemaTag?: InputMaybe<Scalars['String']>;
   frontend?: InputMaybe<Scalars['String']>;
@@ -5927,88 +6451,104 @@ export type ServiceMutationCheckSchemaArgs = {
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationCheckWorkflowArgs = {
   id: Scalars['ID'];
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationCreateCompositionStatusSubscriptionArgs = {
   channelID: Scalars['ID'];
   variant: Scalars['String'];
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationCreateSchemaPublishSubscriptionArgs = {
   channelID: Scalars['ID'];
   variant: Scalars['String'];
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationDeleteChannelArgs = {
   id: Scalars['ID'];
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationDeleteQueryTriggerArgs = {
   id: Scalars['ID'];
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationDeleteRegistrySubscriptionArgs = {
   id: Scalars['ID'];
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationDeleteRegistrySubscriptionsArgs = {
   variant: Scalars['String'];
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationDeleteScheduledSummaryArgs = {
   id: Scalars['ID'];
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationDeleteSchemaTagArgs = {
   tag: Scalars['String'];
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationDeleteTracesArgs = {
   from: Scalars['Timestamp'];
   to?: InputMaybe<Scalars['Timestamp']>;
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationIgnoreOperationsInChecksArgs = {
   ids: Array<Scalars['ID']>;
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationMarkChangesForOperationAsSafeArgs = {
   checkID: Scalars['ID'];
   operationID: Scalars['ID'];
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationNewKeyArgs = {
   keyName?: InputMaybe<Scalars['String']>;
   role?: UserPermission;
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationOverrideUserPermissionArgs = {
   permission?: InputMaybe<UserPermission>;
   userID: Scalars['ID'];
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationPreviewContractVariantArgs = {
   filterConfig: FilterConfigInput;
   sourceVariant: Scalars['String'];
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationPromoteSchemaArgs = {
   graphVariant: Scalars['String'];
   historicParameters?: InputMaybe<HistoricQueryParameters>;
@@ -6017,6 +6557,18 @@ export type ServiceMutationPromoteSchemaArgs = {
 };
 
 
+/** Mutations to a graph. */
+export type ServiceMutationPublishSubgraphArgs = {
+  activePartialSchema: PartialSchemaInput;
+  gitContext?: InputMaybe<GitContextInput>;
+  graphVariant: Scalars['String'];
+  name: Scalars['String'];
+  revision: Scalars['String'];
+  url?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Mutations to a graph. */
 export type ServiceMutationRegisterOperationsWithResponseArgs = {
   clientIdentity?: InputMaybe<RegisteredClientIdentityInput>;
   gitContext?: InputMaybe<GitContextInput>;
@@ -6026,6 +6578,7 @@ export type ServiceMutationRegisterOperationsWithResponseArgs = {
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationRemoveImplementingServiceAndTriggerCompositionArgs = {
   dryRun?: Scalars['Boolean'];
   graphVariant: Scalars['String'];
@@ -6033,61 +6586,72 @@ export type ServiceMutationRemoveImplementingServiceAndTriggerCompositionArgs = 
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationRemoveKeyArgs = {
   id?: InputMaybe<Scalars['ID']>;
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationRenameKeyArgs = {
   id: Scalars['ID'];
   newKeyName?: InputMaybe<Scalars['String']>;
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationReportServerInfoArgs = {
   executableSchema?: InputMaybe<Scalars['String']>;
   info: EdgeServerInfo;
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationStoreSchemaDocumentArgs = {
   schemaDocument: Scalars['String'];
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationTestSlackChannelArgs = {
   id: Scalars['ID'];
   notification: SlackNotificationInput;
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationTestSubscriptionForChannelArgs = {
   channelID: Scalars['ID'];
   subscriptionID: Scalars['ID'];
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationTransferArgs = {
   to: Scalars['String'];
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationTriggerRepublishArgs = {
   graphVariant: Scalars['String'];
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationUnignoreOperationsInChecksArgs = {
   ids: Array<Scalars['ID']>;
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationUnmarkChangesForOperationAsSafeArgs = {
   checkID: Scalars['ID'];
   operationID: Scalars['ID'];
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationUpdateCheckConfigurationArgs = {
   excludedClients?: InputMaybe<Array<ClientFilterInput>>;
   excludedOperationNames?: InputMaybe<Array<OperationNameFilterInput>>;
@@ -6100,6 +6664,7 @@ export type ServiceMutationUpdateCheckConfigurationArgs = {
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationUpdateDatadogMetricsConfigArgs = {
   apiKey?: InputMaybe<Scalars['String']>;
   apiRegion?: InputMaybe<DatadogApiRegion>;
@@ -6107,26 +6672,31 @@ export type ServiceMutationUpdateDatadogMetricsConfigArgs = {
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationUpdateDescriptionArgs = {
   description: Scalars['String'];
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationUpdateHiddenFromUninvitedNonAdminAccountMembersArgs = {
   hiddenFromUninvitedNonAdminAccountMembers: Scalars['Boolean'];
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationUpdateReadmeArgs = {
   readme: Scalars['String'];
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationUpdateTitleArgs = {
   title: Scalars['String'];
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationUploadSchemaArgs = {
   errorOnBadRequest?: Scalars['Boolean'];
   gitContext?: InputMaybe<GitContextInput>;
@@ -6138,6 +6708,7 @@ export type ServiceMutationUploadSchemaArgs = {
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationUpsertChannelArgs = {
   id?: InputMaybe<Scalars['ID']>;
   pagerDutyChannel?: InputMaybe<PagerDutyChannelInput>;
@@ -6146,6 +6717,7 @@ export type ServiceMutationUpsertChannelArgs = {
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationUpsertContractVariantArgs = {
   contractVariantName: Scalars['String'];
   filterConfig: FilterConfigInput;
@@ -6154,6 +6726,7 @@ export type ServiceMutationUpsertContractVariantArgs = {
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationUpsertImplementingServiceAndTriggerCompositionArgs = {
   activePartialSchema: PartialSchemaInput;
   gitContext?: InputMaybe<GitContextInput>;
@@ -6164,18 +6737,21 @@ export type ServiceMutationUpsertImplementingServiceAndTriggerCompositionArgs = 
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationUpsertPagerDutyChannelArgs = {
   channel: PagerDutyChannelInput;
   id?: InputMaybe<Scalars['ID']>;
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationUpsertQueryTriggerArgs = {
   id?: InputMaybe<Scalars['ID']>;
   trigger: QueryTriggerInput;
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationUpsertRegistrySubscriptionArgs = {
   channelID?: InputMaybe<Scalars['ID']>;
   id?: InputMaybe<Scalars['ID']>;
@@ -6184,6 +6760,7 @@ export type ServiceMutationUpsertRegistrySubscriptionArgs = {
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationUpsertScheduledSummaryArgs = {
   channelID?: InputMaybe<Scalars['ID']>;
   enabled?: InputMaybe<Scalars['Boolean']>;
@@ -6194,12 +6771,14 @@ export type ServiceMutationUpsertScheduledSummaryArgs = {
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationUpsertSlackChannelArgs = {
   channel: SlackChannelInput;
   id?: InputMaybe<Scalars['ID']>;
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationUpsertWebhookChannelArgs = {
   id?: InputMaybe<Scalars['ID']>;
   name?: InputMaybe<Scalars['String']>;
@@ -6208,6 +6787,7 @@ export type ServiceMutationUpsertWebhookChannelArgs = {
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationValidateOperationsArgs = {
   gitContext?: InputMaybe<GitContextInput>;
   operations: Array<OperationDocumentInput>;
@@ -6215,6 +6795,7 @@ export type ServiceMutationValidateOperationsArgs = {
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationValidatePartialSchemaOfImplementingServiceAgainstGraphArgs = {
   graphVariant: Scalars['String'];
   implementingServiceName: Scalars['String'];
@@ -6222,6 +6803,7 @@ export type ServiceMutationValidatePartialSchemaOfImplementingServiceAgainstGrap
 };
 
 
+/** Mutations to a graph. */
 export type ServiceMutationVariantArgs = {
   name: Scalars['String'];
 };
@@ -6401,30 +6983,43 @@ export type ServiceQueryStatsRecord = {
   timestamp: Scalars['Timestamp'];
 };
 
-/** A map from role (permission) String to boolean that the current user is allowed for the root service */
+/** A map from role (permission) String to boolean that the current user is allowed for a particular graph. */
 export type ServiceRoles = {
   __typename?: 'ServiceRoles';
+  /** Whether the currently authenticated user is permitted to perform schema checks (i.e. run `rover (sub)graph check`). */
   canCheckSchemas: Scalars['Boolean'];
+  /** Whether the currently authenticated user is permitted to create new graph variants. */
   canCreateVariants: Scalars['Boolean'];
+  /** Whether the currently authenticated user is permitted to delete the graph in question */
   canDelete: Scalars['Boolean'];
+  /** Whether the currently authenticated user is permitted to manage user access to the graph in question. */
   canManageAccess: Scalars['Boolean'];
+  /** Whether the currently authenticated user is permitted to manage the build configuration (e.g. build pipeline version). */
   canManageBuildConfig: Scalars['Boolean'];
+  /** Whether the currently authenticated user is permitted to manage 3rd party integrations (e.g. Datadog forwarding). */
   canManageIntegrations: Scalars['Boolean'];
+  /** Whether the currently authenticated user is permitted to manage graph-level API keys. */
   canManageKeys: Scalars['Boolean'];
+  /** Whether the currently authenticated user is permitted to perform basic administration (e.g. set to public) over variants. */
   canManageVariants: Scalars['Boolean'];
+  /** Whether the currently authenticated user is permitted to view details about the build configuration (e.g. build pipeline version). */
   canQueryBuildConfig: Scalars['Boolean'];
+  /** Whether the currently authenticated user is permitted to view details of the check configuration for this graph. */
   canQueryCheckConfiguration: Scalars['Boolean'];
   canQueryDeletedImplementingServices: Scalars['Boolean'];
+  /** Whether the currently authenticated user is permitted to view which subgraphs the graph is composed of. */
   canQueryImplementingServices: Scalars['Boolean'];
   canQueryIntegrations: Scalars['Boolean'];
   canQueryPrivateInfo: Scalars['Boolean'];
   canQueryPublicInfo: Scalars['Boolean'];
   canQueryReadmeAuthor: Scalars['Boolean'];
   canQueryRoleOverrides: Scalars['Boolean'];
+  /** Whether the currently authenticated user is permitted to download schemas owned by this graph. */
   canQuerySchemas: Scalars['Boolean'];
   canQueryStats: Scalars['Boolean'];
   canQueryTokens: Scalars['Boolean'];
   canQueryTraces: Scalars['Boolean'];
+  /** Whether the currently authenticated user is permitted to register operations (i.e. `apollo client:push`) for this graph. */
   canRegisterOperations: Scalars['Boolean'];
   canStoreSchemasWithoutVariant: Scalars['Boolean'];
   canUndelete: Scalars['Boolean'];
@@ -6433,6 +7028,7 @@ export type ServiceRoles = {
   canUpdateTitle: Scalars['Boolean'];
   /** @deprecated Replaced with canQueryTraces and canQueryStats */
   canVisualizeStats: Scalars['Boolean'];
+  /** Whether the currently authenticated user is permitted to make updates to the check configuration for this graph. */
   canWriteCheckConfiguration: Scalars['Boolean'];
   /** @deprecated Never worked, not replaced */
   canWriteTraces: Scalars['Boolean'];
@@ -6441,6 +7037,7 @@ export type ServiceRoles = {
 /** A time window with a specified granularity over a given service. */
 export type ServiceStatsWindow = {
   __typename?: 'ServiceStatsWindow';
+  billingUsageStats: Array<ServiceBillingUsageStatsRecord>;
   edgeServerInfos: Array<ServiceEdgeServerInfosRecord>;
   errorStats: Array<ServiceErrorStatsRecord>;
   fieldLatencies: Array<ServiceFieldLatenciesRecord>;
@@ -6454,6 +7051,14 @@ export type ServiceStatsWindow = {
   roundedUpTo: Scalars['Timestamp'];
   tracePathErrorsRefs: Array<ServiceTracePathErrorsRefsRecord>;
   traceRefs: Array<ServiceTraceRefsRecord>;
+};
+
+
+/** A time window with a specified granularity over a given service. */
+export type ServiceStatsWindowBillingUsageStatsArgs = {
+  filter?: InputMaybe<ServiceBillingUsageStatsFilter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<ServiceBillingUsageStatsOrderBySpec>>;
 };
 
 
@@ -6777,6 +7382,7 @@ export type SourceLocation = {
 /** A time window with a specified granularity. */
 export type StatsWindow = {
   __typename?: 'StatsWindow';
+  billingUsageStats: Array<BillingUsageStatsRecord>;
   edgeServerInfos: Array<EdgeServerInfosRecord>;
   errorStats: Array<ErrorStatsRecord>;
   fieldLatencies: Array<FieldLatenciesRecord>;
@@ -6789,6 +7395,14 @@ export type StatsWindow = {
   roundedUpTo: Scalars['Timestamp'];
   tracePathErrorsRefs: Array<TracePathErrorsRefsRecord>;
   traceRefs: Array<TraceRefsRecord>;
+};
+
+
+/** A time window with a specified granularity. */
+export type StatsWindowBillingUsageStatsArgs = {
+  filter?: InputMaybe<BillingUsageStatsFilter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<BillingUsageStatsOrderBySpec>>;
 };
 
 
@@ -6985,6 +7599,7 @@ export type TimezoneOffset = {
   zoneID: Scalars['String'];
 };
 
+/** Counts of changes. */
 export type TotalChangeSummaryCounts = {
   __typename?: 'TotalChangeSummaryCounts';
   /**
@@ -7024,6 +7639,8 @@ export type Trace = {
   root: TraceNode;
   signature: Scalars['String'];
   startTime: Scalars['Timestamp'];
+  unexecutedOperationBody?: Maybe<Scalars['String']>;
+  unexecutedOperationName?: Maybe<Scalars['String']>;
   variablesJSON: Array<StringToString>;
 };
 
@@ -7293,6 +7910,7 @@ export type TraceSourceLocation = {
   line: Scalars['Int'];
 };
 
+/** Counts of changes at the type level, including interfaces, unions, enums, scalars, input objects, etc. */
 export type TypeChangeSummaryCounts = {
   __typename?: 'TypeChangeSummaryCounts';
   /** Number of changes that are additions of types. */
@@ -7339,20 +7957,29 @@ export type UpdateOperationCollectionEntryResult = OperationCollectionEntry | Pe
 
 export type UpdateOperationCollectionResult = OperationCollection | PermissionError | ValidationError;
 
+/** The result of a schema publish to a graph variant. */
 export type UploadSchemaMutationResponse = {
   __typename?: 'UploadSchemaMutationResponse';
+  /** A response code for processing via machines (e.g. UPLOAD_SUCCESS or NO_CHANGES) */
   code: Scalars['String'];
+  /** Human readable result of a schema publish. */
   message: Scalars['String'];
+  /** If successful, the corresponding publication. */
+  publication?: Maybe<SchemaTag>;
+  /** Whether the schema publish successfully completed or encountered errors. */
   success: Scalars['Boolean'];
+  /** If successful, the corresponding publication. */
   tag?: Maybe<SchemaTag>;
 };
 
+/** A registered user. */
 export type User = Identity & {
   __typename?: 'User';
   acceptedPrivacyPolicyAt?: Maybe<Scalars['Timestamp']>;
   /** @deprecated Replaced with User.memberships.account */
   accounts: Array<Account>;
   apiKeys: Array<UserApiKey>;
+  /** Translation of this user identity to an 'Actor' type. */
   asActor: Actor;
   /**
    * Get an URL to which an avatar image can be uploaded. Client uploads by sending a PUT request
@@ -7382,6 +8009,7 @@ export type User = Identity & {
   fullName: Scalars['String'];
   /** The user's GitHub username, if they log in via GitHub. May be null even for GitHub users in some edge cases. */
   githubUsername?: Maybe<Scalars['String']>;
+  /** The unique identifier for a user. */
   id: Scalars['ID'];
   /**
    * This role is reserved exclusively for internal MDG employees, and it controls what access they may have to other
@@ -7391,7 +8019,9 @@ export type User = Identity & {
   /** Last time any API token from this user was used against AGM services */
   lastAuthenticatedAt?: Maybe<Scalars['Timestamp']>;
   logoutAfterIdleMs?: Maybe<Scalars['Int']>;
+  /** Which organizations a user belongs to. */
   memberships: Array<UserMembership>;
+  /** The name (first and last) of a user. */
   name: Scalars['String'];
   odysseyCertifications?: Maybe<Array<OdysseyCertification>>;
   odysseyCourses?: Maybe<Array<OdysseyCourse>>;
@@ -7406,11 +8036,13 @@ export type User = Identity & {
 };
 
 
+/** A registered user. */
 export type UserApiKeysArgs = {
   includeCookies?: InputMaybe<Scalars['Boolean']>;
 };
 
 
+/** A registered user. */
 export type UserAvatarUrlArgs = {
   size?: Scalars['Int'];
 };
@@ -7427,11 +8059,16 @@ export type UserExperimentalFeatures = {
   exampleFeature: Scalars['Boolean'];
 };
 
+/** An organization a given user belongs to. */
 export type UserMembership = {
   __typename?: 'UserMembership';
+  /** The organization a user is a member of. */
   account: Account;
+  /** When the user joined the organization. */
   createdAt: Scalars['Timestamp'];
+  /** What level of access a use has to an organization. */
   permission: UserPermission;
+  /** The user that is a member of an organization. */
   user: User;
 };
 
@@ -7590,6 +8227,7 @@ export enum UserSegment {
   NotSpecified = 'NOT_SPECIFIED',
   ProductionGraphs = 'PRODUCTION_GRAPHS',
   Sandbox = 'SANDBOX',
+  SandboxOperationCollections = 'SANDBOX_OPERATION_COLLECTIONS',
   TryTeam = 'TRY_TEAM'
 }
 

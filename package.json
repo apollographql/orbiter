@@ -7,7 +7,8 @@
     "build": "npm run codegen && tsc",
     "clean": "git clean -dfqX -- ./node_modules ./tscsonfig.tsbuildinfo ./dist ./generated",
     "watch": "concurrently 'tsc --watch' 'npm run codegen -- --watch'",
-    "start": "concurrently 'npm run watch' 'netlify dev'",
+    "start": "npm run build && concurrently 'tsc --watch' 'npm run codegen -- --watch' 'netlify dev'",
+    "quickstart": "tsc && netlify dev",
     "test": "jest",
     "codegen": "graphql-codegen",
     "format": "prettier --write './src/**/*.ts'"

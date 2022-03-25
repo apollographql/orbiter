@@ -3,14 +3,13 @@ import {
   RoverTrackMutationVariables,
 } from "../generated/studio";
 import { request } from "graphql-request";
-const graphQLEndpoint =
-  "https://graphql.api.apollographql.com/api/graphql";
+const graphQLEndpoint = "https://graphql.api.apollographql.com/api/graphql";
 
 if (process.env["NODE_ENV"] == "dev") {
-  require("dotenv").config()
+  require("dotenv").config();
 }
 
-const STUDIO_API_KEY = process.env["STUDIO_API_KEY"]
+const STUDIO_API_KEY = process.env["STUDIO_API_KEY"];
 
 export async function track(
   variables: RoverTrackMutationVariables,
@@ -22,12 +21,15 @@ export async function track(
         url: graphQLEndpoint,
         document: RoverTrackDocument,
         variables,
-        requestHeaders: { "User-Agent": userAgent, "X-Api-Key": STUDIO_API_KEY },
+        requestHeaders: {
+          "User-Agent": userAgent,
+          "X-Api-Key": STUDIO_API_KEY,
+        },
       });
     } catch (e) {
       console.error(e);
     }
   } else {
-    throw "Could not find $STUDIO_API_KEY"
+    throw "Could not find $STUDIO_API_KEY";
   }
 }

@@ -1,10 +1,5 @@
-declare module 'make-fetch-happen' {
-  import type {
-    Response,
-    Request,
-    RequestInfo,
-    RequestInit,
-  } from 'node-fetch';
+declare module "make-fetch-happen" {
+  import type { Response, Request, RequestInfo, RequestInit } from "node-fetch";
 
   // If adding to these options, they should mirror those from `make-fetch-happen`
   // @see: https://github.com/npm/make-fetch-happen/#extra-options
@@ -40,9 +35,10 @@ declare module 'make-fetch-happen' {
    * @see: https://git.io/JvBwX
    */
   export interface Fetcher {
-    (input?: RequestInfo, init?: RequestInit & FetcherOptions): Promise<
-      Response
-    >;
+    (
+      input?: RequestInfo,
+      init?: RequestInit & FetcherOptions
+    ): Promise<Response>;
   }
 
   let fetch: Fetcher & {
