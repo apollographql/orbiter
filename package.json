@@ -11,7 +11,7 @@
     "quickstart": "tsc && netlify dev",
     "test": "jest",
     "codegen": "graphql-codegen",
-    "format": "prettier --write './src/**/*.ts'"
+    "format": "prettier --write './src/**/*.ts' --ignore-path ./src/generated/studio.ts"
   },
   "author": "opensource@apollographql.com",
   "license": "MIT",
