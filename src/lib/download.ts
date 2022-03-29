@@ -32,8 +32,6 @@ export async function downloadEvent(
     } else {
       throw new MalformedRequestError("You must either download a tarball or an install script");
     }
-
-    console.log(`endpoint: ${endpoint}`)
     let response = await fetch(endpoint);
     if (response.ok) {
       const headers = {

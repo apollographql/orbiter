@@ -68,7 +68,7 @@ export class Binary {
             method: "HEAD",
             redirect: "manual",
           });
-          if (response && response.status == 301) {
+          if (response && (response.status == 301 || response.status == 302)) {
             let realLatestUrl = response.headers.get("location");
             const splits = realLatestUrl && realLatestUrl.split("/");
             const latestVersion = splits && splits[splits.length - 1];
