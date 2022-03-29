@@ -12,7 +12,7 @@ export class Binary {
     this.repo = new Repo(this.name);
   }
 
-  async _getReleaseTagName(version: string): Promise<string> {
+  private getReleaseTagName(version: string): string {
     let tagName: string;
     switch (this.name) {
       case BinaryName.Rover:
@@ -33,10 +33,10 @@ export class Binary {
     return tagName;
   }
 
-  async _getReleaseTarballName(
+  private getReleaseTarballName(
     inputTargetTriple: string,
     version: string
-  ): Promise<string> {
+  ): string {
     let targetTriple = enumFromStringValue(TargetTriple, inputTargetTriple);
     return `${this.name}-${version}-${targetTriple}.tar.gz`;
   }
@@ -47,9 +47,9 @@ export class Binary {
   ): Promise<string> {
     return `https://github.com/${
       this.repo.slug
-    }/releases/download/${await this._getReleaseTagName(
+    }/releases/download/${await this.getReleaseTagName(
       version
-    )}/${await this._getReleaseTarballName(inputTargetTriple, version)}`;
+    )}/${await this.getReleaseTarballName(inputTargetTriple, version)}`;
   }
 
   async getFullyQualifiedVersion(): Promise<string> {

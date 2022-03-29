@@ -24,21 +24,16 @@ export async function downloadEvent(
     let binary = new Binary(inputBinaryName, inputVersion);
     let version = await binary.getFullyQualifiedVersion();
     let fetch = getFetcher();
-    let endpoint: string | null = null;
+    let endpoint: string;
     if (downloadType == "installer") {
       endpoint = await binary.getInstallScriptUrl(inputTarget, version);
     } else if (downloadType == "tarball") {
       endpoint = await binary.getReleaseTarballUrl(inputTarget, version);
+    } else {
+      throw new MalformedRequestError("You must either download a tarball or an install script");
     }
 
-    if (endpoint == null) {
-      // this _should_ be unreachable but idk.
-      // TypeScript _looks_ like Rust which almost makes it worse
-      // I don't trust it.
-      throw new MalformedRequestError(
-        "You must either download a tarball or an install script."
-      );
-    }
+    console.log(`endpoint: ${endpoint}`)
     let response = await fetch(endpoint);
     if (response.ok) {
       const headers = {
@@ -69,7 +64,7 @@ export async function downloadEvent(
     }
     return {
       statusCode: 500,
-      body: `an unknown error occurred when loading the installer for ${binary.name}@${version} from GitHub Releases. the error we received from GitHub was '${response.statusText}'`,
+      body: `an unknown error occurred when loading the ${downloadType} for ${binary.name}@${version} from GitHub Releases. the error we received from GitHub was '${response.statusText}'`,
     };
   } catch (e) {
     if (e instanceof MalformedRequestError) {
@@ -85,7 +80,7 @@ export async function downloadEvent(
     }
     return {
       statusCode: 500,
-      body: `An unknown error occurred when loading the ${inputBinaryName} installer for ${inputVersion}.`,
+      body: `An unknown error occurred when loading the ${inputBinaryName} ${downloadType} for ${inputVersion}.`,
     };
   }
 }
