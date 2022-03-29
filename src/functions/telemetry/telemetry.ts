@@ -5,7 +5,10 @@ import {
 } from "aws-lambda";
 import { track } from "../../lib/track";
 import { sentryWrapHandler, initSentry } from "../../lib/sentry";
-import { RoverTrackMutationVariables, RoverArgumentInput } from "../../generated/studio";
+import {
+  RoverTrackMutationVariables,
+  RoverArgumentInput,
+} from "../../generated/studio";
 
 const CLI_NAME: string = "rover";
 
@@ -87,8 +90,8 @@ export async function trackSession(session: Session, userAgent: string) {
     let value = session.command.arguments[key as keyof object];
     let input: RoverArgumentInput = {
       key,
-      value
-    }
+      value,
+    };
     args.push(input);
   }
   const event_payload: RoverTrackMutationVariables = {
