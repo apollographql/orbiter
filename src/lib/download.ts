@@ -65,20 +65,9 @@ export async function downloadEvent(
       );
     }
   } catch (e) {
-    if (!(e instanceof HttpError)) {
-      if (
-        e instanceof MalformedRequestError ||
-        e instanceof NotFoundError ||
-        e instanceof InternalServerError
-      ) {
-        e = new HttpError(e);
-      } else {
-        let ie = new InternalServerError(e);
-        e = new HttpError(ie);
-      }
-    }
+    let statusCode = e?.status || 500;
     return {
-      statusCode: e.status,
+      statusCode,
       body: e.message,
     };
   }

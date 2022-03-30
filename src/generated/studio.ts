@@ -8274,6 +8274,7 @@ export enum UserPermission {
   BillingManager = 'BILLING_MANAGER',
   Consumer = 'CONSUMER',
   Contributor = 'CONTRIBUTOR',
+  Documenter = 'DOCUMENTER',
   GraphAdmin = 'GRAPH_ADMIN',
   LegacyGraphKey = 'LEGACY_GRAPH_KEY',
   Observer = 'OBSERVER',
