@@ -64,7 +64,7 @@ export class Binary {
       // https:, , github.com, apollographql, rover, releases, v0.99.99
       const urlComponents = realLatestUrl?.split("/");
       // grab the last element
-      const latestVersion = urlComponents?.at(-1);
+      const latestVersion = urlComponents?.pop();
       if (!latestVersion) {
         throw new NotFoundError("could not get latest version");
       }
