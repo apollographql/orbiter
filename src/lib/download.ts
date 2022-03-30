@@ -1,7 +1,6 @@
 import { APIGatewayProxyResult } from "aws-lambda";
 import { getFetcher } from "./getFetcher";
 import {
-  HttpError,
   InternalServerError,
   MalformedRequestError,
   NotFoundError,
@@ -27,13 +26,7 @@ export async function downloadEvent(
       throw new MalformedRequestError("You must specify a version to download");
     }
     let binary = new Binary(inputBinaryName, inputVersion);
-    let version: string;
-    let maybeVersion = await binary.getFullyQualifiedVersion();
-    if (maybeVersion instanceof HttpError) {
-      throw maybeVersion;
-    } else {
-      version = maybeVersion;
-    }
+    let version = await binary.getFullyQualifiedVersion();
     let fetch = getFetcher();
     let endpoint: string;
     if (downloadType === "installer") {
