@@ -69,10 +69,11 @@ export async function downloadEvent(
         statusCode: 404,
         body: e.message,
       };
+    } else {
+      return {
+        statusCode: 500,
+        body: `An unknown error occurred when loading the ${inputBinaryName} ${downloadType} for ${inputVersion}.`,
+      };
     }
-    return {
-      statusCode: 500,
-      body: `An unknown error occurred when loading the ${inputBinaryName} ${downloadType} for ${inputVersion}.`,
-    };
   }
 }

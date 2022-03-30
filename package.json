@@ -17,6 +17,14 @@
   "author": "opensource@apollographql.com",
   "license": "MIT",
   "devDependencies": {
+    "babel-jest": "^26.6.3",
+    "concurrently": "^6.0.2",
+    "jest": "^26.6.3",
+    "netlify-cli": "^3.24.3",
+    "nock": "^13.0.11",
+    "prettier": "^2.5.1"
+  },
+  "dependencies": {
     "@babel/core": "^7.13.14",
     "@babel/preset-env": "^7.13.12",
     "@babel/preset-typescript": "^7.13.0",
@@ -34,28 +42,19 @@
     "@types/node": "^12.12.47",
     "@types/node-fetch": "^2.5.7",
     "@types/uuid": "^8.3.0",
-    "babel-jest": "^26.6.3",
-    "concurrently": "^6.0.2",
-    "dotenv": "^16.0.0",
-    "jest": "^26.6.3",
-    "netlify-cli": "^3.24.3",
-    "nock": "^13.0.11",
-    "prettier": "^2.5.1",
-    "typescript": "^4.5.5"
-  },
-  "dependencies": {
     "@sentry/serverless": "^6.2.1",
     "btoa": "^1.2.1",
     "graphql": "^15.8.0",
     "graphql-request": "^4.0.0",
     "make-fetch-happen": "^8.0.14",
+    "typescript": "^4.5.5",
     "uuid": "^8.3.2"
   },
   "engines": {
-    "node": ">=16 <17",
-    "npm": "8.x"
+    "node": ">=14 <15",
+    "npm": "6.x"
   },
   "volta": {
-    "node": "16.14.2"
+    "node": "14.19.1"
   }
 }

@@ -57,8 +57,10 @@ export class Binary {
     });
     if (response?.status === 301 || response?.status === 302) {
       let realLatestUrl = response.headers.get("location");
+      // 
       const splits = realLatestUrl?.split("/");
-      const latestVersion = splits?.at(-1);
+      console.log(splits?.join(", "));
+      const latestVersion = splits && splits[splits.length - 1];
       if (!latestVersion) {
         throw new NotFoundError("could not get latest version");
       }
