@@ -58,9 +58,8 @@ export async function downloadEvent(
       );
     }
   } catch (e) {
-    let statusCode = e?.status || 500;
     return {
-      statusCode,
+      statusCode: e?.status || 500,
       body: e.message,
     };
   }
