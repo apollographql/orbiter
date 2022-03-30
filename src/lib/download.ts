@@ -1,6 +1,11 @@
 import { APIGatewayProxyResult } from "aws-lambda";
 import { getFetcher } from "./getFetcher";
-import { MalformedRequestError, NotFoundError } from "./error";
+import {
+  HttpError,
+  InternalServerError,
+  MalformedRequestError,
+  NotFoundError,
+} from "./error";
 import { Binary } from "./binary";
 
 // this is the main function meant to be called from the various endpoints
@@ -22,11 +27,17 @@ export async function downloadEvent(
       throw new MalformedRequestError("You must specify a version to download");
     }
     let binary = new Binary(inputBinaryName, inputVersion);
-    let version = await binary.getFullyQualifiedVersion();
+    let version: string;
+    let maybeVersion = await binary.getFullyQualifiedVersion();
+    if (maybeVersion instanceof HttpError) {
+      throw maybeVersion;
+    } else {
+      version = maybeVersion;
+    }
     let fetch = getFetcher();
     let endpoint: string;
     if (downloadType === "installer") {
-      endpoint = await binary.getInstallScriptUrl(inputTarget, version);
+      endpoint = binary.getInstallScriptUrl(inputTarget, version);
     } else if (downloadType === "tarball") {
       endpoint = binary.getReleaseTarballUrl(inputTarget, version);
     } else {
@@ -49,31 +60,26 @@ export async function downloadEvent(
         `couldn't find a GitHub release for ${binary.name}@${version}. ${endpoint} returned 404.`
       );
     } else {
-      return {
-        statusCode: response.status,
-        body: `an unknown error occurred when loading the ${downloadType} for ${
-          binary.name
-        }@${version} from GitHub Releases. the error we received from GitHub was: '${
-          response.statusText
-        }\n---\n${await response.text()}'`,
-      };
+      throw new InternalServerError(
+        `an unknown error occurred when loading the ${downloadType} for ${binary.name}@${version} from GitHub Releases. the error we received from GitHub was: '${response.statusText}'`
+      );
     }
   } catch (e) {
-    if (e instanceof MalformedRequestError) {
-      return {
-        statusCode: 400,
-        body: e.message,
-      };
-    } else if (e instanceof NotFoundError) {
-      return {
-        statusCode: 404,
-        body: e.message,
-      };
-    } else {
-      return {
-        statusCode: 500,
-        body: `An unknown error occurred when loading the ${inputBinaryName} ${downloadType} for ${inputVersion}.`,
-      };
+    if (!(e instanceof HttpError)) {
+      if (
+        e instanceof MalformedRequestError ||
+        e instanceof NotFoundError ||
+        e instanceof InternalServerError
+      ) {
+        e = new HttpError(e);
+      } else {
+        let ie = new InternalServerError(e);
+        e = new HttpError(ie);
+      }
     }
+    return {
+      statusCode: e.status,
+      body: e.message,
+    };
   }
 }

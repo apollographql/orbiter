@@ -1,5 +1,6 @@
 import nock from "nock";
-import { Binary } from "../binary";
+import { Binary, InputVersion } from "../binary";
+import {  MalformedRequestError } from "../error";
 import { downloadEvent } from "../download";
 
 const INSTALLER_CONTENTS = "installer contents";
@@ -10,21 +11,25 @@ beforeEach(() => {
 });
 
 const nockGitHubLatest = (binary: Binary, version: string) => {
-  nock(binary.versionUrl())
+  let latestReleaseEndpoint = binary.repo.releaseUrl(new InputVersion("latest", binary.name))
+  let thisReleaseEndpoint = binary.repo.releaseUrl(new InputVersion(version, binary.name))
+  nock(latestReleaseEndpoint)
     .head("")
-    .reply(301, undefined, {
-      Location: `https://github.com/${binary.repo.slug}/releases/${version}`,
+    .reply(302, undefined, {
+      Location: thisReleaseEndpoint,
     });
 };
 
-const nockInstaller = async (
+const nockInstaller = (
   binary: Binary,
   version: string,
   platform: string
 ) => {
-  nock(await binary.getInstallScriptUrl(platform, version))
-    .get("")
-    .reply(200, INSTALLER_CONTENTS);
+  let githubInstallerEndpoint = binary.getInstallScriptUrl(
+    platform,
+    version
+  );
+  nock(githubInstallerEndpoint).head("").reply(200, INSTALLER_CONTENTS);
 };
 
 it("fetches latest version from a redirected url", async () => {
@@ -40,8 +45,9 @@ it("fetches latest version from a redirected url", async () => {
     "installer"
   );
   let version = res.headers["X-Version"];
+  let location = res.headers["Location"]
   expect(version).toEqual("v0.99.99");
-  expect(res.body).toEqual(INSTALLER_CONTENTS);
+  expect(location).toContain("v0.99.99");
 });
 
 it("returns proper version with /vx.x.x", async () => {
@@ -56,20 +62,19 @@ it("returns proper version with /vx.x.x", async () => {
     realVersion,
     "installer"
   );
+  let location = res.headers["Location"];
   let version = res.headers["X-Version"];
+  expect(location).toContain("githubusercontent")
+  expect(location).toContain("v0.99.99")
   expect(version).toEqual("v0.99.99");
-  expect(res.body).toEqual(INSTALLER_CONTENTS);
 });
 
 it("errors when invalid platform passed", async () => {
   let realVersion = "v0.99.99";
-  let rover = new Binary("rover", realVersion);
   let platform = "myInvalidOS";
-  nockGitHubLatest(rover, realVersion);
-  nockInstaller(rover, realVersion, platform);
 
   let res = await downloadEvent(
-    rover.name.toString(),
+    "rover",
     platform,
     realVersion,
     "installer"
@@ -78,9 +83,16 @@ it("errors when invalid platform passed", async () => {
   expect(res.statusCode).toEqual(400);
 });
 
-it("errors when invalid version format passed", async () => {
-  let realVersion = "notarealversion";
-  expect(async () => {
-    return new Binary("rover", realVersion);
-  }).rejects.toThrow(/version/gi);
+it("errors when invalid version passed", async () => {
+  let version = "badbadversion";
+  let platform = "nix";
+
+  let res = await downloadEvent(
+    "rover",
+    platform,
+    version,
+    "installer"
+  );
+  expect(res.body).toContain("invalid");
+  expect(res.statusCode).toEqual(400);
 });

@@ -18,8 +18,6 @@ beforeEach(() => {
 });
 
 it("pulls from a version if passed", async () => {
-  nock(buildInstallUrl("v0.0.1")).get("").reply(200, "# bash script");
-
   const res = await handler(
     {
       path: "/nix/v0.0.1",
@@ -28,9 +26,9 @@ it("pulls from a version if passed", async () => {
     null
   );
 
-  expect(res.statusCode).toEqual(200);
+  expect(res.statusCode).toEqual(302);
   expect(res.headers["X-Version"]).toEqual("v0.0.1");
-  expect(res.body).toContain("# bash script");
+  expect(res.headers["Location"]).toContain("v0.0.1");
 });
 
 it("returns a 400 if no version is passed", async () => {
@@ -52,7 +50,7 @@ it("returns a 400 if no platform is passed", async () => {
 });
 
 it("returns a 500 if GitHub is down", async () => {
-  nock(buildInstallUrl("v0.0.1")).get("").reply(500, "oh noe big err");
+  nock(buildInstallUrl("v0.0.1")).head("").reply(500, "oh noe big err");
 
   const res = await handler({
     path: "/nix/v0.0.1",
@@ -63,7 +61,7 @@ it("returns a 500 if GitHub is down", async () => {
 });
 
 it("returns a 400 if asking for a bad version", async () => {
-  nock(buildInstallUrl("0.0.1")).get("").reply(500, "oh noe big err");
+  nock(buildInstallUrl("0.0.1")).head("").reply(500, "oh noe big err");
 
   // note the missing `v`
   const res = await handler({
@@ -75,7 +73,7 @@ it("returns a 400 if asking for a bad version", async () => {
 });
 
 it("returns a 404 if asking for a nonexistent version", async () => {
-  nock(buildInstallUrl("v0.0.999")).get("").reply(404, "lol not found");
+  nock(buildInstallUrl("v0.0.999")).head("").reply(404, "lol not found");
 
   const res = await handler({
     path: "/nix/v0.0.999",

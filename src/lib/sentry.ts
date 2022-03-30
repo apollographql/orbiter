@@ -28,7 +28,6 @@ function wrapHandler<TEvent, TResult>(
 
     return wrappedHandler;
   } else {
-    console.warn("skipping sentry initializer in dev mode");
     return handler;
   }
 }
