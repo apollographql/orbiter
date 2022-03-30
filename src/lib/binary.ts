@@ -69,7 +69,7 @@ export class Binary {
         const urlComponents = realLatestUrl?.split("/");
         // grab the last element
         const latestVersion =
-          urlComponents && urlComponents[urlComponents.length - 1];
+          urlComponents?.at(-1);
         if (!latestVersion) {
           throw new NotFoundError("could not get latest version");
         }
