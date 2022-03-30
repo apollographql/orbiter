@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run codegen && tsc && npm run node-version",
-    "clean": "rm ./node_modules ./package-lock.json ./tsconfig.tsbuildinfo ./dist ./generated ./.nvmrc -rf && npm run node-version",
+    "clean": "rm -r ./node_modules ./package-lock.json ./tsconfig.tsbuildinfo ./dist ./generated ./.nvmrc && npm run node-version",
     "watch": "concurrently 'tsc --watch' 'npm run codegen -- --watch'",
     "start": "npm run build && concurrently 'tsc --watch' 'npm run codegen -- --watch' 'netlify dev'",
     "quickstart": "tsc && netlify dev",
