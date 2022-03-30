@@ -333,7 +333,7 @@ export class InputVersion {
   constructor(inputVersion: string, binaryName: BinaryName) {
     let version = inputVersion.toLowerCase();
     let isValidVersionTag =
-      version.startsWith("v") && version.split(".").length - 1 >= 2;
+      version.startsWith("v") && version.split(".").length >= 2;
     if (version == "latest" || isValidVersionTag) {
       this.descriptor = version;
     } else if (
