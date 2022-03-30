@@ -2420,6 +2420,8 @@ export type ContractPreviewSuccess = {
 export enum ContractVariantFailedStep {
   AddDirectiveDefinitionsIfNotPresent = 'ADD_DIRECTIVE_DEFINITIONS_IF_NOT_PRESENT',
   DirectiveDefinitionLocationAugmenting = 'DIRECTIVE_DEFINITION_LOCATION_AUGMENTING',
+  EmptyEnumMasking = 'EMPTY_ENUM_MASKING',
+  EmptyInputObjectMasking = 'EMPTY_INPUT_OBJECT_MASKING',
   EmptyObjectAndInterfaceMasking = 'EMPTY_OBJECT_AND_INTERFACE_MASKING',
   EmptyUnionMasking = 'EMPTY_UNION_MASKING',
   InputValidation = 'INPUT_VALIDATION',
@@ -4177,6 +4179,15 @@ export type NotFoundError = Error & {
   message: Scalars['String'];
 };
 
+export type OdysseyAttempt = {
+  __typename?: 'OdysseyAttempt';
+  completedAt?: Maybe<Scalars['Timestamp']>;
+  id: Scalars['ID'];
+  responses: Array<OdysseyResponse>;
+  startedAt: Scalars['Timestamp'];
+  testId: Scalars['String'];
+};
+
 export type OdysseyCertification = {
   __typename?: 'OdysseyCertification';
   certificationId: Scalars['String'];
@@ -4203,6 +4214,21 @@ export type OdysseyCourseInput = {
   courseId: Scalars['String'];
 };
 
+export type OdysseyResponse = {
+  __typename?: 'OdysseyResponse';
+  correct: Scalars['Boolean'];
+  id: Scalars['ID'];
+  questionId: Scalars['String'];
+  values: Array<OdysseyValue>;
+};
+
+export type OdysseyResponseInput = {
+  attemptId: Scalars['ID'];
+  correct: Scalars['Boolean'];
+  questionId: Scalars['String'];
+  values: Array<Scalars['String']>;
+};
+
 export type OdysseyTask = {
   __typename?: 'OdysseyTask';
   completedAt?: Maybe<Scalars['Timestamp']>;
@@ -4214,6 +4240,12 @@ export type OdysseyTaskInput = {
   completedAt?: InputMaybe<Scalars['Timestamp']>;
   taskId: Scalars['String'];
   value?: InputMaybe<Scalars['String']>;
+};
+
+export type OdysseyValue = {
+  __typename?: 'OdysseyValue';
+  id: Scalars['ID'];
+  value: Scalars['String'];
 };
 
 export type Operation = {
@@ -8023,6 +8055,8 @@ export type User = Identity & {
   memberships: Array<UserMembership>;
   /** The name (first and last) of a user. */
   name: Scalars['String'];
+  odysseyAttempt?: Maybe<OdysseyAttempt>;
+  odysseyAttempts: Array<OdysseyAttempt>;
   odysseyCertifications?: Maybe<Array<OdysseyCertification>>;
   odysseyCourses?: Maybe<Array<OdysseyCourse>>;
   odysseyHasEarlyAccess: Scalars['Boolean'];
@@ -8045,6 +8079,12 @@ export type UserApiKeysArgs = {
 /** A registered user. */
 export type UserAvatarUrlArgs = {
   size?: Scalars['Int'];
+};
+
+
+/** A registered user. */
+export type UserOdysseyAttemptArgs = {
+  id: Scalars['ID'];
 };
 
 export type UserApiKey = ApiKey & {
@@ -8077,6 +8117,7 @@ export type UserMutation = {
   acceptPrivacyPolicy?: Maybe<Scalars['Void']>;
   /** Change the user's password */
   changePassword?: Maybe<Scalars['Void']>;
+  createOdysseyAttempt?: Maybe<OdysseyAttempt>;
   createOdysseyCertification?: Maybe<OdysseyCertification>;
   createOdysseyCourses?: Maybe<Array<OdysseyCourse>>;
   createOdysseyTasks?: Maybe<Array<OdysseyTask>>;
@@ -8099,6 +8140,7 @@ export type UserMutation = {
   renameKey?: Maybe<UserApiKey>;
   resendVerificationEmail?: Maybe<Scalars['Void']>;
   setOdysseyCourse?: Maybe<OdysseyCourse>;
+  setOdysseyResponse?: Maybe<OdysseyResponse>;
   setOdysseyTask?: Maybe<OdysseyTask>;
   /** Submit a zendesk ticket for this user */
   submitZendeskTicket?: Maybe<ZendeskTicket>;
@@ -8108,6 +8150,7 @@ export type UserMutation = {
   updateBetaFeaturesOn?: Maybe<User>;
   /** Update the status of a feature for this. For example, if you want to hide an introductory popup. */
   updateFeatureIntros?: Maybe<User>;
+  updateOdysseyAttempt?: Maybe<OdysseyAttempt>;
   /**
    * Update user to have the given internal mdg admin role.
    * It is necessary to be an MDG_INTERNAL_SUPER_ADMIN to perform update.
@@ -8123,6 +8166,11 @@ export type UserMutation = {
 export type UserMutationChangePasswordArgs = {
   newPassword: Scalars['String'];
   previousPassword: Scalars['String'];
+};
+
+
+export type UserMutationCreateOdysseyAttemptArgs = {
+  testId: Scalars['String'];
 };
 
 
@@ -8167,6 +8215,11 @@ export type UserMutationSetOdysseyCourseArgs = {
 };
 
 
+export type UserMutationSetOdysseyResponseArgs = {
+  response: OdysseyResponseInput;
+};
+
+
 export type UserMutationSetOdysseyTaskArgs = {
   task: OdysseyTaskInput;
 };
@@ -8199,6 +8252,12 @@ export type UserMutationUpdateBetaFeaturesOnArgs = {
 
 export type UserMutationUpdateFeatureIntrosArgs = {
   newFeatureIntros?: InputMaybe<FeatureIntrosInput>;
+};
+
+
+export type UserMutationUpdateOdysseyAttemptArgs = {
+  completedAt?: InputMaybe<Scalars['Timestamp']>;
+  id: Scalars['ID'];
 };
 
 
@@ -8385,15 +8444,15 @@ export const RoverTrackDocument = gql`
 }
     `;
 
-export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string) => Promise<T>;
+export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
 
-const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
+const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType) => action();
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
     RoverTrack(variables: RoverTrackMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RoverTrackMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<RoverTrackMutation>(RoverTrackDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'RoverTrack');
+      return withWrapper((wrappedRequestHeaders) => client.request<RoverTrackMutation>(RoverTrackDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'RoverTrack', 'mutation');
     }
   };
 }

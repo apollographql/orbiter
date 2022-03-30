@@ -1,5 +1,6 @@
 import { getFetcher } from "./getFetcher";
 import { NotFoundError, MalformedRequestError } from "./error";
+import { Fetcher } from "make-fetch-happen";
 
 export class Binary {
   name: BinaryName;
@@ -20,8 +21,7 @@ export class Binary {
         tagName = version;
         break;
       case BinaryName.Supergraph:
-        // supergraph@v0.0.0 but make it URL encoded
-        tagName = `supergraph%40${version}`;
+        tagName = encodeURIComponent(`supergraph@${version}`);
         break;
       default:
         throw new MalformedRequestError(
@@ -41,130 +41,136 @@ export class Binary {
     return `${this.name}-${version}-${targetTriple}.tar.gz`;
   }
 
-  async getReleaseTarballUrl(
-    inputTargetTriple: string,
-    version: string
-  ): Promise<string> {
+  getReleaseTarballUrl(inputTargetTriple: string, version: string): string {
     return `https://github.com/${
       this.repo.slug
-    }/releases/download/${await this.getReleaseTagName(
+    }/releases/download/${this.getReleaseTagName(
       version
-    )}/${await this.getReleaseTarballName(inputTargetTriple, version)}`;
+    )}/${this.getReleaseTarballName(inputTargetTriple, version)}`;
   }
 
-  async getFullyQualifiedVersion(): Promise<string> {
+  async getFullyQualifiedRoverVersion(fetch: Fetcher): Promise<string> {
+    let versionUrl = this.versionUrl();
+    let response = await fetch(versionUrl, {
+      method: "HEAD",
+      redirect: "manual",
+    });
+    if (response?.status === 301 || response?.status === 302) {
+      let realLatestUrl = response.headers.get("location");
+      const splits = realLatestUrl?.split("/");
+      const latestVersion = splits?.at(-1);
+      if (!latestVersion) {
+        throw new NotFoundError("could not get latest version");
+      }
+      return latestVersion;
+    } else if (response.status === 404) {
+      throw new NotFoundError(
+        `could not find release. ${versionUrl} returned 404`
+      );
+    } else {
+      throw Error(`something went wrong while fetching ${versionUrl}`);
+    }
+  }
+
+  async getFullyQualifiedSupergraphVersion(
+    fetch: Fetcher,
+    version: string
+  ): Promise<string> {
     let invalidSupergraphVersion = new MalformedRequestError(
       `invalid version '${this.inputVersion}'. must be 'latest-0', 'latest-2', or in semver form 'v0.0.0'`
     );
-    let fetch = getFetcher();
+    // supergraph is a bit weird because we have a "latest" for fed 1 _and_ for fed 2
+    // `cargo xtask tag` automatically bumps the ref that `composition-latest-0`/`composition-latest-2` point to
+    // and the tag annotation includes the fully resolved version
+    // there are a few hoops to jump through but it's not _too_ bad
+    let latestTag: string;
+    if (version === "latest-0") {
+      latestTag = "refs/tags/composition-latest-0";
+    } else if (version === "latest-2") {
+      latestTag = "refs/tags/composition-latest-2";
+    } else {
+      throw invalidSupergraphVersion;
+    }
+    // this is the same url that's used under the hood when running `git ls-remote`
+    // it's a good way to get info about tags without having to clone the entire repository
+    const tagsUrl = this.repo.tagsUrl();
+    let allTagsResponse = await fetch(tagsUrl);
+    const allTags = await allTagsResponse.text();
+    let ref: string | null = null;
+    // slice the first two lines because they are C headers or something
+    // and skip the last line is an empty 0000
+    for (let refTag of allTags.split("\n").slice(2, -1)) {
+      // each line looks like this:
+      // 004cbfc117e2ddd919d56f1172f39e407558c4f975aa refs/tags/composition-latest-2
+      // 004c65b6f9847e772e1b0510b97c39d399df9c911f03 refs/tags/composition@v2.0.0-preview.2
+      let [thisRef, thisTag] = refTag.trim().split(" ");
+      if (thisTag === latestTag) {
+        // the `004c` prefix must be trimmed to get the correct tag.
+        ref = thisRef.slice(4);
+      }
+    }
+
+    if (ref === null) {
+      throw new NotFoundError(
+        `could not find ref for tag ${latestTag} in https://github.com/${this.repo.slug}`
+      );
+    }
+    // now that we have the ref, we can query for the message inside our annotated tag that contains
+    // the real version we're looking to download.
+    // API docs on this endpoint are here: https://docs.github.com/en/rest/reference/git#get-a-tag
+    const tagUrl = this.repo.tagUrl(ref);
+    let ghToken = process.env.GH_TOKEN;
+    if (!ghToken) {
+      throw new Error("Server not properly configured with a GitHub API Token");
+    }
+    let tagResponse = await fetch(tagUrl, {
+      headers: {
+        Accept: "application/vnd.github.v3+json",
+        Authorization: `Bearer ${ghToken}`,
+      },
+    });
+    if (tagResponse.ok) {
+      let tag = await tagResponse.json();
+      if (typeof tag.message === "string") {
+        // the message has a newline at the end of it so let's discard that.
+        let latest = tag.message.trim();
+
+        // let's verify that the message is looking good
+        if (typeof latest === "string" && latest.startsWith("v")) {
+          return latest;
+        } else {
+          throw new MalformedRequestError(
+            `version from tag ${latestTag} is malformed`
+          );
+        }
+      } else {
+        throw new MalformedRequestError(`.message is not a string`);
+      }
+    }
+
+    if (tagResponse.status === 404) {
+      throw new NotFoundError(`couldn't find a git tag at ${tagUrl}`);
+    }
+    throw Error(
+      `an unknown error occurred when fetching the tag for ${this.name}@${this.inputVersion}`
+    );
+  }
+
+  async getFullyQualifiedVersion(): Promise<string> {
+    let fetcher = getFetcher();
     let version = this.inputVersion.toString();
     if (version.startsWith("v")) {
       return version;
     } else if (version.startsWith("latest")) {
       switch (this.name) {
         case BinaryName.Rover:
-          let versionUrl = this.versionUrl();
-          let response = await fetch(versionUrl, {
-            method: "HEAD",
-            redirect: "manual",
-          });
-          if (response && (response.status == 301 || response.status == 302)) {
-            let realLatestUrl = response.headers.get("location");
-            const splits = realLatestUrl && realLatestUrl.split("/");
-            const latestVersion = splits && splits[splits.length - 1];
-            if (!latestVersion) {
-              throw new NotFoundError("could not get latest version");
-            }
-            return latestVersion;
-          } else if (response.status == 404) {
-            throw new NotFoundError(
-              `could not find release. ${versionUrl} returned 404`
-            );
-          } else {
-            throw Error(`something went wrong while fetching ${versionUrl}`);
-          }
+          return this.getFullyQualifiedRoverVersion(fetcher);
         case BinaryName.RoverFed2:
           // rover_fed2@v0.4.8 was the latest version ever released for this plugin
           return "v0.4.8";
         case BinaryName.Supergraph:
-          // supergraph is a bit weird because we have a "latest" for fed 1 _and_ for fed 2
-          // `cargo xtask tag` automatically bumps the ref that `composition-latest-0`/`composition-latest-2` point to
-          // and the tag annotation includes the fully resolved version
-          // there are a few hoops to jump through but it's not _too_ bad
-          let latestTag: string;
-          if (version == "latest-0") {
-            latestTag = "refs/tags/composition-latest-0";
-          } else if (version == "latest-2") {
-            latestTag = "refs/tags/composition-latest-2";
-          } else {
-            throw invalidSupergraphVersion;
-          }
-          // this is the same url that's used under the hood when running `git ls-remote`
-          // it's a good way to get info about tags without having to clone the entire repository
-          const tagsUrl = this.repo.tagsUrl();
-          let allTagsResponse = await fetch(tagsUrl);
-          const allTags = await allTagsResponse.text();
-          let ref: string | null = null;
-          // slice the first two lines because they are C headers or something
-          // and skip the last line is an empty 0000
-          for (let refTag of allTags.split("\n").slice(2, -1)) {
-            // each line looks like this:
-            // 004cbfc117e2ddd919d56f1172f39e407558c4f975aa refs/tags/composition-latest-2
-            // 004c65b6f9847e772e1b0510b97c39d399df9c911f03 refs/tags/composition@v2.0.0-preview.2
-            let [thisRef, thisTag] = refTag.trim().split(" ");
-            if (thisTag == latestTag) {
-              // the `004c` prefix must be trimmed to get the correct tag.
-              ref = thisRef.slice(4);
-            }
-          }
+          return this.getFullyQualifiedSupergraphVersion(fetcher, version);
 
-          if (ref == null) {
-            throw new NotFoundError(
-              `could not find ref for tag ${latestTag} in https://github.com/${this.repo.slug}`
-            );
-          } else {
-            // now that we have the ref, we can query for the message inside our annotated tag that contains
-            // the real version we're looking to download.
-            // API docs on this endpoint are here: https://docs.github.com/en/rest/reference/git#get-a-tag
-            const tagUrl = this.repo.tagUrl(ref);
-            let ghToken = process.env.GH_TOKEN;
-            if (!ghToken) {
-              throw new Error(
-                "Server not properly configured with a GitHub API Token"
-              );
-            }
-            let tagResponse = await fetch(tagUrl, {
-              headers: {
-                Accept: "application/vnd.github.v3+json",
-                Authorization: `Bearer ${ghToken}`,
-              },
-            });
-            if (tagResponse.ok) {
-              let tag = await tagResponse.json();
-              if (typeof tag.message == "string") {
-                // the message has a newline at the end of it so let's discard that.
-                let latest = tag.message.trim();
-
-                // let's verify that the message is looking good
-                if (typeof latest == "string" && latest.startsWith("v")) {
-                  return latest;
-                } else {
-                  throw new MalformedRequestError(
-                    `version from tag ${latestTag} is malformed`
-                  );
-                }
-              } else {
-                throw new MalformedRequestError(`.message is not a string`);
-              }
-            }
-
-            if (tagResponse.status === 404) {
-              throw new NotFoundError(`couldn't find a git tag at ${tagUrl}`);
-            }
-            throw Error(
-              `an unknown error occurred when fetching the tag for ${this.name}@${this.inputVersion}`
-            );
-          }
         default:
           throw new MalformedRequestError(
             `invalid binary name '${
@@ -199,7 +205,7 @@ export class Binary {
         break;
     }
 
-    if (installerFileExtension == null || installerPlatform == null) {
+    if (!installerFileExtension || !installerPlatform) {
       throw new MalformedRequestError(
         "could not determine the correct URL for this platform"
       );
@@ -310,8 +316,8 @@ class InputVersion {
     if (version == "latest" || isValidVersionTag) {
       this.descriptor = version;
     } else if (
-      binaryName == BinaryName.Supergraph &&
-      (version == "latest-0" || version == "latest-2" || isValidVersionTag)
+      binaryName === BinaryName.Supergraph &&
+      (version === "latest-0" || version === "latest-2" || isValidVersionTag)
     ) {
       this.descriptor = version;
     } else {
@@ -329,7 +335,7 @@ class InputVersion {
 function possibleValues<O extends object>(obj: O): string[] {
   let values: string[] = [];
   Object.values(obj)
-    .filter((k) => typeof k == "string")
+    .filter((k) => typeof k === "string")
     .map((k) => values.push(k));
   return values;
 }

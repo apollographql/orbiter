@@ -25,45 +25,39 @@ export async function downloadEvent(
     let version = await binary.getFullyQualifiedVersion();
     let fetch = getFetcher();
     let endpoint: string;
-    if (downloadType == "installer") {
+    if (downloadType === "installer") {
       endpoint = await binary.getInstallScriptUrl(inputTarget, version);
-    } else if (downloadType == "tarball") {
-      endpoint = await binary.getReleaseTarballUrl(inputTarget, version);
+    } else if (downloadType === "tarball") {
+      endpoint = binary.getReleaseTarballUrl(inputTarget, version);
     } else {
-      throw new MalformedRequestError("You must either download a tarball or an install script");
+      throw new MalformedRequestError(
+        "You must either download a tarball or an install script"
+      );
     }
-    let response = await fetch(endpoint);
+    let response = await fetch(endpoint, { method: "HEAD" });
     if (response.ok) {
-      const headers = {
-        "X-Version": version,
+      return {
+        statusCode: 302,
+        body: `You are being redirected to ${endpoint}`,
+        headers: {
+          Location: endpoint,
+          "X-Version": version,
+        },
       };
-      const statusCode = 200;
-
-      if (downloadType == "installer") {
-        return {
-          statusCode,
-          body: await response.text(),
-          headers,
-        };
-      } else if (downloadType == "tarball") {
-        return {
-          statusCode,
-          body: Buffer.from(await response.buffer()).toString("base64"),
-          headers,
-          isBase64Encoded: true,
-        };
-      }
-    }
-
-    if (response.status === 404) {
+    } else if (response.status === 404) {
       throw new NotFoundError(
         `couldn't find a GitHub release for ${binary.name}@${version}. ${endpoint} returned 404.`
       );
+    } else {
+      return {
+        statusCode: response.status,
+        body: `an unknown error occurred when loading the ${downloadType} for ${
+          binary.name
+        }@${version} from GitHub Releases. the error we received from GitHub was: '${
+          response.statusText
+        }\n---\n${await response.text()}'`,
+      };
     }
-    return {
-      statusCode: 500,
-      body: `an unknown error occurred when loading the ${downloadType} for ${binary.name}@${version} from GitHub Releases. the error we received from GitHub was '${response.statusText}'`,
-    };
   } catch (e) {
     if (e instanceof MalformedRequestError) {
       return {

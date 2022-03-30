@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run codegen && tsc",
-    "clean": "git clean -dfqX -- ./node_modules ./tscsonfig.tsbuildinfo ./dist ./generated",
+    "clean": "rm ./node_modules ./package-lock.json ./tscsonfig.tsbuildinfo ./dist ./generated ./.nvmrc -rf && npm run node-version",
     "watch": "concurrently 'tsc --watch' 'npm run codegen -- --watch'",
     "start": "npm run build && concurrently 'tsc --watch' 'npm run codegen -- --watch' 'netlify dev'",
     "quickstart": "tsc && netlify dev",
     "test": "jest",
     "codegen": "graphql-codegen",
-    "format": "prettier --write './src/**/*.ts' --ignore-path ./src/generated/studio.ts"
+    "format": "prettier --write './src/**/*.ts' --ignore-path ./src/generated/studio.ts",
+    "node-version": "node -e 'console.log(require(\"./package.json\").volta.node)' > .nvmrc"
   },
   "author": "opensource@apollographql.com",
   "license": "MIT",
@@ -25,6 +26,8 @@
     "@graphql-codegen/typescript-graphql-request": "^4.3.7",
     "@graphql-codegen/typescript-operations": "^2.3.2",
     "@types/aws-lambda": "^8.10.57",
+    "@types/babel__core": "^7.1.19",
+    "@types/babel__generator": "^7.6.4",
     "@types/btoa": "^1.2.3",
     "@types/jest": "^26.0.22",
     "@types/jsonwebtoken": "^8.5.0",
@@ -49,11 +52,10 @@
     "uuid": "^8.3.2"
   },
   "engines": {
-    "node": ">=14 <16",
-    "npm": "6.x"
+    "node": ">=16 <17",
+    "npm": "8.x"
   },
   "volta": {
-    "node": "14.19.0",
-    "npm": "6.14.16"
+    "node": "16.14.2"
   }
 }
