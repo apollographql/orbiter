@@ -2,6 +2,9 @@
   command = "npm run build"
   functions = "./dist/functions"
 
+[dev]
+  autoLaunch = false
+
 # Netlify's functions are invoked at `/.netlify/functions/fn-name`, which is
 # definitely not ideal, and we'd like to also hide the provider (netlify) in the
 # url. This adds a 200 proxy from `/fn-name` to `/.netlify/functions/fn-name`
