@@ -50,6 +50,7 @@ const MALFORMED_REQUEST = {
   statusCode: 400,
   body: "Malformed Request",
 };
+
 const INVALID_PERMISSIONS = {
   statusCode: 403,
   body: "Invalid Permissions",
