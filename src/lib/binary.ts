@@ -3,7 +3,6 @@ import {
   NotFoundError,
   MalformedRequestError,
   InternalServerError,
-  HttpError,
 } from "./error";
 import { Fetcher } from "make-fetch-happen";
 
@@ -54,46 +53,37 @@ export class Binary {
     )}/${this.getReleaseTarballName(inputTargetTriple, version)}`;
   }
 
-  async getFullyQualifiedRoverVersion(
-    fetch: Fetcher
-  ): Promise<string | HttpError> {
-    try {
-      let versionUrl = this.versionUrl();
-      let response = await fetch(versionUrl, {
-        method: "HEAD",
-        redirect: "manual",
-      });
-      if (response?.status === 301 || response?.status === 302) {
-        let realLatestUrl = response.headers.get("location");
-        // https:, , github.com, apollographql, rover, releases, v0.99.99
-        const urlComponents = realLatestUrl?.split("/");
-        // grab the last element
-        const latestVersion = urlComponents?.at(-1);
-        if (!latestVersion) {
-          throw new NotFoundError("could not get latest version");
-        }
-        return latestVersion;
-      } else if (response.status === 404) {
-        throw new NotFoundError(
-          `could not find release. ${versionUrl} returned 404`
-        );
-      } else {
-        throw new InternalServerError(
-          `something went wrong while fetching ${versionUrl}`
-        );
+  async getFullyQualifiedRoverVersion(fetch: Fetcher): Promise<string> {
+    let versionUrl = this.versionUrl();
+    let response = await fetch(versionUrl, {
+      method: "HEAD",
+      redirect: "manual",
+    });
+    if (response?.status === 301 || response?.status === 302) {
+      let realLatestUrl = response.headers.get("location");
+      // https:, , github.com, apollographql, rover, releases, v0.99.99
+      const urlComponents = realLatestUrl?.split("/");
+      // grab the last element
+      const latestVersion = urlComponents?.pop();
+      if (!latestVersion) {
+        throw new NotFoundError("could not get latest version");
       }
-    } catch (e) {
-      return new HttpError(e);
+      return latestVersion;
+    } else if (response.status === 404) {
+      throw new NotFoundError(
+        `could not find release. ${versionUrl} returned 404`
+      );
+    } else {
+      throw new InternalServerError(
+        `something went wrong while fetching ${versionUrl}`
+      );
     }
   }
 
   async getFullyQualifiedSupergraphVersion(
     fetch: Fetcher,
     version: string
-  ): Promise<string | HttpError> {
-    let invalidSupergraphVersion = new MalformedRequestError(
-      `invalid version '${this.inputVersion}'. must be 'latest-0', 'latest-2', or in semver form 'v0.0.0'`
-    );
+  ): Promise<string> {
     // supergraph is a bit weird because we have a "latest" for fed 1 _and_ for fed 2
     // `cargo xtask tag` automatically bumps the ref that `composition-latest-0`/`composition-latest-2` point to
     // and the tag annotation includes the fully resolved version
@@ -104,7 +94,9 @@ export class Binary {
     } else if (version === "latest-2") {
       latestTag = "refs/tags/composition-latest-2";
     } else {
-      return invalidSupergraphVersion;
+      throw new MalformedRequestError(
+        `invalid version '${this.inputVersion}'. must be 'latest-0', 'latest-2', or in semver form 'v0.0.0'`
+      );
     }
     // this is the same url that's used under the hood when running `git ls-remote`
     // it's a good way to get info about tags without having to clone the entire repository
@@ -126,7 +118,7 @@ export class Binary {
     }
 
     if (ref === null) {
-      return new NotFoundError(
+      throw new NotFoundError(
         `could not find ref for tag ${latestTag} in https://github.com/${this.repo.slug}`
       );
     }
@@ -136,7 +128,7 @@ export class Binary {
     const tagUrl = this.repo.tagUrl(ref);
     let ghToken = process.env.GH_TOKEN;
     if (!ghToken) {
-      return new InternalServerError("$GH_TOKEN is not set");
+      throw new InternalServerError("$GH_TOKEN is not set");
     }
     let tagResponse = await fetch(tagUrl, {
       headers: {
@@ -145,9 +137,9 @@ export class Binary {
       },
     });
     if (tagResponse.status === 404) {
-      return new NotFoundError(`could not find a git tag at ${tagUrl}`);
+      throw new NotFoundError(`could not find a git tag at ${tagUrl}`);
     } else if (!tagResponse.ok) {
-      return new InternalServerError(
+      throw new InternalServerError(
         `an unknown error occurred when fetching the tag for ${this.name}@${this.inputVersion}`
       );
     }
@@ -160,41 +152,44 @@ export class Binary {
       if (latest?.startsWith("v")) {
         return latest;
       } else {
-        return new InternalServerError(
+        throw new InternalServerError(
           `version from tag ${latestTag} is malformed`
         );
       }
     } else {
-      return new InternalServerError(`.message is not a string`);
+      throw new InternalServerError(`.message is not a string`);
     }
   }
 
-  async getFullyQualifiedVersion(): Promise<string | HttpError> {
+  async getFullyQualifiedVersion(): Promise<string> {
     let fetcher = getFetcher();
     let version = this.inputVersion.toString();
     if (version.startsWith("v")) {
       return version;
-    } else if (version.startsWith("latest")) {
-      switch (this.name) {
-        case BinaryName.Rover:
-          return this.getFullyQualifiedRoverVersion(fetcher);
-        case BinaryName.RoverFed2:
-          // rover_fed2@v0.4.8 was the latest version ever released for this plugin
-          return "v0.4.8";
-        case BinaryName.Supergraph:
-          return this.getFullyQualifiedSupergraphVersion(fetcher, version);
-
-        default:
-          return new MalformedRequestError(
-            `invalid binary name '${
-              this.name
-            }'. possible names are ${possibleValues(BinaryName)}`
-          );
-      }
     }
-    return new InternalServerError(
-      "an unknown error occurred while getting fully qualified version"
-    );
+
+    if (!version.startsWith("latest")) {
+      throw new InternalServerError(
+        "an unknown error occurred while getting fully qualified version"
+      );
+    }
+
+    switch (this.name) {
+      case BinaryName.Rover:
+        return this.getFullyQualifiedRoverVersion(fetcher);
+      case BinaryName.RoverFed2:
+        // rover_fed2@v0.4.8 was the latest version ever released for this plugin
+        return "v0.4.8";
+      case BinaryName.Supergraph:
+        return this.getFullyQualifiedSupergraphVersion(fetcher, version);
+
+      default:
+        throw new MalformedRequestError(
+          `invalid binary name '${
+            this.name
+          }'. possible names are ${possibleValues(BinaryName)}`
+        );
+    }
   }
 
   getInstallScriptUrl(inputTargetPlatform: string, version: string): string {

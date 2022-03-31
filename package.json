@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run codegen && tsc && npm run node-version",
-    "clean": "rm ./node_modules ./package-lock.json ./tsconfig.tsbuildinfo ./dist ./generated ./.nvmrc -rf && npm run node-version",
+    "clean": "rm -rf ./node_modules ./package-lock.json ./tsconfig.tsbuildinfo ./dist ./generated ./.nvmrc && npm run node-version",
     "watch": "concurrently 'tsc --watch' 'npm run codegen -- --watch'",
     "start": "npm run build && concurrently 'tsc --watch' 'npm run codegen -- --watch' 'netlify dev'",
     "quickstart": "tsc && netlify dev",
@@ -25,8 +25,8 @@
     "prettier": "^2.5.1"
   },
   "dependencies": {
-    "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/core": "^7.17.8",
+    "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-typescript": "^7.16.7",
     "@babel/runtime": "^7.17.8",
@@ -36,6 +36,7 @@
     "@graphql-codegen/typescript-graphql-request": "^4.3.7",
     "@graphql-codegen/typescript-operations": "^2.3.2",
     "@sentry/serverless": "^6.2.1",
+    "@tsconfig/node14": "1.0.1",
     "@types/aws-lambda": "^8.10.57",
     "@types/babel__core": "^7.1.19",
     "@types/babel__generator": "^7.6.4",
