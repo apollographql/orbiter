@@ -5,10 +5,6 @@ import {
 import { request } from "graphql-request";
 const graphQLEndpoint = "https://graphql.api.apollographql.com/api/graphql";
 
-if (process.env["NODE_ENV"] == "dev") {
-  require("dotenv").config();
-}
-
 const STUDIO_API_KEY = process.env["STUDIO_API_KEY"];
 
 export async function track(

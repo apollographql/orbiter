@@ -1,4 +1,4 @@
-import { unwrappedHandler as handler } from "./nix-install";
+import { unwrappedHandler as handler } from "./install-rover";
 import nock from "nock";
 
 jest.mock("../../lib/sentry", () => ({
@@ -18,37 +18,39 @@ beforeEach(() => {
 });
 
 it("pulls from a version if passed", async () => {
-  nock(buildInstallUrl("v0.0.1")).get("").reply(200, "# bash script");
+  const res = await handler(
+    {
+      path: "/nix/v0.0.1",
+    },
+    null,
+    null
+  );
 
-  const res = await handler({
-    path: "/nix/v0.0.1",
-  });
-
-  expect(res.statusCode).toEqual(200);
+  expect(res.statusCode).toEqual(302);
   expect(res.headers["X-Version"]).toEqual("v0.0.1");
-  expect(res.body).toContain("# bash script");
+  expect(res.headers["Location"]).toContain("v0.0.1");
 });
 
-it("returns a 500 if no version is passed", async () => {
+it("returns a 400 if no version is passed", async () => {
   const res = await handler({
     path: "/nix",
   });
 
-  expect(res.statusCode).toEqual(500);
+  expect(res.statusCode).toEqual(400);
   expect(res.body).toContain("version");
 });
 
-it("returns a 500 if no platform is passed", async () => {
+it("returns a 400 if no platform is passed", async () => {
   const res = await handler({
     path: "/",
   });
 
-  expect(res.statusCode).toEqual(500);
+  expect(res.statusCode).toEqual(400);
   expect(res.body).toContain("platform");
 });
 
 it("returns a 500 if GitHub is down", async () => {
-  nock(buildInstallUrl("v0.0.1")).get("").reply(500, "oh noe big err");
+  nock(buildInstallUrl("v0.0.1")).head("").reply(500, "oh noe big err");
 
   const res = await handler({
     path: "/nix/v0.0.1",
@@ -58,25 +60,25 @@ it("returns a 500 if GitHub is down", async () => {
   expect(res.body).toContain("Internal Server Error");
 });
 
-it("returns a 500 if asking for a bad version", async () => {
-  nock(buildInstallUrl("0.0.1")).get("").reply(500, "oh noe big err");
+it("returns a 400 if asking for a bad version", async () => {
+  nock(buildInstallUrl("0.0.1")).head("").reply(500, "oh noe big err");
 
   // note the missing `v`
   const res = await handler({
     path: "/nix/0.0.1",
   });
 
-  expect(res.statusCode).toEqual(500);
-  expect(res.body).toContain("Invalid version");
+  expect(res.statusCode).toEqual(400);
+  expect(res.body).toContain("invalid version");
 });
 
-it("returns a 400 if asking for a nonexistent version", async () => {
-  nock(buildInstallUrl("v0.0.999")).get("").reply(404, "lol not found");
+it("returns a 404 if asking for a nonexistent version", async () => {
+  nock(buildInstallUrl("v0.0.999")).head("").reply(404, "lol not found");
 
   const res = await handler({
     path: "/nix/v0.0.999",
   });
 
-  expect(res.statusCode).toEqual(400);
-  expect(res.body).toContain("Couldn't find release");
+  expect(res.statusCode).toEqual(404);
+  expect(res.body).toContain("couldn't find a GitHub release");
 });
