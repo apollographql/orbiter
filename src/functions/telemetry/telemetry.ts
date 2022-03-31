@@ -39,7 +39,7 @@ interface Session {
   // the sha-256 hash of the current working directory
   cwd_hash: string;
   // the sha-256 hash of the git remote URL
-  remote_url_hash: string;
+  remote_url_hash: string | null;
   // Information about the current architecture/platform
   platform: Platform;
   // The current version of the CLI
