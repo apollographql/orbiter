@@ -2077,7 +2077,7 @@ export type CheckPartialSchemaResult = {
   checkSchemaResult?: Maybe<CheckSchemaResult>;
   /** Result of compostion run as part of the overall subgraph check. */
   compositionValidationResult: CompositionValidationResult;
-  /** If any modifications were detected in the composed core schema */
+  /** Whether any modifications were detected in the composed core schema. */
   coreSchemaModified: Scalars['Boolean'];
   /** Check workflow associated with the overall subgraph check. */
   workflow?: Maybe<CheckWorkflow>;
@@ -2250,7 +2250,7 @@ export type CompositionAndUpsertResult = {
   graphCompositionID: Scalars['String'];
   /** Copy text for the launch result of a publish. */
   launchCliCopy?: Maybe<Scalars['String']>;
-  /** Link to corresponding launches page on Studio if avaliable. */
+  /** Link to corresponding launches page on Studio if available. */
   launchUrl?: Maybe<Scalars['String']>;
   /** List of subgraphs that are included in this composition. */
   subgraphConfigs: Array<SubgraphConfig>;
@@ -2422,6 +2422,7 @@ export enum ContractVariantFailedStep {
   DirectiveDefinitionLocationAugmenting = 'DIRECTIVE_DEFINITION_LOCATION_AUGMENTING',
   EmptyEnumMasking = 'EMPTY_ENUM_MASKING',
   EmptyInputObjectMasking = 'EMPTY_INPUT_OBJECT_MASKING',
+  EmptyObjectAndInterfaceFieldMasking = 'EMPTY_OBJECT_AND_INTERFACE_FIELD_MASKING',
   EmptyObjectAndInterfaceMasking = 'EMPTY_OBJECT_AND_INTERFACE_MASKING',
   EmptyUnionMasking = 'EMPTY_UNION_MASKING',
   InputValidation = 'INPUT_VALIDATION',
@@ -2471,6 +2472,7 @@ export type CoreSchema = {
   coreDocument: Scalars['GraphQLDocument'];
   coreHash: Scalars['String'];
   fieldCount: Scalars['Int'];
+  tags: Array<Scalars['String']>;
   typeCount: Scalars['Int'];
 };
 
@@ -3936,8 +3938,6 @@ export type Mutation = {
   newAccount?: Maybe<Account>;
   newService?: Maybe<Service>;
   operationCollection?: Maybe<OperationCollectionMutation>;
-  /** Refresh all plans from third-party billing service */
-  plansRefreshBilling?: Maybe<Scalars['Void']>;
   /** Report a running GraphQL server's schema. */
   reportSchema?: Maybe<ReportSchemaResult>;
   /** Ask for a user's password to be reset by E-mail */
@@ -4007,6 +4007,7 @@ export type MutationNewServiceArgs = {
   id: Scalars['ID'];
   isDev?: Scalars['Boolean'];
   name?: InputMaybe<Scalars['String']>;
+  onboardingArchitecture?: InputMaybe<OnboardingArchitecture>;
   title?: InputMaybe<Scalars['String']>;
 };
 
@@ -4090,7 +4091,7 @@ export type MutationTrackRoverSessionArgs = {
   command: Scalars['String'];
   cwdHash: Scalars['SHA256'];
   os: Scalars['String'];
-  remoteUrlHash: Scalars['SHA256'];
+  remoteUrlHash?: InputMaybe<Scalars['SHA256']>;
   sessionId: Scalars['ID'];
   version: Scalars['String'];
 };
@@ -4247,6 +4248,11 @@ export type OdysseyValue = {
   id: Scalars['ID'];
   value: Scalars['String'];
 };
+
+export enum OnboardingArchitecture {
+  Monolith = 'MONOLITH',
+  Supergraph = 'SUPERGRAPH'
+}
 
 export type Operation = {
   __typename?: 'Operation';
@@ -4732,6 +4738,8 @@ export type Query = {
   account?: Maybe<Account>;
   /** Retrieve account by billing provider identifier */
   accountByBillingCode?: Maybe<Account>;
+  /** Retrieve account by internal id */
+  accountByInternalID?: Maybe<Account>;
   /** Whether an account ID is available for mutation{newAccount(id:)} */
   accountIDAvailable: Scalars['Boolean'];
   /** All accounts */
@@ -4806,6 +4814,11 @@ export type QueryAccountArgs = {
 
 
 export type QueryAccountByBillingCodeArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryAccountByInternalIdArgs = {
   id: Scalars['ID'];
 };
 
@@ -5575,6 +5588,7 @@ export type Service = Identity & {
   createdAt: Scalars['Timestamp'];
   createdBy?: Maybe<Identity>;
   datadogMetricsConfig?: Maybe<DatadogMetricsConfig>;
+  defaultBuildPipelineTrack?: Maybe<Scalars['String']>;
   deletedAt?: Maybe<Scalars['Timestamp']>;
   description?: Maybe<Scalars['String']>;
   devGraphOwner?: Maybe<User>;
@@ -5604,6 +5618,7 @@ export type Service = Identity & {
    * @deprecated Use Service.title
    */
   name: Scalars['String'];
+  onboardingArchitecture?: Maybe<OnboardingArchitecture>;
   operation?: Maybe<Operation>;
   /** Gets the operations and their approved changes for this graph, checkID, and operationID. */
   operationsAcceptedChanges: Array<OperationAcceptedChange>;
@@ -6380,11 +6395,6 @@ export type ServiceMutation = {
   newKey: GraphApiKey;
   /** Adds an override to the given users permission for this graph */
   overrideUserPermission?: Maybe<Service>;
-  /**
-   * Returns a preview of the Core and API schema contracts derived from a source variant and a set of filter configurations
-   * @deprecated use GraphVariant.contractPreview instead
-   */
-  previewContractVariant: ContractVariantPreviewResult;
   /** Promote the schema with the given SHA-256 hash to active for the given variant/tag. */
   promoteSchema: PromoteSchemaResponseOrError;
   /** Publish to a subgraph. If composition is successful, this will update running routers. */
@@ -6397,6 +6407,7 @@ export type ServiceMutation = {
   /** @deprecated use Mutation.reportSchema instead */
   reportServerInfo?: Maybe<ReportServerInfoResult>;
   service: Service;
+  setDefaultBuildPipelineTrack?: Maybe<Scalars['String']>;
   /**
    * Store a given schema document. This schema will be attached to the graph but
    * not be associated with any variant. On success, returns the schema hash.
@@ -6574,13 +6585,6 @@ export type ServiceMutationOverrideUserPermissionArgs = {
 
 
 /** Mutations to a graph. */
-export type ServiceMutationPreviewContractVariantArgs = {
-  filterConfig: FilterConfigInput;
-  sourceVariant: Scalars['String'];
-};
-
-
-/** Mutations to a graph. */
 export type ServiceMutationPromoteSchemaArgs = {
   graphVariant: Scalars['String'];
   historicParameters?: InputMaybe<HistoricQueryParameters>;
@@ -6635,6 +6639,12 @@ export type ServiceMutationRenameKeyArgs = {
 export type ServiceMutationReportServerInfoArgs = {
   executableSchema?: InputMaybe<Scalars['String']>;
   info: EdgeServerInfo;
+};
+
+
+/** Mutations to a graph. */
+export type ServiceMutationSetDefaultBuildPipelineTrackArgs = {
+  version: Scalars['String'];
 };
 
 
