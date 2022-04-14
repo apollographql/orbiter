@@ -8409,7 +8409,7 @@ export type ZendeskTicketInput = {
 
 
 export const RoverTrack = gql`
-    mutation RoverTrack($anonymousId: ID!, $command: String!, $cwdHash: SHA256!, $os: String!, $remoteUrlHash: SHA256!, $sessionId: ID!, $version: String!, $arguments: [RoverArgumentInput!]!, $ci: String) {
+    mutation RoverTrack($anonymousId: ID!, $command: String!, $cwdHash: SHA256!, $os: String!, $remoteUrlHash: SHA256, $sessionId: ID!, $version: String!, $arguments: [RoverArgumentInput!]!, $ci: String) {
   trackRoverSession(
     anonymousId: $anonymousId
     command: $command
@@ -8428,7 +8428,7 @@ export type RoverTrackMutationVariables = Exact<{
   command: Scalars['String'];
   cwdHash: Scalars['SHA256'];
   os: Scalars['String'];
-  remoteUrlHash: Scalars['SHA256'];
+  remoteUrlHash?: InputMaybe<Scalars['SHA256']>;
   sessionId: Scalars['ID'];
   version: Scalars['String'];
   arguments: Array<RoverArgumentInput> | RoverArgumentInput;
@@ -8440,7 +8440,7 @@ export type RoverTrackMutation = { __typename?: 'Mutation', trackRoverSession?: 
 
 
 export const RoverTrackDocument = gql`
-    mutation RoverTrack($anonymousId: ID!, $command: String!, $cwdHash: SHA256!, $os: String!, $remoteUrlHash: SHA256!, $sessionId: ID!, $version: String!, $arguments: [RoverArgumentInput!]!, $ci: String) {
+    mutation RoverTrack($anonymousId: ID!, $command: String!, $cwdHash: SHA256!, $os: String!, $remoteUrlHash: SHA256, $sessionId: ID!, $version: String!, $arguments: [RoverArgumentInput!]!, $ci: String) {
   trackRoverSession(
     anonymousId: $anonymousId
     command: $command
