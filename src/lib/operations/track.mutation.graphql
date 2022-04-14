@@ -3,7 +3,7 @@ mutation RoverTrack(
   $command: String!
   $cwdHash: SHA256!
   $os: String!
-  $remoteUrlHash: SHA256!
+  $remoteUrlHash: SHA256
   $sessionId: ID!
   $version: String!
   $arguments: [RoverArgumentInput!]!
