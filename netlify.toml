@@ -10,7 +10,7 @@
 # url. This adds a 200 proxy from `/fn-name` to `/.netlify/functions/fn-name`
 [[redirects]]
   from = "https://rover.apollo.dev/tar/*"
-  to = "/.netlify/functions/tar"
+  to = "https://rover.apollo.dev/.netlify/functions/tar"
 
   # Proxy / rewrite transparently without the `location` hop.
   status = 200
@@ -22,7 +22,7 @@
 
 [[redirects]]
   from = "https://install.apollographql.com/tar/*"
-  to = "/.netlify/functions/tar"
+  to = "https://install.apollographql.com/.netlify/functions/tar"
 
   # Proxy / rewrite transparently without the `location` hop.
   status = 200
@@ -34,7 +34,7 @@
 
 [[redirects]]
   from = "https://rover.apollo.dev/win/*"
-  to = "/.netlify/functions/install-rover"
+  to = "https://rover.apollo.dev/.netlify/functions/install-rover"
 
   # Proxy / rewrite transparently without the `location` hop.
   status = 200
@@ -46,7 +46,7 @@
 
 [[redirects]]
   from = "https://install.apollographql.com/win/*"
-  to = "/.netlify/functions/install-rover"
+  to = "https://install.apollographql.com/.netlify/functions/install-rover"
 
   # Proxy / rewrite transparently without the `location` hop.
   status = 200
@@ -58,7 +58,7 @@
 
 [[redirects]]
   from = "https://rover.apollo.dev/nix/*"
-  to = "/.netlify/functions/install-rover"
+  to = "https://rover.apollo.dev/.netlify/functions/install-rover"
 
   # Proxy / rewrite transparently without the `location` hop.
   status = 200
@@ -70,7 +70,7 @@
 
 [[redirects]]
   from = "https://install.apollographql.com/nix/*"
-  to = "/.netlify/functions/install-rover"
+  to = "https://install.apollographql.com/.netlify/functions/install-rover"
 
   # Proxy / rewrite transparently without the `location` hop.
   status = 200
@@ -82,7 +82,7 @@
 
 [[redirects]]
   from = "https://rover.apollo.dev/plugins/*"
-  to = "/.netlify/functions/install-plugin"
+  to = "https://rover.apollo.dev/.netlify/functions/install-plugin"
 
   # Proxy / rewrite transparently without the `location` hop.
   status = 200
@@ -94,7 +94,7 @@
 
 [[redirects]]
   from = "https://rover.apollo.dev/telemetry"
-  to = "/.netlify/functions/telemetry"
+  to = "https://rover.apollo.dev/.netlify/functions/telemetry"
 
   # Proxy / rewrite transparently without the `location` hop.
   status = 200
@@ -106,7 +106,7 @@
 
 [[redirects]]
   from = "https://install.apollographql.com/telemetry"
-  to = "/.netlify/functions/telemetry"
+  to = "https://install.apollographql.com/.netlify/functions/telemetry"
 
   # Proxy / rewrite transparently without the `location` hop.
   status = 200
@@ -118,7 +118,7 @@
 
 [[redirects]]
   from = "https://rover.apollo.dev/legacy-cli/*"
-  to = "/.netlify/functions/legacy-cli"
+  to = "https://rover.apollo.dev/.netlify/functions/legacy-cli"
 
   # Proxy / rewrite transparently without the `location` hop.
   status = 200
@@ -130,7 +130,7 @@
 
 [[redirects]]
   from = "https://install.apollographql.com/legacy-cli/*"
-  to = "/.netlify/functions/legacy-cli"
+  to = "https://install.apollographql.com/.netlify/functions/legacy-cli"
 
   # Proxy / rewrite transparently without the `location` hop.
   status = 200
@@ -183,7 +183,7 @@
 
 [[redirects]]
   from = "https://router.apollo.dev/router/win/*"
-  to = "/.netlify/functions/install-router"
+  to = "https://router.apollo.dev/.netlify/functions/install-router"
 
   # Proxy / rewrite transparently without the `location` hop.
   status = 200
@@ -195,7 +195,7 @@
 
 [[redirects]]
   from = "https://router.apollo.dev/router/nix/*"
-  to = "/.netlify/functions/install-router"
+  to = "https://router.apollo.dev/.netlify/functions/install-router"
 
   # Proxy / rewrite transparently without the `location` hop.
   status = 200
