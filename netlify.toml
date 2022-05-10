@@ -9,7 +9,7 @@
 # definitely not ideal, and we'd like to also hide the provider (netlify) in the
 # url. This adds a 200 proxy from `/fn-name` to `/.netlify/functions/fn-name`
 [[redirects]]
-  from = "/tar/*"
+  from = "https://rover.apollo.dev/tar/*"
   to = "/.netlify/functions/tar"
 
   # Proxy / rewrite transparently without the `location` hop.
@@ -21,7 +21,19 @@
   headers = {Apollo-Proxy-Rule = "from-root-config"}
 
 [[redirects]]
-  from = "/win/*"
+  from = "https://install.apollographql.com/tar/*"
+  to = "/.netlify/functions/tar"
+
+  # Proxy / rewrite transparently without the `location` hop.
+  status = 200
+
+  # Always redirect, even if somehow some content exists at the root "from"
+  force = true
+
+  headers = {Apollo-Proxy-Rule = "from-root-config"}
+
+[[redirects]]
+  from = "https://rover.apollo.dev/win/*"
   to = "/.netlify/functions/install-rover"
 
   # Proxy / rewrite transparently without the `location` hop.
@@ -33,7 +45,7 @@
   headers = {Apollo-Proxy-Rule = "from-root-config"}
 
 [[redirects]]
-  from = "/nix/*"
+  from = "https://install.apollographql.com/win/*"
   to = "/.netlify/functions/install-rover"
 
   # Proxy / rewrite transparently without the `location` hop.
@@ -45,8 +57,8 @@
   headers = {Apollo-Proxy-Rule = "from-root-config"}
 
 [[redirects]]
-  from = "/router/win/*"
-  to = "/.netlify/functions/install-router"
+  from = "https://rover.apollo.dev/nix/*"
+  to = "/.netlify/functions/install-rover"
 
   # Proxy / rewrite transparently without the `location` hop.
   status = 200
@@ -57,8 +69,8 @@
   headers = {Apollo-Proxy-Rule = "from-root-config"}
 
 [[redirects]]
-  from = "/router/nix/*"
-  to = "/.netlify/functions/install-router"
+  from = "https://install.apollographql.com/nix/*"
+  to = "/.netlify/functions/install-rover"
 
   # Proxy / rewrite transparently without the `location` hop.
   status = 200
@@ -69,7 +81,7 @@
   headers = {Apollo-Proxy-Rule = "from-root-config"}
 
 [[redirects]]
-  from = "/plugins/*"
+  from = "https://rover.apollo.dev/plugins/*"
   to = "/.netlify/functions/install-plugin"
 
   # Proxy / rewrite transparently without the `location` hop.
@@ -81,7 +93,7 @@
   headers = {Apollo-Proxy-Rule = "from-root-config"}
 
 [[redirects]]
-  from = "/telemetry"
+  from = "https://rover.apollo.dev/telemetry"
   to = "/.netlify/functions/telemetry"
 
   # Proxy / rewrite transparently without the `location` hop.
@@ -93,7 +105,31 @@
   headers = {Apollo-Proxy-Rule = "from-root-config"}
 
 [[redirects]]
-  from = "/legacy-cli/*"
+  from = "https://install.apollographql.com/telemetry"
+  to = "/.netlify/functions/telemetry"
+
+  # Proxy / rewrite transparently without the `location` hop.
+  status = 200
+
+  # Always redirect, even if somehow some content exists at the root "from"
+  force = true
+
+  headers = {Apollo-Proxy-Rule = "from-root-config"}
+
+[[redirects]]
+  from = "https://rover.apollo.dev/legacy-cli/*"
+  to = "/.netlify/functions/legacy-cli"
+
+  # Proxy / rewrite transparently without the `location` hop.
+  status = 200
+
+  # Always redirect, even if somehow some content exists at the root "from"
+  force = true
+
+  headers = {Apollo-Proxy-Rule = "from-root-config"}
+
+[[redirects]]
+  from = "https://install.apollographql.com/legacy-cli/*"
   to = "/.netlify/functions/legacy-cli"
 
   # Proxy / rewrite transparently without the `location` hop.
@@ -131,6 +167,35 @@
 [[redirects]]
   from = "/quickstart/reviews/graphql"
   to = "https://w0jtezo2pa.execute-api.us-east-1.amazonaws.com/Prod/graphql"
+
+  # Proxy / rewrite transparently without the `location` hop.
+  status = 200
+
+  # Always redirect, even if somehow some content exists at the root "from"
+  force = true
+
+  headers = {Apollo-Proxy-Rule = "from-root-config"}
+
+
+#
+# Router
+# 
+
+[[redirects]]
+  from = "https://router.apollo.dev/router/win/*"
+  to = "/.netlify/functions/install-router"
+
+  # Proxy / rewrite transparently without the `location` hop.
+  status = 200
+
+  # Always redirect, even if somehow some content exists at the root "from"
+  force = true
+
+  headers = {Apollo-Proxy-Rule = "from-root-config"}
+
+[[redirects]]
+  from = "https://router.apollo.dev/router/nix/*"
+  to = "/.netlify/functions/install-router"
 
   # Proxy / rewrite transparently without the `location` hop.
   status = 200
