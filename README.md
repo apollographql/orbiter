@@ -119,7 +119,6 @@ Releasing a new build of the functions is managed through GitHub and Netlify. Wh
 
 The functions are instrumented with [Sentry](https://sentry.io) alerting. Those responsible for this code are: 
 
-* [@jakedawkins](https://github.com/jakedawkins)
 * [@EverlastingBugstopper](https://github.com/EverlastingBugstopper)
 * [@lrlna](https://github.com/lrlna)
 
