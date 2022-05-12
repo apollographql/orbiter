@@ -12,9 +12,9 @@ const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
   event
 ) => {
   try {
-    // router.apollo.dev / nix / latest
-    // router.apollo.dev / win / v0.1.0
-    let [_, _router_prefix, inputPlatform, inputVersion] =
+    // router.apollo.dev / download / nix / latest
+    // router.apollo.dev / download / win / v0.1.0
+    let [_, __, inputPlatform, inputVersion] =
       event.path.split("/");
     return downloadEvent("router", inputPlatform, inputVersion, "installer");
   } catch (e) {
