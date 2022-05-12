@@ -1,0 +1,24 @@
+# Netlify's functions are invoked at `/.netlify/functions/fn-name`, which is
+# definitely not ideal, and we'd like to also hide the provider (netlify) in the
+# url. This adds a transparent "200" proxy from root locations to actual functions
+/tar/* /.netlify/functions/tar 200!
+/win/* /.netlify/functions/install-rover 200!
+/nix/* /.netlify/functions/install-rover 200!
+
+/plugins/* /.netlify/functions/install-plugin 200!
+
+/telemetry /.netlify/functions/telemetry 200!
+
+/legacy-cli/* /.netlify/functions/legacy-cli 200!
+
+# These are for the Router despite the `/download/` prefix.
+# Working plan is to use domain-based redirects to accomplish this.
+/download/nix/* /.netlify/functions/install-router 200!
+
+# Non-Functions
+
+/ https://www.apollographql.com/docs/rover 302
+
+/quickstart https://www.apollographql.com/docs/federation/quickstart
+/quickstart/products/graphql https://7bssbnldib.execute-api.us-east-1.amazonaws.com/Prod/graphql 200!
+/quickstart/reviews/graphql https://w0jtezo2pa.execute-api.us-east-1.amazonaws.com/Prod/graphql 200!
