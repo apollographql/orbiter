@@ -1,26 +1,20 @@
 # Netlify's functions are invoked at `/.netlify/functions/fn-name`, which is
 # definitely not ideal, and we'd like to also hide the provider (netlify) in the
 # url. This adds a transparent "200" proxy from root locations to actual functions
-https://rover.apollo.dev/tar/* https://rover.apollo.dev/.netlify/functions/tar 200!
-https://install.apollographql.com/tar/* https://install.apollographql.com/.netlify/functions/tar 200!
+/tar/* /.netlify/functions/tar 200!
+/win/* /.netlify/functions/install-rover 200!
+/nix/* /.netlify/functions/install-rover 200!
 
-https://rover.apollo.dev/win/* https://rover.apollo.dev/.netlify/functions/install-rover 200!
-https://install.apollographql.com/win/* https://install.apollographql.com/.netlify/functions/install-rover 200!
+/plugins/* /.netlify/functions/install-plugin 200!
 
-https://rover.apollo.dev/nix/* https://rover.apollo.dev/.netlify/functions/install-rover 200!
-https://install.apollographql.com/nix/* https://install.apollographql.com/.netlify/functions/install-rover 200!
+/telemetry /.netlify/functions/telemetry 200!
 
-https://rover.apollo.dev/plugins/* https://rover.apollo.dev/.netlify/functions/install-plugin 200!
-# install.apollographql.com never supported plugins, so no extra rule for plugins here.
+/legacy-cli/* /.netlify/functions/legacy-cli 200!
 
-https://rover.apollo.dev/telemetry https://rover.apollo.dev/.netlify/functions/telemetry 200!
-https://install.apollographql.com/telemetry https://install.apollographql.com/.netlify/functions/telemetry 200!
+# Non-Functions
 
-https://rover.apollo.dev/legacy-cli/* https://rover.apollo.dev/.netlify/functions/legacy-cli 200!
-https://install.apollographql.com/legacy-cli/* https://install.apollographql.com/.netlify/functions/legacy-cli 200!
+/ https://www.apollographql.com/docs/rover 302
 
-https://rover.apollo.dev/ https://www.apollographql.com/docs/rover 302
-
-https://rover.apollo.dev/quickstart https://www.apollographql.com/docs/federation/quickstart
-https://rover.apollo.dev/quickstart/products/graphql https://7bssbnldib.execute-api.us-east-1.amazonaws.com/Prod/graphql 200!
-https://rover.apollo.dev/quickstart/reviews/graphql https://w0jtezo2pa.execute-api.us-east-1.amazonaws.com/Prod/graphql 200!
+/quickstart https://www.apollographql.com/docs/federation/quickstart
+/quickstart/products/graphql https://7bssbnldib.execute-api.us-east-1.amazonaws.com/Prod/graphql 200!
+/quickstart/reviews/graphql https://w0jtezo2pa.execute-api.us-east-1.amazonaws.com/Prod/graphql 200!
