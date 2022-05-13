@@ -13,7 +13,7 @@
 
 # These are for the Router despite the `/download/` prefix.
 # Working plan is to use domain-based redirects to accomplish this.
-/download/nix/* /.netlify/functions/install-router 200!
+/download/nix/* /.netlify/functions/download-router 200!
 
 # Non-Functions
 
