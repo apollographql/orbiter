@@ -1,10 +1,10 @@
-import { getFetcher } from "./getFetcher";
-import {
-  NotFoundError,
-  MalformedRequestError,
-  InternalServerError,
-} from "./error";
 import { Fetcher } from "make-fetch-happen";
+import {
+  InternalServerError,
+  MalformedRequestError,
+  NotFoundError,
+} from "./error";
+import { getFetcher } from "./getFetcher";
 
 export class Binary {
   name: BinaryName;
@@ -20,6 +20,7 @@ export class Binary {
   private getReleaseTagName(version: string): string {
     let tagName: string;
     switch (this.name) {
+      case BinaryName.Router:
       case BinaryName.Rover:
       case BinaryName.RoverFed2:
         tagName = version;
@@ -175,6 +176,7 @@ export class Binary {
     }
 
     switch (this.name) {
+      case BinaryName.Router:
       case BinaryName.Rover:
         return this.getFullyQualifiedRoverVersion(fetcher);
       case BinaryName.RoverFed2:
@@ -217,6 +219,8 @@ export class Binary {
     }
 
     switch (this.name) {
+      case BinaryName.Router:
+        return `https://raw.githubusercontent.com/${this.repo.slug}/${version}/scripts/install.sh`;
       case BinaryName.Rover:
         return `https://raw.githubusercontent.com/${this.repo.slug}/${version}/installers/binstall/scripts/${installerPlatform}/install${installerFileExtension}`;
       case BinaryName.RoverFed2:
@@ -244,6 +248,7 @@ export class Binary {
 }
 
 enum BinaryName {
+  Router = "router",
   Rover = "rover",
   Supergraph = "supergraph",
   RoverFed2 = "rover-fed2",
@@ -274,6 +279,9 @@ class Repo {
       case BinaryName.RoverFed2:
       case BinaryName.Rover:
         repoName = "rover";
+        break;
+      case BinaryName.Router:
+        repoName = "router";
         break;
       case BinaryName.Supergraph:
         repoName = "federation-rs";

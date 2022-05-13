@@ -174,6 +174,7 @@ export type AccountTicketArgs = {
 
 /** Columns of AccountBillingUsageStats. */
 export enum AccountBillingUsageStatsColumn {
+  AgentVersion = 'AGENT_VERSION',
   OperationCount = 'OPERATION_COUNT',
   OperationCountProvidedExplicitly = 'OPERATION_COUNT_PROVIDED_EXPLICITLY',
   SchemaTag = 'SCHEMA_TAG',
@@ -183,6 +184,7 @@ export enum AccountBillingUsageStatsColumn {
 
 export type AccountBillingUsageStatsDimensions = {
   __typename?: 'AccountBillingUsageStatsDimensions';
+  agentVersion?: Maybe<Scalars['String']>;
   operationCountProvidedExplicitly?: Maybe<Scalars['String']>;
   schemaTag?: Maybe<Scalars['String']>;
   serviceId?: Maybe<Scalars['ID']>;
@@ -190,6 +192,8 @@ export type AccountBillingUsageStatsDimensions = {
 
 /** Filter for data in AccountBillingUsageStats. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
 export type AccountBillingUsageStatsFilter = {
+  /** Selects rows whose agentVersion dimension equals the given value if not null. To query for the null value, use {in: {agentVersion: [null]}} instead. */
+  agentVersion?: InputMaybe<Scalars['String']>;
   and?: InputMaybe<Array<AccountBillingUsageStatsFilter>>;
   in?: InputMaybe<AccountBillingUsageStatsFilterIn>;
   not?: InputMaybe<AccountBillingUsageStatsFilter>;
@@ -204,6 +208,8 @@ export type AccountBillingUsageStatsFilter = {
 
 /** Filter for data in AccountBillingUsageStats. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
 export type AccountBillingUsageStatsFilterIn = {
+  /** Selects rows whose agentVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  agentVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose operationCountProvidedExplicitly dimension is in the given list. A null value in the list means a row with null for that dimension. */
   operationCountProvidedExplicitly?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
@@ -436,6 +442,76 @@ export type AccountExperimentalFeatures = {
   webhooksPreview: Scalars['Boolean'];
 };
 
+/** Columns of AccountFieldExecutions. */
+export enum AccountFieldExecutionsColumn {
+  EstimatedExecutionCount = 'ESTIMATED_EXECUTION_COUNT',
+  FieldName = 'FIELD_NAME',
+  ObservedExecutionCount = 'OBSERVED_EXECUTION_COUNT',
+  ParentType = 'PARENT_TYPE',
+  ReferencingOperationCount = 'REFERENCING_OPERATION_COUNT',
+  SchemaTag = 'SCHEMA_TAG',
+  ServiceId = 'SERVICE_ID',
+  Timestamp = 'TIMESTAMP'
+}
+
+export type AccountFieldExecutionsDimensions = {
+  __typename?: 'AccountFieldExecutionsDimensions';
+  fieldName?: Maybe<Scalars['String']>;
+  parentType?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
+  serviceId?: Maybe<Scalars['ID']>;
+};
+
+/** Filter for data in AccountFieldExecutions. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
+export type AccountFieldExecutionsFilter = {
+  and?: InputMaybe<Array<AccountFieldExecutionsFilter>>;
+  /** Selects rows whose fieldName dimension equals the given value if not null. To query for the null value, use {in: {fieldName: [null]}} instead. */
+  fieldName?: InputMaybe<Scalars['String']>;
+  in?: InputMaybe<AccountFieldExecutionsFilterIn>;
+  not?: InputMaybe<AccountFieldExecutionsFilter>;
+  or?: InputMaybe<Array<AccountFieldExecutionsFilter>>;
+  /** Selects rows whose parentType dimension equals the given value if not null. To query for the null value, use {in: {parentType: [null]}} instead. */
+  parentType?: InputMaybe<Scalars['String']>;
+  /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
+  schemaTag?: InputMaybe<Scalars['String']>;
+  /** Selects rows whose serviceId dimension equals the given value if not null. To query for the null value, use {in: {serviceId: [null]}} instead. */
+  serviceId?: InputMaybe<Scalars['ID']>;
+};
+
+/** Filter for data in AccountFieldExecutions. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
+export type AccountFieldExecutionsFilterIn = {
+  /** Selects rows whose fieldName dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  fieldName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Selects rows whose parentType dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  parentType?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Selects rows whose serviceId dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  serviceId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+};
+
+export type AccountFieldExecutionsMetrics = {
+  __typename?: 'AccountFieldExecutionsMetrics';
+  estimatedExecutionCount: Scalars['Long'];
+  observedExecutionCount: Scalars['Long'];
+  referencingOperationCount: Scalars['Long'];
+};
+
+export type AccountFieldExecutionsOrderBySpec = {
+  column: AccountFieldExecutionsColumn;
+  direction: Ordering;
+};
+
+export type AccountFieldExecutionsRecord = {
+  __typename?: 'AccountFieldExecutionsRecord';
+  /** Dimensions of AccountFieldExecutions that can be grouped by. */
+  groupBy: AccountFieldExecutionsDimensions;
+  /** Metrics of AccountFieldExecutions that can be aggregated over. */
+  metrics: AccountFieldExecutionsMetrics;
+  /** Starting segment timestamp. */
+  timestamp: Scalars['Timestamp'];
+};
+
 /** Columns of AccountFieldLatencies. */
 export enum AccountFieldLatenciesColumn {
   FieldHistogram = 'FIELD_HISTOGRAM',
@@ -505,6 +581,88 @@ export type AccountFieldLatenciesRecord = {
   groupBy: AccountFieldLatenciesDimensions;
   /** Metrics of AccountFieldLatencies that can be aggregated over. */
   metrics: AccountFieldLatenciesMetrics;
+  /** Starting segment timestamp. */
+  timestamp: Scalars['Timestamp'];
+};
+
+/** Columns of AccountFieldRequestsByClientVersion. */
+export enum AccountFieldRequestsByClientVersionColumn {
+  ClientName = 'CLIENT_NAME',
+  ClientVersion = 'CLIENT_VERSION',
+  EstimatedExecutionCount = 'ESTIMATED_EXECUTION_COUNT',
+  FieldName = 'FIELD_NAME',
+  ObservedExecutionCount = 'OBSERVED_EXECUTION_COUNT',
+  ParentType = 'PARENT_TYPE',
+  ReferencingOperationCount = 'REFERENCING_OPERATION_COUNT',
+  SchemaTag = 'SCHEMA_TAG',
+  ServiceId = 'SERVICE_ID',
+  Timestamp = 'TIMESTAMP'
+}
+
+export type AccountFieldRequestsByClientVersionDimensions = {
+  __typename?: 'AccountFieldRequestsByClientVersionDimensions';
+  clientName?: Maybe<Scalars['String']>;
+  clientVersion?: Maybe<Scalars['String']>;
+  fieldName?: Maybe<Scalars['String']>;
+  parentType?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
+  serviceId?: Maybe<Scalars['ID']>;
+};
+
+/** Filter for data in AccountFieldRequestsByClientVersion. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
+export type AccountFieldRequestsByClientVersionFilter = {
+  and?: InputMaybe<Array<AccountFieldRequestsByClientVersionFilter>>;
+  /** Selects rows whose clientName dimension equals the given value if not null. To query for the null value, use {in: {clientName: [null]}} instead. */
+  clientName?: InputMaybe<Scalars['String']>;
+  /** Selects rows whose clientVersion dimension equals the given value if not null. To query for the null value, use {in: {clientVersion: [null]}} instead. */
+  clientVersion?: InputMaybe<Scalars['String']>;
+  /** Selects rows whose fieldName dimension equals the given value if not null. To query for the null value, use {in: {fieldName: [null]}} instead. */
+  fieldName?: InputMaybe<Scalars['String']>;
+  in?: InputMaybe<AccountFieldRequestsByClientVersionFilterIn>;
+  not?: InputMaybe<AccountFieldRequestsByClientVersionFilter>;
+  or?: InputMaybe<Array<AccountFieldRequestsByClientVersionFilter>>;
+  /** Selects rows whose parentType dimension equals the given value if not null. To query for the null value, use {in: {parentType: [null]}} instead. */
+  parentType?: InputMaybe<Scalars['String']>;
+  /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
+  schemaTag?: InputMaybe<Scalars['String']>;
+  /** Selects rows whose serviceId dimension equals the given value if not null. To query for the null value, use {in: {serviceId: [null]}} instead. */
+  serviceId?: InputMaybe<Scalars['ID']>;
+};
+
+/** Filter for data in AccountFieldRequestsByClientVersion. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
+export type AccountFieldRequestsByClientVersionFilterIn = {
+  /** Selects rows whose clientName dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  clientName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Selects rows whose clientVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  clientVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Selects rows whose fieldName dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  fieldName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Selects rows whose parentType dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  parentType?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Selects rows whose serviceId dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  serviceId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+};
+
+export type AccountFieldRequestsByClientVersionMetrics = {
+  __typename?: 'AccountFieldRequestsByClientVersionMetrics';
+  estimatedExecutionCount: Scalars['Long'];
+  observedExecutionCount: Scalars['Long'];
+  referencingOperationCount: Scalars['Long'];
+};
+
+export type AccountFieldRequestsByClientVersionOrderBySpec = {
+  column: AccountFieldRequestsByClientVersionColumn;
+  direction: Ordering;
+};
+
+export type AccountFieldRequestsByClientVersionRecord = {
+  __typename?: 'AccountFieldRequestsByClientVersionRecord';
+  /** Dimensions of AccountFieldRequestsByClientVersion that can be grouped by. */
+  groupBy: AccountFieldRequestsByClientVersionDimensions;
+  /** Metrics of AccountFieldRequestsByClientVersion that can be aggregated over. */
+  metrics: AccountFieldRequestsByClientVersionMetrics;
   /** Starting segment timestamp. */
   timestamp: Scalars['Timestamp'];
 };
@@ -1045,7 +1203,9 @@ export type AccountStatsWindow = {
   billingUsageStats: Array<AccountBillingUsageStatsRecord>;
   edgeServerInfos: Array<AccountEdgeServerInfosRecord>;
   errorStats: Array<AccountErrorStatsRecord>;
+  fieldExecutions: Array<AccountFieldExecutionsRecord>;
   fieldLatencies: Array<AccountFieldLatenciesRecord>;
+  fieldRequestsByClientVersion: Array<AccountFieldRequestsByClientVersionRecord>;
   fieldUsage: Array<AccountFieldUsageRecord>;
   operationCheckStats: Array<AccountOperationCheckStatsRecord>;
   queryStats: Array<AccountQueryStatsRecord>;
@@ -1083,10 +1243,26 @@ export type AccountStatsWindowErrorStatsArgs = {
 
 
 /** A time window with a specified granularity over a given account. */
+export type AccountStatsWindowFieldExecutionsArgs = {
+  filter?: InputMaybe<AccountFieldExecutionsFilter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<AccountFieldExecutionsOrderBySpec>>;
+};
+
+
+/** A time window with a specified granularity over a given account. */
 export type AccountStatsWindowFieldLatenciesArgs = {
   filter?: InputMaybe<AccountFieldLatenciesFilter>;
   limit?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<AccountFieldLatenciesOrderBySpec>>;
+};
+
+
+/** A time window with a specified granularity over a given account. */
+export type AccountStatsWindowFieldRequestsByClientVersionArgs = {
+  filter?: InputMaybe<AccountFieldRequestsByClientVersionFilter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<AccountFieldRequestsByClientVersionOrderBySpec>>;
 };
 
 
@@ -1563,6 +1739,7 @@ export type BillingPlanAddonV2 = {
 
 export type BillingPlanCapabilities = {
   __typename?: 'BillingPlanCapabilities';
+  clientVersions: Scalars['Boolean'];
   clients: Scalars['Boolean'];
   contracts: Scalars['Boolean'];
   datadog: Scalars['Boolean'];
@@ -1619,6 +1796,7 @@ export type BillingPlanV2 = {
   addons: Array<BillingPlanAddonV2>;
   billingModel: BillingModel;
   billingPeriod?: Maybe<BillingPeriod>;
+  clientVersions: Scalars['Boolean'];
   clients: Scalars['Boolean'];
   contracts: Scalars['Boolean'];
   datadog: Scalars['Boolean'];
@@ -1720,6 +1898,7 @@ export type BillingSubscriptionV2 = {
 /** Columns of BillingUsageStats. */
 export enum BillingUsageStatsColumn {
   AccountId = 'ACCOUNT_ID',
+  AgentVersion = 'AGENT_VERSION',
   OperationCount = 'OPERATION_COUNT',
   OperationCountProvidedExplicitly = 'OPERATION_COUNT_PROVIDED_EXPLICITLY',
   SchemaTag = 'SCHEMA_TAG',
@@ -1730,6 +1909,7 @@ export enum BillingUsageStatsColumn {
 export type BillingUsageStatsDimensions = {
   __typename?: 'BillingUsageStatsDimensions';
   accountId?: Maybe<Scalars['ID']>;
+  agentVersion?: Maybe<Scalars['String']>;
   operationCountProvidedExplicitly?: Maybe<Scalars['String']>;
   schemaTag?: Maybe<Scalars['String']>;
   serviceId?: Maybe<Scalars['ID']>;
@@ -1739,6 +1919,8 @@ export type BillingUsageStatsDimensions = {
 export type BillingUsageStatsFilter = {
   /** Selects rows whose accountId dimension equals the given value if not null. To query for the null value, use {in: {accountId: [null]}} instead. */
   accountId?: InputMaybe<Scalars['ID']>;
+  /** Selects rows whose agentVersion dimension equals the given value if not null. To query for the null value, use {in: {agentVersion: [null]}} instead. */
+  agentVersion?: InputMaybe<Scalars['String']>;
   and?: InputMaybe<Array<BillingUsageStatsFilter>>;
   in?: InputMaybe<BillingUsageStatsFilterIn>;
   not?: InputMaybe<BillingUsageStatsFilter>;
@@ -1755,6 +1937,8 @@ export type BillingUsageStatsFilter = {
 export type BillingUsageStatsFilterIn = {
   /** Selects rows whose accountId dimension is in the given list. A null value in the list means a row with null for that dimension. */
   accountId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Selects rows whose agentVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  agentVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose operationCountProvidedExplicitly dimension is in the given list. A null value in the list means a row with null for that dimension. */
   operationCountProvidedExplicitly?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
@@ -2419,6 +2603,7 @@ export type ContractPreviewSuccess = {
 
 export enum ContractVariantFailedStep {
   AddDirectiveDefinitionsIfNotPresent = 'ADD_DIRECTIVE_DEFINITIONS_IF_NOT_PRESENT',
+  AddInaccessibleSpecPurpose = 'ADD_INACCESSIBLE_SPEC_PURPOSE',
   DirectiveDefinitionLocationAugmenting = 'DIRECTIVE_DEFINITION_LOCATION_AUGMENTING',
   EmptyEnumMasking = 'EMPTY_ENUM_MASKING',
   EmptyInputObjectMasking = 'EMPTY_INPUT_OBJECT_MASKING',
@@ -2884,6 +3069,76 @@ export type FieldChangeSummaryCounts = {
   removals: Scalars['Int'];
 };
 
+/** Columns of FieldExecutions. */
+export enum FieldExecutionsColumn {
+  EstimatedExecutionCount = 'ESTIMATED_EXECUTION_COUNT',
+  FieldName = 'FIELD_NAME',
+  ObservedExecutionCount = 'OBSERVED_EXECUTION_COUNT',
+  ParentType = 'PARENT_TYPE',
+  ReferencingOperationCount = 'REFERENCING_OPERATION_COUNT',
+  SchemaTag = 'SCHEMA_TAG',
+  ServiceId = 'SERVICE_ID',
+  Timestamp = 'TIMESTAMP'
+}
+
+export type FieldExecutionsDimensions = {
+  __typename?: 'FieldExecutionsDimensions';
+  fieldName?: Maybe<Scalars['String']>;
+  parentType?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
+  serviceId?: Maybe<Scalars['ID']>;
+};
+
+/** Filter for data in FieldExecutions. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
+export type FieldExecutionsFilter = {
+  and?: InputMaybe<Array<FieldExecutionsFilter>>;
+  /** Selects rows whose fieldName dimension equals the given value if not null. To query for the null value, use {in: {fieldName: [null]}} instead. */
+  fieldName?: InputMaybe<Scalars['String']>;
+  in?: InputMaybe<FieldExecutionsFilterIn>;
+  not?: InputMaybe<FieldExecutionsFilter>;
+  or?: InputMaybe<Array<FieldExecutionsFilter>>;
+  /** Selects rows whose parentType dimension equals the given value if not null. To query for the null value, use {in: {parentType: [null]}} instead. */
+  parentType?: InputMaybe<Scalars['String']>;
+  /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
+  schemaTag?: InputMaybe<Scalars['String']>;
+  /** Selects rows whose serviceId dimension equals the given value if not null. To query for the null value, use {in: {serviceId: [null]}} instead. */
+  serviceId?: InputMaybe<Scalars['ID']>;
+};
+
+/** Filter for data in FieldExecutions. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
+export type FieldExecutionsFilterIn = {
+  /** Selects rows whose fieldName dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  fieldName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Selects rows whose parentType dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  parentType?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Selects rows whose serviceId dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  serviceId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+};
+
+export type FieldExecutionsMetrics = {
+  __typename?: 'FieldExecutionsMetrics';
+  estimatedExecutionCount: Scalars['Long'];
+  observedExecutionCount: Scalars['Long'];
+  referencingOperationCount: Scalars['Long'];
+};
+
+export type FieldExecutionsOrderBySpec = {
+  column: FieldExecutionsColumn;
+  direction: Ordering;
+};
+
+export type FieldExecutionsRecord = {
+  __typename?: 'FieldExecutionsRecord';
+  /** Dimensions of FieldExecutions that can be grouped by. */
+  groupBy: FieldExecutionsDimensions;
+  /** Metrics of FieldExecutions that can be aggregated over. */
+  metrics: FieldExecutionsMetrics;
+  /** Starting segment timestamp. */
+  timestamp: Scalars['Timestamp'];
+};
+
 /** Columns of FieldLatencies. */
 export enum FieldLatenciesColumn {
   FieldHistogram = 'FIELD_HISTOGRAM',
@@ -2953,6 +3208,88 @@ export type FieldLatenciesRecord = {
   groupBy: FieldLatenciesDimensions;
   /** Metrics of FieldLatencies that can be aggregated over. */
   metrics: FieldLatenciesMetrics;
+  /** Starting segment timestamp. */
+  timestamp: Scalars['Timestamp'];
+};
+
+/** Columns of FieldRequestsByClientVersion. */
+export enum FieldRequestsByClientVersionColumn {
+  ClientName = 'CLIENT_NAME',
+  ClientVersion = 'CLIENT_VERSION',
+  EstimatedExecutionCount = 'ESTIMATED_EXECUTION_COUNT',
+  FieldName = 'FIELD_NAME',
+  ObservedExecutionCount = 'OBSERVED_EXECUTION_COUNT',
+  ParentType = 'PARENT_TYPE',
+  ReferencingOperationCount = 'REFERENCING_OPERATION_COUNT',
+  SchemaTag = 'SCHEMA_TAG',
+  ServiceId = 'SERVICE_ID',
+  Timestamp = 'TIMESTAMP'
+}
+
+export type FieldRequestsByClientVersionDimensions = {
+  __typename?: 'FieldRequestsByClientVersionDimensions';
+  clientName?: Maybe<Scalars['String']>;
+  clientVersion?: Maybe<Scalars['String']>;
+  fieldName?: Maybe<Scalars['String']>;
+  parentType?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
+  serviceId?: Maybe<Scalars['ID']>;
+};
+
+/** Filter for data in FieldRequestsByClientVersion. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
+export type FieldRequestsByClientVersionFilter = {
+  and?: InputMaybe<Array<FieldRequestsByClientVersionFilter>>;
+  /** Selects rows whose clientName dimension equals the given value if not null. To query for the null value, use {in: {clientName: [null]}} instead. */
+  clientName?: InputMaybe<Scalars['String']>;
+  /** Selects rows whose clientVersion dimension equals the given value if not null. To query for the null value, use {in: {clientVersion: [null]}} instead. */
+  clientVersion?: InputMaybe<Scalars['String']>;
+  /** Selects rows whose fieldName dimension equals the given value if not null. To query for the null value, use {in: {fieldName: [null]}} instead. */
+  fieldName?: InputMaybe<Scalars['String']>;
+  in?: InputMaybe<FieldRequestsByClientVersionFilterIn>;
+  not?: InputMaybe<FieldRequestsByClientVersionFilter>;
+  or?: InputMaybe<Array<FieldRequestsByClientVersionFilter>>;
+  /** Selects rows whose parentType dimension equals the given value if not null. To query for the null value, use {in: {parentType: [null]}} instead. */
+  parentType?: InputMaybe<Scalars['String']>;
+  /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
+  schemaTag?: InputMaybe<Scalars['String']>;
+  /** Selects rows whose serviceId dimension equals the given value if not null. To query for the null value, use {in: {serviceId: [null]}} instead. */
+  serviceId?: InputMaybe<Scalars['ID']>;
+};
+
+/** Filter for data in FieldRequestsByClientVersion. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
+export type FieldRequestsByClientVersionFilterIn = {
+  /** Selects rows whose clientName dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  clientName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Selects rows whose clientVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  clientVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Selects rows whose fieldName dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  fieldName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Selects rows whose parentType dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  parentType?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Selects rows whose serviceId dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  serviceId?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+};
+
+export type FieldRequestsByClientVersionMetrics = {
+  __typename?: 'FieldRequestsByClientVersionMetrics';
+  estimatedExecutionCount: Scalars['Long'];
+  observedExecutionCount: Scalars['Long'];
+  referencingOperationCount: Scalars['Long'];
+};
+
+export type FieldRequestsByClientVersionOrderBySpec = {
+  column: FieldRequestsByClientVersionColumn;
+  direction: Ordering;
+};
+
+export type FieldRequestsByClientVersionRecord = {
+  __typename?: 'FieldRequestsByClientVersionRecord';
+  /** Dimensions of FieldRequestsByClientVersion that can be grouped by. */
+  groupBy: FieldRequestsByClientVersionDimensions;
+  /** Metrics of FieldRequestsByClientVersion that can be aggregated over. */
+  metrics: FieldRequestsByClientVersionMetrics;
   /** Starting segment timestamp. */
   timestamp: Scalars['Timestamp'];
 };
@@ -3137,7 +3474,7 @@ export type GraphVariant = {
   contractFilterConfig?: Maybe<FilterConfig>;
   /** Preview a Contract schema built from this source variant. */
   contractPreview: ContractPreview;
-  /** Explorer setting for default headers for a graph */
+  /** @deprecated Use sharedHeaders instead */
   defaultHeaders?: Maybe<Scalars['String']>;
   derivedVariantCount: Scalars['Int'];
   /** Graph the variant belongs to. */
@@ -3189,6 +3526,8 @@ export type GraphVariant = {
   requestsInLastDay?: Maybe<Scalars['Long']>;
   /** If the graphql endpoint is set up to accept cookies. */
   sendCookies?: Maybe<Scalars['Boolean']>;
+  /** Explorer setting for shared headers for a graph */
+  sharedHeaders?: Maybe<Scalars['String']>;
   sourceVariant?: Maybe<GraphVariant>;
   /** Subgraph of a given name, null if non-existent. */
   subgraph?: Maybe<FederatedImplementingService>;
@@ -3281,6 +3620,8 @@ export type GraphVariantMutation = {
   __typename?: 'GraphVariantMutation';
   addLinkToVariant: GraphVariant;
   configureComposition?: Maybe<GraphVariant>;
+  /** Delete the variant. */
+  delete: DeleteSchemaTagResult;
   /** @deprecated Use configureComposition instead */
   enableTagAndInaccessible?: Maybe<GraphVariant>;
   /** Graph ID of the variant */
@@ -3292,15 +3633,18 @@ export type GraphVariantMutation = {
   relaunch: RelaunchResult;
   removeLinkFromVariant: GraphVariant;
   setIsFavoriteOfCurrentUser: GraphVariant;
+  /** @deprecated Use updateSharedHeaders instead */
   updateDefaultHeaders?: Maybe<GraphVariant>;
   updateIsProtected?: Maybe<GraphVariant>;
   updatePreflightScript?: Maybe<GraphVariant>;
   updateSendCookies?: Maybe<GraphVariant>;
+  updateSharedHeaders?: Maybe<GraphVariant>;
   updateSubscriptionURL?: Maybe<GraphVariant>;
   updateURL?: Maybe<GraphVariant>;
   updateVariantIsPublic?: Maybe<GraphVariant>;
   updateVariantIsPubliclyListed?: Maybe<GraphVariant>;
   updateVariantIsVerified?: Maybe<GraphVariant>;
+  /** Update the [README](https://www.apollographql.com/docs/studio/explorer/operation-collections#embedding-in-the-readme-page) of this variant */
   updateVariantReadme?: Maybe<GraphVariant>;
 };
 
@@ -3359,6 +3703,12 @@ export type GraphVariantMutationUpdatePreflightScriptArgs = {
 /** Modifies a variant of a graph, also called a schema tag in parts of our product. */
 export type GraphVariantMutationUpdateSendCookiesArgs = {
   sendCookies: Scalars['Boolean'];
+};
+
+
+/** Modifies a variant of a graph, also called a schema tag in parts of our product. */
+export type GraphVariantMutationUpdateSharedHeadersArgs = {
+  sharedHeaders?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -3969,9 +4319,9 @@ export type MutationAccountArgs = {
 
 export type MutationCreateOperationCollectionArgs = {
   description?: InputMaybe<Scalars['String']>;
-  editRoles?: InputMaybe<Array<UserPermission>>;
   isSandbox: Scalars['Boolean'];
   isShared: Scalars['Boolean'];
+  minEditRole?: InputMaybe<UserPermission>;
   name: Scalars['String'];
   variantRefs?: InputMaybe<Array<Scalars['ID']>>;
 };
@@ -4461,8 +4811,6 @@ export type OperationCollectionMutation = {
   removeFromVariant: RemoveOperationCollectionFromVariantResult;
   setMinEditRole?: Maybe<UpdateOperationCollectionResult>;
   updateDescription?: Maybe<UpdateOperationCollectionResult>;
-  /** @deprecated Deprecated in favour of setMinEditRole */
-  updateEditRoles?: Maybe<UpdateOperationCollectionResult>;
   updateIsFavorite?: Maybe<UpdateOperationCollectionResult>;
   updateIsShared?: Maybe<UpdateOperationCollectionResult>;
   updateName?: Maybe<UpdateOperationCollectionResult>;
@@ -4511,11 +4859,6 @@ export type OperationCollectionMutationSetMinEditRoleArgs = {
 
 export type OperationCollectionMutationUpdateDescriptionArgs = {
   description?: InputMaybe<Scalars['String']>;
-};
-
-
-export type OperationCollectionMutationUpdateEditRolesArgs = {
-  editRoles: Array<UserPermission>;
 };
 
 
@@ -5952,6 +6295,7 @@ export type ServiceVariantArgs = {
 
 /** Columns of ServiceBillingUsageStats. */
 export enum ServiceBillingUsageStatsColumn {
+  AgentVersion = 'AGENT_VERSION',
   OperationCount = 'OPERATION_COUNT',
   OperationCountProvidedExplicitly = 'OPERATION_COUNT_PROVIDED_EXPLICITLY',
   SchemaTag = 'SCHEMA_TAG',
@@ -5960,12 +6304,15 @@ export enum ServiceBillingUsageStatsColumn {
 
 export type ServiceBillingUsageStatsDimensions = {
   __typename?: 'ServiceBillingUsageStatsDimensions';
+  agentVersion?: Maybe<Scalars['String']>;
   operationCountProvidedExplicitly?: Maybe<Scalars['String']>;
   schemaTag?: Maybe<Scalars['String']>;
 };
 
 /** Filter for data in ServiceBillingUsageStats. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
 export type ServiceBillingUsageStatsFilter = {
+  /** Selects rows whose agentVersion dimension equals the given value if not null. To query for the null value, use {in: {agentVersion: [null]}} instead. */
+  agentVersion?: InputMaybe<Scalars['String']>;
   and?: InputMaybe<Array<ServiceBillingUsageStatsFilter>>;
   in?: InputMaybe<ServiceBillingUsageStatsFilterIn>;
   not?: InputMaybe<ServiceBillingUsageStatsFilter>;
@@ -5978,6 +6325,8 @@ export type ServiceBillingUsageStatsFilter = {
 
 /** Filter for data in ServiceBillingUsageStats. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
 export type ServiceBillingUsageStatsFilterIn = {
+  /** Selects rows whose agentVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  agentVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose operationCountProvidedExplicitly dimension is in the given list. A null value in the list means a row with null for that dimension. */
   operationCountProvidedExplicitly?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
@@ -6172,6 +6521,70 @@ export type ServiceErrorStatsRecord = {
   timestamp: Scalars['Timestamp'];
 };
 
+/** Columns of ServiceFieldExecutions. */
+export enum ServiceFieldExecutionsColumn {
+  EstimatedExecutionCount = 'ESTIMATED_EXECUTION_COUNT',
+  FieldName = 'FIELD_NAME',
+  ObservedExecutionCount = 'OBSERVED_EXECUTION_COUNT',
+  ParentType = 'PARENT_TYPE',
+  ReferencingOperationCount = 'REFERENCING_OPERATION_COUNT',
+  SchemaTag = 'SCHEMA_TAG',
+  Timestamp = 'TIMESTAMP'
+}
+
+export type ServiceFieldExecutionsDimensions = {
+  __typename?: 'ServiceFieldExecutionsDimensions';
+  fieldName?: Maybe<Scalars['String']>;
+  parentType?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
+};
+
+/** Filter for data in ServiceFieldExecutions. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
+export type ServiceFieldExecutionsFilter = {
+  and?: InputMaybe<Array<ServiceFieldExecutionsFilter>>;
+  /** Selects rows whose fieldName dimension equals the given value if not null. To query for the null value, use {in: {fieldName: [null]}} instead. */
+  fieldName?: InputMaybe<Scalars['String']>;
+  in?: InputMaybe<ServiceFieldExecutionsFilterIn>;
+  not?: InputMaybe<ServiceFieldExecutionsFilter>;
+  or?: InputMaybe<Array<ServiceFieldExecutionsFilter>>;
+  /** Selects rows whose parentType dimension equals the given value if not null. To query for the null value, use {in: {parentType: [null]}} instead. */
+  parentType?: InputMaybe<Scalars['String']>;
+  /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
+  schemaTag?: InputMaybe<Scalars['String']>;
+};
+
+/** Filter for data in ServiceFieldExecutions. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
+export type ServiceFieldExecutionsFilterIn = {
+  /** Selects rows whose fieldName dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  fieldName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Selects rows whose parentType dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  parentType?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type ServiceFieldExecutionsMetrics = {
+  __typename?: 'ServiceFieldExecutionsMetrics';
+  estimatedExecutionCount: Scalars['Long'];
+  observedExecutionCount: Scalars['Long'];
+  referencingOperationCount: Scalars['Long'];
+};
+
+export type ServiceFieldExecutionsOrderBySpec = {
+  column: ServiceFieldExecutionsColumn;
+  direction: Ordering;
+};
+
+export type ServiceFieldExecutionsRecord = {
+  __typename?: 'ServiceFieldExecutionsRecord';
+  /** Dimensions of ServiceFieldExecutions that can be grouped by. */
+  groupBy: ServiceFieldExecutionsDimensions;
+  /** Metrics of ServiceFieldExecutions that can be aggregated over. */
+  metrics: ServiceFieldExecutionsMetrics;
+  /** Starting segment timestamp. */
+  timestamp: Scalars['Timestamp'];
+};
+
 /** Columns of ServiceFieldLatencies. */
 export enum ServiceFieldLatenciesColumn {
   FieldHistogram = 'FIELD_HISTOGRAM',
@@ -6235,6 +6648,82 @@ export type ServiceFieldLatenciesRecord = {
   groupBy: ServiceFieldLatenciesDimensions;
   /** Metrics of ServiceFieldLatencies that can be aggregated over. */
   metrics: ServiceFieldLatenciesMetrics;
+  /** Starting segment timestamp. */
+  timestamp: Scalars['Timestamp'];
+};
+
+/** Columns of ServiceFieldRequestsByClientVersion. */
+export enum ServiceFieldRequestsByClientVersionColumn {
+  ClientName = 'CLIENT_NAME',
+  ClientVersion = 'CLIENT_VERSION',
+  EstimatedExecutionCount = 'ESTIMATED_EXECUTION_COUNT',
+  FieldName = 'FIELD_NAME',
+  ObservedExecutionCount = 'OBSERVED_EXECUTION_COUNT',
+  ParentType = 'PARENT_TYPE',
+  ReferencingOperationCount = 'REFERENCING_OPERATION_COUNT',
+  SchemaTag = 'SCHEMA_TAG',
+  Timestamp = 'TIMESTAMP'
+}
+
+export type ServiceFieldRequestsByClientVersionDimensions = {
+  __typename?: 'ServiceFieldRequestsByClientVersionDimensions';
+  clientName?: Maybe<Scalars['String']>;
+  clientVersion?: Maybe<Scalars['String']>;
+  fieldName?: Maybe<Scalars['String']>;
+  parentType?: Maybe<Scalars['String']>;
+  schemaTag?: Maybe<Scalars['String']>;
+};
+
+/** Filter for data in ServiceFieldRequestsByClientVersion. Fields with dimension names represent equality checks. All fields are implicitly ANDed together. */
+export type ServiceFieldRequestsByClientVersionFilter = {
+  and?: InputMaybe<Array<ServiceFieldRequestsByClientVersionFilter>>;
+  /** Selects rows whose clientName dimension equals the given value if not null. To query for the null value, use {in: {clientName: [null]}} instead. */
+  clientName?: InputMaybe<Scalars['String']>;
+  /** Selects rows whose clientVersion dimension equals the given value if not null. To query for the null value, use {in: {clientVersion: [null]}} instead. */
+  clientVersion?: InputMaybe<Scalars['String']>;
+  /** Selects rows whose fieldName dimension equals the given value if not null. To query for the null value, use {in: {fieldName: [null]}} instead. */
+  fieldName?: InputMaybe<Scalars['String']>;
+  in?: InputMaybe<ServiceFieldRequestsByClientVersionFilterIn>;
+  not?: InputMaybe<ServiceFieldRequestsByClientVersionFilter>;
+  or?: InputMaybe<Array<ServiceFieldRequestsByClientVersionFilter>>;
+  /** Selects rows whose parentType dimension equals the given value if not null. To query for the null value, use {in: {parentType: [null]}} instead. */
+  parentType?: InputMaybe<Scalars['String']>;
+  /** Selects rows whose schemaTag dimension equals the given value if not null. To query for the null value, use {in: {schemaTag: [null]}} instead. */
+  schemaTag?: InputMaybe<Scalars['String']>;
+};
+
+/** Filter for data in ServiceFieldRequestsByClientVersion. Fields match if the corresponding dimension's value is in the given list. All fields are implicitly ANDed together. */
+export type ServiceFieldRequestsByClientVersionFilterIn = {
+  /** Selects rows whose clientName dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  clientName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Selects rows whose clientVersion dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  clientVersion?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Selects rows whose fieldName dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  fieldName?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Selects rows whose parentType dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  parentType?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Selects rows whose schemaTag dimension is in the given list. A null value in the list means a row with null for that dimension. */
+  schemaTag?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type ServiceFieldRequestsByClientVersionMetrics = {
+  __typename?: 'ServiceFieldRequestsByClientVersionMetrics';
+  estimatedExecutionCount: Scalars['Long'];
+  observedExecutionCount: Scalars['Long'];
+  referencingOperationCount: Scalars['Long'];
+};
+
+export type ServiceFieldRequestsByClientVersionOrderBySpec = {
+  column: ServiceFieldRequestsByClientVersionColumn;
+  direction: Ordering;
+};
+
+export type ServiceFieldRequestsByClientVersionRecord = {
+  __typename?: 'ServiceFieldRequestsByClientVersionRecord';
+  /** Dimensions of ServiceFieldRequestsByClientVersion that can be grouped by. */
+  groupBy: ServiceFieldRequestsByClientVersionDimensions;
+  /** Metrics of ServiceFieldRequestsByClientVersion that can be aggregated over. */
+  metrics: ServiceFieldRequestsByClientVersionMetrics;
   /** Starting segment timestamp. */
   timestamp: Scalars['Timestamp'];
 };
@@ -7082,7 +7571,9 @@ export type ServiceStatsWindow = {
   billingUsageStats: Array<ServiceBillingUsageStatsRecord>;
   edgeServerInfos: Array<ServiceEdgeServerInfosRecord>;
   errorStats: Array<ServiceErrorStatsRecord>;
+  fieldExecutions: Array<ServiceFieldExecutionsRecord>;
   fieldLatencies: Array<ServiceFieldLatenciesRecord>;
+  fieldRequestsByClientVersion: Array<ServiceFieldRequestsByClientVersionRecord>;
   fieldStats: Array<ServiceFieldLatenciesRecord>;
   fieldUsage: Array<ServiceFieldUsageRecord>;
   operationCheckStats: Array<ServiceOperationCheckStatsRecord>;
@@ -7121,10 +7612,26 @@ export type ServiceStatsWindowErrorStatsArgs = {
 
 
 /** A time window with a specified granularity over a given service. */
+export type ServiceStatsWindowFieldExecutionsArgs = {
+  filter?: InputMaybe<ServiceFieldExecutionsFilter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<ServiceFieldExecutionsOrderBySpec>>;
+};
+
+
+/** A time window with a specified granularity over a given service. */
 export type ServiceStatsWindowFieldLatenciesArgs = {
   filter?: InputMaybe<ServiceFieldLatenciesFilter>;
   limit?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<ServiceFieldLatenciesOrderBySpec>>;
+};
+
+
+/** A time window with a specified granularity over a given service. */
+export type ServiceStatsWindowFieldRequestsByClientVersionArgs = {
+  filter?: InputMaybe<ServiceFieldRequestsByClientVersionFilter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<ServiceFieldRequestsByClientVersionOrderBySpec>>;
 };
 
 
@@ -7427,7 +7934,9 @@ export type StatsWindow = {
   billingUsageStats: Array<BillingUsageStatsRecord>;
   edgeServerInfos: Array<EdgeServerInfosRecord>;
   errorStats: Array<ErrorStatsRecord>;
+  fieldExecutions: Array<FieldExecutionsRecord>;
   fieldLatencies: Array<FieldLatenciesRecord>;
+  fieldRequestsByClientVersion: Array<FieldRequestsByClientVersionRecord>;
   fieldUsage: Array<FieldUsageRecord>;
   operationCheckStats: Array<OperationCheckStatsRecord>;
   queryStats: Array<QueryStatsRecord>;
@@ -7465,10 +7974,26 @@ export type StatsWindowErrorStatsArgs = {
 
 
 /** A time window with a specified granularity. */
+export type StatsWindowFieldExecutionsArgs = {
+  filter?: InputMaybe<FieldExecutionsFilter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<FieldExecutionsOrderBySpec>>;
+};
+
+
+/** A time window with a specified granularity. */
 export type StatsWindowFieldLatenciesArgs = {
   filter?: InputMaybe<FieldLatenciesFilter>;
   limit?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Array<FieldLatenciesOrderBySpec>>;
+};
+
+
+/** A time window with a specified granularity. */
+export type StatsWindowFieldRequestsByClientVersionArgs = {
+  filter?: InputMaybe<FieldRequestsByClientVersionFilter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<Array<FieldRequestsByClientVersionOrderBySpec>>;
 };
 
 
