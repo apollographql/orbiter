@@ -66,7 +66,7 @@ The payload shape looks like the following:
     "session_id": "UNIQUE",
     "cwd_hash": "ghgfj4h",
     "platform": { "os": "windows", "continuous_integration": "ci-provider or null" },
-    "command": { "name": "subgraph check", "args": {"validation_period": null, "query_count_threshold": null} }
+    "command": { "name": "subgraph check", "args": {"validation_period": null, "query_count_threshold": null } }
 }
 ```
 
