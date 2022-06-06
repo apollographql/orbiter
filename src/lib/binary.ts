@@ -255,10 +255,12 @@ enum BinaryName {
 }
 
 enum TargetTriple {
-  Apple64 = "x86_64-apple-darwin",
-  LinuxGnu64 = "x86_64-unknown-linux-gnu",
-  LinuxMusl64 = "x86_64-unknown-linux-musl",
-  Windows64 = "x86_64-pc-windows-msvc",
+  AppleAmd = "x86_64-apple-darwin",
+  AppleArm = "aarch64-apple-darwin",
+  LinuxAmdGnu = "x86_64-unknown-linux-gnu",
+  LinuxAmdMusl = "x86_64-unknown-linux-musl",
+  LinuxArm = "aarch64-unknown-linux-gnu",
+  WindowsAmd = "x86_64-pc-windows-msvc",
 }
 
 export enum TargetPlatform {
@@ -357,7 +359,7 @@ export function enumFromStringValue<T>(
   enm: { [s: string]: T },
   value: string
 ): T {
-  const values: string = possibleValues(enm).toString().replace(",", ", ");
+  const values: string = possibleValues(enm).toString().split(",").join(", ");
   if ((Object.values(enm) as unknown as string[]).includes(value)) {
     return value as unknown as T;
   } else {
