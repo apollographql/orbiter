@@ -30,8 +30,7 @@ export class Binary {
         break;
       default:
         throw new MalformedRequestError(
-          `invalid binary name '${
-            this.name
+          `invalid binary name '${this.name
           }'. possible names are ${possibleValues(BinaryName)}`
         );
     }
@@ -43,15 +42,17 @@ export class Binary {
     version: string
   ): string {
     let targetTriple = enumFromStringValue(TargetTriple, inputTargetTriple);
+    if (targetTriple === TargetTriple.AppleArm && this.name === BinaryName.Supergraph) {
+      throw new MalformedRequestError(`invalid target '${targetTriple}' for '${this.name}' binary, you should download the 'x86_64-apple-darwin' target instead and it will work on Mac machines with Apple's ARM processor via emulation.`)
+    }
     return `${this.name}-${version}-${targetTriple}.tar.gz`;
   }
 
   getReleaseTarballUrl(inputTargetTriple: string, version: string): string {
-    return `https://github.com/${
-      this.repo.slug
-    }/releases/download/${this.getReleaseTagName(
-      version
-    )}/${this.getReleaseTarballName(inputTargetTriple, version)}`;
+    return `https://github.com/${this.repo.slug
+      }/releases/download/${this.getReleaseTagName(
+        version
+      )}/${this.getReleaseTarballName(inputTargetTriple, version)}`;
   }
 
   async getFullyQualifiedRoverVersion(fetch: Fetcher): Promise<string> {
@@ -187,8 +188,7 @@ export class Binary {
 
       default:
         throw new MalformedRequestError(
-          `invalid binary name '${
-            this.name
+          `invalid binary name '${this.name
           }'. possible names are ${possibleValues(BinaryName)}`
         );
     }
@@ -231,8 +231,7 @@ export class Binary {
         );
       default:
         throw new MalformedRequestError(
-          `invalid binary name '${
-            this.name
+          `invalid binary name '${this.name
           }'. possible names are ${possibleValues(BinaryName)}`
         );
     }

@@ -803,12 +803,20 @@ export type AccountMutation = {
   auditExport?: Maybe<AuditLogExportMutation>;
   /** Cancel a pending change from an annual team subscription to a monthly team subscription when the current period expires. */
   cancelConvertAnnualTeamSubscriptionToMonthlyAtNextPeriod?: Maybe<Account>;
+  /** Cancel a pending change from an annual team subscription to a monthly team subscription when the current period expires. */
+  cancelConvertAnnualTeamSubscriptionToMonthlyAtNextPeriodV2?: Maybe<Account>;
   /** Cancel account subscriptions, subscriptions will remain active until the end of the paid period */
   cancelSubscriptions?: Maybe<Account>;
+  /** Cancel account subscriptions, subscriptions will remain active until the end of the paid period */
+  cancelSubscriptionsV2?: Maybe<Account>;
   /** Changes an annual team subscription to a monthly team subscription when the current period expires. */
   convertAnnualTeamSubscriptionToMonthlyAtNextPeriod?: Maybe<Account>;
+  /** Changes an annual team subscription to a monthly team subscription when the current period expires. */
+  convertAnnualTeamSubscriptionToMonthlyAtNextPeriodV2?: Maybe<Account>;
   /** Changes a monthly team subscription to an annual team subscription. */
   convertMonthlyTeamSubscriptionToAnnual?: Maybe<Account>;
+  /** Changes a monthly team subscription to an annual team subscription. */
+  convertMonthlyTeamSubscriptionToAnnualV2?: Maybe<Account>;
   createStaticInvitation?: Maybe<OrganizationInviteLink>;
   /** Delete the account's avatar. Requires Account.canUpdateAvatar to be true. */
   deleteAvatar?: Maybe<AvatarDeleteError>;
@@ -816,12 +824,19 @@ export type AccountMutation = {
   dismissExpiredTrial?: Maybe<Account>;
   /** Apollo admins only: extend an ongoing trial */
   extendTrial?: Maybe<Account>;
+  /** Apollo admins only: extend an ongoing trial */
+  extendTrialV2?: Maybe<Account>;
   /** Hard delete an account and all associated services */
   hardDelete?: Maybe<Scalars['Void']>;
+  hasBillingInfo?: Maybe<Scalars['Boolean']>;
+  internalID?: Maybe<Scalars['String']>;
   /** Send an invitation to join the account by E-mail */
   invite?: Maybe<AccountInvitation>;
+  name: Scalars['String'];
   /** Reactivate a canceled current subscription */
   reactivateCurrentSubscription?: Maybe<Account>;
+  /** Reactivate a canceled current subscription */
+  reactivateCurrentSubscriptionV2?: Maybe<Account>;
   /** Refresh billing information from third-party billing service */
   refreshBilling?: Maybe<Scalars['Void']>;
   /** Delete an invitation */
@@ -832,16 +847,25 @@ export type AccountMutation = {
   /** Send a new E-mail for an existing invitation */
   resendInvitation?: Maybe<AccountInvitation>;
   revokeStaticInvitation?: Maybe<OrganizationInviteLink>;
+  seatCountForNextBill?: Maybe<Scalars['Int']>;
   /** Apollo admins only: set the billing plan to an arbitrary plan */
   setPlan?: Maybe<Scalars['Void']>;
+  /** Apollo admins only: set the billing plan to an arbitrary plan */
+  setPlanV2?: Maybe<Account>;
   /** Start a new team subscription with the given billing period */
   startTeamSubscription?: Maybe<Account>;
+  /** Start a new team subscription with the given billing period */
+  startTeamSubscriptionV2?: Maybe<Account>;
   /** Start a team trial */
   startTrial?: Maybe<Account>;
+  /** Start a team trial */
+  startTrialV2?: Maybe<Account>;
   /** This is called by the form shown to users after they cancel their team subscription. */
   submitTeamCancellationFeedback?: Maybe<Scalars['Void']>;
   /** Apollo admins only: terminate any ongoing subscriptions in the account, without refunds */
   terminateSubscriptions?: Maybe<Account>;
+  /** Apollo admins only: terminate any ongoing subscriptions in the account, without refunds */
+  terminateSubscriptionsV2?: Maybe<Account>;
   /** Update the billing address for a Recurly token */
   updateBillingAddress?: Maybe<Account>;
   /** Update the billing information from a Recurly token */
@@ -873,6 +897,11 @@ export type AccountMutationCreateStaticInvitationArgs = {
 
 
 export type AccountMutationExtendTrialArgs = {
+  to: Scalars['Timestamp'];
+};
+
+
+export type AccountMutationExtendTrialV2Args = {
   to: Scalars['Timestamp'];
 };
 
@@ -916,7 +945,17 @@ export type AccountMutationSetPlanArgs = {
 };
 
 
+export type AccountMutationSetPlanV2Args = {
+  id: Scalars['ID'];
+};
+
+
 export type AccountMutationStartTeamSubscriptionArgs = {
+  billingPeriod: BillingPeriod;
+};
+
+
+export type AccountMutationStartTeamSubscriptionV2Args = {
   billingPeriod: BillingPeriod;
 };
 
@@ -1701,6 +1740,23 @@ export type BillingMonth = {
   start: Scalars['Timestamp'];
 };
 
+export type BillingMutation = {
+  __typename?: 'BillingMutation';
+  createSetupIntent?: Maybe<SetupIntentResult>;
+  startUsageBasedPlan?: Maybe<StartUsageBasedPlanResult>;
+};
+
+
+export type BillingMutationCreateSetupIntentArgs = {
+  internalAccountId: Scalars['ID'];
+};
+
+
+export type BillingMutationStartUsageBasedPlanArgs = {
+  internalAccountId: Scalars['ID'];
+  paymentMethodId: Scalars['String'];
+};
+
 export enum BillingPeriod {
   Monthly = 'MONTHLY',
   Quarterly = 'QUARTERLY',
@@ -2375,6 +2431,8 @@ export type CheckWorkflowTask = {
   createdAt: Scalars['Timestamp'];
   id: Scalars['ID'];
   status: CheckWorkflowTaskStatus;
+  /** A studio UI url to view the details of this check workflow task */
+  targetURL?: Maybe<Scalars['String']>;
   /** The workflow that this task belongs to. */
   workflow: CheckWorkflow;
 };
@@ -2480,11 +2538,13 @@ export type CompositionBuildInput = {
 export type CompositionCheckTask = CheckWorkflowTask & {
   __typename?: 'CompositionCheckTask';
   completedAt?: Maybe<Scalars['Timestamp']>;
+  coreSchemaModified: Scalars['Boolean'];
   createdAt: Scalars['Timestamp'];
   id: Scalars['ID'];
   /** The result of the composition. */
   result?: Maybe<CompositionResult>;
   status: CheckWorkflowTaskStatus;
+  targetURL?: Maybe<Scalars['String']>;
   workflow: CheckWorkflow;
 };
 
@@ -3473,7 +3533,7 @@ export type GraphVariant = {
   /** As new schema tags keep getting published, activeSchemaPublish refers to the latest. */
   activeSchemaPublish?: Maybe<SchemaTag>;
   /** Return check configuration for this particular graph variant. */
-  checkConfig?: Maybe<HistoricQueryParametersType>;
+  checkConfig: HistoricQueryParametersType;
   /** The version of composition currently in use, if applicable */
   compositionVersion?: Maybe<Scalars['String']>;
   /** Filter configuration used to create the contract schema */
@@ -3638,7 +3698,10 @@ export type GraphVariantMutation = {
   updateVariantIsPublic?: Maybe<GraphVariant>;
   updateVariantIsPubliclyListed?: Maybe<GraphVariant>;
   updateVariantIsVerified?: Maybe<GraphVariant>;
-  /** Update the [README](https://www.apollographql.com/docs/studio/explorer/operation-collections#embedding-in-the-readme-page) of this variant */
+  /**
+   * Update the [README](https://www.apollographql.com/docs/studio/org/graphs/#the-readme-page) of this variant.
+   * Rate Limit of 1000/min.
+   */
   updateVariantReadme?: Maybe<GraphVariant>;
 };
 
@@ -3829,16 +3892,16 @@ export type HistoricQueryParametersInput = {
 
 export type HistoricQueryParametersType = {
   __typename?: 'HistoricQueryParametersType';
-  excludedClients?: Maybe<Array<ClientInfoFilterOutput>>;
-  excludedOperationNames?: Maybe<Array<OperationNameFilter>>;
-  from?: Maybe<Scalars['Timestamp']>;
-  fromNormalized?: Maybe<Scalars['Timestamp']>;
-  ignoredOperations?: Maybe<Array<Scalars['ID']>>;
-  includedVariants?: Maybe<Array<Scalars['String']>>;
-  queryCountThreshold?: Maybe<Scalars['Int']>;
-  queryCountThresholdPercentage?: Maybe<Scalars['Float']>;
-  to?: Maybe<Scalars['Timestamp']>;
-  toNormalized?: Maybe<Scalars['Timestamp']>;
+  excludedClients: Array<ClientInfoFilterOutput>;
+  excludedOperationNames: Array<OperationNameFilter>;
+  from: Scalars['Timestamp'];
+  fromNormalized: Scalars['Timestamp'];
+  ignoredOperations: Array<Scalars['ID']>;
+  includedVariants: Array<Scalars['String']>;
+  queryCountThreshold: Scalars['Int'];
+  queryCountThresholdPercentage: Scalars['Float'];
+  to: Scalars['Timestamp'];
+  toNormalized: Scalars['Timestamp'];
 };
 
 /** An identity (e.g. Anonymous, a specific User) within Apollo Studio. See implementations. */
@@ -4316,6 +4379,7 @@ export type MoveOperationCollectionEntrySuccess = {
 export type Mutation = {
   __typename?: 'Mutation';
   account?: Maybe<AccountMutation>;
+  billing?: Maybe<BillingMutation>;
   /** Creates an operation collection for the given variantRefs, or make a sandbox collection without variantRefs. */
   createOperationCollection: CreateOperationCollectionResult;
   /**
@@ -5048,6 +5112,7 @@ export type OperationsCheckTask = CheckWorkflowTask & {
   /** The result of the check. */
   result?: Maybe<OperationsCheckResult>;
   status: CheckWorkflowTaskStatus;
+  targetURL?: Maybe<Scalars['String']>;
   workflow: CheckWorkflow;
 };
 
@@ -7983,6 +8048,13 @@ export type ServiceTraceRefsRecord = {
   timestamp: Scalars['Timestamp'];
 };
 
+export type SetupIntentResult = NotFoundError | PermissionError | SetupIntentSuccess;
+
+export type SetupIntentSuccess = {
+  __typename?: 'SetupIntentSuccess';
+  clientSecret: Scalars['String'];
+};
+
 /** Slack notification channel */
 export type SlackChannel = Channel & {
   __typename?: 'SlackChannel';
@@ -8023,6 +8095,13 @@ export type SourceLocation = {
   column: Scalars['Int'];
   /** Line number. */
   line: Scalars['Int'];
+};
+
+export type StartUsageBasedPlanResult = NotFoundError | PermissionError | StartUsageBasedPlanSuccess;
+
+export type StartUsageBasedPlanSuccess = {
+  __typename?: 'StartUsageBasedPlanSuccess';
+  customerPlanId: Scalars['String'];
 };
 
 /** A time window with a specified granularity. */
@@ -8245,6 +8324,13 @@ export enum SubscriptionStateV2 {
   Pending = 'PENDING',
   Unknown = 'UNKNOWN'
 }
+
+export type SyncBillingAccountResult = PermissionError | SyncBillingAccountSuccess;
+
+export type SyncBillingAccountSuccess = {
+  __typename?: 'SyncBillingAccountSuccess';
+  message: Scalars['String'];
+};
 
 export type TemporaryUrl = {
   __typename?: 'TemporaryURL';
