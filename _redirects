@@ -16,9 +16,9 @@
 /download/nix/* /.netlify/functions/download-router 200!
 
 # Non-Functions
+https://router.apollo.dev/ https://www.apollographql.com/docs/router/quickstart 302
+https://rover.apollo.dev/ https://www.apollographql.com/docs/rover 302
 
-/ https://www.apollographql.com/docs/rover 302
-
-/quickstart https://www.apollographql.com/docs/federation/quickstart
-/quickstart/products/graphql https://7bssbnldib.execute-api.us-east-1.amazonaws.com/Prod/graphql 200!
-/quickstart/reviews/graphql https://w0jtezo2pa.execute-api.us-east-1.amazonaws.com/Prod/graphql 200!
+https://rover.apollo.dev/quickstart https://www.apollographql.com/docs/federation/quickstart
+https://rover.apollo.dev/quickstart/products/graphql https://7bssbnldib.execute-api.us-east-1.amazonaws.com/Prod/graphql 200!
+https://rover.apollo.dev/quickstart/reviews/graphql https://w0jtezo2pa.execute-api.us-east-1.amazonaws.com/Prod/graphql 200!
