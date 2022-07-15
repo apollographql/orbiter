@@ -39,6 +39,7 @@ Valid target triples are as follows:
 
 ||`x86_64-unknown-linux-gnu`|`x86_64-unknown-linux-musl`|`x86_64-apple-darwin`|`x86_64-pc-windows-msvc`|`aarch64-apple-darwin`|
 |---|---|---|---|---|---|
+|router|✅|❌|✅|✅|❌|
 |rover|✅|✅|✅|✅|❌|
 |supergraph|✅|❌|✅|✅|❌|
 
@@ -46,6 +47,7 @@ Valid versions are as follows:
 
 ||`v{version}` (i.e. v2.0.0)|`latest`|`latest-0`|`latest-2`|
 |---|---|---|---|---|
+|router|✅|✅|❌|❌|
 |rover|✅|✅|❌|❌|
 |supergraph|✅|❌|✅|✅|
 
@@ -134,6 +136,6 @@ These functions are connected to our [status page](https://status.apollographql.
 
 __404 when installing a package__:
 
-If there is an elevated number of `404`s happening check the `Releases` tab of the `rover` to ensure that the release in question (typically latest) has all of its tarballs for each platform. There should be three tarballs present. If there aren't, you will need to cut a new release or manually build the tarballs.
+If there is an elevated number of `404`s happening check the `Releases` tab of either the [Rover releases](https://github.com/apollographql/rover/releases) or the [Router releases](https://github.com/apollographql/router/releases) pages to ensure that the release in question (typically "latest") has all of its tarballs for each platform. There should be three tarballs present. If there aren't, you will need to cut a new release or manually build the tarballs.
 
 <img src="https://raw.githubusercontent.com/apollographql/space-kit/main/src/illustrations/svgs/moon.svg" width="100%" height="144">
