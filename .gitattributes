@@ -1,1 +1,1 @@
-src/generated/** -diff
+src/generated/studio.ts -diff
