@@ -30,8 +30,7 @@ export class Binary {
         break;
       default:
         throw new MalformedRequestError(
-          `invalid binary name '${
-            this.name
+          `invalid binary name '${this.name
           }'. possible names are ${possibleValues(BinaryName)}`
         );
     }
@@ -43,15 +42,17 @@ export class Binary {
     version: string
   ): string {
     let targetTriple = enumFromStringValue(TargetTriple, inputTargetTriple);
+    if (targetTriple === TargetTriple.AppleArm && (this.name === BinaryName.Supergraph || this.name === BinaryName.Router)) {
+      throw new MalformedRequestError(`invalid target '${targetTriple}' for '${this.name}' binary, you should download the 'x86_64-apple-darwin' target instead and it will work on Mac machines with Apple's ARM processor via emulation.`)
+    }
     return `${this.name}-${version}-${targetTriple}.tar.gz`;
   }
 
   getReleaseTarballUrl(inputTargetTriple: string, version: string): string {
-    return `https://github.com/${
-      this.repo.slug
-    }/releases/download/${this.getReleaseTagName(
-      version
-    )}/${this.getReleaseTarballName(inputTargetTriple, version)}`;
+    return `https://github.com/${this.repo.slug
+      }/releases/download/${this.getReleaseTagName(
+        version
+      )}/${this.getReleaseTarballName(inputTargetTriple, version)}`;
   }
 
   async getFullyQualifiedRoverVersion(fetch: Fetcher): Promise<string> {
@@ -187,8 +188,7 @@ export class Binary {
 
       default:
         throw new MalformedRequestError(
-          `invalid binary name '${
-            this.name
+          `invalid binary name '${this.name
           }'. possible names are ${possibleValues(BinaryName)}`
         );
     }
@@ -231,8 +231,7 @@ export class Binary {
         );
       default:
         throw new MalformedRequestError(
-          `invalid binary name '${
-            this.name
+          `invalid binary name '${this.name
           }'. possible names are ${possibleValues(BinaryName)}`
         );
     }
@@ -255,10 +254,12 @@ enum BinaryName {
 }
 
 enum TargetTriple {
-  Apple64 = "x86_64-apple-darwin",
-  LinuxGnu64 = "x86_64-unknown-linux-gnu",
-  LinuxMusl64 = "x86_64-unknown-linux-musl",
-  Windows64 = "x86_64-pc-windows-msvc",
+  AppleAmd = "x86_64-apple-darwin",
+  AppleArm = "aarch64-apple-darwin",
+  LinuxAmdGnu = "x86_64-unknown-linux-gnu",
+  LinuxAmdMusl = "x86_64-unknown-linux-musl",
+  LinuxArm = "aarch64-unknown-linux-gnu",
+  WindowsAmd = "x86_64-pc-windows-msvc",
 }
 
 export enum TargetPlatform {
@@ -357,7 +358,7 @@ export function enumFromStringValue<T>(
   enm: { [s: string]: T },
   value: string
 ): T {
-  const values: string = possibleValues(enm).toString().replace(",", ", ");
+  const values: string = possibleValues(enm).toString().split(",").join(", ");
   if ((Object.values(enm) as unknown as string[]).includes(value)) {
     return value as unknown as T;
   } else {

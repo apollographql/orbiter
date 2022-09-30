@@ -37,10 +37,11 @@ Valid names are `rover` and `supergraph`.
 
 Valid target triples are as follows:
 
-||`x86_64-unknown-linux-gnu`|`x86_64-unknown-linux-musl`|`x86_64-apple-darwin`|`x86_64-pc-windows-msvc`|`aarch64-apple-darwin`|
-|---|---|---|---|---|---|
-|rover|✅|✅|✅|✅|❌|
-|supergraph|✅|❌|✅|✅|❌|
+||`x86_64-unknown-linux-gnu`|`x86_64-unknown-linux-musl`|`x86_64-apple-darwin`|`x86_64-pc-windows-msvc`|`aarch64-unknown-linux-gnu`|`aarch64-apple-darwin`|
+|---|---|---|---|---|---|---|
+|rover|✅|✅|✅|✅|✅|✅|
+|supergraph|✅|❌|✅|✅|✅|❌|
+|router|✅|❌|✅|✅|✅|❌|
 
 Valid versions are as follows:
 
@@ -48,6 +49,7 @@ Valid versions are as follows:
 |---|---|---|---|---|
 |rover|✅|✅|❌|❌|
 |supergraph|✅|❌|✅|✅|
+|router|✅|❌|❌|❌|
 
 In order to provide two separate major version channels for the `supergraph` binary, we have a `latest-0` and a `latest-2` version tag instead of the usual `latest`. These versions are sourced from the message of the corresponding git tag [`composition-latest-0`](https://github.com/apollographql/federation-rs/releases/tag/composition-latest-0) and [`composition-latest-2`](https://github.com/apollographql/federation-rs/releases/tag/composition-latest-2).
 
