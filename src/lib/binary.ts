@@ -89,7 +89,7 @@ export class Binary {
     // supergraph is a bit weird because we have a "latest" for fed 1 _and_ for fed 2
     // the source of truth for these is on the `main` branch of https://github.com/apollographql/rover in the ./latest_plugin_versions.json file
     // TODO: make this pull from the `main` branch once https://github.com/apollographql/rover/pull/1363 is merged
-    let latestPluginVersions = await fetch("https://raw.githubusercontent.com/apollographql/rover/avery/describe-latest-versions/latest_plugin_versions.json");
+    let latestPluginVersions = await fetch("https://raw.githubusercontent.com/apollographql/rover/main/latest_plugin_versions.json");
     let supergraphJson = await latestPluginVersions.json();
     let supergraphVersions = supergraphJson["supergraph"]["versions"];
     let latestTag: string;
