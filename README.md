@@ -52,6 +52,9 @@ Valid versions are as follows:
 |supergraph|✅|❌|✅|✅|
 |router|✅|❌|❌|❌|
 
+> **Note**
+> `router` is only downloadable _after_ `v1.0.0-alpha.0`
+
 In order to provide two separate major version channels for the `supergraph` binary, we have a `latest-0` and a `latest-2` version tag instead of the usual `latest`. These versions are sourced from the message of the corresponding git tag [`composition-latest-0`](https://github.com/apollographql/federation-rs/releases/tag/composition-latest-0) and [`composition-latest-2`](https://github.com/apollographql/federation-rs/releases/tag/composition-latest-2).
 
 ## Telemetry
