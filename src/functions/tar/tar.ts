@@ -14,6 +14,7 @@ const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
   try {
     // rover.apollo.dev / tar / rover / x86_64-unknown-linux-gnu / v0.1.0
     // rover.apollo.dev / tar / supergraph / x86_64-apple-darwin / latest-2
+    // rover.apollo.dev / tar / router / aarch64-apple-darwin / latest-plugin
     const [_rootDomain, _tarPrefix, binaryName, targetTriple, version] =
       event.path.split("/");
     return downloadEvent(binaryName, targetTriple, version, "tarball");
