@@ -1,21 +1,19 @@
-import {
-  RoverTrackDocument,
-  RoverTrackMutationVariables,
-} from "../generated/studio";
 import { request } from "graphql-request";
+import {DocumentNode} from "graphql";
 const graphQLEndpoint = "https://graphql.api.apollographql.com/api/graphql";
 
 const STUDIO_API_KEY = process.env["STUDIO_API_KEY"];
 
 export async function track(
-  variables: RoverTrackMutationVariables,
+    document: DocumentNode,
+  variables: any,
   userAgent: string
 ) {
   if (STUDIO_API_KEY) {
     try {
       request({
         url: graphQLEndpoint,
-        document: RoverTrackDocument,
+        document: document,
         variables,
         requestHeaders: {
           "User-Agent": userAgent,
