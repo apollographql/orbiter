@@ -145,8 +145,7 @@ export class Binary {
     // rover will request this latest-plugin version to use the version specified in latest_plugin_versions.json
     } else if (version === "latest-plugin") {
       // the source of truth for the latest router versions is on the `main` branch of https://github.com/apollographql/rover in the ./latest_plugin_versions.json file
-      // TODO: switch this to the `main` branch once https://github.com/apollographql/rover/pull/1430 lands
-      let latestPluginVersions = await fetch("https://raw.githubusercontent.com/apollographql/rover/avery/add-router-plugin/latest_plugin_versions.json");
+      let latestPluginVersions = await fetch("https://raw.githubusercontent.com/apollographql/rover/main/latest_plugin_versions.json");
       let supergraphJson = await latestPluginVersions.json();
       let supergraphVersions = supergraphJson["router"]["versions"];
       latestTag = supergraphVersions["latest-1"];

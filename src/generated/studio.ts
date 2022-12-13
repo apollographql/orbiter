@@ -4528,7 +4528,7 @@ export type GraphVariant = {
   /**
    * Represents whether this variant has a supergraph schema. Note that this can only be true for variants with build steps
    * (running e.g. federation composition or contracts filtering). This will be false for a variant with a build step if it
-   * has never succeeded build.
+   * has never successfully published.
    */
   hasSupergraphSchema: Scalars['Boolean'];
   /** The variant's global identifier in the form `graphID@variant`. */
@@ -6839,8 +6839,6 @@ export type Query = {
   allActiveTeamBillingAccounts?: Maybe<Array<Account>>;
   /** All accounts on active team trial plans */
   allActiveTeamTrialAccounts?: Maybe<Array<Account>>;
-  /** All available plans */
-  allPlans: Array<BillingPlan>;
   allPublicVariants?: Maybe<Array<GraphVariant>>;
   /** All auto-renewing accounts on active annual plans */
   allRenewingNonEnterpriseAnnualAccounts?: Maybe<Array<Account>>;
@@ -6901,8 +6899,6 @@ export type Query = {
   transformSchemaForPlatformApi?: Maybe<Scalars['GraphQLDocument']>;
   /** The plan started by AccountMutation.startTrial */
   trialBillingPlan: BillingPlanV2;
-  /** The plan started by AccountMutation.startTrial */
-  trialPlan: BillingPlan;
   /** Returns details of the Apollo user with the provided ID. */
   user?: Maybe<User>;
   /** Returns details of a Studio graph variant with the provided graph ref. A graph ref has the format `graphID@variantName` (or just `graphID` for the default variant `current`). Returns null if the graph or variant doesn't exist, or if the graph isn't accessible by the current actor. */
@@ -10170,7 +10166,7 @@ export type SubgraphCheckAsyncInput = {
   /** The GitHub context to associate with the check. */
   gitContext: GitContextInput;
   /** The graph ref of the Studio graph and variant to run checks against (such as `my-graph@current`). */
-  graphRef: Scalars['ID'];
+  graphRef?: InputMaybe<Scalars['ID']>;
   /** The URL of the GraphQL endpoint that Apollo Sandbox introspected to obtain the proposed schema. Required if `isSandbox` is `true`. */
   introspectionEndpoint?: InputMaybe<Scalars['String']>;
   /** If `true`, the check was initiated by Apollo Sandbox. */
