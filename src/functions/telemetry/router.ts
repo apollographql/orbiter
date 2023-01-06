@@ -47,7 +47,6 @@ export async function routerHandler(event: APIGatewayProxyEvent, userAgent: stri
 }
 
 export async function trackRouter(request: Request, userAgent: string) {
-  console.log("Tracked");
   let usage = new Array<RouterUsageInput>();
   for (const key in request.usage) {
     let frequency = request.usage[key as keyof object];
@@ -67,6 +66,5 @@ export async function trackRouter(request: Request, userAgent: string) {
     apolloGraphRef: request.apollo_graph_ref,
     supergraphHash: request.supergraph_hash
   };
-  console.log(variables);
   await track(RouterTrackDocument, variables, userAgent);
 }
