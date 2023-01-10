@@ -2,20 +2,14 @@ mutation RouterTrack(
     $sessionId: ID!,
     $version: String!,
     $os: String!,
-    $supergraphHash: String!,
     $usage: [RouterUsageInput!]!,
     $ci: String,
-    $apolloKey: String,
-    $apolloGraphRef: String
 ) {
     trackRouterUsage(
         sessionId: $sessionId,
         version: $version,
         os: $os,
-        supergraphHash: $supergraphHash,
         usage: $usage,
         ci: $ci,
-        apolloKey: $apolloKey,
-        apolloGraphRef: $apolloGraphRef
     )
 }

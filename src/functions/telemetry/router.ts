@@ -62,9 +62,6 @@ export async function trackRouter(request: Request, userAgent: string) {
     ci: request.platform.continuous_integration,
     version: request.version,
     usage: usage,
-    apolloKey: request.apollo_key,
-    apolloGraphRef: request.apollo_graph_ref,
-    supergraphHash: request.supergraph_hash
   };
   await track(RouterTrackDocument, variables, userAgent);
 }
