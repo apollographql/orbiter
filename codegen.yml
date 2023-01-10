@@ -1,7 +1,6 @@
 overwrite: true
-# TODO MUST CHANGE BACK TO FOLLOWING PROD API BEFORE MERGING.
-schema: "https://engine-dev0-api-gateway.c0.gql.zone/api/graphql"
-# schema: "https://graphql.api.apollographql.com/api/graphql"
+# schema: "https://engine-dev0-api-gateway.c0.gql.zone/api/graphql"
+schema: "https://graphql.api.apollographql.com/api/graphql"
 documents: ./src/lib/operations/**/*.graphql
 generates:
   ./src/generated/studio.ts:
