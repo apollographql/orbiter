@@ -10,3 +10,4 @@ generates:
       - "typescript-document-nodes"
       - "typescript-operations"
       - "typescript-graphql-request"
+
