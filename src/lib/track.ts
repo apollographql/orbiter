@@ -14,7 +14,7 @@ export async function track(
     try {
       request({
         url: graphQLEndpoint,
-        document: document,
+        document,
         variables,
         requestHeaders: {
           "User-Agent": userAgent,
