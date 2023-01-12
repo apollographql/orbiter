@@ -19,12 +19,6 @@ interface Request {
   version: string
   // Information about the current architecture/platform
   platform: Platform;
-  // A hash of the supergraph schema
-  supergraph_hash: string
-  // The apollo key if specified
-  apollo_key: string
-  // The apollo graph ref is specified
-  apollo_graph_ref: string
   // Information about what was being used
   usage: object;
 }
