@@ -2820,11 +2820,21 @@ export type CheckWorkflowMutation = {
   /** The graph this check workflow belongs to. */
   graph: Service;
   id: Scalars['ID'];
+  /** Re-run a check workflow using the current configuration. A new workflow is created and returned. */
+  rerun?: Maybe<CheckWorkflowRerunResult>;
   /**
    * Re-run a check workflow using the current check configuration. The result is either a workflow ID that
    * can be used to check the status or an error message that explains what went wrong.
    */
   rerunAsync: CheckRequestResult;
+};
+
+export type CheckWorkflowRerunResult = {
+  __typename?: 'CheckWorkflowRerunResult';
+  /** Check workflow created by re-running. */
+  result?: Maybe<CheckWorkflow>;
+  /** Check workflow that was rerun. */
+  source?: Maybe<CheckWorkflow>;
 };
 
 export enum CheckWorkflowStatus {
@@ -4553,6 +4563,8 @@ export type GraphVariant = {
   contractFilterConfig?: Maybe<FilterConfig>;
   /** Preview a Contract schema built from this source variant. */
   contractPreview: ContractPreview;
+  /** @deprecated Use sharedHeaders instead */
+  defaultHeaders?: Maybe<Scalars['String']>;
   derivedVariantCount: Scalars['Int'];
   /** Returns the list of variants derived from this variant. This currently includes contracts only. */
   derivedVariants?: Maybe<Array<GraphVariant>>;
@@ -4791,6 +4803,8 @@ export type GraphVariantMutation = {
   updateCheckConfigurationExcludedOperations: VariantCheckConfiguration;
   updateCheckConfigurationIncludedVariants: VariantCheckConfiguration;
   updateCheckConfigurationTimeRange: VariantCheckConfiguration;
+  /** @deprecated Use updateSharedHeaders instead */
+  updateDefaultHeaders?: Maybe<GraphVariant>;
   updateIsProtected?: Maybe<GraphVariant>;
   updatePreflightScript?: Maybe<GraphVariant>;
   updateRouter: UpdateRouterResult;
@@ -4910,6 +4924,12 @@ export type GraphVariantMutationUpdateCheckConfigurationTimeRangeArgs = {
   operationCountThresholdPercentage?: InputMaybe<Scalars['Float']>;
   timeRangeSeconds?: InputMaybe<Scalars['Long']>;
   useGraphSettings: Scalars['Boolean'];
+};
+
+
+/** Modifies a variant of a graph, also called a schema tag in parts of our product. */
+export type GraphVariantMutationUpdateDefaultHeadersArgs = {
+  defaultHeaders?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -7374,6 +7394,12 @@ export type RegisteredOperationInput = {
 export type RegisteredOperationMetadataInput = {
   /** This will be used to link existing records in Engine to a new ID. */
   engineSignature?: InputMaybe<Scalars['String']>;
+};
+
+export type RegistryApiKey = {
+  __typename?: 'RegistryApiKey';
+  keyName?: Maybe<Scalars['String']>;
+  token: Scalars['String'];
 };
 
 export type RegistryStatsWindow = {
