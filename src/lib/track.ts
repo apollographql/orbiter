@@ -5,7 +5,7 @@ const graphQLEndpoint = "https://graphql.api.apollographql.com/api/graphql";
 const STUDIO_API_KEY = process.env["STUDIO_API_KEY"];
 
 export async function track(
-    document: DocumentNode,
+  document: DocumentNode,
   variables: any,
   userAgent: string
 ) {
