@@ -30,7 +30,8 @@ export class Binary {
         break;
       default:
         throw new MalformedRequestError(
-          `invalid binary name '${this.name
+          `invalid binary name '${
+            this.name
           }'. possible names are ${possibleValues(BinaryName)}`
         );
     }
@@ -42,17 +43,23 @@ export class Binary {
     version: string
   ): string {
     let targetTriple = enumFromStringValue(TargetTriple, inputTargetTriple);
-    if (targetTriple === TargetTriple.AppleArm && (this.name === BinaryName.Supergraph || this.name === BinaryName.Router)) {
-      throw new MalformedRequestError(`invalid target '${targetTriple}' for '${this.name}' binary, you should download the 'x86_64-apple-darwin' target instead and it will work on Mac machines with Apple's ARM processor via emulation.`)
+    if (
+      targetTriple === TargetTriple.AppleArm &&
+      (this.name === BinaryName.Supergraph || this.name === BinaryName.Router)
+    ) {
+      throw new MalformedRequestError(
+        `invalid target '${targetTriple}' for '${this.name}' binary, you should download the 'x86_64-apple-darwin' target instead and it will work on Mac machines with Apple's ARM processor via emulation.`
+      );
     }
     return `${this.name}-${version}-${targetTriple}.tar.gz`;
   }
 
   getReleaseTarballUrl(inputTargetTriple: string, version: string): string {
-    return `https://github.com/${this.repo.slug
-      }/releases/download/${this.getReleaseTagName(
-        version
-      )}/${this.getReleaseTarballName(inputTargetTriple, version)}`;
+    return `https://github.com/${
+      this.repo.slug
+    }/releases/download/${this.getReleaseTagName(
+      version
+    )}/${this.getReleaseTarballName(inputTargetTriple, version)}`;
   }
 
   async getFullyQualifiedRoverVersion(fetch: Fetcher): Promise<string> {
@@ -85,10 +92,12 @@ export class Binary {
   async getFullyQualifiedSupergraphVersion(
     fetch: Fetcher,
     version: string
-  ): Promise<string> {    
+  ): Promise<string> {
     // supergraph is a bit weird because we have a "latest" for fed 1 _and_ for fed 2
     // the source of truth for these is on the `main` branch of https://github.com/apollographql/rover in the ./latest_plugin_versions.json file
-    let latestPluginVersions = await fetch("https://raw.githubusercontent.com/apollographql/rover/main/latest_plugin_versions.json");
+    let latestPluginVersions = await fetch(
+      "https://raw.githubusercontent.com/apollographql/rover/main/latest_plugin_versions.json"
+    );
     let supergraphJson = await latestPluginVersions.json();
     let supergraphVersions = supergraphJson["supergraph"]["versions"];
     let latestTag: string;
@@ -114,7 +123,7 @@ export class Binary {
   async getFullyQualifiedRouterVersion(
     fetch: Fetcher,
     version: string
-  ): Promise<string> {    
+  ): Promise<string> {
     let latestTag: string;
     // for the "latest" router, we query github releases to get the most recent release
     if (version === "latest") {
@@ -142,10 +151,12 @@ export class Binary {
           `something went wrong while fetching ${versionUrl}`
         );
       }
-    // rover will request this latest-plugin version to use the version specified in latest_plugin_versions.json
+      // rover will request this latest-plugin version to use the version specified in latest_plugin_versions.json
     } else if (version === "latest-plugin") {
       // the source of truth for the latest router versions is on the `main` branch of https://github.com/apollographql/rover in the ./latest_plugin_versions.json file
-      let latestPluginVersions = await fetch("https://raw.githubusercontent.com/apollographql/rover/main/latest_plugin_versions.json");
+      let latestPluginVersions = await fetch(
+        "https://raw.githubusercontent.com/apollographql/rover/main/latest_plugin_versions.json"
+      );
       let supergraphJson = await latestPluginVersions.json();
       let supergraphVersions = supergraphJson["router"]["versions"];
       latestTag = supergraphVersions["latest-1"];
@@ -190,7 +201,8 @@ export class Binary {
 
       default:
         throw new MalformedRequestError(
-          `invalid binary name '${this.name
+          `invalid binary name '${
+            this.name
           }'. possible names are ${possibleValues(BinaryName)}`
         );
     }
@@ -233,7 +245,8 @@ export class Binary {
         );
       default:
         throw new MalformedRequestError(
-          `invalid binary name '${this.name
+          `invalid binary name '${
+            this.name
           }'. possible names are ${possibleValues(BinaryName)}`
         );
     }
@@ -320,7 +333,10 @@ export class InputVersion {
       (version === "latest-0" || version === "latest-2")
     ) {
       this.descriptor = version;
-    } else if (binaryName === BinaryName.Router && version === "latest-plugin") {
+    } else if (
+      binaryName === BinaryName.Router &&
+      version === "latest-plugin"
+    ) {
       this.descriptor = version;
     } else {
       throw new MalformedRequestError(

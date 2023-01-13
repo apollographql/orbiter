@@ -1,13 +1,11 @@
-import {
-  APIGatewayProxyResult,
-  APIGatewayProxyEvent,
-} from "aws-lambda";
+import { APIGatewayProxyResult, APIGatewayProxyEvent } from "aws-lambda";
 import { track } from "../../lib/track";
 import {
   RoverTrackMutationVariables,
-  RoverArgumentInput, RoverTrackDocument,
+  RoverArgumentInput,
+  RoverTrackDocument,
 } from "../../generated/studio";
-import {MALFORMED_REQUEST, Platform} from "./telemetry";
+import { MALFORMED_REQUEST, Platform } from "./telemetry";
 
 export const ROVER_AGENT: string = "rover";
 
@@ -36,7 +34,10 @@ interface Session {
   cli_version: string;
 }
 
-export async function roverHandler(event: APIGatewayProxyEvent, userAgent: string) : Promise<APIGatewayProxyResult> {
+export async function roverHandler(
+  event: APIGatewayProxyEvent,
+  userAgent: string
+): Promise<APIGatewayProxyResult> {
   // Make sure the body exists and contains the right keys to properly build
   // a Session
   if (!event.body) return MALFORMED_REQUEST;
