@@ -13,37 +13,17 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** A blob (base64'ed in JSON & GraphQL) */
   Blob: any;
-  /** ISO 8601 date format, e.g. 'yyyy-MM-dd' */
   Date: any;
-  /**
-   * Implement the DateTime<Utc> scalar
-   *
-   * The input/output is a string in RFC3339 format.
-   */
   DateTime: any;
-  /** A GraphQL document, such as the definition of an operation or schema. */
   GraphQLDocument: any;
   JSON: any;
-  /** Long type */
   Long: any;
-  /**
-   * ISO 8601 combined date and time without timezone.
-   *
-   * # Examples
-   *
-   * * `2015-07-01T08:59:60.123`,
-   */
   NaiveDateTime: any;
-  /** An arbitrary JSON object. */
   Object: any;
-  /** A SHA-256 hash, represented as a lowercase hexadecimal string. */
   SHA256: any;
   StringOrInt: any;
-  /** ISO 8601, extended format with nanoseconds, Zulu (or "[+-]seconds" as a string or number relative to now) */
   Timestamp: any;
-  /** Always null */
   Void: any;
 };
 
@@ -101,7 +81,6 @@ export type Account = {
   invoicesV2: Array<InvoiceV2>;
   isOnExpiredTrial: Scalars['Boolean'];
   isOnTrial: Scalars['Boolean'];
-  legacyIsOnTrial: Scalars['Boolean'];
   memberships?: Maybe<Array<AccountMembership>>;
   /** Name of the organization, which can change over time and isn't unique. */
   name: Scalars['String'];
@@ -139,7 +118,7 @@ export type Account = {
   /** @deprecated use Account.statsWindow instead */
   stats: AccountStatsWindow;
   statsWindow?: Maybe<AccountStatsWindow>;
-  subscriptions?: Maybe<Array<BillingSubscription>>;
+  subscriptions: Array<BillingSubscription>;
   subscriptionsV2: Array<BillingSubscriptionV2>;
   /** Gets a ticket for this org, by id */
   ticket?: Maybe<ZendeskTicket>;
@@ -164,6 +143,7 @@ export type AccountGraphIdAvailableArgs = {
 
 /** An organization in Apollo Studio. Can have multiple members and graphs. */
 export type AccountGraphsArgs = {
+  filterBy?: InputMaybe<GraphFilter>;
   includeDeleted?: InputMaybe<Scalars['Boolean']>;
 };
 
@@ -837,6 +817,8 @@ export type AccountGraphConnection = {
   __typename?: 'AccountGraphConnection';
   /** A list of edges from the account to its graphs. */
   edges?: Maybe<Array<AccountGraphEdge>>;
+  /** A unique identifier for the connectoon. */
+  id: Scalars['ID'];
   /** A list of graphs attached to the account. */
   nodes?: Maybe<Array<Service>>;
   /** Information to aid in pagination. */
@@ -903,17 +885,17 @@ export type AccountMembership = {
 export type AccountMutation = {
   __typename?: 'AccountMutation';
   auditExport?: Maybe<AuditLogExportMutation>;
-  /** Cancel account subscriptions, subscriptions will remain active until the end of the paid period */
+  /**
+   * Cancel account subscriptions, subscriptions will remain active until the end of the paid period.
+   * Currently only works for Recurly subscriptions on team plans.
+   */
   cancelSubscriptions?: Maybe<Account>;
   /**
    * Cancel account subscriptions, subscriptions will remain active until the end of the paid period.
    * Currently only works for Recurly subscriptions on team plans.
    */
   cancelSubscriptionsV2?: Maybe<Account>;
-  /**
-   * Changes an annual team subscription to a monthly team subscription when the current period expires.
-   * @deprecated No longer supported
-   */
+  /** Changes an annual team subscription to a monthly team subscription when the current period expires. */
   convertAnnualTeamSubscriptionToMonthlyAtNextPeriod?: Maybe<Account>;
   /** Changes an annual team subscription to a monthly team subscription when the current period expires. */
   convertAnnualTeamSubscriptionToMonthlyAtNextPeriodV2?: Maybe<Account>;
@@ -923,30 +905,23 @@ export type AccountMutation = {
   deleteAvatar?: Maybe<AvatarDeleteError>;
   /** Acknowledge that a trial has expired and return to community */
   dismissExpiredTrial?: Maybe<Account>;
-  /** Apollo admins only: extend an ongoing trial */
-  extendTrial?: Maybe<Account>;
-  /** Apollo admins only: extend an ongoing trial */
-  extendTrialV2?: Maybe<Account>;
   /** Hard delete an account and all associated services */
   hardDelete?: Maybe<Scalars['Void']>;
-  /**
-   * these four fields are needed by @requires in billing subgraph AccountMutation
-   * since seat-based pricing is being phased out it is considered a temporary inconvenience
-   */
-  hasBillingInfo?: Maybe<Scalars['Boolean']>;
   internalID?: Maybe<Scalars['String']>;
   /** Send an invitation to join the account by E-mail */
   invite?: Maybe<AccountInvitation>;
+  /**  See Account type. Field is needed by extending subgraph. */
   name?: Maybe<Scalars['String']>;
-  /** Reactivate a canceled current subscription */
+  /**
+   * Reactivate a canceled current subscription.
+   * Currently only works for Recurly subscriptions on team plans.
+   */
   reactivateCurrentSubscription?: Maybe<Account>;
   /**
    * Reactivate a canceled current subscription.
    * Currently only works for Recurly subscriptions on team plans.
    */
   reactivateCurrentSubscriptionV2?: Maybe<Account>;
-  /** Refresh billing information from third-party billing service */
-  refreshBilling?: Maybe<Scalars['Void']>;
   /** Delete an invitation */
   removeInvitation?: Maybe<Scalars['Void']>;
   /** Remove a member of the account */
@@ -956,27 +931,24 @@ export type AccountMutation = {
   /** Send a new E-mail for an existing invitation */
   resendInvitation?: Maybe<AccountInvitation>;
   revokeStaticInvitation?: Maybe<OrganizationInviteLink>;
+  /**  See Account type. Field is needed by extending subgraph. */
   seats?: Maybe<Seats>;
-  /** Apollo admins only: set the billing plan to an arbitrary plan */
+  /** Apollo admins only: set the billing plan to an arbitrary plan effective immediately terminating any current paid plan. */
   setPlan?: Maybe<Scalars['Void']>;
   /** Apollo admins only: set the billing plan to an arbitrary plan effective immediately terminating any current paid plan. */
   setPlanV2?: Maybe<Account>;
-  /** Start a new team subscription with the given billing period */
+  /** Start a new team subscription with the given billing period. */
   startTeamSubscription?: Maybe<Account>;
   /** Start a new team subscription with the given billing period. */
   startTeamSubscriptionV2?: Maybe<Account>;
-  /**
-   * Start a team trial
-   * @deprecated No longer supported
-   */
-  startTrial?: Maybe<Account>;
-  /** Start a team trial */
-  startTrialV2?: Maybe<Account>;
   /** This is called by the form shown to users after they cancel their team subscription. */
   submitTeamCancellationFeedback?: Maybe<Scalars['Void']>;
   /** Apollo admins only: Terminate the ongoing subscription in the account as soon as possible, without refunds. */
   terminateSubscription?: Maybe<Account>;
-  /** Apollo admins only: terminate any ongoing subscriptions in the account, without refunds */
+  /**
+   * Apollo admins only: terminate any ongoing subscriptions in the account, without refunds
+   * Currently only works for Recurly subscriptions.
+   */
   terminateSubscriptions?: Maybe<Account>;
   /**
    * Apollo admins only: terminate any ongoing subscriptions in the account, without refunds
@@ -1020,16 +992,6 @@ export type AccountMutationCreateGraphArgs = {
 
 export type AccountMutationCreateStaticInvitationArgs = {
   role: UserPermission;
-};
-
-
-export type AccountMutationExtendTrialArgs = {
-  to: Scalars['Timestamp'];
-};
-
-
-export type AccountMutationExtendTrialV2Args = {
-  to: Scalars['Timestamp'];
 };
 
 
@@ -1956,6 +1918,7 @@ export type BillingInfo = {
   lastFour?: Maybe<Scalars['Int']>;
   lastName?: Maybe<Scalars['String']>;
   month?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
   vatNumber?: Maybe<Scalars['String']>;
   year?: Maybe<Scalars['Int']>;
 };
@@ -2038,19 +2001,40 @@ export type BillingPlan = {
   addons: Array<BillingPlanAddon>;
   billingModel: BillingModel;
   billingPeriod?: Maybe<BillingPeriod>;
+  /** @deprecated capabilities have been flattened into the BillingPlan type */
   capabilities: BillingPlanCapabilities;
+  clientVersions: Scalars['Boolean'];
+  clients: Scalars['Boolean'];
+  contracts: Scalars['Boolean'];
+  datadog: Scalars['Boolean'];
   description?: Maybe<Scalars['String']>;
+  errors: Scalars['Boolean'];
+  federation: Scalars['Boolean'];
   id: Scalars['ID'];
   isTrial: Scalars['Boolean'];
   kind: BillingPlanKind;
+  launches: Scalars['Boolean'];
+  maxAuditInDays: Scalars['Int'];
+  maxRangeInDays?: Maybe<Scalars['Int']>;
+  /** The maximum number of days that checks stats will be stored. */
+  maxRangeInDaysForChecks?: Maybe<Scalars['Int']>;
+  maxRequestsPerMonth?: Maybe<Scalars['Long']>;
+  metrics: Scalars['Boolean'];
   name: Scalars['String'];
+  notifications: Scalars['Boolean'];
+  operationRegistry: Scalars['Boolean'];
   /** The price of every seat */
   pricePerSeatInUsdCents?: Maybe<Scalars['Int']>;
   /** The price of subscribing to this plan with a quantity of 1 (currently always the case) */
   pricePerUnitInUsdCents: Scalars['Int'];
   /** Whether the plan is accessible by all users in QueryRoot.allPlans, QueryRoot.plan, or AccountMutation.setPlan */
   public: Scalars['Boolean'];
+  ranges: Array<Scalars['String']>;
+  schemaValidation: Scalars['Boolean'];
   tier: BillingPlanTier;
+  traces: Scalars['Boolean'];
+  userRoles: Scalars['Boolean'];
+  webhooks: Scalars['Boolean'];
 };
 
 export type BillingPlanAddon = {
@@ -2093,8 +2077,15 @@ export enum BillingPlanKind {
   EnterpriseInternal = 'ENTERPRISE_INTERNAL',
   EnterprisePaid = 'ENTERPRISE_PAID',
   EnterprisePilot = 'ENTERPRISE_PILOT',
+  OneFree = 'ONE_FREE',
+  OnePaid = 'ONE_PAID',
+  Serverless = 'SERVERLESS',
+  ServerlessFree = 'SERVERLESS_FREE',
+  ServerlessPaid = 'SERVERLESS_PAID',
+  Starter = 'STARTER',
   TeamPaid = 'TEAM_PAID',
-  TeamTrial = 'TEAM_TRIAL'
+  TeamTrial = 'TEAM_TRIAL',
+  Unknown = 'UNKNOWN'
 }
 
 export enum BillingPlanKindV2 {
@@ -2116,7 +2107,10 @@ export enum BillingPlanKindV2 {
 export enum BillingPlanTier {
   Community = 'COMMUNITY',
   Enterprise = 'ENTERPRISE',
-  Team = 'TEAM'
+  One = 'ONE',
+  Team = 'TEAM',
+  Unknown = 'UNKNOWN',
+  UsageBased = 'USAGE_BASED'
 }
 
 export enum BillingPlanTierV2 {
@@ -2172,12 +2166,16 @@ export type BillingSubscription = {
   activatedAt: Scalars['Timestamp'];
   addons: Array<BillingSubscriptionAddon>;
   autoRenew: Scalars['Boolean'];
-  /** The price of the subscription when ignoring add-ons (such as seats), ie quantity * pricePerUnitInUsdCents */
-  basePriceInUsdCents: Scalars['Long'];
   canceledAt?: Maybe<Scalars['Timestamp']>;
+  /** Draft invoice for this subscription */
+  currentDraftInvoice?: Maybe<DraftInvoice>;
   currentPeriodEndsAt: Scalars['Timestamp'];
   currentPeriodStartedAt: Scalars['Timestamp'];
   expiresAt?: Maybe<Scalars['Timestamp']>;
+  /** Renewal grace time for updating seat count */
+  graceTimeForNextRenewal?: Maybe<Scalars['Timestamp']>;
+  maxSelfHostedRequestsPerMonth?: Maybe<Scalars['Int']>;
+  maxServerlessRequestsPerMonth?: Maybe<Scalars['Int']>;
   plan: BillingPlan;
   /** The price of every seat */
   pricePerSeatInUsdCents?: Maybe<Scalars['Int']>;
@@ -2187,8 +2185,6 @@ export type BillingSubscription = {
   /** Total price of the subscription when it next renews, including add-ons (such as seats) */
   renewalTotalPriceInUsdCents: Scalars['Long'];
   state: SubscriptionState;
-  /** Total price of the subscription, including add-ons (such as seats) */
-  totalPriceInUsdCents: Scalars['Long'];
   /**
    * When this subscription's trial period expires (if it is a trial). Not the same as the
    * subscription's Recurly expiration).
@@ -2450,6 +2446,11 @@ export type BuildSuccess = {
   /** Contains the supergraph and API schemas created by composition. */
   coreSchema: CoreSchema;
 };
+
+export enum CacheControlScope {
+  Private = 'PRIVATE',
+  Public = 'PUBLIC'
+}
 
 export enum CacheScope {
   Private = 'PRIVATE',
@@ -2910,8 +2911,9 @@ export type Cloud = {
   router?: Maybe<Router>;
   /** Retrieve all routers */
   routers: Array<Router>;
+  /** Information about a specific Cloud Router version */
   version: RouterVersionResult;
-  /** The regions where a cloud router can be deployed */
+  /** A list of Cloud Router versions */
   versions: RouterVersionsResult;
 };
 
@@ -3398,6 +3400,7 @@ export enum ContractVariantFailedStep {
   ToApiSchema = 'TO_API_SCHEMA',
   ToFilterSchema = 'TO_FILTER_SCHEMA',
   Unknown = 'UNKNOWN',
+  UnreachableTypeMasking = 'UNREACHABLE_TYPE_MASKING',
   VersionCheck = 'VERSION_CHECK'
 }
 
@@ -3419,6 +3422,7 @@ export type ContractVariantPreviewSuccess = {
 
 export type ContractVariantUpsertErrors = {
   __typename?: 'ContractVariantUpsertErrors';
+  /** A list of all errors that occurred when attempting to create or update a contract variant. */
   errorMessages: Array<Scalars['String']>;
 };
 
@@ -3426,8 +3430,11 @@ export type ContractVariantUpsertResult = ContractVariantUpsertErrors | Contract
 
 export type ContractVariantUpsertSuccess = {
   __typename?: 'ContractVariantUpsertSuccess';
+  /** The updated contract variant */
   contractVariant: GraphVariant;
+  /** Human-readable text describing the launch result of the contract update. */
   launchCliCopy?: Maybe<Scalars['String']>;
+  /** The URL of the Studio page for this update's associated launch, if available. */
   launchUrl?: Maybe<Scalars['String']>;
 };
 
@@ -4345,6 +4352,11 @@ export type FilterBuildInputs = {
   buildPipelineTrack: BuildPipelineTrack;
   /** The exclude filters used for filtering. */
   exclude: Array<Scalars['String']>;
+  /**
+   * Whether to hide unreachable objects, interfaces, unions, inputs, enums and scalars from
+   * the resulting contract schema.
+   */
+  hideUnreachableTypes: Scalars['Boolean'];
   /** The include filters used for filtering. */
   include: Array<Scalars['String']>;
   /** The SHA-256 of the supergraph schema document used for filtering. */
@@ -4360,6 +4372,7 @@ export type FilterCheckAsyncInput = {
 export type FilterCheckFilterChanges = {
   excludeAdditions?: InputMaybe<Array<Scalars['String']>>;
   excludeRemovals?: InputMaybe<Array<Scalars['String']>>;
+  hideUnreachableTypesChange?: InputMaybe<Scalars['Boolean']>;
   includeAdditions?: InputMaybe<Array<Scalars['String']>>;
   includeRemovals?: InputMaybe<Array<Scalars['String']>>;
 };
@@ -4377,18 +4390,61 @@ export type FilterCheckTask = BuildCheckTask & CheckWorkflowTask & {
   workflow: CheckWorkflow;
 };
 
-/** Filter config specifies strings to be included and or excluded. */
+/** The filter configuration used to build a contract schema. The configuration consists of lists of tags for schema elements to include or exclude in the resulting schema. */
 export type FilterConfig = {
   __typename?: 'FilterConfig';
-  /** Strings to be excluded. */
+  /** Tags of schema elements to exclude from the contract schema. */
   exclude: Array<Scalars['String']>;
-  /** Strings to be included. */
+  /** Whether to hide unreachable objects, interfaces, unions, inputs, enums and scalars from the resulting contract schema. */
+  hideUnreachableTypes: Scalars['Boolean'];
+  /** Tags of schema elements to include in the contract schema. */
   include: Array<Scalars['String']>;
 };
 
 export type FilterConfigInput = {
+  /** A list of tags for schema elements to exclude from the resulting contract schema. */
   exclude: Array<Scalars['String']>;
+  /**
+   * Whether to hide unreachable objects, interfaces, unions, inputs, enums and scalars from
+   * the resulting contract schema. Defaults to `false`.
+   */
+  hideUnreachableTypes?: Scalars['Boolean'];
+  /** A list of tags for schema elements to include in the resulting contract schema. */
   include: Array<Scalars['String']>;
+};
+
+export type FlyReplaceMachineError = {
+  __typename?: 'FlyReplaceMachineError';
+  error: FlyReplaceMachineErrorValue;
+};
+
+export type FlyReplaceMachineErrorValue = FlyReplaceMachineInvalidMachineId | FlyReplaceMachineRouterNotYetCreated;
+
+export type FlyReplaceMachineInvalidMachineId = {
+  __typename?: 'FlyReplaceMachineInvalidMachineId';
+  id: Scalars['String'];
+};
+
+export type FlyReplaceMachineResult = FlyReplaceMachineError | FlyReplaceMachineSuccess;
+
+export type FlyReplaceMachineRouterNotYetCreated = {
+  __typename?: 'FlyReplaceMachineRouterNotYetCreated';
+  message: Scalars['String'];
+};
+
+export type FlyReplaceMachineSuccess = {
+  __typename?: 'FlyReplaceMachineSuccess';
+  newMachineId: Scalars['String'];
+};
+
+export type FlyRouterMutation = {
+  __typename?: 'FlyRouterMutation';
+  recreateMachine: FlyReplaceMachineResult;
+};
+
+
+export type FlyRouterMutationRecreateMachineArgs = {
+  machineId: Scalars['ID'];
 };
 
 export type GqlBillingPlanFromGrpc = {
@@ -4503,7 +4559,7 @@ export type GraphVariant = {
   composeAndFilterPreview?: Maybe<ComposeAndFilterPreviewResult>;
   /** The version of composition currently in use, if applicable */
   compositionVersion?: Maybe<Scalars['String']>;
-  /** Filter configuration used to create the contract schema */
+  /** The filter configuration used to build a contract schema. The configuration consists of lists of tags for schema elements to include or exclude in the resulting schema. */
   contractFilterConfig?: Maybe<FilterConfig>;
   /** Preview a Contract schema built from this source variant. */
   contractPreview: ContractPreview;
@@ -4563,6 +4619,8 @@ export type GraphVariant = {
   name: Scalars['String'];
   /** A list of the saved [operation collections](https://www.apollographql.com/docs/studio/explorer/operation-collections/) associated with this variant. */
   operationCollections: Array<OperationCollection>;
+  /** A list of the saved [operation collections](https://www.apollographql.com/docs/studio/explorer/operation-collections/) associated with this variant, paged. */
+  operationCollectionsConnection?: Maybe<GraphVariantOperationCollectionConnection>;
   /** The merged/computed/effective check configuration for the operations check task. */
   operationsCheckConfiguration?: Maybe<OperationsCheckConfiguration>;
   /**
@@ -4589,6 +4647,7 @@ export type GraphVariant = {
   service: Service;
   /** Explorer setting for shared headers for a graph */
   sharedHeaders?: Maybe<Scalars['String']>;
+  /** The variant this variant is derived from. This property currently only exists on contract variants. */
   sourceVariant?: Maybe<GraphVariant>;
   /** Returns the details of the subgraph with the provided `name`, or null if this variant doesn't include a subgraph with that name. */
   subgraph?: Maybe<FederatedImplementingService>;
@@ -4635,6 +4694,15 @@ export type GraphVariantLaunchArgs = {
 /** A graph variant */
 export type GraphVariantLaunchHistoryArgs = {
   limit?: Scalars['Int'];
+};
+
+
+/** A graph variant */
+export type GraphVariantOperationCollectionsConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -4934,6 +5002,26 @@ export type GraphVariantMutationUpdateVariantReadmeArgs = {
 /** Modifies a variant of a graph, also called a schema tag in parts of our product. */
 export type GraphVariantMutationUpsertRouterConfigArgs = {
   configuration: Scalars['String'];
+};
+
+export type GraphVariantOperationCollectionConnection = {
+  __typename?: 'GraphVariantOperationCollectionConnection';
+  /** A list of edges from the graph variant to its operation collections. */
+  edges?: Maybe<Array<GraphVariantOperationCollectionEdge>>;
+  /** A list of operation collections attached to a graph variant. */
+  nodes?: Maybe<Array<OperationCollection>>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  totalCount: Scalars['Int'];
+};
+
+/** An edge between a graph variant and an operation collection. */
+export type GraphVariantOperationCollectionEdge = {
+  __typename?: 'GraphVariantOperationCollectionEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+  /** An operation collection attached to a graph variant. */
+  node?: Maybe<OperationCollection>;
 };
 
 /** Individual permissions for the current user when interacting with a particular Studio graph variant. */
@@ -5556,7 +5644,6 @@ export type MediaUploadInfo = {
 
 export type Message = {
   __typename?: 'Message';
-  channel_id: Array<Scalars['String']>;
   channels: Array<SlackCommunicationChannel>;
   createdAt: Scalars['Timestamp'];
   id: Scalars['ID'];
@@ -5569,10 +5656,10 @@ export type Message = {
 
 export type MessageConfirmation = {
   __typename?: 'MessageConfirmation';
-  channelId: Scalars['ID'];
+  channel: SlackCommunicationChannel;
   createdAt: Scalars['Timestamp'];
   id: Scalars['ID'];
-  slackMessageId: Scalars['ID'];
+  slackMessage: SlackMessageMeta;
 };
 
 export type MessageInput = {
@@ -5589,7 +5676,6 @@ export type MessagePayload = {
   buttonText: Scalars['String'];
   buttonURL: Scalars['String'];
   header: Scalars['String'];
-  id: Scalars['ID'];
 };
 
 export type MetricStatWindow = {
@@ -5650,6 +5736,8 @@ export type Mutation = {
   submitPostDeletionFeedback?: Maybe<Scalars['Void']>;
   /** Mutation for basic engagement tracking in studio */
   track?: Maybe<Scalars['Void']>;
+  /** Router usage tracking. Reserved to https://router.apollo.dev/telemetry (https://github.com/apollographql/orbiter). */
+  trackRouterUsage?: Maybe<Scalars['Void']>;
   /** Rover session tracking. Reserved to https://rover.apollo.dev/telemetry (https://github.com/apollographql/orbiter). */
   trackRoverSession?: Maybe<Scalars['Void']>;
   /** Unsubscribe a given email from all emails */
@@ -5815,6 +5903,15 @@ export type MutationTrackArgs = {
   event: EventEnum;
   graphID: Scalars['String'];
   graphVariant?: Scalars['String'];
+};
+
+
+export type MutationTrackRouterUsageArgs = {
+  ci?: InputMaybe<Scalars['String']>;
+  os: Scalars['String'];
+  sessionId: Scalars['ID'];
+  usage: Array<RouterUsageInput>;
+  version: Scalars['String'];
 };
 
 
@@ -6800,6 +6897,8 @@ export type ProposedFilterBuildInputChanges = {
   excludeAdditions: Array<Scalars['String']>;
   /** Any proposed removals to exclude filters, or the empty list if no such changes were proposed. */
   excludeRemovals: Array<Scalars['String']>;
+  /** The proposed value for whether to hide unreachable schema elements, or null if no such change was proposed. */
+  hideUnreachableTypesChange?: Maybe<Scalars['Boolean']>;
   /** Any proposed additions to include filters, or the empty list if no such changes were proposed. */
   includeAdditions: Array<Scalars['String']>;
   /** Any proposed removals to include filters, or the empty list if no such changes were proposed. */
@@ -6837,8 +6936,6 @@ export type Query = {
   allAccounts?: Maybe<Array<Account>>;
   /** All accounts on billable plans with active subscriptions */
   allActiveTeamBillingAccounts?: Maybe<Array<Account>>;
-  /** All accounts on active team trial plans */
-  allActiveTeamTrialAccounts?: Maybe<Array<Account>>;
   allPublicVariants?: Maybe<Array<GraphVariant>>;
   /** All auto-renewing accounts on active annual plans */
   allRenewingNonEnterpriseAnnualAccounts?: Maybe<Array<Account>>;
@@ -6893,12 +6990,8 @@ export type Query = {
   studioSettings?: Maybe<UserSettings>;
   /** The plan started by AccountMutation.startTeamSubscription */
   teamBillingPlan: BillingPlanV2;
-  /** The plan started by AccountMutation.startTeamSubscription */
-  teamPlan: BillingPlan;
   /** Schema transformation for the Apollo platform API. Renames types. Internal to Apollo. */
   transformSchemaForPlatformApi?: Maybe<Scalars['GraphQLDocument']>;
-  /** The plan started by AccountMutation.startTrial */
-  trialBillingPlan: BillingPlanV2;
   /** Returns details of the Apollo user with the provided ID. */
   user?: Maybe<User>;
   /** Returns details of a Studio graph variant with the provided graph ref. A graph ref has the format `graphID@variantName` (or just `graphID` for the default variant `current`). Returns null if the graph or variant doesn't exist, or if the graph isn't accessible by the current actor. */
@@ -7022,11 +7115,6 @@ export type QueryStatsArgs = {
 
 
 export type QueryTeamBillingPlanArgs = {
-  billingPeriod: BillingPeriod;
-};
-
-
-export type QueryTeamPlanArgs = {
   billingPeriod: BillingPeriod;
 };
 
@@ -7263,6 +7351,7 @@ export type Readme = {
   lastUpdatedTime?: Maybe<Scalars['Timestamp']>;
 };
 
+/** Responsibility for an errored order */
 export enum ReasonCause {
   Internal = 'INTERNAL',
   User = 'USER'
@@ -7499,6 +7588,7 @@ export type RouterConfigInput = {
 
 export type RouterMutation = {
   __typename?: 'RouterMutation';
+  fly?: Maybe<FlyRouterMutation>;
   setNextVersion: SetNextVersionResult;
   setSecrets: RouterSecretsResult;
 };
@@ -7541,6 +7631,12 @@ export enum RouterStatus {
 export type RouterUpsertFailure = {
   __typename?: 'RouterUpsertFailure';
   message: Scalars['String'];
+};
+
+/** A generic key→count type so that router usage metrics can be added to without modifying the `trackRouterUsage` mutation */
+export type RouterUsageInput = {
+  count: Scalars['Int'];
+  key: Scalars['String'];
 };
 
 export type RouterVersion = {
@@ -9934,6 +10030,11 @@ export type SlackCommunicationChannel = CommunicationChannel & {
   topic?: Maybe<Scalars['String']>;
 };
 
+export type SlackMessageMeta = {
+  __typename?: 'SlackMessageMeta';
+  id: Scalars['ID'];
+};
+
 export type SlackNotificationField = {
   key: Scalars['String'];
   value: Scalars['String'];
@@ -11310,12 +11411,24 @@ export type ZendeskTicket = {
 export type ZendeskTicketInput = {
   description: Scalars['String'];
   graphId?: InputMaybe<Scalars['String']>;
+  graphType?: InputMaybe<GraphType>;
   organizationId?: InputMaybe<Scalars['String']>;
   priority: TicketPriority;
   subject: Scalars['String'];
 };
 
 
+export const RouterTrack = gql`
+    mutation RouterTrack($sessionId: ID!, $version: String!, $os: String!, $usage: [RouterUsageInput!]!, $ci: String) {
+  trackRouterUsage(
+    sessionId: $sessionId
+    version: $version
+    os: $os
+    usage: $usage
+    ci: $ci
+  )
+}
+    `;
 export const RoverTrack = gql`
     mutation RoverTrack($anonymousId: ID!, $command: String!, $cwdHash: SHA256!, $os: String!, $remoteUrlHash: SHA256, $sessionId: ID!, $version: String!, $arguments: [RoverArgumentInput!]!, $ci: String) {
   trackRoverSession(
@@ -11331,6 +11444,17 @@ export const RoverTrack = gql`
   )
 }
     `;
+export type RouterTrackMutationVariables = Exact<{
+  sessionId: Scalars['ID'];
+  version: Scalars['String'];
+  os: Scalars['String'];
+  usage: Array<RouterUsageInput> | RouterUsageInput;
+  ci?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type RouterTrackMutation = { __typename?: 'Mutation', trackRouterUsage?: any | null };
+
 export type RoverTrackMutationVariables = Exact<{
   anonymousId: Scalars['ID'];
   command: Scalars['String'];
@@ -11347,6 +11471,17 @@ export type RoverTrackMutationVariables = Exact<{
 export type RoverTrackMutation = { __typename?: 'Mutation', trackRoverSession?: any | null };
 
 
+export const RouterTrackDocument = gql`
+    mutation RouterTrack($sessionId: ID!, $version: String!, $os: String!, $usage: [RouterUsageInput!]!, $ci: String) {
+  trackRouterUsage(
+    sessionId: $sessionId
+    version: $version
+    os: $os
+    usage: $usage
+    ci: $ci
+  )
+}
+    `;
 export const RoverTrackDocument = gql`
     mutation RoverTrack($anonymousId: ID!, $command: String!, $cwdHash: SHA256!, $os: String!, $remoteUrlHash: SHA256, $sessionId: ID!, $version: String!, $arguments: [RoverArgumentInput!]!, $ci: String) {
   trackRoverSession(
@@ -11370,6 +11505,9 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    RouterTrack(variables: RouterTrackMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RouterTrackMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<RouterTrackMutation>(RouterTrackDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'RouterTrack', 'mutation');
+    },
     RoverTrack(variables: RoverTrackMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RoverTrackMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<RoverTrackMutation>(RoverTrackDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'RoverTrack', 'mutation');
     }
