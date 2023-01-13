@@ -42,8 +42,7 @@ export async function routerHandler(event: APIGatewayProxyEvent, userAgent: stri
 
 export async function trackRouter(request: Request, userAgent: string) {
   let usage = new Array<RouterUsageInput>();
-  for (const key in request.usage) {
-    let count = request.usage[key as keyof object];
+  for (const [key, count] of Object.entries(request.usage)) {
     let input: RouterUsageInput = {
       key,
       count,

@@ -55,8 +55,7 @@ export async function roverHandler(event: APIGatewayProxyEvent, userAgent: strin
 
 export async function trackRover(session: Session, userAgent: string) {
   let args = new Array<RoverArgumentInput>();
-  for (const key in session.command.arguments) {
-    let value = session.command.arguments[key as keyof object];
+  for (const [key, value] of Object.entries(session.command.arguments)) {
     let input: RoverArgumentInput = {
       key,
       value,
