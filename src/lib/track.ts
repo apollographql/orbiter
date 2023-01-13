@@ -1,6 +1,5 @@
 import { request } from "graphql-request";
 import {DocumentNode} from "graphql";
-//const graphQLEndpoint = "https://engine-dev0-api-gateway.c0.gql.zone/api/graphql";
 const graphQLEndpoint = "https://graphql.api.apollographql.com/api/graphql";
 
 const STUDIO_API_KEY = process.env["STUDIO_API_KEY"];
