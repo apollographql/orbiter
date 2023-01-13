@@ -11,5 +11,3 @@ tsconfig.tsbuildinfo
 # .env files for credentials
 .env
 
-# For local dev it may be convinient to symlink the generated schema in monorepo
-/kotlin.graphql
