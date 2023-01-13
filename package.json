@@ -11,7 +11,7 @@
     "quickstart": "tsc && netlify dev",
     "test": "npm run build && jest",
     "codegen": "graphql-codegen",
-    "format": "prettier --write './src/**/*.ts' --ignore-path ./src/generated/studio.ts",
+    "format": "prettier --write './src/**/*.ts'",
     "node-version": "node -e 'console.log(require(\"./package.json\").volta.node)' > .nvmrc"
   },
   "author": "opensource@apollographql.com",
