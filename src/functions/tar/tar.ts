@@ -19,6 +19,7 @@ const handler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (
       event.path.split("/");
     return downloadEvent(binaryName, targetTriple, version, "tarball");
   } catch (e) {
+    console.error(e);
     return {
       statusCode: 500,
       body: e.message,
