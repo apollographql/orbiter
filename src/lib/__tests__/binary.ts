@@ -39,9 +39,11 @@ it("fetches latest version from a redirected url", async () => {
     "latest",
     "installer"
   );
-  let version = res.headers["X-Version"];
-  let location = res.headers["Location"];
+  let version = res.headers?.["X-Version"];
+  let cacheControl = res.headers?.["Cache-Control"];
+  let location = res.headers?.["Location"];
   expect(version).toEqual("v0.99.99");
+  expect(cacheControl).toEqual("max-age=60, stale-if-error=30, stale-while-revalidate=30");
   expect(location).toContain("v0.99.99");
 });
 
@@ -57,10 +59,12 @@ it("returns proper version with /vx.x.x", async () => {
     realVersion,
     "installer"
   );
-  let location = res.headers["Location"];
-  let version = res.headers["X-Version"];
+  let location = res.headers?.["Location"];
+  let cacheControl = res.headers?.["Cache-Control"];
+  let version = res.headers?.["X-Version"];
   expect(location).toContain("githubusercontent");
   expect(location).toContain("v0.99.99");
+  expect(cacheControl).toContain("max-age=60, stale-if-error=30, stale-while-revalidate=30");
   expect(version).toEqual("v0.99.99");
 });
 
@@ -69,7 +73,9 @@ it("errors when invalid platform passed", async () => {
   let platform = "myInvalidOS";
 
   let res = await downloadEvent("rover", platform, realVersion, "installer");
+  let cacheControl = res.headers?.["Cache-Control"];
   expect(res.body).toContain("invalid");
+  expect(cacheControl).toBeUndefined()
   expect(res.statusCode).toEqual(400);
 });
 
@@ -78,6 +84,8 @@ it("errors when invalid version passed", async () => {
   let platform = "nix";
 
   let res = await downloadEvent("rover", platform, version, "installer");
+  let cacheControl = res.headers?.["Cache-Control"];
   expect(res.body).toContain("invalid");
+  expect(cacheControl).toBeUndefined();
   expect(res.statusCode).toEqual(400);
 });

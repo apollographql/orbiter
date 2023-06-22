@@ -28,6 +28,7 @@ it("pulls from a version if passed", async () => {
 
   expect(res.statusCode).toEqual(302);
   expect(res.headers["X-Version"]).toEqual("v0.9.0-rc.0");
+  expect(res.headers["Cache-Control"]).toEqual("max-age=60, stale-if-error=30, stale-while-revalidate=30");
   expect(res.headers["Location"]).toContain("v0.9.0-rc.0");
 });
 
@@ -37,6 +38,7 @@ it("returns a 400 if no version is passed", async () => {
   });
 
   expect(res.statusCode).toEqual(400);
+  expect(res.headers?.["Cache-Control"]).toBeUndefined();
   expect(res.body).toContain("version");
 });
 
@@ -46,6 +48,7 @@ it("returns a 400 if no platform is passed", async () => {
   });
 
   expect(res.statusCode).toEqual(400);
+  expect(res.headers?.["Cache-Control"]).toBeUndefined();
   expect(res.body).toContain("platform");
 });
 
@@ -57,6 +60,7 @@ it("returns a 500 if GitHub is down", async () => {
   });
 
   expect(res.statusCode).toEqual(500);
+  expect(res.headers?.["Cache-Control"]).toBeUndefined();
   expect(res.body).toContain("Internal Server Error");
 });
 
@@ -69,6 +73,7 @@ it("returns a 400 if asking for a bad version", async () => {
   });
 
   expect(res.statusCode).toEqual(400);
+  expect(res.headers?.["Cache-Control"]).toBeUndefined();
   expect(res.body).toContain("invalid version");
 });
 
@@ -80,5 +85,6 @@ it("returns a 404 if asking for a nonexistent version", async () => {
   });
 
   expect(res.statusCode).toEqual(404);
+  expect(res.headers?.["Cache-Control"]).toBeUndefined();
   expect(res.body).toContain("couldn't find a GitHub release");
 });

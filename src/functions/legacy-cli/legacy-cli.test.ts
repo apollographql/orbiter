@@ -27,6 +27,7 @@ it("pulls from a version if passed", async () => {
   });
 
   expect(res.statusCode).toEqual(301);
+  expect(res.headers?.["Cache-Control"]).toBeUndefined();
   expect(res.body).toContain("Redirecting");
 });
 
@@ -40,6 +41,7 @@ it("returns a 500 if no version is passed", async () => {
   });
 
   expect(res.statusCode).toEqual(400);
+  expect(res.headers?.["Cache-Control"]).toBeUndefined();
   expect(res.body).toContain("Missing");
 });
 
@@ -53,6 +55,7 @@ it("returns a 500 if no platform is passed", async () => {
   });
 
   expect(res.statusCode).toEqual(400);
+  expect(res.headers?.["Cache-Control"]).toBeUndefined();
   expect(res.body).toContain("Missing");
 });
 
@@ -66,6 +69,7 @@ it("returns a 500 if GitHub is down", async () => {
   });
 
   expect(res.statusCode).toEqual(500);
+  expect(res.headers?.["Cache-Control"]).toBeUndefined();
   expect(res.body).toContain("Internal Server Error");
 });
 
@@ -81,5 +85,6 @@ it("returns a 500 if asking for a bad version", async () => {
   });
 
   expect(res.statusCode).toEqual(500);
+  expect(res.headers?.["Cache-Control"]).toBeUndefined();
   expect(res.body).toContain("Internal Server Error");
 });
