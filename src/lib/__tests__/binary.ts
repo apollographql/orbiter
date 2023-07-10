@@ -43,7 +43,7 @@ it("fetches latest version from a redirected url", async () => {
   let cacheControl = res.headers?.["Cache-Control"];
   let location = res.headers?.["Location"];
   expect(version).toEqual("v0.99.99");
-  expect(cacheControl).toEqual("max-age=60, stale-if-error=30, stale-while-revalidate=30");
+  expect(cacheControl).toEqual("max-age=60, stale-if-error=18000, stale-while-revalidate=30");
   expect(location).toContain("v0.99.99");
 });
 
@@ -64,7 +64,7 @@ it("returns proper version with /vx.x.x", async () => {
   let version = res.headers?.["X-Version"];
   expect(location).toContain("githubusercontent");
   expect(location).toContain("v0.99.99");
-  expect(cacheControl).toContain("max-age=60, stale-if-error=30, stale-while-revalidate=30");
+  expect(cacheControl).toContain("max-age=60, stale-if-error=18000, stale-while-revalidate=30");
   expect(version).toEqual("v0.99.99");
 });
 

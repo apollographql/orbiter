@@ -28,7 +28,7 @@ it("pulls from a version if passed", async () => {
 
   expect(res.statusCode).toEqual(302);
   expect(res.headers["X-Version"]).toEqual("v0.0.1");
-  expect(res.headers?.["Cache-Control"]).toEqual("max-age=60, stale-if-error=30, stale-while-revalidate=30")
+  expect(res.headers?.["Cache-Control"]).toEqual("max-age=60, stale-if-error=18000, stale-while-revalidate=30")
   expect(res.headers["Location"]).toContain("v0.0.1");
 });
 

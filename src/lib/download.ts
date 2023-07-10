@@ -45,7 +45,7 @@ export async function downloadEvent(
         body: `You are being redirected to ${endpoint}`,
         headers: {
           Location: endpoint,
-          "Cache-Control": "max-age=60, stale-if-error=30, stale-while-revalidate=30",
+          "Cache-Control": "max-age=60, stale-if-error=18000, stale-while-revalidate=30",
           "X-Version": version,
         },
       };
