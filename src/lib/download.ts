@@ -38,8 +38,14 @@ export async function downloadEvent(
         "You must either download a tarball or an install script"
       );
     }
-    let response = await fetch(endpoint, { method: "HEAD" });
-    if (response.ok) {
+    // Do not follow redirect,
+    // just make sure the endpoint is ready
+    // to receive the client's call
+    let response = await fetch(endpoint, {
+      method: "HEAD",
+      redirect: "manual",
+    });
+    if (response.ok || response.status === 302) {
       return {
         statusCode: 302,
         body: `You are being redirected to ${endpoint}`,
