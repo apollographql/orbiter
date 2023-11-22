@@ -38,9 +38,9 @@ export async function downloadEvent(
         "You must either download a tarball or an install script"
       );
     }
-    // Do not follow redirect,
-    // just make sure the endpoint is ready
-    // to receive the client's call
+    // In order to mitigate an outage, we no longer follow redirects here (which is the m-f-h default)
+    // but instead accept that we **may** get a redirect.
+    // Slack: https://apollograph.slack.com/archives/C04933VF6CV/p1700645363560329
     let response = await fetch(endpoint, {
       method: "HEAD",
       redirect: "manual",
