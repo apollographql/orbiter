@@ -44,8 +44,7 @@ export class Binary {
   ): string {
     let targetTriple = enumFromStringValue(TargetTriple, inputTargetTriple);
     if (
-      targetTriple === TargetTriple.AppleArm &&
-      (this.name === BinaryName.Supergraph || this.name === BinaryName.Router)
+      targetTriple === TargetTriple.AppleArm && this.name === BinaryName.Supergraph
     ) {
       throw new MalformedRequestError(
         `invalid target '${targetTriple}' for '${this.name}' binary, you should download the 'x86_64-apple-darwin' target instead and it will work on Mac machines with Apple's ARM processor via emulation.`
