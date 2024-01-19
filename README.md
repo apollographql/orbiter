@@ -41,7 +41,9 @@ Valid target triples are as follows:
 |---|---|---|---|---|---|---|
 |rover|✅|✅|✅|✅|✅|✅|
 |supergraph|✅|❌|✅|✅|✅|❌|
-|router|✅|❌|✅|✅|✅|❌|
+|router|✅|❌|✅|✅|✅|✅|
+
+Note: router supported `x86_64-apple-darwin` until version `1.37.0`. For subsequent releases, the router supports `aarch64-apple-darwin`.
 
 Valid versions are as follows:
 
