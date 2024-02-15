@@ -6,7 +6,7 @@ import {
 } from "./error";
 import { getFetcher } from "./getFetcher";
 
-const OSX_ONLY_ROUTER_VERSIONS = ["v1.38.0", "v1.39.0"];
+const OSX_AARCH_ONLY_ROUTER_VERSIONS = ["v1.38.0", "v1.39.0"];
 
 export class Binary {
   name: BinaryName;
@@ -67,7 +67,7 @@ export class Binary {
   private isAppleArmOnlyRouter(version: string): boolean {
     return (
       this.name === BinaryName.Router &&
-      OSX_ONLY_ROUTER_VERSIONS.includes(version)
+      OSX_AARCH_ONLY_ROUTER_VERSIONS.includes(version)
     );
   }
 
