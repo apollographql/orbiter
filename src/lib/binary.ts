@@ -6,6 +6,8 @@ import {
 } from "./error";
 import { getFetcher } from "./getFetcher";
 
+const OSX_AARCH_ONLY_ROUTER_VERSIONS = ["v1.38.0", "v1.39.0"];
+
 export class Binary {
   name: BinaryName;
   repo: Repo;
@@ -44,13 +46,29 @@ export class Binary {
   ): string {
     let targetTriple = enumFromStringValue(TargetTriple, inputTargetTriple);
     if (
-      targetTriple === TargetTriple.AppleArm && this.name === BinaryName.Supergraph
+      targetTriple === TargetTriple.AppleAmd &&
+      this.isAppleArmOnlyRouter(version)
+    ) {
+      throw new MalformedRequestError(
+        `invalid target '${targetTriple}' for '${this.name}' binary, you should download the 'x86_64-apple-darwin' target for router v1.39.1 or later.`
+      );
+    }
+    if (
+      targetTriple === TargetTriple.AppleArm &&
+      this.name === BinaryName.Supergraph
     ) {
       throw new MalformedRequestError(
         `invalid target '${targetTriple}' for '${this.name}' binary, you should download the 'x86_64-apple-darwin' target instead and it will work on Mac machines with Apple's ARM processor via emulation.`
       );
     }
     return `${this.name}-${version}-${targetTriple}.tar.gz`;
+  }
+
+  private isAppleArmOnlyRouter(version: string): boolean {
+    return (
+      this.name === BinaryName.Router &&
+      OSX_AARCH_ONLY_ROUTER_VERSIONS.includes(version)
+    );
   }
 
   getReleaseTarballUrl(inputTargetTriple: string, version: string): string {
