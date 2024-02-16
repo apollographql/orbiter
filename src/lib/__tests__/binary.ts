@@ -43,7 +43,9 @@ it("fetches latest version from a redirected url", async () => {
   let cacheControl = res.headers?.["Cache-Control"];
   let location = res.headers?.["Location"];
   expect(version).toEqual("v0.99.99");
-  expect(cacheControl).toEqual("max-age=60, stale-if-error=18000, stale-while-revalidate=30");
+  expect(cacheControl).toEqual(
+    "max-age=60, stale-if-error=18000, stale-while-revalidate=30"
+  );
   expect(location).toContain("v0.99.99");
 });
 
@@ -64,7 +66,9 @@ it("returns proper version with /vx.x.x", async () => {
   let version = res.headers?.["X-Version"];
   expect(location).toContain("githubusercontent");
   expect(location).toContain("v0.99.99");
-  expect(cacheControl).toContain("max-age=60, stale-if-error=18000, stale-while-revalidate=30");
+  expect(cacheControl).toContain(
+    "max-age=60, stale-if-error=18000, stale-while-revalidate=30"
+  );
   expect(version).toEqual("v0.99.99");
 });
 
@@ -121,7 +125,7 @@ it("fetches arm only for router 1.38.0 and 1.39.0", async () => {
     expect(() => {
       routerBinary.getReleaseTarballUrl(appleAmdTriplet, r);
     }).toThrow(
-      "malformed request: invalid target 'x86_64-apple-darwin' for 'router' binary, you should download the 'x86_64-apple-darwin' target for router v1.39.1 or later, and it will work on all Mac machines thanks to universal binary."
+      "malformed request: invalid target 'x86_64-apple-darwin' for 'router' binary, you should download the 'x86_64-apple-darwin' target for router v1.39.1 or later."
     );
   }
 });

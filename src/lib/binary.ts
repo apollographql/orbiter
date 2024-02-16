@@ -50,7 +50,7 @@ export class Binary {
       this.isAppleArmOnlyRouter(version)
     ) {
       throw new MalformedRequestError(
-        `invalid target '${targetTriple}' for '${this.name}' binary, you should download the 'x86_64-apple-darwin' target for router v1.39.1 or later, and it will work on all Mac machines thanks to universal binary.`
+        `invalid target '${targetTriple}' for '${this.name}' binary, you should download the 'x86_64-apple-darwin' target for router v1.39.1 or later.`
       );
     }
     if (
